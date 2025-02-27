@@ -1,0 +1,86 @@
+/* Home.module.css */
+.hero {
+    background: url('https://picsum.photos/1920/800') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    position: relative;
+  }
+  
+  .heroContent {
+    max-width: 600px;
+    height: 400px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .section {
+    padding: 64px;
+    text-align: center;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 32px;
+    margin-top: 32px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 24px;
+  }
+
+  .gymCard {
+    background: #013056;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .gymCard img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .gymCardContent {
+    flex: 1;
+  }
+  
+  .gymCard h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .gymCard p {
+    margin: 5px 0;
+  }
+  
+  .gymCardButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .gymButton {
+    background: #d97706;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .gymButton:hover {
+    background: #b45309;
+  }
+  

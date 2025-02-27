@@ -1,0 +1,66 @@
+
+.header {
+    width: 100%;
+    height: auto;
+    padding: 13px 64px;
+    background: #013056;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    text-align: center;
+    color: #F5FFF6;
+    font-size: 28px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .navMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .navLink {
+    text-align: center;
+    color: #F5FFF6;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .rightSection {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .searchForm {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .searchInput {
+    padding: 4px 8px;
+    width: 200px;
+    font-size: 14px;
+    font-family: "Noto Serif TC", serif;
+    border-radius: 3px;
+    border: none;
+  }
+  
+  .searchButton {
+    padding: 4px 10px;
+    background-color: #f87808;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: "Noto Serif TC", serif;
+  }
+  

@@ -1,0 +1,68 @@
+/* Footer.module.css */
+.container {
+    width: 100%;
+    height: 100%;
+    padding: 40px 64px 50px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.73) 26%, rgba(0, 0, 0, 0) 100%);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .content {
+    align-self: stretch;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 44px;
+  }
+  
+  .title {
+    align-self: stretch;
+    color: #F5FFF6;
+    font-size: 32px;
+  }
+  
+  .contactWrapper {
+    align-self: stretch;
+    height: 143.29px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 27px;
+  }
+  
+  .contactInfo {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 22px;
+  }
+  
+  .contactItem {
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .contactText {
+    color: #F5FFF6;
+    font-size: 17px;
+    font-weight: 400;
+  }
+  
+  .emailContainer {
+    align-self: stretch;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+  }
