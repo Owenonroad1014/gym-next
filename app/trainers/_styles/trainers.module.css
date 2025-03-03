@@ -1,0 +1,165 @@
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+}
+
+.bannerImageContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+}
+
+.bannerImageContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/images/banner.jpg') center repeat;
+  background-size: contain;
+  opacity: 0.9; /* 調整透明度 */
+}
+
+.title {
+  color: #000000;
+  margin-bottom: 20px;
+  font-size: 90px;
+  
+  position: absolute;
+  left: 30px;
+  top: 80px;
+  z-index: 1;
+}
+.titleGrey {
+  color: #faf0ca;
+}
+.p {
+  color: #fff;
+  font-size: 70px;
+
+  position: absolute;
+  left: 35px;
+  top: 180px;
+  z-index: 1;
+}
+.pHighlight {
+  color: #E76317;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.secTitle {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.searchSection {
+  background-color: #e6e6e6;
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.trainerIcon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.filterContainer {
+  width: 100%;
+  max-width: 600px;
+}
+
+.filterItem {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.filterLabel {
+  width: 70px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.filterSelect {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px;
+  outline: none;
+}
+
+/* .searchButton {
+  margin-top: 10px;
+  background-color: #0078d4;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+} */
+
+/* .searchButton svg {
+  width: 20px;
+  height: 20px;
+} */
+
+.resultsContainer {
+  flex-grow: 1;
+  background-color: #ccc;
+  padding: 20px;
+  min-height: 200px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.emptyResults {
+  color: #666;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .filterLabel {
+    width: 50px;
+    font-size: 12px;
+  }
+}
+
+.trainersContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

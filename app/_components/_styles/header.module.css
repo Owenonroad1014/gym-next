@@ -9,12 +9,22 @@
     align-items: center;
   }
   
-  .logo {
+  /* .logo {
     text-align: center;
     color: #F5FFF6;
     font-size: 28px;
     font-weight: 700;
     text-decoration: none;
+    
+  } */
+  .logo img{
+    width: 130px;
+    height: 40px; 
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 10px; */
   }
   
   .navMenu {

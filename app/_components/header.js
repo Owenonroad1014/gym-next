@@ -3,24 +3,24 @@ import React, { useState } from 'react'
 import headerstyles from './_styles/header.module.css'
 import Link from 'next/link'
 
-
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('')
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('搜尋：', searchQuery)
   }
+  
   return (
     <>
       <div className={headerstyles.header}>
-        {/* LOGO */}
+        
         <div>
           <Link href="/" className={headerstyles.logo}>
-            LOGO
+          <img src="/gym-logo-white.svg" alt="Logo" ></img>
           </Link>
         </div>
-
+        
         {/* 導航選單 */}
         <div className={headerstyles.navMenu}>
           <Link href="/trainers" className={headerstyles.navLink}>
@@ -36,7 +36,7 @@ export default function Header() {
             找GYM友
           </Link>
         </div>
-
+        
         {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
           {/* 搜尋欄 */}
@@ -52,12 +52,12 @@ export default function Header() {
               搜尋
             </button>
           </form>
-
+          
           {/* 登入按鈕 */}
           <Link href="/login" className={headerstyles.navLink}>
             登入
           </Link>
-
+          
           {/* 註冊按鈕 */}
           <Link href="/register" className={headerstyles.navLink}>
             註冊
