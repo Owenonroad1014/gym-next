@@ -5,6 +5,7 @@ import styles from './_styles/home.module.css';
 export default function Home() {
     return (
       <>
+      
         <div>
       <div className={styles.hero}>
         <div className={styles.heroContent}>
