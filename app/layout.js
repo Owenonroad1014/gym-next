@@ -1,18 +1,6 @@
-// import localFont from 'next/font/local'
-import '@/styles/globals.css'
+import '@/Styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
-
-// const geistSans = localFont({
-//   src: './fonts/GeistVF.woff',
-//   variable: '--font-geist-sans',
-//   weight: '100 900',
-// })
-// const geistMono = localFont({
-//   src: './fonts/GeistMonoVF.woff',
-//   variable: '--font-geist-mono',
-//   weight: '100 900',
-// })
 
 export const metadata = {
   title: 'GYM',
@@ -22,13 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <head>
-      <link rel="icon" href="/favicon.ico"/>
-    </head>
       <body>
-      <Header/>
+        <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   )

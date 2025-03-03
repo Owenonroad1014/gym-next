@@ -1,76 +1,107 @@
-
 .header {
-    width: 100%;
-    height: auto;
-    padding: 13px 64px;
-    background: #013056;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* .logo {
-    text-align: center;
-    color: #F5FFF6;
-    font-size: 28px;
-    font-weight: 700;
-    text-decoration: none;
-    
-  } */
-  .logo img{
-    width: 130px;
-    height: 40px; 
-    margin-right: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding-top: 10px; */
-  }
-  
-  .navMenu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .navLink {
-    text-align: center;
-    color: #F5FFF6;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-  
-  .rightSection {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .searchForm {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .searchInput {
-    padding: 4px 8px;
-    width: 200px;
-    font-size: 14px;
-    font-family: "Noto Serif TC", serif;
-    border-radius: 3px;
-    border: none;
-  }
-  
-  .searchButton {
-    padding: 4px 10px;
-    background-color: #f87808;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 14px;
-    font-family: "Noto Serif TC", serif;
-  }
-  
+  width: 100%;
+  height: auto;
+  padding: 13px 64px;
+  /* background: #013056; */
+  /* background-image: linear-gradient(
+    to right,
+    #013056,
+    #07355b,
+    #0d3a60,
+    #134064,
+    #194569,
+    #1f496b,
+    #254c6c,
+    #2b506e,
+    #33536d,
+    #3a566b,
+    #41586a,
+    #485b69
+  ); */
+  background-image: linear-gradient(
+    to right,
+    #013056,
+    #003560,
+    #003a69,
+    #004073,
+    #00457d,
+    #0e4f8a,
+    #1a5a97,
+    #2465a5,
+    #3779b9,
+    #488dcd,
+    #5aa2e2,
+    #6bb7f6
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+}
+
+.logo {
+  /* text-align: center;
+  color: #f5fff6;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  /* width: 130px;
+  height: 40px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+  /* padding-top: 10px; */
+}
+
+.navMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navLink {
+  text-align: center;
+  color: #f5fff6;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rightSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 5px;
+}
+
+.searchInput {
+  padding: 4px 8px;
+  width: 200px;
+  font-size: 14px;
+  font-family: 'Noto Serif TC', serif;
+  border-radius: 3px;
+  border: none;
+}
+
+.searchButton {
+  padding: 4px 10px;
+  background-color: #f87808;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: 'Noto Serif TC', serif;
+}
