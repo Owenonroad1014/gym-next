@@ -1,0 +1,30 @@
+.button {
+    width: 168px;
+    max-width: 100%;
+    margin-top: 11px;
+    padding: 8px 43px;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+  }
+  
+  .buttonDark {
+    background-color: #e76317;
+    color: #fff;
+  }
+  
+  .buttonLight {
+    background-color: #0b3760;
+    color: #fff;
+    margin-top: 14px;
+  }
+  
+  @media (width <= 991px) {
+    .button {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
