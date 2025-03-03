@@ -1,0 +1,255 @@
+.container {
+  margin: auto;
+  margin-top: 64px;
+  margin-bottom: 100px;
+  width: 1440px;
+}
+/* Bannner */
+.banner {
+  width: 1440px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Select */
+.selectTarget {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectTarget p {
+  background-color: #db6318;
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  box-shadow: 5px 3px 5px #33333388;
+  transform: skewX(-21deg);
+}
+.selectTarget p span {
+  display: inline-block;
+  padding: 0 5px;
+  transform: skewX(21deg);
+}
+.selectTarget ul {
+  background-color: #0b3760;
+  color: white;
+  margin: 0;
+  padding: 10px 15px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 3px 5px #33333388;
+  transform: skewX(-21deg);
+}
+.selectTarget ul li {
+  cursor: pointer;
+  padding: 0px 10px;
+  border-right: 1px solid #333;
+  transform: skewX(21deg);
+}
+.selectTarget ul li:hover {
+  /* color: #f87808; */
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.selectTarget ul li:last-child {
+  border-right: none;
+}
+/* LIST */
+.list {
+  /* background-color: #01305617; */
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  /* border-radius: 8px; */
+  margin: 20px 0px;
+}
+
+.pagination a {
+  color: white;
+  background-color: #0b3760;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #db6318c7;
+  transform: scale(1.1);
+}
+
+.pagination .active {
+  background-color: #db6318;
+  font-weight: bold;
+  cursor: default;
+}
+
+.pagination .disabled {
+  background-color: #8b8b8b;
+  cursor: not-allowed;
+}
+
+.personList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 10px;
+}
+/* CARD */
+
+.profileCard {
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 228px;
+  height: 271px;
+  padding-top: 79px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profileCard_container {
+  background-color: #0b3760;
+  display: flex;
+  height: 200px; /* 384px * 2/3 */
+  padding-bottom: 45px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.profileImage {
+  aspect-ratio: 0.98;
+  object-fit: contain;
+  width: 150px; /* 248px * 2/3 */
+  border-radius: 50%; /* 126px * 2/3 */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
+    50% / cover no-repeat;
+}
+
+.profileName {
+  width: 146px; /* 219px * 2/3 */
+  font-size: 23px; /* 35px * 2/3 */
+  color: #fff;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
+  font-family: 'Noto Serif TC';
+}
+
+.profile_divider {
+  border: 0;
+  border-top: 1px solid #fff;
+  margin-top: 12px;
+  width: 90%; /* 344px * 2/3 */
+}
+
+.profile_description_wrapper {
+  display: flex;
+  margin-top: 3px;
+  height: 49px; /* 73px * 2/3 */
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile_description {
+  padding: 0px 20px;
+  font-size: 12px; /* 18px * 2/3 */
+  color: #fff;
+  line-height: 20px;
+  flex: 1;
+  margin: 0;
+  /* overflow: hidden; */
+}
+
+.profile_arrow {
+  border-radius: 24px;
+  background-color: #faf0ca;
+  position: absolute;
+  padding: 0 7px;
+  font-size: 13px; /* 20px * 2/3 */
+  color: #828181;
+  font-weight: 700;
+  width: 23px; /* 34px * 2/3 */
+  height: 23px; /* 34px * 2/3 */
+  right: 15px;
+  bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.circle {
+  width: 170px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.favorite_button {
+  background: #e76317;
+  border: none;
+  color: white;
+  padding: 6px;
+  width: 60%;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.card {
+  display: flex;
+  width: 305px;
+  height: 402px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 30px;
+}
+.avatar {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #333;
+  border-radius: 150px;
+  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
+    50% / cover no-repeat;
+  margin-bottom: 20px;
+}
+.personContent {
+  display: flex;
+  height: 218px;
+  align-items: center;
+}
+.personContent h5 {
+  color: #828181;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+}
+.personContent p {
+  color: #828181;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
