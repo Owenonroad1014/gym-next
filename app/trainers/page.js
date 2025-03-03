@@ -14,14 +14,14 @@ export default function TrainersPage(props) {
   const sortItems = ['home', '教練列表', '教練資訊']
   
   return (
-    <div className={styles.container}>
-  <div className={styles.bannerImageContainer}>
-  <h1 className={styles.title}><span className={styles.titleWhite}>健身</span><span className={styles.titleGrey}>教練</span></h1>
-  <h3 className={styles.p}>FIT<span className={styles.pHighlight}>NES</span>S <span className={styles.pHighlight}>CO</span>ACH</h3>
+    <>
+    <div className={styles.bannerImageContainer}>
+  <h1 className={styles.title}>健身教練</h1>
+  <h3 className={styles.p}>FITNESS COACH</h3>
 {/* <h3 className={styles.p}>REN<span className={styles.pHighlight}>TA</span>L</h3> */}
 
       </div>
-      
+    <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.searchSection}>
           <div className={styles.trainerIcon}>
@@ -163,6 +163,6 @@ export default function TrainersPage(props) {
       
       
     </div>
-    
+    </>
   )
 }
