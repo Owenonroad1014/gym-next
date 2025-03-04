@@ -1,5 +1,5 @@
-/* eslint-disable import/no-unresolved */
-import '@/Styles/globals.css'
+
+import '@/styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
 
