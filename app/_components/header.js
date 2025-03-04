@@ -30,7 +30,7 @@ export default function Header() {
 
         {/* 導航選單 */}
         <div className={headerstyles.navMenu}>
-          <Link href="/trainers" className={headerstyles.navLink}>
+          <Link href="/coaches" className={headerstyles.navLink}>
             找GYM身教練
           </Link>
           <Link href="/trainers" className={headerstyles.navLink}>

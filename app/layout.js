@@ -14,6 +14,10 @@ import Footer from './_components/footer'
 //   weight: '100 900',
 // })
 
+import '@/styles/globals.css'
+import Header from './_components/header'
+import Footer from './_components/footer'
+
 export const metadata = {
   title: 'GYM',
   description: '我在，往GYM步的路上邁進',

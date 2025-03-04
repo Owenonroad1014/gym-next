@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   padding: 13px 64px;
-<<<<<<< HEAD
+
   background: #0b3760;
   display: flex;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   font-size: 28px;
   font-weight: 700;
   text-decoration: none;
-=======
+
   /* background: #013056; */
   /* background-image: linear-gradient(
     to right,
@@ -51,6 +51,7 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  z-index: 100;
 }
 
 .logo {
@@ -71,7 +72,7 @@
   justify-content: center;
   align-items: center; */
   /* padding-top: 10px; */
->>>>>>> 38841a35a4e1b58c5b686a957e70004100c77c97
+
 }
 
 .navMenu {
