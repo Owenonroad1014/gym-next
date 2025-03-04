@@ -2,36 +2,18 @@
   width: 100%;
   height: auto;
   padding: 13px 64px;
-
   background: #0b3760;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logo {
+.header {
   text-align: center;
   color: #f5fff6;
   font-size: 28px;
   font-weight: 700;
   text-decoration: none;
-
-  /* background: #013056; */
-  /* background-image: linear-gradient(
-    to right,
-    #013056,
-    #07355b,
-    #0d3a60,
-    #134064,
-    #194569,
-    #1f496b,
-    #254c6c,
-    #2b506e,
-    #33536d,
-    #3a566b,
-    #41586a,
-    #485b69
-  ); */
   background-image: linear-gradient(
     to right,
     #013056,
