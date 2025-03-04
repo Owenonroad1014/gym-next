@@ -1,4 +1,4 @@
-.trainers-card {
+.coaches-card {
     display: flex;
     width: 450px;
     height: 220px;
@@ -12,14 +12,14 @@
     margin-bottom: 5px;
   }
   
-  .trainers-card:hover {
+  .coaches-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
   .card-left {
     width: 170px;
-    background-color: #f87808; /* 橘色背景 */
+    background-color: #db6318; /* 橘色背景 */
     display: flex;
     justify-content: center;
     padding-top: 20px;
@@ -41,7 +41,7 @@
   
   .card-right {
     flex: 1;
-    background-color: #013056; /* 深藍色背景 */
+    background-color: #0b3760;; /* 深藍色背景 */
     color: white;
     padding: 25px 20px;
     position: relative;

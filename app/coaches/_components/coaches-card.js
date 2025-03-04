@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react';
-import styles from './_styles/trainers-card.module.css';
+import styles from './_styles/coaches-card.module.css';
 
-const TrainersCard = ({
+const CoachesCard = ({
   avatarUrl = 'https://avatar.iran.liara.run/public/boy?username=Scott',
   skill = "",
   name ="",
@@ -17,7 +17,7 @@ const TrainersCard = ({
 return (
     <>
     <div 
-        className={`${styles['trainers-card']} ${isHovered ? styles.hovered : ''}`}
+        className={`${styles['coaches-card']} ${isHovered ? styles.hovered : ''}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
     >
@@ -43,4 +43,4 @@ return (
 );
 };
 
-export default TrainersCard;
+export default CoachesCard;

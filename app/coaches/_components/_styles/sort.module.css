@@ -3,7 +3,7 @@
   display: flex;
   width: 100%;
   border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
+  margin: 0px 10px 10px 10px;
 }
 
 .btnHome {
