@@ -2,6 +2,20 @@
   width: 100%;
   height: auto;
   padding: 13px 64px;
+
+  background: #0b3760;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-align: center;
+  color: #f5fff6;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none;
+
   /* background: #013056; */
   /* background-image: linear-gradient(
     to right,
@@ -58,6 +72,7 @@
   justify-content: center;
   align-items: center; */
   /* padding-top: 10px; */
+
 }
 
 .navMenu {
