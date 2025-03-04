@@ -1,7 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import '@/Styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
-
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -13,10 +13,6 @@ import Footer from './_components/footer'
 //   variable: '--font-geist-mono',
 //   weight: '100 900',
 // })
-
-import '@/styles/globals.css'
-import Header from './_components/header'
-import Footer from './_components/footer'
 
 export const metadata = {
   title: 'GYM',

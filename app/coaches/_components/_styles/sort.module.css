@@ -22,6 +22,22 @@
   transform: translateY(-2px);
 }
 
+.btnHome:not(:last-child)::before {
+  content: "›";
+  position: absolute;
+  top: 1px;
+  right: -5px;
+  color: #666;
+  font-size: 20px;
+  z-index: 2;
+}
+.active:not(:last-child)::before {
+  color: #666;
+  /* 移除字體粗細和大小變化 */
+  font-weight: normal;
+  font-size: 20px;
+}
+
 .active {
   color: #f87808;
   font-weight: 600;

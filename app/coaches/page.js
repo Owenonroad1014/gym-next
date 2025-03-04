@@ -7,7 +7,7 @@ import Banner from './_components/banner'
 import CoachCard from './_components/coaches-card'
 
 
-export default function coachesPage( { children } ) {
+export default function coachesPage() {
   // const [city, setCity] = useState('')
   // const [district, setDistrict] = useState('')
   // const [trainers, setTrainers] = useState([])
@@ -31,7 +31,6 @@ export default function coachesPage( { children } ) {
           <h2 className={styles.secTitle}>尋找教練</h2>
           <div className={styles.filterContainer}>
             <Search/>
-            {children}
           </div>
         </div>
         

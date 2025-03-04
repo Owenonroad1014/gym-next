@@ -1,12 +1,12 @@
 .container {
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-  padding: 0;
+  margin: 50px auto 20px auto;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin-top: 60px;
+ 
 }
 .content {
   display: flex;
@@ -56,9 +56,9 @@
 }
 
 @media (max-width: 768px) {
-  .container {
+  /* .container {
     padding: 10px;
-  }
+  } */
 
   .filterLabel {
     width: 50px;
