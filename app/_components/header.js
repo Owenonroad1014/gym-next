@@ -1,8 +1,9 @@
 'use client'
 import React, { useState } from 'react'
 import headerstyles from './_styles/header.module.css'
+import Image from 'next/image'
 import Link from 'next/link'
-
+import { FaCartPlus } from 'react-icons/fa'
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -17,7 +18,13 @@ export default function Header() {
         {/* LOGO */}
         <div>
           <Link href="/" className={headerstyles.logo}>
-            LOGO
+            <Image
+              src="/gym-logo-white.svg"
+              alt="Logo"
+              width={130}
+              height={40}
+            />
+            {/* <img src="/gym-logo-white.svg" alt="Logo"></img> */}
           </Link>
         </div>
 
@@ -40,7 +47,7 @@ export default function Header() {
         {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
           {/* 搜尋欄 */}
-          <form onSubmit={handleSubmit} className={headerstyles.searchForm}>
+          {/* <form onSubmit={handleSubmit} className={headerstyles.searchForm}>
             <input
               type="text"
               placeholder="請輸入課程名稱/商品名稱"
@@ -51,7 +58,7 @@ export default function Header() {
             <button type="submit" className={headerstyles.searchButton}>
               搜尋
             </button>
-          </form>
+          </form> */}
 
           {/* 登入按鈕 */}
           <Link href="/login" className={headerstyles.navLink}>
@@ -61,6 +68,9 @@ export default function Header() {
           {/* 註冊按鈕 */}
           <Link href="/register" className={headerstyles.navLink}>
             註冊
+          </Link>
+          <Link href="/cart" className={headerstyles.navLink}>
+            <FaCartPlus />
           </Link>
         </div>
       </div>

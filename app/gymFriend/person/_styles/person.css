@@ -1,0 +1,79 @@
+.user_info {
+  width: 1200px;
+  margin: auto;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_info .user_avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
+    50% / cover no-repeat;
+}
+.user_info .user_detail {
+  margin: 10px;
+}
+.user_info .user_detail p {
+  font-size: 30px;
+  margin: 10px;
+}
+.user_info .user_detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px;
+}
+.user_info .user_detail li {
+  line-height: 2rem;
+  padding: 5px;
+}
+.user_detail .hastag ul {
+  display: flex;
+}
+.user_detail .hastag ul li {
+  /* background-color: #db6318; */
+  border: 1px solid #db6318;
+  padding: 0;
+  /* padding: 0px 15px; */
+  margin: 10px;
+  box-shadow: 5px 3px 5px #33333388;
+  transform: skewX(-21deg);
+}
+.user_detail .hastag ul li button {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9rem;
+  color: #db6318;
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+  transform: skewX(21deg);
+}
+.user_detail .hastag ul li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  left: 0;
+  /* background: rgb(20, 20, 20); */
+  background-color: #db6318;
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+.user_detail .hastag ul li button:hover {
+  color: #fff;
+}
+
+.user_detail .hastag ul li:hover::before {
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
