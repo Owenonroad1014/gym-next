@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"; // 引入 icons
 import styles from "../_styles/carts.module.css";
 import ProductRow from "./ProductRow";
 
 function OrderSummary() {
-  // Sample product data - in a real app, this would come from props or context
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
   const products = [
     {
       id: 1,
@@ -27,7 +33,6 @@ function OrderSummary() {
     },
   ];
 
-  // Calculate totals
   const subtotal = products.reduce((sum, product) => sum + product.subtotal, 0);
   const discount = 0;
   const total = subtotal - discount;
@@ -35,38 +40,41 @@ function OrderSummary() {
   return (
     <section className={styles.sectionA}>
       <article className={styles.card}>
-        <header className={styles.header}>
+        {/* 標題區 - 點擊可展開/收合 */}
+        <header className={styles.header} onClick={toggleOpen}>
           <div>
-            <span className={styles.span}>合計:$500</span>
+            <span>購物車({products.length}件)</span>
             <br />
-            <span>購物車(1件)</span>
+            <span className={styles.span}>合計: ${total}</span>
           </div>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/5f84a20c2fd60de342f73abf9f6aab7cb2ec80080f56ef35981149ed29e2b0bd?placeholderIfAbsent=true"
-            alt="Cart icon"
-            className={styles.img3}
-          />
+          
+          <div className={styles.toggleIcon}>
+            {isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
+          </div>
         </header>
 
-        <div className={styles.productTable}>
-          <div className={styles.tableHeader}>
-            <div>商品資料</div>
-            <div>租借天數</div>
-            <div>數量</div>
-            <div>價格</div>
-            <div>小計</div>
+        {/* 下拉內容區 */}
+        {isOpen && (
+          <div className={styles.productTable}>
+            <div className={styles.tableHeader}>
+              <div>商品資料</div>
+              <div>租借天數</div>
+              <div>數量</div>
+              <div>價格</div>
+              <div>小計</div>
+            </div>
+
+            {products.map((product) => (
+              <ProductRow key={product.id} product={product} />
+            ))}
+
+            <footer className={styles.summary}>
+              <div>小計: ${subtotal}</div>
+              <div className={styles.div}>優惠: ${discount}</div>
+              <div className={styles.div}>合計: ${total}</div>
+            </footer>
           </div>
-
-          {products.map((product) => (
-            <ProductRow key={product.id} product={product} />
-          ))}
-        </div>
-
-        <footer className={styles.summary}>
-          <div>小計:${subtotal}</div>
-          <div className={styles.div}>優惠:${discount}</div>
-          <div className={styles.div}>合計:${total}</div>
-        </footer>
+        )}
       </article>
     </section>
   );
