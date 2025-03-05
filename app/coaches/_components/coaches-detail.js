@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/f
 import Sort from './sort';
 
 const CoachDetail = ({
-  avatarUrl = 'https://avatar.iran.liara.run/public/boy?username=Scott',
+  avatarUrl = '',
   name = "",
   title = "",
   email = "",
@@ -18,7 +18,6 @@ const CoachDetail = ({
     linkedin: ""
   },
   description = "",
-  experience = [],
   certifications = []
 }) => {
 
@@ -90,17 +89,6 @@ const CoachDetail = ({
             <p className={styles.description}>{description}</p>
           </div>
           
-          <div className={styles['experience-section']}>
-            <h4 className={styles['section-title']}>教學經驗</h4>
-            <ul className={styles['experience-list']}>
-              {experience.map((exp, index) => (
-                <li key={index} className={styles['experience-item']}>
-                  <span className={styles['experience-year']}>{exp.year}</span>
-                  <span className={styles['experience-detail']}>{exp.detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
           
           <div className={styles['certifications-section']}>
             <h4 className={styles['section-title']}>專業證照</h4>

@@ -5,6 +5,7 @@
     max-width: 1440px;
     margin: 40px auto;
     padding: 40px 20px;
+
   
   }
   
@@ -18,7 +19,6 @@
   
   .coach-content {
     display: flex;
-    gap: 40px;
   }
 
   /* 左側區域 */
@@ -35,14 +35,14 @@
     width: 100%;
     height: auto;
     border-radius: 3px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5 );
   }
   
   .social-media {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 30px;
+    margin-top: 30px;
   }
   
   .social-icon {
@@ -69,23 +69,38 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-color: #f2d3d08d;
+    background-image: linear-gradient(
+    to bottom,
+    #013056,
+    #003560,
+    #003a69,
+    #004073,
+    #00457d,
+    #0e4f8a,
+    #1a5a97,
+    #2465a5,
+    #3779b9,
+    #488dcd,
+    #5aa2e2,
+    #6bb7f6
+  );
     border-radius: 3px;
-    padding: 30px;
-
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: #E0E0E0;
   }
   
   .coach-name {
     font-size: 2.2rem;
     font-weight: 700;
     margin: 0;
-    color: #0b3760;
+    color: #ffffff;
   }
   
   .coach-title {
     font-size: 1.3rem;
     font-weight: 500;
-    color: #666;
+    color: #ffffffb3;
     margin: 0;
   }
   
@@ -103,14 +118,14 @@
   
   .info-label {
     font-weight: 600;
-    color: #333;
+    color: #F5F5F5;
     min-width: 80px;
   }
   
   .section-title {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #0b3760;
+    color: #ffffff;
     margin: 0 0 10px 0;
     position: relative;
     padding-left: 15px;
@@ -140,12 +155,12 @@
     border: 1px solid #e9ecef;
     border-radius: 3px;
     font-size: 0.9rem;
-    color: #495057;
+    color: #004080;
   }
   
   .description {
     line-height: 1.6;
-    color: #666;
+    color: #F5F5F5;
     margin: 0;
   }
   
