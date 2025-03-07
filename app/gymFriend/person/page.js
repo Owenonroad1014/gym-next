@@ -1,15 +1,25 @@
 'use client'
+import Image from 'next/image'
 import gymfriendcss from '../_styles/gymfrenid.module.css'
 import './_styles/person.css'
 import FriendBanner from '../_components/friendBanner'
+import Breadcrumb from '../_components/breadcrumb'
 
 export default function PersonPage() {
   return (
     <>
       <div className={gymfriendcss.container}>
         <FriendBanner />
+        <Breadcrumb />
         <div className="user_info">
-          <div className="user_avatar"></div>
+          <div className="user_avatar">
+            <Image
+              src="https://xsgames.co/randomusers/avatar.php?g=male"
+              alt="avatar"
+              width={200}
+              height={200}
+            />
+          </div>
           <div className="user_detail">
             <p className="username">熊大</p>
             <hr />

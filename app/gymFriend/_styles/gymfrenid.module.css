@@ -2,53 +2,70 @@
   margin: auto;
   margin-top: 64px;
   margin-bottom: 100px;
-  width: 1440px;
+  max-width: 1440px;
 }
 /* Bannner */
 .banner {
-  width: 1440px;
+  background-image: url('/imgs/gymfriendBanner.jpg');
+  max-width: 1440px;
+  width: 100%;
   height: 400px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 50px 60px;
+}
+.banner h3 {
+  color: white;
+  font-size: 3rem;
+}
+.banner p {
+  color: white;
+  font-size: 1.5rem;
 }
 /* Select */
 .selectTarget {
+  margin: auto;
+  max-width: 800px;
   margin-top: 10px;
+  margin-bottom: 50px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  /* background-color: #4474a1; */
+  /* border-bottom: 2px solid #0b3760; */
+  border-radius: 3px;
+  /* background-color: #0b3760b4; */
+  /* color: white; */
 }
 .selectTarget p {
-  background-color: #db6318;
-  color: white;
   padding: 10px 15px;
   margin: 10px;
-  box-shadow: 5px 3px 5px #33333388;
-  transform: skewX(-21deg);
+  border-radius: 3px;
 }
 .selectTarget p span {
   display: inline-block;
   padding: 0 5px;
-  transform: skewX(21deg);
 }
 .selectTarget ul {
-  background-color: #0b3760;
-  color: white;
+  /* background-color: #0b3760; */
+  /* color: white; */
   margin: 0;
   padding: 10px 15px;
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 3px 5px #33333388;
-  transform: skewX(-21deg);
+  /* box-shadow: 5px 3px 5px #33333388; */
+  border-radius: 3px;
 }
 .selectTarget ul li {
   cursor: pointer;
-  padding: 0px 10px;
+  padding: 0px 15px;
+  /* border-right: 1px solid white; */
   border-right: 1px solid #333;
-  transform: skewX(21deg);
 }
 .selectTarget ul li:hover {
   /* color: #f87808; */
@@ -58,10 +75,86 @@
 .selectTarget ul li:last-child {
   border-right: none;
 }
-/* LIST */
-.list {
-  /* background-color: #01305617; */
+/* 麵包屑 */
+.breadcrumbContainer {
+  max-width: 1200px;
+  /* margin: 50px auto; */
+  position: relative;
+  font-family: 'Noto Serif TC', serif;
+  box-sizing: border-box;
 }
+
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  /* border-bottom: 1px solid #eee; */
+  background-color: transparent;
+}
+
+.breadcrumbItem {
+  position: relative;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: '›';
+  position: absolute;
+  top: 13px;
+  right: -5px;
+  color: #666;
+  font-size: 20px;
+  z-index: 2;
+}
+
+.breadcrumbItem a {
+  text-decoration: none;
+  color: #666;
+  font-size: 18px;
+  font-family: 'Noto Serif TC', serif;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+  height: 60px;
+  line-height: 60px;
+  display: block;
+}
+
+/* 懸停效果 - 上浮動畫和底部線條 */
+.breadcrumbItem:hover a {
+  transform: translateY(-2px);
+  color: #666;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+/* 底部線條動畫 */
+/* .breadcrumbItem:not(.active) a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #000;
+  transition: all 0.5s ease;
+} */
+
+.breadcrumbItem:hover a::after,
+.breadcrumbItem.active a::after {
+  width: 100%;
+}
+
+/* 點擊/活動狀態 */
+.breadcrumbItem.active a {
+  color: #f87808;
+  font-weight: 600;
+}
+/* pagination */
+
 .pagination {
   display: flex;
   justify-content: center;
@@ -76,7 +169,7 @@
   background-color: #0b3760;
   padding: 10px 15px;
   margin: 0 5px;
-  border-radius: 5px;
+  border-radius: 3px;
   text-decoration: none;
   font-size: 1rem;
   transition: background-color 0.3s, transform 0.2s;
@@ -99,11 +192,13 @@
 }
 
 .personList {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   padding: 10px;
+  justify-content: flex-start;
 }
+
 /* CARD */
 
 .profileCard {
@@ -118,13 +213,15 @@
 }
 
 .profileCard_container {
-  background-color: #0b3760;
+  background-color: #0b3760ce;
+  /* background-color: #0b3760; */
   display: flex;
   height: 200px; /* 384px * 2/3 */
   padding-bottom: 45px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  border-radius: 3px;
 }
 
 .profileImage {
@@ -135,7 +232,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
+  background: url('https://xsgames.co/randomusers/avatar.php?g=male') lightgray
     50% / cover no-repeat;
 }
 
@@ -205,7 +302,8 @@
   align-items: center;
 }
 .favorite_button {
-  background: #e76317;
+  background: #eb7d3e;
+  /* background: #e76317; */
   border: none;
   color: white;
   padding: 6px;
@@ -213,6 +311,7 @@
   cursor: pointer;
   font-size: 12px;
   margin-top: 10px;
+  border-radius: 3px;
 }
 
 .card {

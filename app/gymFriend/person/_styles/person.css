@@ -1,19 +1,22 @@
 .user_info {
-  width: 1200px;
+  max-width: 1440px;
   margin: auto;
-  margin-top: 100px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f2f3f3;
+  padding: 20px 10px;
 }
 
 .user_info .user_avatar {
-  width: 150px;
+  width: 200px;
   height: 150px;
-  border-radius: 50%;
+
   margin: 20px;
-  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
-    50% / cover no-repeat;
+}
+.user_info .user_avatar img {
+  border-radius: 50%;
 }
 .user_info .user_detail {
   margin: 10px;
@@ -40,7 +43,8 @@
   padding: 0;
   /* padding: 0px 15px; */
   margin: 10px;
-  box-shadow: 5px 3px 5px #33333388;
+  /* box-shadow: 5px 3px 5px #33333388; */
+  border-radius: 3px;
   transform: skewX(-21deg);
 }
 .user_detail .hastag ul li button {
@@ -54,26 +58,13 @@
   padding: 5px 10px;
   transform: skewX(21deg);
 }
-.user_detail .hastag ul li::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 100%;
-  left: 0;
-  /* background: rgb(20, 20, 20); */
-  background-color: #db6318;
-  opacity: 0;
-  z-index: -1;
-  transition: all 0.5s;
-}
 
 .user_detail .hastag ul li button:hover {
   color: #fff;
 }
 
-.user_detail .hastag ul li:hover::before {
-  left: 0;
-  right: 0;
+.user_detail .hastag ul li:hover {
+  background-color: #db6318;
+
   opacity: 1;
 }
