@@ -10,9 +10,9 @@ export default function GymFriendPage() {
   const breadcrumb = ['首頁', '找GYM友']
   return (
     <>
-      <div className={gymfriendcss.container}>
-        <FriendBanner />
-        <Breadcrumb breadcrumb={breadcrumb} />
+      <FriendBanner />
+      <Breadcrumb breadcrumb={breadcrumb} />
+      <div className={gymfriendcss.friendContainer}>
         <SelectTarget />
         <List />
       </div>
