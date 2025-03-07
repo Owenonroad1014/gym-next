@@ -1,0 +1,231 @@
+.body2 {
+    color: #fff;
+    background-color: #0b3760;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+    font-weight: 400;
+    display: flex;
+  }
+  .progress {
+    text-align: center;
+    background-color: #0b3760;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    height: 500px;
+    padding: 40px 105px;
+    font-family:
+      Noto Sans TC,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    overflow: hidden;
+  }
+  @media (width<=991px) {
+    .progress {
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+  }
+  @media (width<=640px) {
+    .progress {
+      padding: 10px;
+    }
+  }
+  .progressItem {
+    color: #fff;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+  }
+  
+  .progressLine {
+    background-color: #fff;
+    width: 236px;
+    height: 2px;
+  }
+  @media (width<=991px) {
+    .progressLine {
+      width: 100px;
+    }
+  }
+  
+  .sectionA {
+    background-color: #0b3760;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+  }
+  .card {
+    background-color: #0b3760;
+    /* border-radius: 8px; */
+    max-width: 1024px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .header {
+    color: #0b3760;
+    letter-spacing: 1.5px;
+    background-color: #eb854a;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 32px;
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    display: flex;
+  }
+  @media (width<=640px) {
+    .header {
+      text-align: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  .span {
+    font-weight: 600;
+  }
+  
+  .productTable {
+    color: #fff;
+    width: 100%;
+    font-family:
+      Noto Sans TC,
+      sans-serif;
+  }
+  .tableHeader {
+    text-align: center;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    padding: 20px;
+    font-size: 20px;
+    display: grid;
+  }
+  @media (width<=991px) {
+    .tableHeader {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+  .productRow {
+    text-align: center;
+    border-bottom: 1px solid #ffffff1a;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 20px;
+    display: grid;
+  }
+  @media (width<=991px) {
+    .productRow {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+  .productImage {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+  }
+  @media (width<=991px) {
+    .productImage {
+      margin: 0 auto;
+    }
+  }
+  .summary {
+    text-align: right;
+    color: #fff;
+    padding: 20px;
+    font-family:
+      Noto Sans TC,
+      sans-serif;
+    font-size: 20px;
+  }
+  .div {
+    margin-top: 25px;
+  }
+  .sectionB {
+    background-color: #0b3760;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+  }
+  .formCard {
+    background-color: #0b3760;
+    max-width: 1046px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  @media (width<=991px) {
+    .formCard {
+      padding: 10px;
+    }
+  }
+  @media (width<=640px) {
+    .formCard {
+      margin: 10px;
+    }
+  }
+  /*橘底標題*/
+  .formHeader {
+    color: #fff;
+    height: 40px;
+    background-color: #eb854a;
+    border: 1px solid #828181;
+    padding: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;  /* 垂直置中 */
+  }
+  .formGroup {
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+    display: flex;
+  }
+  .formLabel {
+    color: #fff;
+    font-family:
+      Noto Sans TC,
+      sans-serif;
+    font-size: 18px;
+  }
+  .formInput {
+    background-color: #fff;
+    border: 1px solid #0000004d;
+    width: 100%;
+    height: 45px;
+  }
+  .formTextarea {
+    background-color: #fff;
+    border: 1px solid #0000004d;
+    width: 100%;
+    height: 139px;
+  }
+  .sectionC,
+  .sectionD {
+    background-color: #0b3760;
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+  }
+  .invoiceSection {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    display: grid;
+  }
+  @media (width<=991px) {
+    .invoiceSection {
+      grid-template-columns: 1fr;
+    }
+  }
+  .dropdown {
+    background-color: #fff;
+    border: 1px solid #0000004d;
+    width: 100%;
+    height: 45px;
+  }
+  

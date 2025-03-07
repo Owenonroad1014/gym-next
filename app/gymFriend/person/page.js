@@ -6,25 +6,35 @@ import FriendBanner from '../_components/friendBanner'
 import Breadcrumb from '../_components/breadcrumb'
 
 export default function PersonPage() {
+  const breadcrumb = ['首頁', '找GYM友', '王小明']
   return (
     <>
       <div className={gymfriendcss.container}>
         <FriendBanner />
+<<<<<<< HEAD
         <Breadcrumb />
+=======
+        <Breadcrumb breadcrumb={breadcrumb} />
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
         <div className="user_info">
           <div className="user_avatar">
             <Image
               src="https://xsgames.co/randomusers/avatar.php?g=male"
               alt="avatar"
+<<<<<<< HEAD
               width={200}
               height={200}
+=======
+              width={250}
+              height={250}
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
             />
           </div>
           <div className="user_detail">
-            <p className="username">熊大</p>
+            <p className="username">王小明</p>
             <hr />
             <ul>
-              <li>性別：女</li>
+              <li>性別：男</li>
               <li>運動項目： 重訓、跑步</li>
               <li>
                 簡短介紹：
@@ -33,21 +43,9 @@ export default function PersonPage() {
             </ul>
             <div className="hastag">
               <ul>
-                <li>
-                  <button>
-                    <span>#增肌</span>
-                  </button>
-                </li>
-                <li>
-                  <button>
-                    <span>#健康維持</span>
-                  </button>
-                </li>
-                <li>
-                  <button>
-                    <span>#健康維持</span>
-                  </button>
-                </li>
+                <li>#增肌</li>
+                <li>#健康維持</li>
+                <li>#健康維持</li>
               </ul>
             </div>
           </div>

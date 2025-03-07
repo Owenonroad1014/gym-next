@@ -1,0 +1,21 @@
+.productGrid {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 57px 60px;
+  width: 100%;
+  margin: 0px;
+  padding: 80px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255, 0.4);
+  /* border-radius: 50px; */
+}
+
+@media (width <= 991px) {
+  .productGrid {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+}

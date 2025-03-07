@@ -1,5 +1,9 @@
 .user_info {
+<<<<<<< HEAD
   max-width: 1440px;
+=======
+  max-width: 1200px;
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
   margin: auto;
   margin-top: 20px;
   display: flex;
@@ -7,18 +11,32 @@
   align-items: center;
   background-color: #f2f3f3;
   padding: 20px 10px;
+<<<<<<< HEAD
 }
 
 .user_info .user_avatar {
   width: 200px;
   height: 150px;
+=======
+  gap: 20px;
+}
+
+.user_info .user_avatar {
+  width: 250px;
+  height: 250px;
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
 
   margin: 20px;
 }
 .user_info .user_avatar img {
+<<<<<<< HEAD
   border-radius: 50%;
+=======
+  border-radius: 3px;
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
 }
 .user_info .user_detail {
+  max-width: 800px;
   margin: 10px;
 }
 .user_info .user_detail p {
@@ -38,11 +56,12 @@
   display: flex;
 }
 .user_detail .hastag ul li {
-  /* background-color: #db6318; */
-  border: 1px solid #db6318;
-  padding: 0;
-  /* padding: 0px 15px; */
+  font-weight: bold;
+  color: #333333af;
+  background-color: white;
+  padding: 3px 15px;
   margin: 10px;
+<<<<<<< HEAD
   /* box-shadow: 5px 3px 5px #33333388; */
   border-radius: 3px;
   transform: skewX(-21deg);
@@ -67,4 +86,8 @@
   background-color: #db6318;
 
   opacity: 1;
+=======
+  box-shadow: 5px 3px 5px #33333388;
+  border-radius: 3px;
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
 }

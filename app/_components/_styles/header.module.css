@@ -2,6 +2,21 @@
   width: 100%;
   height: auto;
   padding: 13px 64px;
+<<<<<<< HEAD
+=======
+  background: #0b3760;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+  text-align: center;
+  color: #f5fff6;
+  font-size: 28px;
+  font-weight: 700;
+  text-decoration: none;
+>>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
   background-image: linear-gradient(
     to right,
     #013056,
@@ -21,6 +36,7 @@
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  z-index: 100;
 }
 
 .logo {
@@ -41,6 +57,7 @@
   justify-content: center;
   align-items: center; */
   /* padding-top: 10px; */
+
 }
 
 .navMenu {

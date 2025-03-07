@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+.equipmentRental {
+    font-family:
+      "Noto Serif TC",
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+  }
+  
+  .contentSection {
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: stretch;
+    width: 100%;
+    min-height: 1500px;
+    padding: 40px 120px 150px 120px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background-color: #d4cec8;
+    /* background-image: url(/img/contentBackground3.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;  */
+  }
+
+  .contentTitle{
+    display: flex;
+  }
+  
+  @media (width <= 991px) {
+    .contentSection {
+      max-width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
