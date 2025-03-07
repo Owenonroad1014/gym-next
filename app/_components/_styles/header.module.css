@@ -1,14 +1,8 @@
+
 .header {
   width: 100%;
   height: auto;
   padding: 13px 64px;
-  background: #0b3760;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header {
   text-align: center;
   color: #f5fff6;
   font-size: 28px;
