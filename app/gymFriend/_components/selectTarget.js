@@ -8,9 +8,7 @@ export default function SelectTarget() {
     <>
       <div className={gymfriendcss.selectTarget}>
         <p>
-          <span>
-            <TbTargetArrow />
-          </span>
+          <TbTargetArrow className={gymfriendcss.targetIcon} />
           <span>健身目標</span>
         </p>
         <ul className="selectTarget-list">
