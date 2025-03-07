@@ -3,10 +3,7 @@
   margin-top: 64px;
   margin-bottom: 100px;
   max-width: 1440px;
-<<<<<<< HEAD
-=======
   background-color: rgba(255, 255, 255, 0.678);
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
 }
 /* Bannner */
 .banner {
@@ -38,13 +35,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-<<<<<<< HEAD
-  /* background-color: #4474a1; */
-  /* border-bottom: 2px solid #0b3760; */
-=======
   color: #333;
 
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
   border-radius: 3px;
   /* background-color: #0b3760b4; */
   /* color: white; */
@@ -161,11 +153,8 @@
 .breadcrumbItem.active a {
   color: #f87808;
   font-weight: 600;
-<<<<<<< HEAD
-=======
   text-decoration: underline;
   text-underline-offset: 10px;
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
 }
 /* pagination */
 

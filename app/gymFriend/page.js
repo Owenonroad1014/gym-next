@@ -12,11 +12,7 @@ export default function GymFriendPage() {
     <>
       <div className={gymfriendcss.container}>
         <FriendBanner />
-<<<<<<< HEAD
-        <Breadcrumb />
-=======
         <Breadcrumb breadcrumb={breadcrumb} />
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
         <SelectTarget />
         <List />
       </div>

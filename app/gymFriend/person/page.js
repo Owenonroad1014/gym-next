@@ -11,23 +11,14 @@ export default function PersonPage() {
     <>
       <div className={gymfriendcss.container}>
         <FriendBanner />
-<<<<<<< HEAD
-        <Breadcrumb />
-=======
         <Breadcrumb breadcrumb={breadcrumb} />
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
         <div className="user_info">
           <div className="user_avatar">
             <Image
               src="https://xsgames.co/randomusers/avatar.php?g=male"
               alt="avatar"
-<<<<<<< HEAD
-              width={200}
-              height={200}
-=======
               width={250}
               height={250}
->>>>>>> 3cd4b2afd3708ace1e55cada6db5a5616acc3373
             />
           </div>
           <div className="user_detail">
