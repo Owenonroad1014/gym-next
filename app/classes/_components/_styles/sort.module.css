@@ -1,0 +1,84 @@
+.sortContainer {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sortForm {
+    display: flex;
+    justify-self: center;
+    gap: 10px;
+    width: 400px;
+    height: 100%;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .dropdown button {
+    background-color: white;
+    color: #142020;
+    width: 100%;
+    height: 100%;
+    font-size: 19px;
+    border: 1px solid #142020;
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 3px;
+  }
+  .dropdown button:hover {
+    background-color: #142020;
+    color: white;
+    
+    padding: 12px 8px;
+    border-radius: 3px;
+  }
+  
+  .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .dropdownContent.show {
+    display: block;
+  }
+  
+  .dropdownContent button {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: #142020;
+    padding: 12px 8px;
+    text-decoration: none;
+    display: block;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 0.2px;
+  }
+  .dropdownContent button:first-child{
+     margin-top: 5px; 
+  }
+  
+  .dropdownContent button:hover {
+    background-color: #142020;
+    color: white;
+    border-radius: 3px;
+  
+  }
+  
+ 

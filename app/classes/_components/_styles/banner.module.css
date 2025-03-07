@@ -5,6 +5,7 @@
     height: 400px; /* 根據設計指南 */
     margin-bottom: 10px;
     overflow: hidden;
+    margin-top: 50px;
   }
   
   .bannerImageContainer::before {

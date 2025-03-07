@@ -4,7 +4,7 @@ import styles from './_styles/coaches.module.css'
 import React, { useState, useEffect } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
-import CoachCard from './_components/coaches-card'
+
 
 
 export default function coachesPage() {
@@ -15,9 +15,8 @@ export default function coachesPage() {
   
   return (
     <>
-    <Banner title="健身教練" subtitle="FITNESS COACH"/>
     <div className={styles.container}>
-      
+      <Banner title="健身教練" subtitle="FITNESS COACH"/>
       
       <div className={styles.content}>
         <div className={styles.searchSection}>

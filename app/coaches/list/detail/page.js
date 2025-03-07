@@ -30,7 +30,6 @@ function CoachDetailPage() {
 
   return (
     <>
-    
     <CoachDetail {...coachData} />
     </>
   );

@@ -69,21 +69,7 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-image: linear-gradient(
-    to bottom,
-    #013056,
-    #003560,
-    #003a69,
-    #004073,
-    #00457d,
-    #0e4f8a,
-    #1a5a97,
-    #2465a5,
-    #3779b9,
-    #488dcd,
-    #5aa2e2,
-    #6bb7f6
-  );
+    background-color: #0b3760;
     border-radius: 3px;
     padding: 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);

@@ -1,16 +1,18 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import styles from '../_styles/coaches.module.css'
+import styles from '../_styles/classes.module.css'
 import Banner from '../_components/banner'
 import Search from '../_components/search'
 import Calendar from '../_components/calendar'
+import TabButton from '../_components/tabButton'
 
 export default function CoachesListPage(props) {
+   const [activeTab, setActiveTab] = useState('search')
   const courses = [
     {
       id: '1',
-      date: new Date(2025, 2, 11
+      date: new Date(2025, 3, 11
       ),
       title: '瑜珈初級班',
       time: '19:00 - 20:00'
@@ -18,7 +20,28 @@ export default function CoachesListPage(props) {
     },
     {
       id: '2',
-      date: new Date(2025, 2, 20
+      date: new Date(2025, 3, 11
+      ),
+      title: '重訓班',
+      time: '19:00 - 20:00'
+    },
+    {
+      id: '3',
+      date: new Date(2025, 3, 15
+      ),
+      title: '重訓班',
+      time: '19:00 - 20:00'
+    },
+    {
+      id: '4',
+      date: new Date(2025, 3, 5
+      ),
+      title: '重訓班',
+      time: '19:00 - 20:00'
+    },
+    {
+      id: '5',
+      date: new Date(2025, 3, 5
       ),
       title: '重訓班',
       time: '19:00 - 20:00'
@@ -28,8 +51,23 @@ export default function CoachesListPage(props) {
 
   return (
     <>
+    <Banner title="課程專區" subtitle="FITNESS CLASSES" />
       <div className={styles.container}>
-        <Banner title="課程專區" subtitle="FITNESS CLASSES" />
+        
+        <div className={styles.tabButtons}>
+          <TabButton 
+            isActive={activeTab === 'search'} 
+            onClick={() => setActiveTab('search')}
+          >
+            課表查詢
+          </TabButton>
+          <TabButton 
+            isActive={activeTab === 'intro'} 
+            onClick={() => setActiveTab('intro')}
+          >
+            課程介紹
+          </TabButton>
+        </div>
 
         <div className={styles.content}>
           <div className={styles.searchSection}>
