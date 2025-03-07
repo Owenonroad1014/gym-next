@@ -2,23 +2,7 @@
   width: 100%;
   height: auto;
   padding: 13px 64px;
-  background: #013056;
-  /* background-image: linear-gradient(
-    to right,
-    #013056,
-    #07355b,
-    #0d3a60,
-    #134064,
-    #194569,
-    #1f496b,
-    #254c6c,
-    #2b506e,
-    #33536d,
-    #3a566b,
-    #41586a,
-    #485b69
-  ); */
-  /* background-image: linear-gradient(
+  background-image: linear-gradient(
     to right,
     #013056,
     #003560,
@@ -32,7 +16,7 @@
     #488dcd,
     #5aa2e2,
     #6bb7f6
-  ); */
+  );
   display: flex;
   justify-content: space-between;
   align-items: center;
