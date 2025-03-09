@@ -4,7 +4,7 @@ import gymfriendcss from '../_styles/gymfrenid.module.css'
 import './_styles/person.css'
 import FriendBanner from '../_components/friendBanner'
 import Breadcrumb from '../_components/breadcrumb'
-
+import FloatingBar from '@/app/_components/float-bar'
 export default function PersonPage() {
   const breadcrumb = ['首頁', '找GYM友', '王小明']
   return (
@@ -41,6 +41,7 @@ export default function PersonPage() {
             </div>
           </div>
         </div>
+        <FloatingBar/>
       </div>
     </>
   )
