@@ -61,12 +61,12 @@ export default function Header() {
           </form> */}
 
           {/* 登入按鈕 */}
-          <Link href="/login" className={headerstyles.navLink}>
+          <Link href="/member/login" className={headerstyles.navLink}>
             登入
           </Link>
 
           {/* 註冊按鈕 */}
-          <Link href="/register" className={headerstyles.navLink}>
+          <Link href="member/register" className={headerstyles.navLink}>
             註冊
           </Link>
           <Link href="/cart" className={headerstyles.navLink}>
