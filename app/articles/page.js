@@ -10,12 +10,11 @@ export default function ArticlesPage() {
   return (
     <>
       <ArticlesBanner />
+      <Breadcrumb breadcrumb={breadcrumb} />
       <div className={articlecss.articlesContainer}>
-        <Breadcrumb breadcrumb={breadcrumb}/>
-        <Select/>
-        <List/>
+        <Select />
+        <List />
       </div>
-     
     </>
   )
 }
