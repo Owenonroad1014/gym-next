@@ -9,7 +9,7 @@
   }
   .progress {
     text-align: center;
-    background-color: #87a0b8;
+    /* background-color: #87a0b8; */
     justify-content: center;
     align-items: center;
     gap: 40px;
@@ -41,14 +41,15 @@
     align-items: center;
     gap: 10px;
     display: flex;
+    padding: 30px;
     /* border-bottom:3px solid #eb854a; */
   }
   
-  .progressLine {
+  /* .progressLine {
     background-color: #587896;
     width: 236px;
     height: 2px;
-  }
+  } */
   @media (width<=991px) {
     .progressLine {
       width: 100px;
@@ -216,7 +217,7 @@
   .formTextarea {
     background-color: #fff;
     border: 1px solid #0000004d;
-    box-shadow: 0px 0px 10px rgb(79, 79, 79);
+    /* box-shadow: 0px 0px 10px rgb(79, 79, 79); */
     width: 100%;
     height: 139px;
   }
