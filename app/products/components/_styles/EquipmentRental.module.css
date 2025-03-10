@@ -10,16 +10,15 @@
   }
   
   .contentSection {
+    width: 1440px;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: stretch;
-    width: 100%;
-    min-height: 1500px;
-    padding: 40px 120px 150px 120px;
+    padding: 30px 0;
     display: flex;
     position: relative;
     overflow: hidden;
-    background-color: #d4cec8;
+    margin: auto;
     /* background-image: url(/img/contentBackground3.jpg);
     background-size: cover;
     background-position: center;
@@ -28,11 +27,12 @@
 
   .contentTitle{
     display: flex;
+    justify-content: flex-end;
   }
   
   @media (width <= 991px) {
     .contentSection {
-      max-width: 100%;
+      width: 100%;
       padding-left: 20px;
       padding-right: 20px;
     }

@@ -3,20 +3,23 @@ import React from "react";
 import HeroSection from "./components/HeroSection";
 import ProductGrid from "./components/ProductGrid";
 import styles from "./components/_styles/EquipmentRental.module.css";
-import Sort from "./components/sort";
+import Breadcrumb from "./components/breadcrumb";
 import Search from "./components/search";
 
+
 const EquipmentRental = () => {
+
+
   return (
     <main className={styles.equipmentRental}>
       <HeroSection />
       <section className={styles.contentSection}>
       <div className={styles.contentTitle}>
-      <Sort />
+      <Breadcrumb />
       <Search />
       </div>
-      
-        <ProductGrid />
+        <ProductGrid >
+      </ProductGrid>
       </section>
     </main>
   );

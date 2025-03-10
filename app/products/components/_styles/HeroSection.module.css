@@ -3,14 +3,16 @@
   white-space: nowrap;
   text-transform: uppercase;
   flex-direction: column;
-  width: 100%;
+  /* max-width: 1440px; */
   height: 400px;
   padding: 70px;
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 700;
   display: flex;
   position: relative;
   overflow: hidden;
+  margin: auto;
+  margin-top: 53px;
 }
 
 .heroBackground {
@@ -27,7 +29,7 @@
   height: 300px;
   position: relative;
   z-index: 1;
-  background-image: url(/img/Ellipse36-2.png);
+  /* background-image: url(/img/Ellipse36-2.png); */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat; 
