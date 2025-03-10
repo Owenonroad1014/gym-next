@@ -1,0 +1,260 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lexend:wght@100..900&display=swap');
+
+
+
+/* Notice Section */
+.noticeSection {
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 18px;
+  max-width: 1440px;
+  padding: 20px 120px;
+  display: flex;
+  position: relative;
+  margin: auto;
+}
+
+.noticeContainer {
+  background-color: rgba(239, 244, 247, 0.9);
+  /* border: 15px solid #000; */
+  width: 80%;
+  margin-left: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 10px 70px;
+  font-family: "Noto Serif TC";
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.noticeGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  padding: 35px 60px 35px 150px;
+}
+
+.noticeItem {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  padding: 0 30px;
+  
+}
+
+.noticeNumber {
+  color: #e17917;
+  font-size: 50px;
+  flex-shrink: 0;
+  width: 40px;
+}
+
+.noticeContent {
+  flex-grow: 1;
+}
+
+.noticeTitle {
+  color: #0b3760;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.noticeDescription {
+  color: #6c7273;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.noticeSidebar {
+  position: absolute;
+  /* bottom: 10%; */
+  left: 10%;
+  background-color: #fff;
+  border: 6px solid #000;
+  width: 23%;
+  padding: 20px;
+  z-index: 1;
+}
+
+.sidebarTitle {
+  font-family:"Lexend", "Noto Serif TC", Helvetica, sans-serif;
+  font-size: 50px;
+  font-weight: 800;
+  color: #323943;
+}
+
+.rental{
+  font-size: 60px;
+  color: rgb(8, 46, 59);
+}
+.not{
+  font-size: 64px;
+  color: rgb(19, 70, 87);
+}
+
+.ice{
+  font-size: 54px;
+  color: rgb(33, 96, 116);
+}
+/* Equipment Section */
+.equipmentSection {
+  background-color: #dfdfdf;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 700px;
+}
+
+.orangeSidebar {
+  background-color: #e76317;
+  width: 180px;
+  height: 100%;
+  padding: 15px 0;
+  /* flex-shrink: 0; */
+  flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+    display: inline-flex;
+    align-self: stretch; 
+    height: 200px; 
+    transform: rotate(-90deg); transform-origin: top left; 
+    text-align: center; 
+    color: rgba(255, 89, 56, 0.93); font-size: 50px; 
+    font-family: Inter; 
+    font-weight: 700; 
+    word-wrap: break-word;
+}
+
+.labelLeft,
+  .labelRight {
+    width: 232px; 
+    min-height: 700px; 
+    padding-top: 65px; 
+    padding-bottom: 65px; 
+    background: #E76317;
+    
+  }
+
+.equipmentGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.equipmentCategory {
+  position: relative;
+  width: 35%;
+  height: 450px;
+}
+
+.equipmentImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.equipmentTitle {
+  position: absolute;
+  color: #fff;
+  font-family: "Noto Serif TC", -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  padding: 10px 35px;
+  white-space: nowrap;
+  bottom: 5%;
+}
+
+.equipmentDivider {
+  position: absolute;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 2px;
+  background-color: #e76317;
+  bottom: 6%;
+}
+
+/* Process Section */
+.processSection {
+  color: #000;
+  width: 100%;
+  min-height: 720px;
+  padding: 60px 0;
+  font-family: "Noto Serif TC", -apple-system, Roboto, Helvetica, sans-serif;
+  position: relative;
+}
+
+.processMainTitle {
+  font-size: 64px;
+  font-weight: 700;
+  margin-bottom: 17px;
+  position: relative;
+  z-index: 1;
+}
+
+.processEnglishTitle {
+  color: #0b3760;
+  margin-left: 10px;
+}
+
+.processGrid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.processStep {
+  flex: 1;
+  min-width: 240px;
+  background-color: #e76317;
+  padding-bottom: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.processStep:nth-child(even) {
+  background-color: #fff;
+  color: #0b3760;
+}
+
+.processHeader {
+  text-align: center;
+  padding: 20px;
+}
+
+.processNumber {
+  font-size: 96px;
+  font-weight: 900;
+  color: #0b3760;
+}
+
+.processTitle {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.processImage {
+  width: 100%;
+  aspect-ratio: 0.91;
+  object-fit: contain;
+}
+
+.processSubtitle {
+  font-size: 60px;
+  font-weight: 900;
+  text-align: center;
+  padding: 10px;
+}
