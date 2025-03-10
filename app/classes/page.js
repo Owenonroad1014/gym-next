@@ -7,6 +7,8 @@ import Banner from './_components/banner'
 import TabButton from './_components/tabButton'
 import Filter from './_components/filter'
 import Sort from './_components/sort'
+import ClassesIntro from './_components/classes-intro'
+import ClassesIntro2 from './_components/classes-intro2'
 
 export default function ClassesPage() {
   // const [city, setCity] = useState('')
@@ -59,7 +61,6 @@ export default function ClassesPage() {
                 <Search />
               </div>
             </div>
-
             <div className={styles.resultsContainer}>
               <div className={styles.emptyResults}>
                 <p>選擇場館以顯示該場館課程</p>
@@ -67,14 +68,20 @@ export default function ClassesPage() {
             </div>
           </div>
         ) : (
-          <div className={styles.content}>
+          <>
           <Filter/>
             <h2>靜態課程</h2>
           <Sort/>
-            
-          </div>
+         <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
+
+          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
+          <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
+          
+          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
+          </>
         )}
       </div>
+      
     </>
   )
 }

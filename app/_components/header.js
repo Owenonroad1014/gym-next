@@ -1,20 +1,35 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import headerstyles from './_styles/header.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 
 export default function Header() {
-  const [searchQuery, setSearchQuery] = useState('')
+  const  [isScrolling, setIsScrolling] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('搜尋：', searchQuery)
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 36) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // 清理事件監聽器
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   return (
     <>
-      <div className={headerstyles.header}>
+      <div className={`${headerstyles.header} ${isScrolling ? headerstyles.hscrolling : ''}`}>
+
         {/* LOGO */}
         <div>
           <Link href="/" className={headerstyles.logo}>
@@ -24,7 +39,6 @@ export default function Header() {
               width={130}
               height={40}
             />
-            {/* <img src="/gym-logo-white.svg" alt="Logo"></img> */}
           </Link>
         </div>
 
@@ -46,21 +60,6 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
-          {/* 搜尋欄 */}
-          {/* <form onSubmit={handleSubmit} className={headerstyles.searchForm}>
-            <input
-              type="text"
-              placeholder="請輸入課程名稱/商品名稱"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={headerstyles.searchInput}
-            />
-            <button type="submit" className={headerstyles.searchButton}>
-              搜尋
-            </button>
-          </form> */}
-
-          {/* 登入按鈕 */}
           <Link href="/login" className={headerstyles.navLink}>
             登入
           </Link>
