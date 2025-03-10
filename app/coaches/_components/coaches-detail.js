@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from './_styles/coach-detail.module.css';
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
-import Sort from './sort';
+import Breadcrumb from './breadcrumb';
 
 const CoachDetail = ({
   avatarUrl = '',
@@ -21,12 +21,12 @@ const CoachDetail = ({
   certifications = []
 }) => {
 
-    const sortItems = ['home', '教練列表', '教練資訊']
+    const breadcrumb = ['home', '教練列表', '教練資訊']
 
   return (
     <div className={styles['coach-detail-container']}>
     
-      <Sort items={sortItems}/>
+      <Breadcrumb breadcrumb={breadcrumb}/>
 
        
       <div className={styles['coach-content']}>

@@ -1,13 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
 import styles from '../_styles/classes.module.css'
-import Banner from '../_components/banner'
+import React, { useState, useEffect } from 'react'
 import Search from '../_components/search'
-import Calendar from '../_components/calendar'
+import Banner from '../_components/banner'
 import TabButton from '../_components/tabButton'
+import Filter from '../_components/filter'
+import Sort from '../_components/sort'
+import ClassesIntro from '../_components/classes-intro'
+import ClassesIntro2 from '../_components/classes-intro2'
+import Calendar from '../_components/calendar'
 
-export default function CoachesListPage(props) {
+export default function ClassCalenderPage(props) {
    const [activeTab, setActiveTab] = useState('search')
   const courses = [
     {
@@ -68,8 +72,7 @@ export default function CoachesListPage(props) {
             課程介紹
           </TabButton>
         </div>
-
-        <div className={styles.content}>
+        {activeTab === 'search' ? (        <div className={styles.content}>
           <div className={styles.searchSection}>
             <div className={styles.coachIcon}>
               <svg
@@ -98,8 +101,22 @@ export default function CoachesListPage(props) {
           <Calendar courses={courses} />
 
           
-        </div>
+        </div> ): (
+          <>
+          <Filter/>
+            <h2>靜態課程</h2>
+          <Sort/>
+         <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+
+          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+          <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+          
+          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+          </>
+        )}
       </div>
+      
     </>
   )
 }
+

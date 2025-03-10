@@ -72,12 +72,12 @@ export default function ClassesPage() {
           <Filter/>
             <h2>靜態課程</h2>
           <Sort/>
-         <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
+         <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
 
-          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
-          <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
+          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+          <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
           
-          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
+          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
           </>
         )}
       </div>

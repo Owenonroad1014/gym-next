@@ -4,21 +4,7 @@
   height: 100%;
   padding: 40px 64px 50px;
   /* background: linear-gradient(90deg, rgba(0, 0, 0, 0.73) 26%, rgba(0, 0, 0, 0) 100%); */
-  background-image: linear-gradient(
-    to bottom,
-    #013056,
-    #003560,
-    #003a69,
-    #004073,
-    #00457d,
-    #0e4f8a,
-    #1a5a97,
-    #2465a5,
-    #3779b9,
-    #488dcd,
-    #5aa2e2,
-    #6bb7f6
-  );
+  background-color: #2a2929;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;

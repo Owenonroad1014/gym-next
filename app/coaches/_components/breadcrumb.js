@@ -1,6 +1,6 @@
 'use client'
 
-import gymfriendcss from '../gymFriend/_styles/gymfrenid.module.css'
+import sytles from './_styles/breadcrumb.module.css'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
@@ -8,27 +8,27 @@ export default function Breadcrumb({ breadcrumb = [] }) {
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(null)
   useEffect(() => {
-    if (pathname.includes('/gymFriend/person')) {
+    if (pathname.includes('/coaches/list/detail')) {
       setActiveIndex(2)
     } else {
-      if (pathname.includes('/gymFriend')) {
+      if (pathname.includes('/coaches/list')) {
         setActiveIndex(1)
       } else {
         setActiveIndex(null)
       }
     }
   }, [pathname])
-  const breadcrumbLinks = ['/', '/gymFriend', '/gymFriend/person']
+  const breadcrumbLinks = ['/', '/coaches/list', '/coaches/list/detail']
 
   return (
     <>
-      <div className={gymfriendcss.breadcrumbContainer}>
-        <nav className={gymfriendcss.breadcrumb}>
+      <div className={sytles.breadcrumbContainer}>
+        <nav className={sytles.breadcrumb}>
           {breadcrumb.map((v, index) => (
             <div
               key={index}
-              className={`${gymfriendcss.breadcrumbItem} ${
-                index === activeIndex ? gymfriendcss.active : ''
+              className={`${sytles.breadcrumbItem} ${
+                index === activeIndex ? sytles.active : ''
               }`}
             >
               <a href={breadcrumbLinks[index]}>{v}</a>

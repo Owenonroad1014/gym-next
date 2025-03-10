@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react'
 import CoachesCard from '../_components/coaches-card'
-import Sort from '../_components/sort'
+import Breadcrumb from '../_components/breadcrumb'
 import styles from '../_styles/coaches.module.css'
 import Banner from '../_components/banner'
 import Search from '../_components/search'
 
 export default function CoachesListPage(props) {
-  const sortItems = ['home', '教練列表', '教練資訊']
+  const breadcrumb = ['home', '教練列表']
 
 
   return (
@@ -32,7 +32,7 @@ export default function CoachesListPage(props) {
         </div>
         
         <div> 
-        <Sort items={sortItems} />
+        <Breadcrumb breadcrumb={breadcrumb} />
       </div>
       <div className={styles.coachesContainer}>
         <CoachesCard
@@ -42,7 +42,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -51,7 +51,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -60,7 +60,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -69,7 +69,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -78,7 +78,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -87,7 +87,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
       </div>
       </div> 
