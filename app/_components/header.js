@@ -33,7 +33,7 @@ export default function Header() {
           <Link href="/coaches" className={headerstyles.navLink}>
             找GYM身教練
           </Link>
-          <Link href="/trainers" className={headerstyles.navLink}>
+          <Link href="/articles" className={headerstyles.navLink}>
             GYM享知識
           </Link>
           <Link href="/trainers" className={headerstyles.navLink}>
