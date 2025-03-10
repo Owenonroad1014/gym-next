@@ -1,0 +1,286 @@
+/* Bannner */
+.banner {
+  background-image: url('/imgs/articleBanner.jpg');
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 50px;
+  padding: 50px 60px;
+}
+.banner h3 {
+  color: white;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+}
+.banner p {
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+/* 麵包屑 */
+.breadcrumbContainer {
+  max-width: 1200px;
+  /* margin: 50px auto; */
+  position: relative;
+  font-family: 'Noto Serif TC', serif;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  /* border-bottom: 1px solid #eee; */
+  background-color: transparent;
+}
+
+.breadcrumbItem {
+  position: relative;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: '›';
+  position: absolute;
+  top: 13px;
+  right: -5px;
+  color: #666;
+  font-size: 20px;
+  z-index: 2;
+}
+
+.breadcrumbItem a {
+  text-decoration: none;
+  color: #666;
+  font-size: 18px;
+  font-family: 'Noto Serif TC', serif;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+  height: 60px;
+  line-height: 60px;
+  display: block;
+}
+
+/* 懸停效果 - 上浮動畫和底部線條 */
+.breadcrumbItem:hover a {
+  transform: translateY(-2px);
+  color: #666;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+/* 底部線條動畫 */
+/* .breadcrumbItem:not(.active) a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #000;
+  transition: all 0.5s ease;
+} */
+
+.breadcrumbItem:hover a::after,
+.breadcrumbItem.active a::after {
+  width: 100%;
+}
+
+/* 點擊/活動狀態 */
+.breadcrumbItem.active a {
+  color: #f87808;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+.articlesContainer {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  min-height: 100vh;
+}
+/* select */
+.selectArea {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 3px;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.selectPart {
+  width: 100%;
+  padding: 20px 30px;
+  text-align: center;
+}
+
+.selectTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: start;
+  cursor: pointer;
+}
+
+.selectPart select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.selectPart select:focus {
+  outline: none;
+  border-color: #db6318;
+}
+
+/* list */
+.articleList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 10px;
+  justify-content: flex-start;
+}
+/* card */
+.card {
+  cursor: pointer;
+  background-color: #0b3760;
+  width: 250px;
+  height: 380px;
+  padding: 5px 5px;
+  color: white;
+  margin: 10px auto;
+  border-radius: 3px;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+.images {
+  position: relative;
+}
+.heartArea {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  right: -30px;
+  top: -30px;
+  border: 5px solid #0b3760;
+}
+.faHeart {
+  cursor: pointer;
+  position: absolute;
+  left: 7px;
+  bottom: 5px;
+  font-size: 22px;
+  box-sizing: content-box;
+  transition: all 0.3s;
+  color: #0b3760;
+}
+.faHeart:hover {
+  color: #f87808;
+  transition: all 0.3s;
+}
+.content {
+  padding: 5px 10px;
+  margin: 10px 0;
+}
+.content h5 {
+  font-size: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content hr {
+  margin: 10px 0;
+}
+.content p {
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  /* border-radius: 8px; */
+  margin: 20px 0px;
+}
+
+.pagination a {
+  color: white;
+  background-color: #0b3760;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #db6318c7;
+  transform: scale(1.1);
+}
+
+.pagination .active {
+  background-color: #db6318;
+  font-weight: bold;
+  cursor: default;
+}
+
+.pagination .disabled {
+  background-color: #8b8b8b;
+  cursor: not-allowed;
+}
+
+.personList {
+  background-color: #fff6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 10px;
+  justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbItem a {
+    font-size: 14px;
+  }
+  .selectArea {
+    flex-direction: column;
+    align-items: center;
+  }
+  .selectPart {
+    width: 100%;
+    border-right: none;
+    text-align: left;
+  }
+}

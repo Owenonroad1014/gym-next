@@ -15,8 +15,9 @@ export default function coachesPage() {
   
   return (
     <>
+    <Banner title="健身教練" subtitle="FITNESS COACH"/>
     <div className={styles.container}>
-      <Banner title="健身教練" subtitle="FITNESS COACH"/>
+      
       
       <div className={styles.content}>
         <div className={styles.searchSection}>

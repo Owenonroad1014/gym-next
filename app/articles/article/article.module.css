@@ -1,0 +1,248 @@
+.articleContainer {
+  max-width: 1200px;
+  margin: auto;
+}
+.topSection {
+  display: flex;
+  margin-top: 40px;
+}
+/* shareSidebar */
+.shareSidebar {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+.wrapper {
+  position: fixed;
+  left: 5px;
+  top: 60px;
+  list-style: none;
+  height: 120px;
+  width: 100%;
+  padding-top: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.wrapper .icon {
+  position: relative;
+  background-color: #0b3760;
+  color: #fff;
+  border-radius: 50%;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #f87808;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: '';
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .icon:hover,
+.wrapper .icon:hover .tooltip,
+.wrapper .icon:hover .tooltip::before {
+  background: #f87808;
+  color: #fff;
+}
+
+/* TOP5 */
+.hotRankingArea {
+  max-width: 300px;
+}
+.hotRankingArea h4 {
+  font-size: 24px;
+  font-style: italic;
+  font-family: 'Didot';
+  font-weight: 600;
+  color: #f87808;
+  text-align: center;
+}
+.dash {
+  width: 100%;
+  height: 5px;
+  background-color: #f87808;
+  border-radius: 3px;
+  margin: 10px 0;
+}
+.hotRankingArea ol {
+  list-style: none;
+}
+.hotRankingArea ol li {
+  margin: 5px 0;
+  border-bottom: 1px solid #333;
+  transition: all 0.3s;
+}
+.hotRankingArea ol li:hover {
+  background-color: #d4cec890;
+  transition: all 0.3s;
+}
+.hotRankingArea ol li a {
+  display: flex;
+  padding: 10px;
+}
+.hotRankingArea ol li a span:first-child {
+  color: #f87808;
+  font-style: italic;
+  font-size: 20px;
+  font-family: 'Didot';
+  font-weight: bold;
+  display: inline-block;
+  width: 30px;
+  align-content: center;
+  margin-right: 10px;
+}
+.hotRankingArea ol li a span:last-child {
+  display: inline-block;
+  max-width: calc(100% - 20px);
+  line-height: 1.5em;
+}
+/* 文章內容content */
+.articleContent {
+  max-width: calc(100% - 400px);
+  padding: 10px 30px;
+  line-height: 1.8em;
+  margin: 0 50px 50px 60px;
+}
+.date {
+  color: #333;
+  font-size: 12px;
+  margin: 8px 0;
+}
+.articleContent h3 {
+  font-size: 1.8em;
+}
+.articleContent ol {
+  list-style: none;
+}
+.articleContent li {
+  margin-top: 20px;
+}
+.articleContent ol span {
+  display: block;
+  font-weight: bold;
+  color: rgb(160, 134, 82);
+  margin-bottom: 16px;
+}
+/* 輪播 */
+
+.sliderContainer {
+  max-width: 1100px;
+  margin:auto;
+  border-radius: 1px;
+  margin-bottom: 100px;
+  
+}
+.sliderItem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sliderContainer>h5{
+  margin-left: 20px;
+  font-size: 24px;
+  font-family: 'Didot';
+  font-weight: 600;
+}
+.sliderContainer hr{
+  margin: 10px 0;
+}
+
+
+
+
+@media (max-width: 1100px) {
+  .topSection {
+    flex-direction: column;
+    align-items: center;
+  }
+  .breadcrumbItem a {
+    font-size: 14px;
+  }
+  .articleContent {
+    max-width: 100%;
+    padding: 10px 60px;
+  }
+  .articleContent img{
+    height: 300px;
+    width: 400px;
+  }
+  .topSection{
+    margin-bottom: 20px;
+  }
+  .hotRankingArea {
+    max-width: 50%;
+  }
+  .wrapper {
+    top: 90px;
+    left: 5px;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .wrapper .icon {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    margin: 5px;
+  }
+
+  .wrapper .tooltip {
+    font-size: 10px;
+    padding: 3px 5px;
+  }
+  .sliderContainer {
+    margin-top: 20px;
+    padding: 10px;
+  }
+}
+@media (max-width: 400px){
+  .articleContent img{
+    height: 149px;
+    width: 200px;
+  }
+}

@@ -2,11 +2,10 @@
 
 import React from 'react';
 import CoachDetail from '../../_components/coaches-detail';
-import Sort from '../../_components/sort';
 
 function CoachDetailPage() {
   const coachData = {
-    avatarUrl: "/images/coach-profile.jpg",
+    avatarUrl: "/images/coach.jpg",
     name: "張育瑄",
     title: "專業瑜珈教練",
     email: "yuhsuan.chang@email.com",
@@ -19,12 +18,6 @@ function CoachDetailPage() {
       linkedin: "https://linkedin.com/in/yuhsuan.chang"
     },
     description: "專業瑜珈教練，擁有10年教學經驗，專精於初學者指導與體態調整。透過精心設計的課程，幫助學員達到身心平衡，改善體態問題，並從中獲得內在的平靜與力量。",
-    experience: [
-      { year: "2020-至今", detail: "綠洲健身中心 資深瑜珈教練" },
-      { year: "2017-2020", detail: "陽光瑜珈工作室 主任教練" },
-      { year: "2015-2017", detail: "健康人生健身房 瑜珈講師" },
-      { year: "2013-2015", detail: "私人瑜珈教練" }
-    ],
     certifications: [
       "國際瑜珈聯盟 RYT-500 認證教練",
       "皮拉提斯墊上訓練Level 2認證",
@@ -37,7 +30,6 @@ function CoachDetailPage() {
 
   return (
     <>
-    
     <CoachDetail {...coachData} />
     </>
   );
