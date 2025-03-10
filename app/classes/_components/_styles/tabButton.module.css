@@ -1,0 +1,35 @@
+
+  
+  .tabButton {
+    padding: 0.5rem 1rem;
+    border: none;
+    width: 100%;
+    height: 80px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 22px;
+    cursor: pointer;
+    background: #5b5b5b;
+    position: relative;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  
+  .tabButton.active {
+    background: #f87808;
+    color: #000;
+    font-weight: bold;
+  }
+  
+  .tabButton.active::after {
+    content: '';
+    display: block;
+    border-style: solid;
+    border-width: 10px 10px 0 10px; /* 修改這行 */
+    border-color: #f87808 transparent transparent transparent; /* 加入這行 */
+    position: absolute;
+    bottom: 0;
+    left: 49%;
+    transform: translate3d(0, 100%, 0);
+    z-index: 1;
+  }

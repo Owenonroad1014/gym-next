@@ -1,20 +1,16 @@
 'use client'
 
-import styles from './_styles/classes.module.css'
+import styles from '../_styles/classes.module.css'
 import React, { useState, useEffect } from 'react'
-import Search from './_components/search'
-import Banner from './_components/banner'
-import TabButton from './_components/tabButton'
-import Filter from './_components/filter'
-import Sort from './_components/sort'
-import ClassesIntro from './_components/classes-intro'
-import ClassesIntro2 from './_components/classes-intro2'
+import Search from '../_components/search'
+import Banner from '../_components/banner'
+import TabButton from '../_components/tabButton'
 
 export default function ClassesPage() {
   // const [city, setCity] = useState('')
   // const [district, setDistrict] = useState('')
   // const [trainers, setTrainers] = useState([])
-  const [activeTab, setActiveTab] = useState('search')
+  const [activeTab, setActiveTab] = useState('intro')
 
   return (
     <>
@@ -22,20 +18,19 @@ export default function ClassesPage() {
       <div className={styles.container}>
         
         <div className={styles.tabButtons}>
-          <TabButton 
-            isActive={activeTab === 'search'} 
+          <TabButton
+            isActive={activeTab === 'search'}
             onClick={() => setActiveTab('search')}
           >
             課表查詢
           </TabButton>
-          <TabButton 
-            isActive={activeTab === 'intro'} 
+          <TabButton
+            isActive={activeTab === 'intro'}
             onClick={() => setActiveTab('intro')}
           >
             課程介紹
           </TabButton>
         </div>
-
         {activeTab === 'search' ? (
           <div className={styles.content}>
             <div className={styles.searchSection}>
@@ -61,6 +56,7 @@ export default function ClassesPage() {
                 <Search />
               </div>
             </div>
+
             <div className={styles.resultsContainer}>
               <div className={styles.emptyResults}>
                 <p>選擇場館以顯示該場館課程</p>
@@ -68,20 +64,11 @@ export default function ClassesPage() {
             </div>
           </div>
         ) : (
-          <>
-          <Filter/>
-            <h2>靜態課程</h2>
-          <Sort/>
-         <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
-
-          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
-          <ClassesIntro title="靜態課程-1" description = ""  avatarUrl = 'images/yoga.jpg'/>
-          
-          <ClassesIntro2 title="靜態課程-2" description = ""  avatarUrl = 'images/yoga.jpg'/>
-          </>
+          <div className={styles.content}>
+            <h2>課程介紹內容</h2>
+          </div>
         )}
       </div>
-      
     </>
   )
 }

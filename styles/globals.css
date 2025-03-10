@@ -40,13 +40,13 @@ a {
 }
 
 
-.container {
+/* .container {
   width: 100%;
   max-width: 1440px;
   margin: auto ;
   min-height: 100vh;
   
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   html {

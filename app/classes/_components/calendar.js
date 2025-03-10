@@ -42,7 +42,7 @@ export default function CourseCalendar({
       <h2>課程表</h2>
       <div className={styles.header}>
         <button onClick={handlePrevWeek} className={styles.nextWeek}>
-          ← 上週
+          ＜
         </button>
         <div className={styles.dateInfo}>
           {selectedDate.getFullYear()}年{selectedDate.getMonth() + 1}月第
@@ -50,7 +50,7 @@ export default function CourseCalendar({
         </div>
 
         <button onClick={handleNextWeek} className={styles.nextWeek}>
-          下週 →
+        ＞
         </button>
       </div>
 
@@ -60,22 +60,41 @@ export default function CourseCalendar({
             <div key={day.getTime()} className={styles.day}>
               <div className={styles.dayNumber}>{day.getDate()}</div>
               <div className={styles.weekday}>
-                {['日', '一', '二', '三', '四', '五', '六'][day.getDay()]}
+                {
+                  [
+                    '星期日',
+                    '星期一',
+                    '星期二',
+                    '星期三',
+                    '星期四',
+                    '星期五',
+                    '星期六',
+                  ][day.getDay()]
+                }
               </div>
-
-              {courses
-                .filter(
+              <div className={styles.eventsContainer}>
+                {courses
+                  .filter(
+                    (course) =>
+                      course.date.getDate() === day.getDate() &&
+                      course.date.getMonth() - 1 === day.getMonth() &&
+                      course.date.getFullYear() === day.getFullYear()
+                  )
+                  .map((course) => (
+                    <div key={course.id} className={styles.event}>
+                      {course.title}{' '}
+                      <div className={styles.time}>{course.time}</div>
+                    </div>
+                  ))}
+                {courses.filter(
                   (course) =>
                     course.date.getDate() === day.getDate() &&
-                    course.date.getMonth() === day.getMonth() &&
+                    course.date.getMonth() - 1 === day.getMonth() &&
                     course.date.getFullYear() === day.getFullYear()
-                )
-                .map((course) => (
-                  <div key={course.id} className={styles.event}>
-                    <div className={styles.time}>{course.time}</div>
-                    {course.title}
-                  </div>
-                ))}
+                ).length === 0 && (
+                  <div className={styles.noEvent}>本日尚無課程</div>
+                )}
+              </div>
             </div>
           ))}
         </div>
