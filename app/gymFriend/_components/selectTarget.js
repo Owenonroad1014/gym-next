@@ -1,41 +1,37 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import gymfriendcss from '../_styles/gymfrenid.module.css'
-import { TbTargetArrow } from 'react-icons/tb'
+import { PiGenderMaleBold, PiGenderFemaleBold } from 'react-icons/pi'
+
 export default function SelectTarget() {
+  const [selectedGoal, setSelectedGoal] = useState('')
+  
+  const handleGoalChange = (event) => {
+    setSelectedGoal(event.target.value)
+  }
+
   return (
     <>
       <div className={gymfriendcss.selectTarget}>
-        <p>
-          <TbTargetArrow className={gymfriendcss.targetIcon} />
-          <span>健身目標</span>
-        </p>
-        <ul className="selectTarget-list">
-          <li>增肌</li>
-          <li>減脂</li>
-          <li>提高耐力</li>
-          <li>增強體能</li>
-          <li>健康維持</li>
-          <li>提高核心能量</li>
-        </ul>
+        <div className={gymfriendcss.gender}>
+          <PiGenderMaleBold />
+          <PiGenderFemaleBold />
+        </div>
+
+        <div className={gymfriendcss.dropdown}>
+          {/* <label htmlFor="goals">選擇健身目標</label> */}
+          <select id="goals" value={selectedGoal} onChange={handleGoalChange}>
+            <option value="">選擇健身目標</option>
+            <option value="增肌">增肌</option>
+            <option value="減脂">減脂</option>
+            <option value="提高耐力">提高耐力</option>
+            <option value="增強體能">增強體能</option>
+            <option value="健康維持">健康維持</option>
+            <option value="提高核心能量">提高核心能量</option>
+          </select>
+        </div>
       </div>
-      {/* <div className={gymfriendcss.selectTarget}>
-        <p>
-          <span>
-            <TbTargetArrow />
-          </span>
-          <span>性別</span>
-        </p>
-        <ul className="selectTarget-list">
-          <li>增肌</li>
-          <li>減脂</li>
-          <li>提高耐力</li>
-          <li>增強體能</li>
-          <li>健康維持</li>
-          <li>提高核心能量</li>
-        </ul>
-      </div> */}
     </>
   )
 }
