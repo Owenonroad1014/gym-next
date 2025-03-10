@@ -1,0 +1,62 @@
+.floatBar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0b3760d3;
+  padding: 10px;
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.toggleBtn {
+  background: #f87808;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.addCart {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.productItem{
+    margin-left: 30px;
+    width: 60%;
+}
+.productItem p {
+  color: #fff;
+  font-size: 16px;
+}
+
+.btn {
+  border: none;
+  padding: 10px;
+  border-radius: 0.2rem;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+}
+
+.add {
+  background-color: #f87808;
+}
+
+.cart,
+.rentNote {
+  background-color: #0b3760;
+}

@@ -17,6 +17,7 @@
     color: #0b3760;
     margin-bottom: 10px;
     font-size:  30px;
+    text-align: center;
   }
   
   .dateInfo {
@@ -25,18 +26,24 @@
   }
   
   .nextWeek {
-    padding: 8px 16px;
-    background-color: #db6318;
-    color: white;
+    height: 40px;
+    padding: 4px 4px;
+    background-color: white;
+    color:  #142020;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 18px;
+    font-size: 35px;
+    text-align: center;
+    line-height: 15px;
+
   }
   
   .nextWeek:hover {
-    background-color: #c0392b;
+    background-color: #142020;
+    color: white;
+
   }
   
   .calendar {
@@ -45,19 +52,20 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
   
-  .weekdays {
+  /* .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     background: #0b3760;
     color: white;
     padding: 10px 0;
     
-  }
+  } */
   
   .weekday {
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
     font-weight: bold;
+    color: #666;
   }
   
   .days {
@@ -65,37 +73,54 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 1px;
     background: #eee;
+    
   }
   
   .day {
+    display: flex;
+    flex-direction: column;
     min-height: 120px;
     padding: 10px;
     background: white;
     position: relative;
     border-radius: 3px;
+    
   }
   
   .dayNumber {
     text-align: center;
-    font-size: 70px;
+    font-size: 50px;
     color: #0b3760;
   }
   
-  .hasEvent {
-    background: #db6318;
+  .eventsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
   }
   
   .event {
-    margin-top: 5px;
-    padding: 5px;
+    min-height: 60px;
+    margin: 4px 0;
+    padding: 8px;
     /* background: #fcfcfc; */
-    color: white;
+    color: rgb(255, 255, 255);
     border-radius: 3px;
     font-size: 20px;
-    cursor: pointer;
     transition: transform 0.2s;
     font-weight: bold;
+    border: #b63f08 2px solid;
+    background-color: #db6318;
   }
+
+  .noEvent {
+    padding-top: 10px;
+    text-align: center;
+    color: #959393;
+    font-size: 18px;
+  }
+  
   .time {
     font-size: 16px;
     color: #fffcfc;
@@ -118,7 +143,12 @@
     
     .event {
       padding: 3px;
-      font-size: 0.7rem;
+      font-size: 1rem;
+    }
+    .time {
+      font-size: 13px;
+      color: #fffcfc;
+      margin-top: 5px;
     }
   }
   
