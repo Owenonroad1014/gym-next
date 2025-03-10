@@ -1,5 +1,6 @@
 import React from "react";
 import AddToCartButton from "./AddToCartButton";
+import { FaRegHeart } from "react-icons/fa";
 import styles from "./_styles/ProductCard.module.css";
 
 const ProductCard = ({ name, price, description, image, icon, variant }) => {
@@ -9,9 +10,6 @@ const ProductCard = ({ name, price, description, image, icon, variant }) => {
     <article className={`${styles.card} ${cardClass}`}>
       <div className={styles.imageContainer}>
         <img src={image} alt={name} className={styles.productImage} />
-        <div className={styles.iconWrapper}>
-          <img src={icon} alt="" className={styles.icon} />
-        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.header}>
@@ -20,7 +18,11 @@ const ProductCard = ({ name, price, description, image, icon, variant }) => {
         </div>
         <hr className={styles.divider} />
         <p className={styles.description}>{description}</p>
-        <AddToCartButton variant={variant} />
+        <div className={styles.btns}>
+        <AddToCartButton variant={variant}     />
+        <FaRegHeart className={styles.heart}/>
+
+        </div>
       </div>
     </article>
   );

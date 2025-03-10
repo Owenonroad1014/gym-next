@@ -11,16 +11,16 @@ export default function ArticlesPage() {
   return (
     <>
       <ArticlesBanner />
+      <Breadcrumb breadcrumb={breadcrumb} />
       <div className={articleCss.articleContainer}>
-        <Breadcrumb breadcrumb={breadcrumb} />
-        <ShareSidebar/>
+        <ShareSidebar />
         <div className={articleCss.topSection}>
           <Content />
           <HotRanking />
         </div>
-      <div className={articleCss.bottomSection}>
-        <Recommend/>
-      </div>
+        <div className={articleCss.bottomSection}>
+          <Recommend />
+        </div>
       </div>
     </>
   )
