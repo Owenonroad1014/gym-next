@@ -8,6 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrArticle } from 'react-icons/gr'
 
+
+
 export default function Recommend() {
   const settings = {
     dots: true,
