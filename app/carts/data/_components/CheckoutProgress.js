@@ -21,7 +21,7 @@ function CheckoutProgress() {
 
       {/* 填寫資料 */}
       <div className={styles.progressItem}>
-        <span style={{color: "orange"}}>step1</span>
+        <span style={{color: "orange"}}>step2</span>
         <AiOutlineForm size={50} color="orange"/>
         <span style={{color: "orange"}}>填寫資料</span>
       </div>
@@ -31,7 +31,7 @@ function CheckoutProgress() {
 
       {/* 完成訂單 */}
       <div className={styles.progressItem}>
-        <span>step1</span>
+        <span>step3</span>
         <MdOutlineCheckCircle size={50} />
         <span>完成訂單</span>
       </div>
