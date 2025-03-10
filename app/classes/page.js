@@ -7,8 +7,8 @@ import Banner from './_components/banner'
 import TabButton from './_components/tabButton'
 import Filter from './_components/filter'
 import Sort from './_components/sort'
-import ClassesIntro from './_components/classes-intro'
-import ClassesIntro2 from './_components/classes-intro2'
+import ClassesIntro from '../_components/classes-intro'
+
 
 export default function ClassesPage() {
   // const [city, setCity] = useState('')
@@ -18,18 +18,17 @@ export default function ClassesPage() {
 
   return (
     <>
-    <Banner title="課程專區" subtitle="FITNESS CLASSES" />
+      <Banner title="課程專區" subtitle="FITNESS CLASSES" />
       <div className={styles.container}>
-        
         <div className={styles.tabButtons}>
-          <TabButton 
-            isActive={activeTab === 'search'} 
+          <TabButton
+            isActive={activeTab === 'search'}
             onClick={() => setActiveTab('search')}
           >
             課表查詢
           </TabButton>
-          <TabButton 
-            isActive={activeTab === 'intro'} 
+          <TabButton
+            isActive={activeTab === 'intro'}
             onClick={() => setActiveTab('intro')}
           >
             課程介紹
@@ -69,19 +68,38 @@ export default function ClassesPage() {
           </div>
         ) : (
           <>
-          <Filter/>
+            <Filter />
             <h2>靜態課程</h2>
-          <Sort/>
-         <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+            <Sort />
+            <ClassesIntro
+              title="靜態課程-1"
+              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
+              avatarUrl="images/yoga.jpg"
+            />
 
-          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
-          <ClassesIntro title="靜態課程-1" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
-          
-          <ClassesIntro2 title="靜態課程-2" description = "採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"  avatarUrl = 'images/yoga.jpg'/>
+            <ClassesIntro
+              title="靜態課程-2"
+              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
+              avatarUrl="images/yoga.jpg"
+              variant='type2'
+
+            />
+            <ClassesIntro
+              title="靜態課程-1"
+              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
+              avatarUrl="images/yoga.jpg"
+            />
+
+            <ClassesIntro
+              title="靜態課程-2"
+              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
+              avatarUrl="images/yoga.jpg"
+              variant='type2'
+
+            />
           </>
         )}
       </div>
-      
     </>
   )
 }

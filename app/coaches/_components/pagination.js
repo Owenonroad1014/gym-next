@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./_styles/Pagination.module.css";
+import styles from "./_styles/pagination.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
