@@ -1,33 +1,29 @@
-
 .header {
+  position: absolute;
   width: 100%;
   height: auto;
   padding: 13px 64px;
   text-align: center;
   color: #f5fff6;
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 700;
   text-decoration: none;
-  background-image: linear-gradient(
-    to right,
-    #013056,
-    #003560,
-    #003a69,
-    #004073,
-    #00457d,
-    #0e4f8a,
-    #1a5a97,
-    #2465a5,
-    #3779b9,
-    #488dcd,
-    #5aa2e2,
-    #6bb7f6
-  );
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   z-index: 100;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.hscrolling {
+  background-color: #2a2929;
+  padding: 10px 60px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* border-bottom: solid 1px #ffffff; */
+  opacity: 0.98;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -48,7 +44,6 @@
   justify-content: center;
   align-items: center; */
   /* padding-top: 10px; */
-
 }
 
 .navMenu {
@@ -60,7 +55,7 @@
 
 .navLink {
   text-align: center;
-  color: #f5fff6;
+  color: #fdfdfd;
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
