@@ -53,7 +53,7 @@ export default function Header() {
           <Link href="/locations" className={headerstyles.navLink}>
             找GYM點
           </Link>
-          <Link href="/gymFriend" className={headerstyles.navLink}>
+          <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>
         </div>
