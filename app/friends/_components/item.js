@@ -18,7 +18,7 @@ export default function List() {
               我是一名重訓愛好者，最近正在增肌訓練，平時每週3次跑步，...
             </p>
             <button className={gymfriendcss.favorite_button}>
-              <Link href="/gymFriend/person">查看更多</Link>
+              <Link href="/friends/person">查看更多</Link>
             </button>
           </section>
         </div>
