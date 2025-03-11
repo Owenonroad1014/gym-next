@@ -18,7 +18,6 @@ const EquipmentRental = () => {
       <Search />
       </div>
         <ProductGrid >
-
       </ProductGrid>
 
       </section>

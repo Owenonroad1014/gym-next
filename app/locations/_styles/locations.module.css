@@ -28,7 +28,7 @@
   height: 250px;
 }
 
-.coachIcon {
+.locationIcon {
   width: 50px;
   height: 50px;
   margin-bottom: 15px;
@@ -53,6 +53,29 @@
   justify-content: center;
   margin: 20px 10px;
 }
+.mapContainer {
+  margin-top: 2px;
+  background-color: #0b3760;
+  padding: 20px;
+  width: 100%;
+  min-height: 100px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.mapContainer h3 {
+  font-size: 22px;
+  color: white;
+  
+}
+.mapIcon {
+  font-size: 30px;
+  color: white;
+  padding-top: 6px;
+  padding-right: 5px;
+}
 
 .emptyResults {
   color: #666;
@@ -70,9 +93,10 @@
   }
 }
 
-.coachesContainer{
+.locationesContainer{
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0px 10px;
+  margin: 10px ;
+  gap: 20px;
+
 }

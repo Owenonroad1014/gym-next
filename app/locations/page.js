@@ -1,12 +1,13 @@
 'use client'
 
-import styles from './_styles/coaches.module.css'
+import styles from './_styles/locations.module.css'
 import React, { useState, useEffect } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
-import CoachCard from './_components/coaches-card'
+import { MdShareLocation } from "react-icons/md";
 
-export default function coachesPage() {
+
+export default function locationsPage() {
   // const [city, setCity] = useState('')
   // const [district, setDistrict] = useState('')
   // const [trainers, setTrainers] = useState([])
@@ -20,7 +21,7 @@ export default function coachesPage() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.searchSection}>
-            <div className={styles.coachIcon}>
+            <div className={styles.locationIcon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -38,6 +39,11 @@ export default function coachesPage() {
             <div className={styles.filterContainer}>
               <Search />
             </div>
+          </div>
+          <div className={styles.mapContainer}>
+          <div className={styles.mapIcon}><MdShareLocation /></div>
+          <h3> 點擊尋找最近的據點</h3>
+
           </div>
 
           <div className={styles.resultsContainer}>
