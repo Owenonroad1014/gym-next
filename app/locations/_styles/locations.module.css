@@ -11,7 +11,16 @@
 .content {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+}
+
+.locationsContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px ;
+  gap: 30px;
+  margin-top: 50px;
+
 }
 .secTitle {
   font-size: 35px;
@@ -93,10 +102,4 @@
   }
 }
 
-.locationesContainer{
-  display: flex;
-  justify-content: space-between;
-  margin: 10px ;
-  gap: 20px;
 
-}

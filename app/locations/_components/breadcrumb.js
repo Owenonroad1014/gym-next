@@ -8,17 +8,17 @@ export default function Breadcrumb({ breadcrumb = [] }) {
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(null)
   useEffect(() => {
-    if (pathname.includes('/coaches/list/detail')) {
+    if (pathname.includes('/locations/list/detail')) {
       setActiveIndex(2)
     } else {
-      if (pathname.includes('/coaches/list')) {
+      if (pathname.includes('/locations/list')) {
         setActiveIndex(1)
       } else {
         setActiveIndex(null)
       }
     }
   }, [pathname])
-  const breadcrumbLinks = ['/', '/coaches/list', '/coaches/list/detail']
+  const breadcrumbLinks = ['/', '/locations/list', '/locations/list/detail']
 
   return (
     <>

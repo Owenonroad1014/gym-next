@@ -27,7 +27,7 @@ function Search({ onSearch}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.replace(`/coaches/list?location=${location}&branch=${branch}`, {
+    router.replace(`/locations/list?location=${location}&branch=${branch}`, {
       scroll: false // 防止自動滾動到頂部
     });
   };

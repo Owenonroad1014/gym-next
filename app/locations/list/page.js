@@ -6,12 +6,15 @@ import Search from '../_components/search'
 import Banner from '../_components/banner'
 import { MdShareLocation } from "react-icons/md";
 import LocationCard from '../_components/locations-card'
+import Breadcrumb from '../_components/breadcrumb'
+import SearchForm from '../_components/search-form'
 
 
 export default function locationsPage() {
   // const [city, setCity] = useState('')
   // const [district, setDistrict] = useState('')
   // const [trainers, setTrainers] = useState([])
+  const breadcrumb = ['home', '營業GYM點']
 
   return (
     <>
@@ -47,11 +50,18 @@ export default function locationsPage() {
 
           </div>
         </div>
-        <div className={styles.locationesContainer}>
+        <div className={styles.toolsContainer}><Breadcrumb breadcrumb={breadcrumb} />
+        <SearchForm/></div>
+        <div className={styles.locationsContainer}>
           <LocationCard/>
           <LocationCard/>
           <LocationCard/>
-          
+          <LocationCard/>
+          <LocationCard/>
+          <LocationCard/>
+          <LocationCard/>
+          <LocationCard/>
+
         </div>
       </div>
     </>
