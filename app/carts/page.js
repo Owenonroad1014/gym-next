@@ -1,22 +1,26 @@
 "use client";
 import React from "react";
-import styles from "./_styles/carts.module.css";
-import CheckoutProgress from "./_components/CheckoutProgress";
+import styles from "./_styles/ShoppingCart.module.css";
+import CartHeader from "./_components/CartHeader";
+import CartProductList from "./_components/CartProductList";
 import OrderSummary from "./_components/OrderSummary";
-import CustomerForm from "./_components/CustomerForm";
-import PaymentForm from "./_components/PaymentForm";
-import InvoiceForm from "./_components/InvoiceForm";
 
-function Body2() {
+function ShoppingCart() {
   return (
-    <main className={styles.body2}>
-      <CheckoutProgress />
-      <OrderSummary />
-      <CustomerForm />
-      <PaymentForm />
-      <InvoiceForm />
-    </main>
+    <>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet"
+      />
+      <main className={styles.cartContainer}>
+        <CartHeader />
+        <section className={styles.cartContent}>
+          <CartProductList />
+          <OrderSummary />
+        </section>
+      </main>
+    </>
   );
 }
 
-export default Body2;
+export default ShoppingCart;

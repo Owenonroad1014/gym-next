@@ -2,18 +2,20 @@
 
 import React, { useState, useEffect } from 'react'
 import CoachesCard from '../_components/coaches-card'
-import Sort from '../_components/sort'
+import Breadcrumb from '../_components/breadcrumb'
 import styles from '../_styles/coaches.module.css'
 import Banner from '../_components/banner'
 import Search from '../_components/search'
+import Pagination from '../_components/pagination'
+import SearchForm from '../_components/search-form'
 
 export default function CoachesListPage(props) {
-  const sortItems = ['home', '教練列表', '教練資訊']
+  const breadcrumb = ['home', '教練列表']
 
 
   return (
     <>
-    <Banner title="健身教練" subtitle="FITNESS COACH"/>
+     <Banner title="健身教練" subtitle="尋找有相同運動愛好的朋友，一起GYM步吧！"/>
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.searchSection}>
@@ -31,8 +33,10 @@ export default function CoachesListPage(props) {
           </div>
         </div>
         
-        <div> 
-        <Sort items={sortItems} />
+        <div>
+        <div className={styles.toolsContainer}><Breadcrumb breadcrumb={breadcrumb} />
+        <SearchForm/></div>
+        
       </div>
       <div className={styles.coachesContainer}>
         <CoachesCard
@@ -42,7 +46,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -51,7 +55,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -60,7 +64,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -69,7 +73,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -78,7 +82,7 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
           <CoachesCard
           avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
@@ -87,10 +91,12 @@ export default function CoachesListPage(props) {
           email="123@gmail.com"
           phone ="0900111222"
           description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
+          detailsUrl = "/coaches/list/detail"
           />
+
       </div>
-      </div> 
+      </div>
+      <Pagination currentPage="1" totalPages="5"/>
       </div> 
 
     </>

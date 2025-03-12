@@ -1,16 +1,29 @@
 .productGrid {
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 57px 60px;
-  width: 100%;
-  margin: 0px;
-  padding: 80px;
+  margin: auto;
+  width: 1440PX;
+  padding: 20px;
   display: flex;
+  flex-direction: row;
   position: relative;
   overflow: hidden;
-  background-color: rgb(255, 255, 255, 0.4);
-  /* border-radius: 50px; */
+}
+
+.productArea{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.productItem{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 35px;
+  justify-content: center;
+  margin-left: 1%;
 }
 
 @media (width <= 991px) {

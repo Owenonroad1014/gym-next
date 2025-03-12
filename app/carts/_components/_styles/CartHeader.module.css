@@ -1,0 +1,63 @@
+.headerContainer {
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+    max-width: 1120px;
+    font-weight: 500;
+    display: flex;
+    padding: 20px;
+  }
+  
+  .loginPrompt {
+    font-feature-settings:
+      "liga" off,
+      "clig" off;
+    color: #141718;
+    justify-content: end;
+    align-items: start;
+    gap: 7px;
+    width: 100%;
+    font-family:
+      Poppins,
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    display: flex;
+  }
+  
+  .loginLink {
+    color: #589ab0;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .cartTitle {
+    border-bottom: 1px solid var(--neutral-04100, #6c7275);
+    color: #000;
+    white-space: nowrap;
+    text-align: center;
+    letter-spacing: -0.4px;
+    align-self: end;
+    width: 100%;
+    min-height: 52px;
+    font-family:
+      Inter,
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    font-weight: normal;
+    margin: 0;
+  }
+  
+  @media (width<=991px) {
+    .headerContainer {
+      max-width: 100%;
+    }
+  }
+  

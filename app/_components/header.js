@@ -50,7 +50,7 @@ export default function Header() {
           <Link href="/articles" className={headerstyles.navLink}>
             GYM享知識
           </Link>
-          <Link href="/trainers" className={headerstyles.navLink}>
+          <Link href="/locations" className={headerstyles.navLink}>
             找GYM點
           </Link>
           <Link href="/friends" className={headerstyles.navLink}>

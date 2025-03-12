@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './_styles/sort.module.css';
 
-const Sort = ({ items = ['健身器材', '瑜珈輔具', '拳擊用品'] }) => {
+const Sort = ({ items = ['熱門商品','健身器材', '瑜珈輔具', '拳擊用品'] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (index) => {
@@ -10,6 +10,7 @@ const Sort = ({ items = ['健身器材', '瑜珈輔具', '拳擊用品'] }) => {
 
 return (
     <div className={styles.container}>
+    <div className={styles.sortTitle}>商品分類</div>
         {items.map((item, index) => (
             <div
                 key={index}

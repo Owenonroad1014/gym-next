@@ -101,7 +101,7 @@
   }
   
   .event {
-    min-height: 60px;
+    min-height: 90px;
     margin: 4px 0;
     padding: 8px;
     /* background: #fcfcfc; */
@@ -110,8 +110,9 @@
     font-size: 20px;
     transition: transform 0.2s;
     font-weight: bold;
-    border: #b63f08 2px solid;
+    border: #e85f0a 2px solid;
     background-color: #db6318;
+    text-align: left;
   }
 
   .noEvent {
