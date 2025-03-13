@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
-import gymfriendcss from '../_styles/gymfrenid.module.css'
-import personCss from './_styles/person.module.css'
+import friendStyle from './_styles/friend.module.css'
 import FriendBanner from '../_components/friend-banner'
 import Breadcrumb from '../_components/breadcrumb'
 // import FloatingBar from '@/app/_components/float-bar'
@@ -9,11 +8,11 @@ export default function PersonPage() {
   const breadcrumb = ['首頁', '找GYM友', '王小明']
   return (
     <>
-      <div className={personCss.personContainer}>
-        <FriendBanner />
-        <Breadcrumb breadcrumb={breadcrumb} />
-        <div className={personCss.user_info}>
-          <div className={personCss.user_avatar}>
+      <FriendBanner />
+      <Breadcrumb breadcrumb={breadcrumb} />
+      <div className={friendStyle.personContainer}>
+        <div className={friendStyle.user_info}>
+          <div className={friendStyle.user_avatar}>
             <Image
               src="https://xsgames.co/randomusers/avatar.php?g=male"
               alt="avatar"
@@ -21,8 +20,8 @@ export default function PersonPage() {
               height={250}
             />
           </div>
-          <div className={personCss.user_detail}>
-            <p className={personCss.username}>王小明</p>
+          <div className={friendStyle.user_detail}>
+            <p className={friendStyle.username}>王小明</p>
             <hr />
             <ul>
               <li>
@@ -36,7 +35,7 @@ export default function PersonPage() {
                 ：我是一名重訓愛好者，最近正在增肌訓練，平時每週3次跑步，想找一個可以一起訓練的夥伴，喜歡挑戰自己的極限，並且希望能一起互相鼓勵進步。
               </li>
             </ul>
-            <div className={personCss.hastag}>
+            <div className={friendStyle.hastag}>
               <ul>
                 <li>#增肌</li>
                 <li>#健康維持</li>
@@ -44,10 +43,10 @@ export default function PersonPage() {
               </ul>
             </div>
           </div>
-          <div className={personCss.sendBtn}>
-            <button className={personCss.btn}>
-              <div class={personCss.svgWrapper - 1}>
-                <div class={personCss.svgWrapper}>
+          <div className={friendStyle.sendBtn}>
+            <button className={friendStyle.btn}>
+              <div class={friendStyle.svgWrapper - 1}>
+                <div class={friendStyle.svgWrapper}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"

@@ -1,39 +1,41 @@
 'use client'
-import articlecss from '../styles/articles.module.css'
+import articleStyle from '../styles/articles.module.css'
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
-
+import Link from 'next/link'
 import Card from './card'
 
 export default function List() {
   return (
     <>
-      <div className={articlecss.articleList}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
-      <div class={articlecss.pagination}>
-        <a href="#" class={articlecss.disabled}>
-          <MdArrowBackIos />
-        </a>
-        <a href="#" class={articlecss.active}>
-          1
-        </a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">
-          <MdArrowForwardIos />
-        </a>
-      </div>
+      <section className={articleStyle.articleRight}>
+        <div className={articleStyle.articleList}>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+        <div class={articleStyle.pagination}>
+          <Link href="#" class={articleStyle.disabled}>
+            <MdArrowBackIos />
+          </Link>
+          <Link href="#" class={articleStyle.active}>
+            1
+          </Link>
+          <Link href="#">2</Link>
+          <Link href="#">3</Link>
+          <Link href="#">4</Link>
+          <Link href="#">5</Link>
+          <Link href="#">
+            <MdArrowForwardIos />
+          </Link>
+        </div>
+      </section>
     </>
   )
 }

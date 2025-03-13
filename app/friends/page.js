@@ -1,6 +1,6 @@
 'use client'
 
-import gymfriendcss from './_styles/gymfrenid.module.css'
+import friendStyle from './_styles/friends.module.css'
 import FriendBanner from './_components/friend-banner'
 import Breadcrumb from './_components/breadcrumb'
 import SelectTarget from './_components/select-target'
@@ -12,7 +12,7 @@ export default function FriendsPage() {
     <>
       <FriendBanner />
       <Breadcrumb breadcrumb={breadcrumb} />
-      <div className={gymfriendcss.friendContainer}>
+      <div className={friendStyle.friendContainer}>
         <SelectTarget />
         <List />
       </div>
