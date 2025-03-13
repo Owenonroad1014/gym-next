@@ -1,6 +1,6 @@
 'use client'
 
-import gymfriendcss from '../_styles/gymfrenid.module.css'
+import friendStyle from '../_styles/friends.module.css'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
@@ -22,13 +22,13 @@ export default function Breadcrumb({ breadcrumb = [] }) {
 
   return (
     <>
-      <div className={gymfriendcss.breadcrumbContainer}>
-        <nav className={gymfriendcss.breadcrumb}>
+      <div className={friendStyle.breadcrumbContainer}>
+        <nav className={friendStyle.breadcrumb}>
           {breadcrumb.map((v, index) => (
             <div
               key={index}
-              className={`${gymfriendcss.breadcrumbItem} ${
-                index === activeIndex ? gymfriendcss.active : ''
+              className={`${friendStyle.breadcrumbItem} ${
+                index === activeIndex ? friendStyle.active : ''
               }`}
             >
               <a href={breadcrumbLinks[index]}>{v}</a>

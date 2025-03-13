@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import gymfriendcss from '../_styles/gymfrenid.module.css'
+import friendStyle from '../_styles/friends.module.css'
 import { PiGenderMaleBold, PiGenderFemaleBold } from 'react-icons/pi'
 
 export default function SelectTarget() {
@@ -13,13 +13,13 @@ export default function SelectTarget() {
 
   return (
     <>
-      <div className={gymfriendcss.selectTarget}>
-        <div className={gymfriendcss.gender}>
+      <div className={friendStyle.selectTarget}>
+        <div className={friendStyle.gender}>
           <PiGenderMaleBold />
           <PiGenderFemaleBold />
         </div>
 
-        <div className={gymfriendcss.dropdown}>
+        <div className={friendStyle.dropdown}>
           {/* <label htmlFor="goals">選擇健身目標</label> */}
           <select id="goals" value={selectedGoal} onChange={handleGoalChange}>
             <option value="">選擇健身目標</option>
