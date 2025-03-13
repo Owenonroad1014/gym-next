@@ -1,6 +1,6 @@
 'use client'
 
-import MemberCss from '../_styles/member.module.css'
+import memberCss from '../_styles/member.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
@@ -11,20 +11,20 @@ export default function LoginPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   return (
-    <div className={MemberCss.container}>
-      <div className={MemberCss.left}>
+    <div className={memberCss.container}>
+      <div className={memberCss.left}>
         <h2>歡迎回來</h2>
         <div>
           <span>還沒成為會員嗎?</span>
-          <Link className={MemberCss.switchBtn} href="/member/register">
+          <Link className={memberCss.switchBtn} href="/member/register">
             註冊帳號
           </Link>
         </div>
       </div>
-      <div className={MemberCss.right}>
+      <div className={memberCss.right}>
         <h1>登入GYM步空間</h1>
         <form action="">
-          <div className={MemberCss.formGroup}>
+          <div className={memberCss.formGroup}>
             帳號
             <input
               type="text"
@@ -34,7 +34,7 @@ export default function LoginPage() {
               name="email"
             />
           </div>
-          <div className={MemberCss.formGroup}>
+          <div className={memberCss.formGroup}>
             密碼
             <input
               type={show ? 'text' : 'password'}
@@ -44,7 +44,7 @@ export default function LoginPage() {
               name="password"
             />
             <button
-              className={MemberCss.iconBtn}
+              className={memberCss.iconBtn}
               type="button"
               onClick={() => {
                 setShow(!show)
@@ -53,11 +53,11 @@ export default function LoginPage() {
               {show ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
-          <div className={MemberCss.btns}>
-            <button type="submit" className={MemberCss.loginBtn}>
+          <div className={memberCss.btns}>
+            <button type="submit" className={memberCss.loginBtn}>
               登入
             </button>
-            <Link href='/member/forget-password'>忘記密碼</Link>
+            <Link href="/member/forget-password">忘記密碼</Link>
           </div>
         </form>
       </div>
