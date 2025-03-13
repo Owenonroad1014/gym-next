@@ -73,6 +73,7 @@
 .coachesContainer{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0px 10px;
+  gap: 35px;
 }
