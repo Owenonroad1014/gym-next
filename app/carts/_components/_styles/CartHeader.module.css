@@ -5,7 +5,7 @@
     max-width: 1120px;
     font-weight: 500;
     display: flex;
-    padding: 20px;
+    /* padding: 20px; */
   }
   
   .loginPrompt {
@@ -61,3 +61,8 @@
     }
   }
   
+  @media (max-width: 375px) {
+    .headerContainer {
+      max-width: 100%;
+    }
+  }

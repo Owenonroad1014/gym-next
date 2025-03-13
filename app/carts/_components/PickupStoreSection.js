@@ -1,20 +1,20 @@
-"use client";
-import React, { useState } from "react";
-import styles from "./_styles/PickupStoreSection.module.css";
+'use client'
+import React, { useState } from 'react'
+import styles from './_styles/PickupStoreSection.module.css'
 
 function PickupStoreSection() {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedStore, setSelectedStore] = useState(""); // 儲存選擇的門市
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [selectedStore, setSelectedStore] = useState('') // 儲存選擇的門市
 
-  const storeOptions = ["台北信義店", "台中中港店", "高雄夢時代店"];
+  const storeOptions = ['台南中西店', '台南中華店', '台南永康店']
 
   const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
+    setIsExpanded(!isExpanded)
+  }
 
   const handleStoreChange = (event) => {
-    setSelectedStore(event.target.value);
-  };
+    setSelectedStore(event.target.value)
+  }
 
   return (
     <div className={styles.sectionContainer}>
@@ -42,10 +42,10 @@ function PickupStoreSection() {
         onClick={toggleExpanded}
         aria-expanded={isExpanded}
       >
-        <i className={styles.chevronIcon} />
+        {/* <i /> */}
       </button>
     </div>
-  );
+  )
 }
 
-export default PickupStoreSection;
+export default PickupStoreSection

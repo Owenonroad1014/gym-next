@@ -12,7 +12,7 @@ function CartProductList() {
       weight: "5kg",
       price: 500,
       quantity: 1,
-      image: "https://placehold.co/80x96/333333/333333",
+      image: "/cart-img/飛輪車.jpg",
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ function CartProductList() {
       weight: "5kg",
       price: 500,
       quantity: 1,
-      image: "https://placehold.co/80x96/333333/333333",
+      image: "/cart-img/飛輪車.jpg",
     },
   ];
 
