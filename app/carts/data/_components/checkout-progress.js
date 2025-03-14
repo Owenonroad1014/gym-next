@@ -3,7 +3,7 @@ import { AiOutlineForm } from "react-icons/ai"; // 填寫資料
 import { GrCart } from "react-icons/gr"; // 訂單確認
 import { MdOutlineCheckCircle } from "react-icons/md"; // 訂單完成
 import styles from "../_styles/data.module.css";
-import { HiArrowSmallRight } from "react-icons/hi2";
+import { HiArrowSmallRight } from "react-icons/hi2";//箭頭
 
 function CheckoutProgress() {
   return (

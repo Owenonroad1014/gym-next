@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"; // 引入 icons
 import styles from "../_styles/data.module.css";
-import ProductRow from "./ProductRow";
+import ProductRow from "./product-row";
 
 function OrderSummary() {
   const [isOpen, setIsOpen] = useState(false);
