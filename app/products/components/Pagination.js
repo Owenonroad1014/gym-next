@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PRODUCTS_LIST , IMG_PATH} from "@/config/api-path";
 
 
-const Pagination = ({ totalPages,page }) => {
+const Pagination = ({ totalPages,page }) => 
   return (
     <nav aria-label="Page navigation example">
       <ul className={styles.pagination}>

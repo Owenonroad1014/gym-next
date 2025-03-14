@@ -1,0 +1,66 @@
+.productSection {
+    flex-direction: column;
+    justify-content: start;
+    width: 643px;
+    min-width: 240px;
+    display: flex;
+  }
+  
+  .tableHeader {
+    border-bottom: 1px solid var(--neutral-04100, #6c7275);
+    color: #121212;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: start;
+    gap: 40px 100px;
+    width: 100%;
+    padding-bottom: 24px;
+    font-family:
+      Inter,
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 2;
+    display: flex;
+  }
+  
+  .productHeading {
+    font-feature-settings:
+      "liga" off,
+      "clig" off;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .columnTitles {
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px 76px;
+    width: 395px;
+    min-width: 240px;
+    display: flex;
+  }
+  
+  .columnTitle {
+    font-feature-settings:
+      "liga" off,
+      "clig" off;
+    align-self: stretch;
+    margin: auto 0;
+  }
+  
+  @media (width<=991px) {
+    .productSection {
+      max-width: 100%;
+    }
+  }
+  
+  @media (width<=375px) {
+    .productSection {
+      max-width: 100%;
+    }
+  }

@@ -1,0 +1,437 @@
+/* Bannner */
+.banner {
+  background-image: url('/imgs/friend/banner/friendBanner2000.jpg');
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 50px 60px;
+}
+.banner h3 {
+  color: white;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+}
+.banner p {
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+}
+.friendContainer {
+  height: 100%;
+  margin: auto;
+  margin-bottom: 100px;
+  max-width: 1440px;
+}
+/* Select */
+.selectTarget {
+  margin: 20px auto;
+  max-width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  border-radius: 3px;
+  padding: 30px;
+  background-color: #f5f5f5;
+}
+
+.selectTarget p {
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+
+.selectTarget p span {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.gender {
+  height: 30px;
+  display: flex;
+  margin-right: 16px;
+  color: #333;
+  border-radius: 3px;
+  justify-content: space-around;
+  width: 20%;
+}
+
+.gender svg {
+  width: 100%;
+  cursor: pointer;
+  box-sizing: content-box;
+  height: 100%;
+  padding: 10px;
+  display: block;
+  border-bottom: 1px solid #333;
+}
+
+.gender svg:hover {
+  background-color: #db6318;
+  color: #fff;
+  border-radius: 3px;
+}
+
+/* Dropdown */
+.dropdown {
+  width: 80%;
+  margin-top: 20px;
+}
+
+.dropdown label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.dropdown select {
+  width: 100%;
+  height: 50px;
+  padding: 10px 20px;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdown select:focus {
+  outline: none;
+  border: 2px solid #db6318;
+}
+
+/* 麵包屑 */
+.breadcrumbContainer {
+  max-width: 1200px;
+  /* margin: 50px auto; */
+  position: relative;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: transparent;
+}
+
+.breadcrumbItem {
+  position: relative;
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: '›';
+  position: absolute;
+  top: 13px;
+  right: -5px;
+  color: #666;
+  font-size: 20px;
+  z-index: 2;
+}
+
+.breadcrumbItem a {
+  text-decoration: none;
+  color: #666;
+  font-size: 18px;
+  font-family: 'Noto Serif TC', serif;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+  height: 60px;
+  line-height: 60px;
+  display: block;
+}
+
+/* 懸停效果 - 上浮動畫和底部線條 */
+.breadcrumbItem:hover a {
+  transform: translateY(-2px);
+  color: #666;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+/* 底部線條動畫 */
+/* .breadcrumbItem:not(.active) a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #000;
+  transition: all 0.5s ease;
+} */
+
+.breadcrumbItem:hover a::after,
+.breadcrumbItem.active a::after {
+  width: 100%;
+}
+
+/* 點擊/活動狀態 */
+.breadcrumbItem.active a {
+  color: #f87808;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+/* pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  /* border-radius: 8px; */
+  margin: 20px 0px;
+}
+
+.pagination a {
+  color: white;
+  background-color: #0b3760;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #db6318c7;
+  transform: scale(1.1);
+}
+
+.pagination .active {
+  background-color: #db6318;
+  font-weight: bold;
+  cursor: default;
+}
+
+.pagination .disabled {
+  background-color: #8b8b8b;
+  cursor: not-allowed;
+}
+
+/* List */
+.personList {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 10px;
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+
+/* Card */
+
+.profileCard {
+  margin: auto;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 228px;
+  /* width: 100%; */
+  height: 320px;
+  padding-top: 79px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profileCard_container {
+  background-color: #0b3760;
+  display: flex;
+  height: 220px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 3px;
+}
+
+.profileImage {
+  aspect-ratio: 0.98;
+  object-fit: contain;
+  width: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  background: url('https://xsgames.co/randomusers/avatar.php?g=male') lightgray
+    50% / cover no-repeat;
+}
+
+.profileName {
+  width: 146px; /* 219px * 2/3 */
+  font-size: 23px; /* 35px * 2/3 */
+  color: #fff;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
+  font-family: 'Noto Serif TC';
+}
+
+.profile_divider {
+  border: 0;
+  border-top: 1px solid #fff;
+  margin: 12px 0;
+  width: 90%; /* 344px * 2/3 */
+}
+
+.profile_description_wrapper {
+  display: flex;
+  margin-top: 3px;
+  height: 100px; /* 73px * 2/3 */
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile_description {
+  /* height: 100px; */
+  padding: 0px 20px;
+  font-size: 12px; /* 18px * 2/3 */
+  color: #fff;
+  line-height: 20px;
+  flex: 1;
+  margin: 0;
+  /* -webkit-line-clamp: 3; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+.profile_arrow {
+  border-radius: 24px;
+  background-color: #faf0ca;
+  position: absolute;
+  padding: 0 7px;
+  font-size: 13px; /* 20px * 2/3 */
+  color: #828181;
+  font-weight: 700;
+  width: 23px; /* 34px * 2/3 */
+  height: 23px; /* 34px * 2/3 */
+  right: 15px;
+  bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.circle {
+  width: 170px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.favorite_button {
+  background: #f87808;
+  /* background: #e76317; */
+  border: none;
+  color: white;
+  padding: 6px;
+  width: 60%;
+  /* margin: 30px 0; */
+  cursor: pointer;
+  font-size: 12px;
+  /* margin-top: 10px; */
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+.card {
+  display: flex;
+  width: 305px;
+  height: 402px;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 30px;
+}
+.avatar {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #333;
+  border-radius: 150px;
+  background: url('https://xsgames.co/randomusers/avatar.php?g=pixel') lightgray
+    50% / cover no-repeat;
+  margin-bottom: 20px;
+}
+.personContent {
+  display: flex;
+  height: 218px;
+  align-items: center;
+}
+.personContent h5 {
+  color: #828181;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: normal;
+}
+.personContent p {
+  color: #828181;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 1440) {
+  .banner {
+    background-image: url('/imgs/friend/banner/friendBanner1440.jpg');
+  }
+}
+@media (max-width: 768px) {
+  .selectTarget {
+    max-width: 80%;
+    flex-direction: column;
+  }
+
+  .selectTarget .gender {
+    width: 100%;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+
+  .selectTarget ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .selectTarget ul li {
+    width: 100%;
+    padding: 10px;
+    border-right: none;
+    text-align: center;
+  }
+
+  .dropdown select {
+    padding: 12px;
+  }
+  .breadcrumbItem a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dropdown select {
+    padding: 15px;
+  }
+}
+@media (max-width: 420) {
+  .banner {
+    background-image: url('/imgs/friend/banner/friendBanner420.jpg');
+  }
+}

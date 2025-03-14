@@ -1,19 +1,51 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import CoachesCard from '../_components/coaches-card'
-import Sort from '../_components/sort'
+import Breadcrumb from '../_components/breadcrumb'
 import styles from '../_styles/coaches.module.css'
 import Banner from '../_components/banner'
 import Search from '../_components/search'
+import Pagination from '../_components/pagination'
+import SearchForm from '../_components/search-form'
+import { COACHES_LIST } from '../../../config/api-path'
+
 
 export default function CoachesListPage(props) {
-  const sortItems = ['home', '教練列表', '教練資訊']
+  const [coaches, setCoaches] = useState([])
+  const [loading, setLoading] = useState(true)
+  const searchParams = useSearchParams()
+   const breadcrumb = ['home', '教練列表']
+
+  useEffect(() => {
+    const fetchCoaches = async () => {
+      try {
+        const location = searchParams.get('location')
+        const branch = searchParams.get('branch')
+        const response = await fetch(
+          `${COACHES_LIST}?location=${location || ''}&branch=${branch || ''}`
+        )
+        const data = await response.json()
+        if(data.success) {
+          setCoaches(data.rows)
+        }
+        setLoading(false)
+      } catch (error) {
+        console.error('Error:', error)
+        setLoading(false)
+      }
+    }
+
+    fetchCoaches()
+  }, [searchParams]) // 當 URL 參數改變時重新獲取資料
+  
+ 
 
 
   return (
     <>
-    <Banner title="健身教練" subtitle="FITNESS COACH"/>
+     <Banner title="健身教練" subtitle="尋找有相同運動愛好的朋友，一起GYM步吧！"/>
     <div className={styles.container}>
       <div className={styles.content}>
         <div className={styles.searchSection}>
@@ -31,66 +63,19 @@ export default function CoachesListPage(props) {
           </div>
         </div>
         
-        <div> 
-        <Sort items={sortItems} />
+        <div>
+        <div className={styles.toolsContainer}><Breadcrumb breadcrumb={breadcrumb} />
+        <SearchForm/></div>
+        
       </div>
       <div className={styles.coachesContainer}>
-        <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
-          <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
-          <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
-          <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
-          <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
-          <CoachesCard
-          avatarUrl="https://avatar.iran.liara.run/public/boy?username=Scott"
-          skill="瑜伽"
-          name="王小明"
-          email="123@gmail.com"
-          phone ="0900111222"
-          description = "專業瑜珈教練, 擁有10年教學經驗..."
-          detailsUrl = "#"
-          />
+      {coaches.map(coach => (
+        <CoachesCard key={coach.id}  name={coach.name} email={coach.email} phone={coach.phone} skill={coach.skill} description={coach.description}
+         />
+      ))}
       </div>
-      </div> 
+      </div>
+      <Pagination currentPage="1" totalPages="5"/>
       </div> 
 
     </>

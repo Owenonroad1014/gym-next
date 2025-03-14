@@ -15,7 +15,7 @@ export default function coachesPage() {
   
   return (
     <>
-    <Banner title="健身教練" subtitle="FITNESS COACH"/>
+    <Banner title="健身教練" subtitle="尋找有相同運動愛好的朋友，一起GYM步吧！"/>
     <div className={styles.container}>
       
       

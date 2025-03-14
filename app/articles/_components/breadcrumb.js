@@ -1,8 +1,9 @@
 'use client'
 
-import articlecss from '../styles/articles.module.css'
+import articleStyle from '../styles/articles.module.css'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 export default function Breadcrumb({ breadcrumb = [] }) {
   const pathname = usePathname()
@@ -22,16 +23,16 @@ export default function Breadcrumb({ breadcrumb = [] }) {
 
   return (
     <>
-      <div className={articlecss.breadcrumbContainer}>
-        <nav className={articlecss.breadcrumb}>
+      <div className={articleStyle.breadcrumbContainer}>
+        <nav className={articleStyle.breadcrumb}>
           {breadcrumb.map((v, index) => (
             <div
               key={index}
-              className={`${articlecss.breadcrumbItem} ${
-                index === activeIndex ? articlecss.active : ''
+              className={`${articleStyle.breadcrumbItem} ${
+                index === activeIndex ? articleStyle.active : ''
               }`}
             >
-              <a href={breadcrumbLinks[index]}>{v}</a>
+              <Link href={breadcrumbLinks[index]}>{v}</Link>
             </div>
           ))}
         </nav>

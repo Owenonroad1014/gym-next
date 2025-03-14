@@ -7,7 +7,7 @@ export default function CourseCalendar({
   courses = [],
 }) {
   const [selectedDate, setSelectedDate] = useState(currentDate)
-
+  
   // 計算週期範圍
   const getWeekRange = (date) => {
     const start = new Date(date)
@@ -16,25 +16,35 @@ export default function CourseCalendar({
     end.setDate(start.getDate() + 6)
     return { start, end }
   }
-
+  
   // 生成週曆天數陣列
   const weekDays = Array.from({ length: 7 }, (_, i) => {
     const day = new Date(selectedDate)
     day.setDate(selectedDate.getDate() - selectedDate.getDay() + i)
     return day
   })
-
+  
   // 處理週期切換
   const handleNextWeek = () => {
     const next = new Date(selectedDate)
     next.setDate(selectedDate.getDate() + 7)
     setSelectedDate(next)
   }
-
+  
   const handlePrevWeek = () => {
     const prev = new Date(selectedDate)
     prev.setDate(selectedDate.getDate() - 7)
     setSelectedDate(prev)
+  }
+  
+  // 根據日期過濾課程
+  const getCoursesByDay = (day) => {
+    return courses.filter(
+      (course) =>
+        course.date.getDate() === day.getDate() &&
+        course.date.getMonth() - 1 === day.getMonth() &&
+        course.date.getFullYear() === day.getFullYear()
+    )
   }
 
   return (
@@ -48,13 +58,13 @@ export default function CourseCalendar({
           {selectedDate.getFullYear()}年{selectedDate.getMonth() + 1}月第
           {Math.ceil(selectedDate.getDate() / 7)}週
         </div>
-
         <button onClick={handleNextWeek} className={styles.nextWeek}>
-        ＞
+          ＞
         </button>
       </div>
-
+      
       <div className={styles.calendar}>
+        {/* 先渲染所有日期 */}
         <div className={styles.days}>
           {weekDays.map((day) => (
             <div key={day.getTime()} className={styles.day}>
@@ -72,31 +82,29 @@ export default function CourseCalendar({
                   ][day.getDay()]
                 }
               </div>
-              <div className={styles.eventsContainer}>
-                {courses
-                  .filter(
-                    (course) =>
-                      course.date.getDate() === day.getDate() &&
-                      course.date.getMonth() - 1 === day.getMonth() &&
-                      course.date.getFullYear() === day.getFullYear()
-                  )
-                  .map((course) => (
+            </div>
+          ))}
+        </div>
+        
+        {/* 再渲染所有課程 */}
+        <div className={styles.eventsWrapper}>
+          {weekDays.map((day) => {
+            const dayCourses = getCoursesByDay(day);
+            return (
+              <div key={`events-${day.getTime()}`} className={`${styles.eventsContainer} ${dayCourses?.length > 0 ? styles.hasEvent : ''}`}>
+                {dayCourses.length > 0 ? (
+                  dayCourses.map((course) => (
                     <div key={course.id} className={styles.event}>
-                      {course.title}{' '}
+                      {course.title}
                       <div className={styles.time}>{course.time}</div>
                     </div>
-                  ))}
-                {courses.filter(
-                  (course) =>
-                    course.date.getDate() === day.getDate() &&
-                    course.date.getMonth() - 1 === day.getMonth() &&
-                    course.date.getFullYear() === day.getFullYear()
-                ).length === 0 && (
+                  ))
+                ) : (
                   <div className={styles.noEvent}>本日尚無課程</div>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

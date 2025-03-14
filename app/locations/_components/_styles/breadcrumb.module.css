@@ -1,0 +1,76 @@
+.breadcrumbContainer {
+    max-width: 1200px;
+    /* margin: 50px auto; */
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: transparent;
+  }
+  
+  .breadcrumbItem {
+    position: relative;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .breadcrumbItem:not(:last-child)::after {
+    content: '›';
+    position: absolute;
+    top: 17px;
+    right: -5px;
+    color: #666;
+    font-size: 20px;
+    z-index: 2;
+  }
+  
+  .breadcrumbItem a {
+    text-decoration: none;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+    height: 60px;
+    line-height: 60px;
+    display: block;
+  }
+  
+  /* 懸停效果 - 上浮動畫和底部線條 */
+  .breadcrumbItem:hover a {
+    transform: translateY(-2px);
+    color: #666;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+  }
+  
+  /* 底部線條動畫 */
+  /* .breadcrumbItem:not(.active) a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: #000;
+    transition: all 0.5s ease;
+  } */
+  
+  .breadcrumbItem:hover a::after,
+  .breadcrumbItem.active a::after {
+    width: 100%;
+  }
+  
+  /* 點擊/活動狀態 */
+  .breadcrumbItem.active a {
+    color: #f87808;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+  }

@@ -1,12 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react';
 import styles from './_styles/search.module.css';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function Search({ onSearch }) {
+  const router = useRouter();
+  const searchParams = useSearchParams()
   const [showLocation, setShowLocation] = useState(false);
   const [showBranch, setShowBranch] = useState(false);
-  const [location, setLocation] = useState('');
-  const [branch, setBranch] = useState('');
+  const [location, setLocation] = useState(searchParams.get('location') || '');
+  const [branch, setBranch] = useState(searchParams.get('branch') || '');
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,7 +27,9 @@ function Search({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch({ location, branch });
+    router.replace(`/classes/list?location=${location}&branch=${branch}`, {
+      scroll: false // 防止自動滾動到頂部
+    });
   };
 
   return (
