@@ -1,6 +1,6 @@
-/* Bannner */
+/* #region ================= Bannner Start ====================== */
 .banner {
-  background-image: url('/imgs/articleBanner.jpg');
+  background-image: url('/imgs/article/banner/articlebanner2000.jpg');
   width: 100%;
   height: 400px;
   display: flex;
@@ -8,7 +8,6 @@
   justify-content: end;
   gap: 20px;
   align-items: flex-start;
-  margin-top: 50px;
   padding: 50px 60px;
 }
 .banner h3 {
@@ -19,21 +18,17 @@
   color: white;
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
-/* 麵包屑 */
-.breadcrumbContainer {
-  /* max-width: 1200px; */
-  /* margin: 50px auto; */
-  position: relative;
-  font-family: 'Noto Serif TC', serif;
-  box-sizing: border-box;
-}
+/* #endregion Bannner  End*/
 
+/* #region ================= Breadcrumb  Start ====================== */
+.breadcrumbContainer {
+  position: relative;
+}
 .breadcrumb {
+  width: 100%;
+  background-color: transparent;
   display: flex;
   justify-content: flex-start;
-  width: 100%;
-  /* border-bottom: 1px solid #eee; */
-  background-color: transparent;
 }
 
 .breadcrumbItem {
@@ -55,19 +50,17 @@
 }
 
 .breadcrumbItem a {
-  text-decoration: none;
+  cursor: pointer;
   color: #666;
   font-size: 18px;
-  font-family: 'Noto Serif TC', serif;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.3s ease, color 0.3s ease;
-  height: 60px;
   line-height: 60px;
+  text-decoration: none;
+  height: 60px;
+  position: relative;
   display: block;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* 懸停效果 - 上浮動畫和底部線條 */
 .breadcrumbItem:hover a {
   transform: translateY(-2px);
   color: #666;
@@ -75,128 +68,207 @@
   text-underline-offset: 10px;
 }
 
-/* 底部線條動畫 */
-/* .breadcrumbItem:not(.active) a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background: #000;
-  transition: all 0.5s ease;
-} */
-
 .breadcrumbItem:hover a::after,
 .breadcrumbItem.active a::after {
   width: 100%;
 }
 
-/* 點擊/活動狀態 */
 .breadcrumbItem.active a {
   color: #f87808;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 10px;
 }
+/* #endregion ================= Breadcrumb ====================== */
 
 .articlesContainer {
-  width: 100%;
   max-width: 1440px;
   margin: auto;
-  min-height: 100vh;
-}
-/* select */
-.selectArea {
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 3px;
-  max-width: 1200px;
-  display: flex;
-  justify-content: center;
-  background-color: #f5f5f5;
 }
 
+/* #region ================= Search Start ====================== */
+.searchContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+}
+
+.searchForm input {
+  /* padding: 3px; */
+  max-width: 250px;
+  border-radius: 3px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 18px;
+  border: 2px rgb(221, 215, 215) solid;
+}
+
+.searchForm button {
+  width: 60px;
+  padding: 12px 10px;
+  background-color: #f87808;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+/* 可以添加懸停效果 */
+.button:hover {
+  background-color: #e56c00;
+}
+/* #endregion ================= Search  End====================== */
+
+.articleBottom {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+/* #region ================= Select  Start ====================== */
+
+.selectArea {
+  width: 15%;
+  align-items: center;
+  margin: 0 15px;
+  display: block;
+  flex-direction: column;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.selectBtn {
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: white;
+  background-color: #f87808;
+  margin: auto;
+  border: none;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: -65px;
+  z-index: 20;
+}
 .selectPart {
   width: 100%;
-  padding: 20px 30px;
-  text-align: center;
+  list-style: none;
+  margin-top: 15px;
 }
-
-.selectTitle {
-  margin-bottom: 20px;
-  font-size: 18px;
-  text-align: start;
-  cursor: pointer;
-}
-
-.selectPart select {
+.categoryTitle {
   width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+  color: rgb(16, 19, 21);
+  background-color: #dee5e7;
   padding: 10px;
-  font-size: 16px;
-  border: 1px solid #0b3760;
-  border-radius: 3px;
-  background-color: #fff;
-  color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+.selectPart li {
   cursor: pointer;
+  width: 80%;
+  height: 60px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 60px;
+  color: #666;
+  padding: 0 20px;
+  border-bottom: #cdc9c9 1px solid;
+  margin: auto;
+  position: relative;
+  transition: all 0.3s;
 }
 
-.selectPart select:focus {
-  outline: none;
-  border-color: #db6318;
+.selectPart li:hover {
+  border-bottom: #48767b 2px solid;
+  transform: translateY(-2px);
+  transition: all 0.3s;
 }
 
-/* list */
+.active {
+  color: #f87808;
+  font-weight: 600;
+}
+/* #endregion ================= Select  End ====================== */
+
+/* #region ================= List  Start ====================== */
+
+.articleRight {
+  max-width: 85%;
+}
 .articleList {
+  padding: 10px;
+  margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  padding: 10px;
   justify-content: flex-start;
+  gap: 3vw;
 }
 /* card */
 .card {
   cursor: pointer;
-  background-color: #0b3760;
   width: 250px;
   height: 380px;
-  padding: 5px 5px;
   color: white;
+  background-color: #0b3760;
+  padding: 5px 5px;
   margin: 10px auto;
   border-radius: 3px;
   transition: all 0.3s;
   overflow: hidden;
 }
 .card:hover {
-  transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
   transition: all 0.3s;
 }
 .images {
   position: relative;
 }
 .heartArea {
-  position: absolute;
-  background-color: white;
-  border-radius: 50%;
-  height: 60px;
   width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 5px solid #0b3760;
+  border-radius: 50%;
+  position: absolute;
   right: -30px;
   top: -30px;
-  border: 5px solid #0b3760;
 }
-.faHeart {
+.heart {
   cursor: pointer;
+  box-sizing: content-box;
+  color: #0b3760;
+  font-size: 22px;
   position: absolute;
   left: 7px;
   bottom: 5px;
-  font-size: 22px;
-  box-sizing: content-box;
   transition: all 0.3s;
-  color: #0b3760;
 }
-.faHeart:hover {
+.heart:hover {
   color: #f87808;
+  transition: all 0.3s;
+}
+.heartActive {
+  box-sizing: content-box;
+  cursor: pointer;
+  font-size: 22px;
+  color: #f87808;
+  position: absolute;
+  left: 7px;
+  bottom: 5px;
   transition: all 0.3s;
 }
 .content {
@@ -222,26 +294,25 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* #endregion ================= List  end ====================== */
 
-/* pagination */
-
+/* #region ================= Pagination  Start ====================== */
 .pagination {
+  padding: 20px;
+  margin: 20px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  /* border-radius: 8px; */
-  margin: 20px 0px;
 }
 
 .pagination a {
+  font-size: 1rem;
+  text-decoration: none;
   color: white;
   background-color: #0b3760;
   padding: 10px 15px;
   margin: 0 5px;
   border-radius: 3px;
-  text-decoration: none;
-  font-size: 1rem;
   transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -251,28 +322,66 @@
 }
 
 .pagination .active {
-  background-color: #db6318;
-  font-weight: bold;
   cursor: default;
+  font-weight: bold;
+  background-color: #db6318;
 }
 
 .pagination .disabled {
-  background-color: #8b8b8b;
   cursor: not-allowed;
+  background-color: #8b8b8b;
 }
+/* #endregion ================= Pagination  End ====================== */
 
 .personList {
-  background-color: #fff6;
+  /* background-color: #fff6;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   padding: 10px;
-  justify-content: flex-start;
+  justify-content: flex-start; */
 }
 
+/* #region ================= RWD ====================== */
+@media (max-width: 1440px) {
+  .banner {
+    background-image: url('/imgs/article/banner/articlebanner1440.jpg');
+  }
+}
+@media (max-width: 1390px) {
+  .selectArea {
+    width: 20%;
+  }
+  .articleRight {
+    max-width: 80%;
+  }
+  .articleList {
+    gap: 4vw;
+  }
+}
+
+@media (max-width: 960px) {
+  .selectBtn {
+    display: block;
+  }
+  .selectArea {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    background-color: #ebeff1;
+
+    width: 90%;
+  }
+  .articleRight {
+    max-width: 100%;
+  }
+  .categoryTitle {
+    background-color: #dee5e7;
+  }
+}
 @media (max-width: 768px) {
   .breadcrumbItem a {
-    font-size: 14px;
+    font-size: 12px;
   }
   .selectArea {
     flex-direction: column;
@@ -284,3 +393,9 @@
     text-align: left;
   }
 }
+@media (max-width: 420) {
+  .banner {
+    background-image: url('/imgs/article/banner/articlebanner420.jpg');
+  }
+}
+/* #endregion ================= RWD END ====================== */

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import articleCss from '../article.module.css'
+import articleStyle from '../article.module.css'
 import Slider from 'react-slick'
 import Card from '../../_components/card'
 import Link from 'next/link'
@@ -39,28 +39,28 @@ export default function Recommend() {
   }
   return (
     <>
-      <div className={articleCss.sliderContainer}>
+      <div className={articleStyle.sliderContainer}>
         <h5>
           <GrArticle /> &nbsp;分類精選文章
         </h5>
         <hr />
         <Slider {...settings}>
-          <div className={articleCss.sliderItem}>
+          <div className={articleStyle.sliderItem}>
             <Link href="#">
               <Card />
             </Link>
           </div>
-          <div className={articleCss.sliderItem}>
+          <div className={articleStyle.sliderItem}>
             <Link href="#">
               <Card />
             </Link>
           </div>
-          <div className={articleCss.sliderItem}>
+          <div className={articleStyle.sliderItem}>
             <Link href="#">
               <Card />
             </Link>
           </div>
-          <div className={articleCss.sliderItem}>
+          <div className={articleStyle.sliderItem}>
             <Link href="#">
               <Card />
             </Link>

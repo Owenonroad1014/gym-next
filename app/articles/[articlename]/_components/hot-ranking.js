@@ -1,15 +1,15 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import articleCss from '../article.module.css'
+import articleStyle from '../article.module.css'
 import { FaMedal } from "react-icons/fa6";
 
 export default function HotRanking() {
   return (
     <>
-      <section className={articleCss.hotRankingArea}>
+      <section className={articleStyle.hotRankingArea}>
         <h4><FaMedal/>&nbsp;&nbsp;TOP FIVE</h4>
-        <div className={articleCss.dash}></div>
+        <div className={articleStyle.dash}></div>
         <ol>
           <li>
             <Link href="#">

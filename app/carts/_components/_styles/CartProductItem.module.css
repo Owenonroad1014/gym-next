@@ -220,4 +220,53 @@
       gap: 16px;
     }
   }
+  /* 待改 */
+  @media (max-width: 375px) {
+    .productItem {
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      text-align: center;
+    }
+  
+    .productImage {
+      width: 60px; /* 縮小圖片 */
+    }
+  
+    .productDetails {
+      width: auto;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .productPricing {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+  
+    .quantityControl {
+      width: 60px;
+      font-size: 10px;
+    }
+  
+    .productName {
+      font-size: 12px; /* 縮小字體 */
+    }
+  
+    .productWeight {
+      font-size: 10px;
+    }
+  
+    .unitPrice,
+    .subtotalPrice {
+      font-size: 14px;
+    }
+  
+    .removeButton {
+      align-self: center;
+      margin-top: 12px;
+    }
+  }
   
