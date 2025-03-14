@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import styles from "./_styles/CartProductList.module.css";
-import CartProductItem from "./CartProductItem";
+import styles from "./_styles/cart-product-list.module.css";
+import CartProductItem from "./cart-product-item";
 
 function CartProductList() {
   // Sample product data - in a real app, this would come from a state or props
