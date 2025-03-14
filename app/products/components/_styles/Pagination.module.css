@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap");
 
+.li{
+    list-style-type: none;
+}
+
+.active {
+    background-color: #db6318 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
 .pagination {
     font-family: "Noto Serif TC", serif;
     display: flex;
@@ -28,11 +38,11 @@
     transform: scale(1.1);
 }
 
-.active {
+/* .active {
     background-color: #db6318;
     font-weight: bold;
     cursor: default;
-}
+} */
 
 .disabled {
     background-color: #8b8b8b;

@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-export default function Breadcrumb({ breadcrumb = ["首頁","商品列表","熱門商品"] }) {
+export default function Breadcrumb({ breadcrumb = ["首頁","影片列表"] }) {
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(null)
-  const breadcrumbLinks = ['/', '/products', '/products/hot']
+  const breadcrumbLinks = ['/', '/vedios', '/vedios/hot']
 
   useEffect(() => {
     const index = breadcrumbLinks.findIndex(link => pathname.startsWith(link))

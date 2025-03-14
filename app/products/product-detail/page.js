@@ -4,11 +4,13 @@ import styles from "./_components/_styles/ProductDetail.module.css";
 import QuantitySelector from "./_components/QuantitySelector";
 import RelatedProducts from "./_components/RelatedProducts";
 import { FaRegHeart } from "react-icons/fa";
+import Breadcrumb from "./_components/breadcrumb";
 
 
 const ProductDetail = () => {
   return (
     <main className={styles.container}>
+      <Breadcrumb />
       <section className={styles.productSection}>
         <img
           src="/img/products.jpg"

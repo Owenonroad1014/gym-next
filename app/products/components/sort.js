@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './_styles/sort.module.css';
 
 const Sort = ({ items = ['熱門商品','健身器材', '瑜珈輔具', '拳擊用品'] }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState("");
 
   const handleClick = (index) => {
     setActiveIndex(index);
