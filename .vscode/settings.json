@@ -41,6 +41,13 @@
     "titleBar.inactiveBackground": "#f9e64f99",
     "titleBar.inactiveForeground": "#15202b99"
   },
+
+  // "workbench.colorCustomizations": {
+  //   "activityBar.background": "#552026",
+  //   "titleBar.activeBackground": "#552026",
+  //   "titleBar.activeForeground": "#fbfbfb"
+  // },
   "peacock.color": "#f9e64f"
+
   "compile-hero.disable-compile-files-on-did-save-code": false
 }
