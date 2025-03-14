@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import styles from './_styles/PickupStoreSection.module.css'
+import styles from './_styles/pickup-store-section.module.css'
 
 function PickupStoreSection() {
   const [isExpanded, setIsExpanded] = useState(false)

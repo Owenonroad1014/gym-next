@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import styles from "./_styles/ShoppingCart.module.css";
-import CheckoutProgress from "./_components/CheckoutProgress";
-import CartHeader from "./_components/CartHeader";
-import CartProductList from "./_components/CartProductList";
-import OrderSummary from "./_components/OrderSummary";
+import styles from "./_styles/shopping-cart.module.css";
+import CheckoutProgress from "./_components/checkout-progress";
+import CartHeader from "./_components/cart-header";
+import CartProductList from "./_components/cart-product-list";
+import OrderSummary from "./_components/order-summary";
 
 function ShoppingCart() {
   return (

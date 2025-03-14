@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./_styles/PaymentMethodSection.module.css";
+import styles from "./_styles/payment-method-section.module.css";
 
 function PaymentMethodSection() {
   const [selectedMethod, setSelectedMethod] = useState(""); // 儲存選擇的付款方式
