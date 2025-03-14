@@ -32,3 +32,11 @@ export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`;
 // Toggle like
 // `${API_SERVER}/address-book/toggle-like/${ab_id}`
 export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`;
+
+
+// export const API_SERVER = `http://localhost:3001`;
+
+export const IMG_PATH = `${API_SERVER}/img`;
+
+// 取得商品列表的資料 GET
+export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
