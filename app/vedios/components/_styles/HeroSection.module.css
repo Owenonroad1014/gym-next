@@ -3,8 +3,7 @@
   white-space: nowrap;
   text-transform: uppercase;
   flex-direction: column;
-  /* max-width: 1440px; */
-  height: 400px;
+  height: 500px;
   padding: 70px;
   font-size: 40px;
   font-weight: 700;
@@ -12,8 +11,19 @@
   position: relative;
   overflow: hidden;
   margin: auto;
-  margin-top: 53px;
 }
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3); /* 灰色覆蓋層 */
+  z-index: 1;
+}
+
 
 .heroBackground {
   object-fit: cover;
