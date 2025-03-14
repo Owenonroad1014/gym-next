@@ -1,0 +1,66 @@
+.pageContainer {
+    width: 100%;
+    max-width: 1440px;
+    min-height: screen;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 24px;
+  }
+  
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    max-width: 720px;
+  }
+  
+  .confirmationImage {
+    width: 250px;
+    height: 250px;
+    margin: 20px; 
+  }
+  
+  .confirmationTitle {
+    color: #928a8a;
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: Inter;
+    font-size: 36px;
+  }
+  
+  .orderDetailsContainer {
+    gap: 30px;
+    width: 100%;
+    max-width: 369px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .orderDetailItem {
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+  }
+  
+  @media (width<=640px) {
+    .confirmationImage  {
+        width: 100px;
+        height: 100px;
+        margin-top: 100px;
+    }
+
+    .confirmationTitle {
+      font-size: 20px;
+    }
+  
+    .orderDetailItem {
+      font-size: 16px;
+    }
+  }
+  

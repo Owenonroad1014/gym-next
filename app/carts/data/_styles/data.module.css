@@ -1,6 +1,5 @@
 .body2 {
-    color: #fff;
-    background-color: #dbd6d6;
+    background-color: #ffffff;
     flex-direction: column;
     justify-content: start;
     width: 100%;
@@ -8,21 +7,22 @@
     display: flex;
   }
   .progress {
+    display: flex;
     text-align: center;
     /* background-color: #87a0b8; */
     justify-content: center;
     align-items: center;
     gap: 40px;
     width: 100%;
-    height: 400px;
+    max-width: 1440px;
+    height: 200px;
     /* padding: 40px; */
     font-family:
       Noto Sans TC,
       sans-serif;
-    font-size: 18px;
-    font-weight: 500;
-    display: flex;
-    overflow: hidden;
+    font-size: 14px;
+    font-weight: 400;
+    /* overflow: hidden; */
   }
   @media (width<=991px) {
     .progress {
@@ -36,7 +36,7 @@
     }
   }
   .progressItem {
-    color: #fff;
+    color: #9b9cb3;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -65,16 +65,16 @@
   }
   /* 商品下拉選單 */
   .card {
-    background-color: #0b3760;
+    background-color: #cdcbc3;
     border-radius: 3px;
     max-width: 1024px;
     margin: 0 auto;
     overflow: hidden;
   }
   .header {
-    color: #0b3760;
+    color: #ffffff;
     letter-spacing: 1.5px;
-    background-color: #eb854a;
+    background-color: #b8b4a7;
     justify-content: space-between;
     align-items: center;
     height: 70px;
@@ -89,6 +89,7 @@
       text-align: center;
       flex-direction: column;
       gap: 10px;
+      min-width: 375px;
     }
   }
   .span {
@@ -162,7 +163,7 @@
     margin-top: 25px;
   }
   .section {
-    /* background-color: transparent; */
+    background-color: rgb(234, 237, 227);
     width: 50%;
     padding: 20px;
     margin: auto;
@@ -185,10 +186,10 @@
   }
   /*橘底標題*/
   .formHeader {
-    color: #fff;
-    height: 40px;
-    background-color: #eb854a;
-    border: 1px solid #828181;
+    color: #000000;
+    height: 35px;
+    /* background-color: #eb854a; */
+    border: 1px solid #000000;
     padding: 12px;
     border-radius: 3px;
     font-size: 20px;
@@ -202,7 +203,7 @@
     display: flex;
   }
   .formLabel {
-    color: #fff;
+    color: #000000;
     font-family:
       Noto Sans TC,
       sans-serif;
@@ -210,9 +211,11 @@
   }
   .formInput {
     background-color: #fff;
-    border: 1px solid #0000004d;
+    border: none;
+    border-bottom:1px solid #000000;
     width:100%;                           
-    height: 35px;
+    height: 25px;
+    /* display: block; */
   }
   .formTextarea {
     background-color: #fff;

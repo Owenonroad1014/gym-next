@@ -3,7 +3,6 @@
     width: 450px;
     height: 220px;
     position: relative;
-    font-family: Arial, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     overflow: hidden;
@@ -56,13 +55,15 @@
   .divider {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     width: 100%;
+
   }
   
   .skill {
     font-size: 16px;
     margin: 5px 0;
+    opacity: 0.9;
   }
   .contact {
     font-size: 14px;
@@ -71,13 +72,12 @@
   }
   
   .description {
-    font-size: 14px;
-    margin: 10px 0;
-    white-space: nowrap;
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 90%;
+    opacity: 0.9;
   }
+
   .arrow {
     color: #1D3459;
     font-weight: bold;
