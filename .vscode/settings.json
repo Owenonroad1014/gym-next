@@ -42,4 +42,5 @@
     "titleBar.inactiveForeground": "#15202b99"
   },
   "peacock.color": "#f9e64f"
+  "compile-hero.disable-compile-files-on-did-save-code": false
 }

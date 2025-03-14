@@ -76,12 +76,15 @@
   
   .header {
     justify-content: space-between;
-    align-items: start;
-    gap: 40px 48px;
+    /* align-items: start; */
+    /* gap: 20px 20px; */
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     display: flex;
+  }
+  .title{
+    /* width: 60%; */
   }
 
   .price{
@@ -90,6 +93,7 @@
     align-items: center;
     color: rgb(31, 86, 112);
     font-weight: 900;
+    /* width: 40%; */
   }
   
   .divider {
@@ -104,6 +108,7 @@
     color: #697278;
     margin-top: 11px;
     font-size: 14px;
+    height: 50px;
   }
   
   .cardLight .description {
