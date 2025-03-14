@@ -1,14 +1,14 @@
 'use client'
 
-import gymfriendcss from '../_styles/gymfrenid.module.css'
+import friendStyle from '../_styles/friends.module.css'
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 import Item from './item'
 
 export default function List() {
   return (
     <>
-      <div className={gymfriendcss.list}>
-        <div className={gymfriendcss.personList}>
+      <div className={friendStyle.list}>
+        <div className={friendStyle.personList}>
           <Item />
           <Item />
           <Item />
@@ -22,11 +22,11 @@ export default function List() {
           <Item />
           <Item />
         </div>
-        <div class={gymfriendcss.pagination}>
-          <a href="#" class={gymfriendcss.disabled}>
+        <div class={friendStyle.pagination}>
+          <a href="#" class={friendStyle.disabled}>
             <MdArrowBackIos />
           </a>
-          <a href="#" class={gymfriendcss.active}>
+          <a href="#" class={friendStyle.active}>
             1
           </a>
           <a href="#">2</a>

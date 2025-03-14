@@ -2,21 +2,26 @@
 
 import React from 'react'
 import Image from 'next/image'
-import articleCss from '../article.module.css'
+import articleStyle from '../article.module.css'
 import { IoMdTime } from 'react-icons/io'
 export default function Content() {
   return (
     <>
-      <div className={articleCss.articleContent}>
+      <div className={articleStyle.articleContent}>
         <h3>揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！</h3>
-        <p className={articleCss.date}>
+        <p className={articleStyle.date}>
           <IoMdTime /> &nbsp;2025/03/08
         </p>
         <p>
           健身是一個改變生活方式的過程，無論是為了增強體能、提高健康水平，還是簡單地希望擁有更好的外觀。對於初學者來說，開始健身可能會感覺有些困難，因為健身的選擇和資訊琳瑯滿目。然而，只要掌握一些基本原則和步驟，你就能夠在這條道路上順利啟航。這篇文章將為你提供一個清晰的健身入門指南，幫助你輕鬆開始健身並建立長期的健身習慣。
         </p>
         <br />
-        <Image src="/imgs/article01.jpg" height={522} width={700} alt="揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！"/>
+        <Image
+          src="/imgs/article/article01.jpg"
+          height={522}
+          width={700}
+          alt="揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！"
+        />
         <ol>
           <li>
             <span>1. 設定明確的目標</span>
