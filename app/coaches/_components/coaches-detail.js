@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/f
 import Breadcrumb from './breadcrumb';
 
 const CoachDetail = ({
-  avatarUrl = '',
+  // avatarUrl = '',
   name = "",
   title = "",
   email = "",

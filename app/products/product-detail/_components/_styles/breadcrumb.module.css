@@ -1,6 +1,6 @@
 .breadcrumbContainer {
-    max-width: 300px;
-    /* margin: 50px auto; */
+    /* max-width: 300px; */
+    margin-left: 14%;
     position: relative;
     font-family: 'Noto Serif TC', serif;
     box-sizing: border-box;

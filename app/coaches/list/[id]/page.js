@@ -13,7 +13,7 @@ function CoachDetailPage() {
     const fetchCoachData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/coaches/${id}`);
+        const response = await fetch(`/coaches/api/${id}`);
         const data = await response.json();
         setCoachData(data);
         setLoading(false);

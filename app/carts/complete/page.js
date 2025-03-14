@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import styles from "./_styles/OrderConfirmation.module.css";
+import styles from "./_styles/order-confirmation.module.css";
 
 function OrderConfirmationHeader({ imageUrl }) {
   return (

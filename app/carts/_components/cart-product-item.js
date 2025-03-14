@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./_styles/CartProductItem.module.css";
+import styles from "./_styles/cart-product-item.module.css";
 
 function CartProductItem({ product }) {
   const [quantity, setQuantity] = useState(product.quantity);

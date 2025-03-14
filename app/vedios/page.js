@@ -3,7 +3,7 @@ import React from "react";
 import HeroSection from "./components/HeroSection";
 import ProductGrid from "./components/ProductGrid";
 import styles from "./components/_styles/EquipmentRental.module.css";
-
+import Breadcrumb from "./components/breadcrumb";
 import Search from "./components/search";
 
 
@@ -15,6 +15,7 @@ const EquipmentRental = () => {
       <HeroSection />
       <section className={styles.contentSection}>
       <div className={styles.contentTitle}>
+      <Breadcrumb ></Breadcrumb>
       <Search />
       </div>
         <ProductGrid >
