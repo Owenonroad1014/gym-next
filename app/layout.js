@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
+import { AuthContextProvider } from '@/context/auth-context'
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
 //   variable: '--font-geist-sans',
@@ -19,12 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <AuthContextProvider>
+      <html lang="en">
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </AuthContextProvider>
   )
 }

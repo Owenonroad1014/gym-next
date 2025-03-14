@@ -1,23 +1,22 @@
 .totalsContainer {
+    display: flex;
     flex-direction: column;
     justify-content: start;
-    display: flex;
   }
   
   .lineItems {
+    display: flex;
     flex-direction: column;
     justify-content: start;
     width: 100%;
     max-width: 365px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 2;
-    display: flex;
   }
   
   .lineItem {
-    border-bottom: 1px solid var(--neutral-07100, #141718);
-    border-radius: 4px;
+    border-bottom: 1px solid #141718;
     justify-content: space-between;
     align-items: center;
     gap: 40px 100px;
@@ -27,9 +26,7 @@
   }
   
   .lineItemShipping {
-    border-bottom: 1px solid var(--neutral-04100, #6c7275);
-    background-color: #fefefe;
-    border-radius: 4px;
+    border-bottom: 1px solid #141718;
     justify-content: space-between;
     align-items: center;
     gap: 40px 100px;
@@ -40,23 +37,23 @@
   }
   
   .lineItemLabel {
-    font-feature-settings:
+    /* font-feature-settings:
       "liga" off,
-      "clig" off;
+      "clig" off; */
     align-self: stretch;
     margin: auto 0;
   }
   
   .lineItemValue {
-    font-feature-settings:
+    /* font-feature-settings:
       "liga" off,
-      "clig" off;
+      "clig" off; */
     align-self: stretch;
     margin: auto 0;
   }
   
   .divider {
-    border-bottom: 1px solid var(--Black-200, #eaeaea);
+    /* border-bottom: 1px solid var(--Black-200, #eaeaea); */
     width: 100%;
     min-height: 52px;
     padding: 13px 0;
@@ -65,6 +62,7 @@
   
   .orderTotal {
     color: #141718;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
@@ -72,30 +70,29 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 1.6;
-    display: flex;
   }
   
   .totalRow {
+    display: flex;
     justify-content: start;
     align-items: start;
-    gap: 40px 160px;
     width: 100%;
-    display: flex;
+    gap: 40px 160px;
   }
   
   .totalLabel {
-    font-feature-settings:
+    /* font-feature-settings:
       "liga" off,
-      "clig" off;
+      "clig" off; */
     margin: 0;
     font-size: 20px;
   }
   
   .totalValue {
     text-align: right;
-    font-feature-settings:
+    /* font-feature-settings:
       "liga" off,
-      "clig" off;
+      "clig" off; */
     margin-left: auto;
   }
   
