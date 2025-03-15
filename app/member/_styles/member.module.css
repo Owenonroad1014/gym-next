@@ -10,7 +10,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 30px;
+  padding: 180px 30px;
+  height: 80vh;
   width: 15%;
   background-image: linear-gradient(
     to bottom,
@@ -48,6 +49,7 @@
 .right {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 50%;
   padding: 30px;
   padding-left: 60px;
@@ -56,7 +58,7 @@
   color: #0b3760;
 }
 .right h1 {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 .formGroup {
   width: 100%;
