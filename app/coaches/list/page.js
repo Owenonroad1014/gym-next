@@ -12,6 +12,7 @@ import SearchForm from '../_components/search-form'
 import { COACHES_LIST } from '../../../config/api-path'
 
 
+
 export default function CoachesListPage(props) {
   const [coaches, setCoaches] = useState([])
   const [loading, setLoading] = useState(true)
@@ -70,8 +71,8 @@ export default function CoachesListPage(props) {
       </div>
       <div className={styles.coachesContainer}>
       {coaches.map(coach => (
-        <CoachesCard key={coach.id}  name={coach.name} email={coach.email} phone={coach.phone} skill={coach.skill} description={coach.description}
-         />
+        <CoachesCard key={coach.id} id={coach.id} name={coach.name} email={coach.email} phone={coach.phone} skill={coach.skill} description={coach.description}
+        avatar={coach.avatar}/>
       ))}
       </div>
       </div>
