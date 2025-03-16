@@ -1,6 +1,7 @@
 // CourseCalendar.js
 import styles from './_styles/calendar.module.css'
 import { useState } from 'react'
+import moment from 'moment-timezone'
 
 export default function CourseCalendar({
   currentDate = new Date(),
@@ -30,12 +31,9 @@ export default function CourseCalendar({
     next.setDate(selectedDate.getDate() + 7)
     setSelectedDate(next)
   }
+ 
+    
   
-  const handlePrevWeek = () => {
-    const prev = new Date(selectedDate)
-    prev.setDate(selectedDate.getDate() - 7)
-    setSelectedDate(prev)
-  }
   
   // 根據日期過濾課程
   const getCoursesByDay = (day) => {
@@ -47,11 +45,43 @@ export default function CourseCalendar({
     )
   }
 
+  const isPastWeek = () => {
+    const today = moment().tz('Asia/Taipei').endOf('day');
+    
+    const selectedWeekStart = moment(selectedDate)
+      .tz('Asia/Taipei')
+      .startOf('week')
+      .endOf('day');
+      
+    
+    return selectedWeekStart.isSameOrBefore(today);
+  }
+  
+  
+  
+  
+  
+const handlePrevWeek = () => {
+  const prev = new Date(selectedDate);
+  prev.setDate(selectedDate.getDate() - 7);
+ 
+  if (!isPastWeek()) {
+    setSelectedDate(prev);
+  }
+}
+
+  
+  
+  
+  
+  
+
   return (
     <div className={styles.container}>
       <h2>課程表</h2>
       <div className={styles.header}>
-        <button onClick={handlePrevWeek} className={styles.nextWeek}>
+        <button onClick={handlePrevWeek} className={styles.nextWeek}
+          disabled={isPastWeek(selectedDate)}>
           ＜
         </button>
         <div className={styles.dateInfo}>

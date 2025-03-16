@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import styles from './_styles/coaches-card.module.css';
 import { AVATAR_PATH } from '../../../config/api-path';
+
 
 const CoachesCard = ({
     id = "1",
@@ -20,6 +21,9 @@ const CoachesCard = ({
         if (text.length <= limit) return text;
         return text.slice(0, limit) + '...';
       };
+
+      
+      
 
   
     return (
