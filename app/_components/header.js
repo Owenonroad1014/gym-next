@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
+
 // 再header 判斷 return null
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
@@ -68,7 +69,7 @@ export default function Header() {
               <Link href="/member" className={headerstyles.navLink}>
                 {auth.nickname}
               </Link>
-              <Link
+              <a
                 href="/qs"
                 onClick={(e) => {
                   e.preventDefault()
@@ -77,7 +78,7 @@ export default function Header() {
                 className={headerstyles.navLink}
               >
                 登出
-              </Link>
+              </a>
             </>
           ) : (
             <>
