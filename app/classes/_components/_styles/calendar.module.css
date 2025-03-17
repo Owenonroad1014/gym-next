@@ -47,6 +47,14 @@
     color: white;
 
   }
+
+  .nextWeek[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+    color: #999;
+  }
+  
   
   .calendar {
     background: white;

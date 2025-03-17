@@ -9,11 +9,7 @@ import articleCss from './article.module.css'
 import ShareSidebar from './_components/share-sidebar'
 import Recommend from './_components/recommend'
 export default function ArticlesPage() {
-  const breadcrumb = [
-    '首頁',
-    'GYM享知識',
-    '揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！',
-  ]
+  const breadcrumb = ['首頁', 'GYM享知識', '如何開始健身：初學者指南']
   return (
     <>
       <ArticlesBanner />

@@ -3,6 +3,7 @@ import styles from './_styles/calendar.module.css'
 import { useState } from 'react'
 import moment from 'moment-timezone'
 import ReservationModal from './reservation-modal'
+import moment from 'moment-timezone'
 
 export default function CourseCalendar({
   currentDate = new Date(),
@@ -48,54 +49,44 @@ export default function CourseCalendar({
 
   // 根據日期過濾課程
   const getCoursesByDay = (day) => {
-    return classes.filter((course) => {
-      const courseDate = new Date(course.date || course.class_date)
-      return (
-        courseDate.getDate() === day.getDate() &&
-        courseDate.getMonth() === day.getMonth() &&
-        courseDate.getFullYear() === day.getFullYear()
-      )
-    })
+    return courses.filter(
+      (course) =>
+        course.date.getDate() === day.getDate() &&
+        course.date.getMonth()  === day.getMonth() &&
+        course.date.getFullYear() === day.getFullYear()
+    )
   }
 
   const isPastWeek = () => {
-    const today = moment().tz('Asia/Taipei').endOf('day')
-
+    const today = moment().tz('Asia/Taipei').endOf('day');
+    
     const selectedWeekStart = moment(selectedDate)
       .tz('Asia/Taipei')
       .startOf('week')
-      .endOf('day')
-
-    return selectedWeekStart.isSameOrBefore(today)
+      .endOf('day');
+      
+    
+    return selectedWeekStart.isSameOrBefore(today);
   }
-
-  // 處理卡片點擊
-  const handleCardClick = (classData) => {
-    console.log('Clicked classData:', classData)
-
-    if (!classData || !classData.date) {
-      console.error('Error: classData or date is undefined')
-      return
-    }
-
-    console.log('Formatted date:', new Date(classData.date).toISOString())
-    const formattedDate = new Date(classData.date) // 確保 date 是 Date 物件
-    setSelectedClass({
-      ...classData,
-      date: formattedDate.toISOString(),
-    })
-    setIsModalOpen(true)
+  
+  
+  
+  
+  
+const handlePrevWeek = () => {
+  const prev = new Date(selectedDate);
+  prev.setDate(selectedDate.getDate() - 7);
+ 
+  if (!isPastWeek()) {
+    setSelectedDate(prev);
   }
-  // 處理預約提交
-  const handleReservationSubmit = async () => {
-    try {
-      // TODO: 實作預約 API 呼叫
-      console.log('Submitting reservation for:', selectedClass)
-      setIsModalOpen(false)
-    } catch (error) {
-      console.error('Reservation failed:', error)
-    }
-  }
+}
+
+  
+  
+  
+  
+  
 
   return (
     <>
@@ -106,7 +97,8 @@ export default function CourseCalendar({
             onClick={handlePrevWeek}
             className={styles.nextWeek}
             disabled={isPastWeek(selectedDate)}
-          >
+          
+          disabled={isPastWeek(selectedDate)}>
             ＜
           </button>
           <div className={styles.dateInfo}>
