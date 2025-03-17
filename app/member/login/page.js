@@ -8,6 +8,7 @@ import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+ 
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
@@ -32,7 +33,7 @@ export default function LoginPage() {
     const success = await login(loginForm.account, loginForm.password)
     if (success) {
       console.log('登入成功')
-      router.push('/') // qs
+      router.back() // qs
     } else {
       alert('登入失敗')
     }
@@ -89,7 +90,7 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
-      <pre>{JSON.stringify(auth, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
     </div>
   )
 }
