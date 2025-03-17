@@ -1,31 +1,55 @@
 'use client'
-import styles from './_styles/breadcrumb.module.css'
-import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import styles from './_styles/breadcrumb.module.css';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from "next/navigation";
 
-export default function Breadcrumb({ breadcrumb = ["首頁","商品列表","熱門商品"] }) {
-  const pathname = usePathname()
-  const [activeIndex, setActiveIndex] = useState(null)
-  const breadcrumbLinks = ['/', '/products', '/products/hot']
+const Breadcrumb = () => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const [activeIndex, setActiveIndex] = useState(null);
 
+  // 從 URL 取得 `category_name`
+  const categoryName = searchParams.get("category_name");
+
+  // 定義麵包屑結構
+  const breadcrumbItems = [
+    { name: "首頁", path: "/" },
+    { name: "全部商品", path: "/products" },
+  ];
+
+  // 如果 `category_name` 存在且不為空，則加到麵包屑
+  if (categoryName) {
+    breadcrumbItems.push({ name: categoryName, path: `?category_name=${categoryName}` }),{scroll:false};
+  }
+
+  // 設定目前 active 的索引
   useEffect(() => {
-    const index = breadcrumbLinks.findIndex(link => pathname.startsWith(link))
-    setActiveIndex(index !== -1 ? index : null)
-  }, [pathname])
+    const index = breadcrumbItems.findIndex(item => {
+      if (item.path.includes("?")) {
+        // 如果是查詢參數，檢查 pathname 是否包含對應的參數
+        return pathname.includes(item.path);
+      }
+      // 如果是路徑比較，直接檢查 pathname 和 item.path 是否匹配
+      return pathname === item.path;
+    });
+    setActiveIndex(index !== -1 ? index : null);
+  }, [pathname, searchParams]);
 
   return (
     <div className={styles.breadcrumbContainer}>
       <nav className={styles.breadcrumb}>
-        {breadcrumb.map((v, index) => (
+        {breadcrumbItems.map((item, index) => (
           <div
             key={index}
-            className={`${styles.breadcrumbItem} ${index === activeIndex ? styles.active : ''}`}
+            className={`${styles.breadcrumbItem}`}
           >
-            <Link href={breadcrumbLinks[index]}>{v}</Link>
+            <Link href={item.path} className={index === activeIndex ? styles.active : ''}>{item.name}</Link>
           </div>
         ))}
       </nav>
     </div>
-  )
+  );
 }
+
+export default Breadcrumb;
