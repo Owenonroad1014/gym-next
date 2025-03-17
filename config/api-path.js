@@ -1,16 +1,16 @@
 
-export const API_SERVER = `http://localhost:3001`;
+export const API_SERVER = `http://localhost:3005`;
 
 
-// 頭貼的路
+// 頭貼的路由
 export const AVATAR_PATH = `${API_SERVER}/imgs`;
 
 // 取得教練的資料 GET
 export const COACHES_LIST = `${API_SERVER}/coaches/api`;
+// 取得單筆教練資料 GET
+export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
 
-// 通訊錄: 取得單一項目資料
-// `${API_SERVER}/address-book/api/${ab_id}`
-export const AB_ITEM_GET = `${API_SERVER}/address-book/api`;
+
 
 
 // 通訊錄: 新增資料 POST

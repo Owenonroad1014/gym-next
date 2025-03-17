@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./_styles/CartHeader.module.css";
+import styles from "./_styles/cart-header.module.css";
 
 function CartHeader() {
   return (
