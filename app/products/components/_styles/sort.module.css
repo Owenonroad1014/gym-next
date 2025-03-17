@@ -8,7 +8,6 @@
   /* border-bottom: 1px solid #eee; */
   margin-bottom: 10px;
   align-items: center;
-  
 }
 
 .sortTitle{
@@ -36,7 +35,7 @@
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease;
-  margin: auto;
+
 }
 
 .btnHome:hover {
@@ -61,37 +60,15 @@
   
 }
 
-.selectBtn {
-  cursor: pointer;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  color: white;
-  background-color: #f87808;
-  border: none;
-  border-radius: 3px;
-  display: none;
-  z-index: 20;
-}
-
-@media (width <= 1200px) {
+@media (width <= 991px) {
   .container {
     /* width: 30%; */
     margin-bottom: 10px;
+
+    
   }
   .btnHome{
     width: 70%;
-    font-size: 16px;
-  }
-
-}
-
-@media (width <= 960px) {
-  .selectBtn {
-    display: block;
-
-  }
-  .container{
-    width: 100%;
+    font-size: 12px;
   }
 }

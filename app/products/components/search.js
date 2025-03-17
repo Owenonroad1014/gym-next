@@ -1,16 +1,17 @@
 // SearchForm.jsx
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './_styles/search.module.css';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-const SearchForm = ({searchParams}) => {
+const SearchForm = () => {
+
   const router = useRouter();
   const searchRef = useRef();
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const usp = new URLSearchParams(searchParams.toString());
-    usp.set("keyword", searchRef.current.value);
-    router.push(`/products?${usp.toString()}`,{ shallow: true, scroll: false }); 
+    router.push(`?keyword=${searchRef.current.value}`);
   };
 
   return (
