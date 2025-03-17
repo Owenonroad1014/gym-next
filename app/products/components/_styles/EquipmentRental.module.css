@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 
 .equipmentRental {
     font-family:
@@ -19,22 +21,60 @@
     position: relative;
     overflow: hidden;
     margin: auto;
-    /* background-image: url(/img/contentBackground3.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;  */
   }
 
   .contentTitle{
     display: flex;
     justify-content: space-between;
   }
+
+  .selectBtn {
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    color: white;
+    background-color: #f87808;
+    margin: auto;
+    border: none;
+    border-radius: 3px;
+    display: none;
+    position: absolute;
+    left: 5%;
+    /* top: -65px; */
+    z-index: 20;
+  }
+
   
-  @media (width <= 991px) {
+  @media (width <= 1440px) {
     .contentSection {
       width: 100%;
       padding-left: 20px;
       padding-right: 20px;
     }
+
+    /* .contentTitle{
+      flex-direction: column;
+
+    } */
   }
+  
+  @media (width <= 960px) {
+    .contentSection {
+      width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .contentTitle{
+      flex-direction: column;
+      justify-content: center;
+      /* align-items: center; */
+    }
+
+    .selectBtn {
+      display: block;
+  }
+  }
+
   
