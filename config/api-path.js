@@ -6,6 +6,10 @@ export const AVATAR_PATH = `${API_SERVER}/imgs`
 // 取得教練的資料 GET
 export const COACHES_LIST = `${API_SERVER}/coaches/api`
 
+
+// 取得課程的資料 GET
+export const CLASSES_LIST = `${API_SERVER}/classes/api`;
+
 // 通訊錄: 取得單一項目資料
 // `${API_SERVER}/address-book/api/${ab_id}`
 export const AB_ITEM_GET = `${API_SERVER}/address-book/api`
