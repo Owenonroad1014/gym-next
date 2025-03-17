@@ -4,36 +4,32 @@ import headerstyles from './_styles/header.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
-import { useAuth } from '@/context/auth-context'
 
-// 再header 判斷 return null
 export default function Header() {
-  const [isScrolling, setIsScrolling] = useState(false)
-  const { auth, logout } = useAuth()
+  const  [isScrolling, setIsScrolling] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 36) {
-        setIsScrolling(true)
+        setIsScrolling(true);
       } else {
-        setIsScrolling(false)
+        setIsScrolling(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-
+    window.addEventListener('scroll', handleScroll);
+    
     // 清理事件監聽器
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   return (
     <>
-      <div
-        className={`${headerstyles.header} ${
-          isScrolling ? headerstyles.hscrolling : ''
-        }`}
-      >
+      <div className={`${headerstyles.header} ${isScrolling ? headerstyles.hscrolling : ''}`}>
+
         {/* LOGO */}
         <div>
           <Link href="/" className={headerstyles.logo}>
@@ -64,38 +60,20 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
-          {auth.id ? (
-            <>
-              <Link href="/member" className={headerstyles.navLink}>
-                {auth.nickname}
-              </Link>
-              <a
-                href="/qs"
-                onClick={(e) => {
-                  e.preventDefault()
-                  logout()
-                }}
-                className={headerstyles.navLink}
-              >
-                登出
-              </a>
-            </>
-          ) : (
-            <>
-              {/* 登入按鈕 */}
-              <Link href="/member/login" className={headerstyles.navLink}>
-                登入
-              </Link>
 
-              {/* 註冊按鈕 */}
-              <Link href="member/register" className={headerstyles.navLink}>
-                註冊
-              </Link>
-              <Link href="/cart" className={headerstyles.navLink}>
-                <FaCartPlus />
-              </Link>
-            </>
-          )}
+          {/* 登入按鈕 */}
+          <Link href="/login" className={headerstyles.navLink}>
+
+            登入
+          </Link>
+
+          {/* 註冊按鈕 */}
+          <Link href="member/register" className={headerstyles.navLink}>
+            註冊
+          </Link>
+          <Link href="/cart" className={headerstyles.navLink}>
+            <FaCartPlus />
+          </Link>
         </div>
       </div>
     </>

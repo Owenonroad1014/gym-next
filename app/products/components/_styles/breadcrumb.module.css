@@ -44,18 +44,3 @@
     line-height: 60px;
     display: block;
   }
-
-  .active{
-    color: #db6318;
-  }
-
-  /* .breadcrumbItem .activeLink {
-    color: #db6318; 
-  } */
-
-  @media (max-width: 960px) {
-    .breadcrumbContainer {
-      /* flex-direction: column; */
-      width: 100%;
-    }
-  }

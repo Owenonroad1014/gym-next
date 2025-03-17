@@ -8,11 +8,8 @@ const HeroSection = () => {
         src="/img/banner.jpg"
         className={styles.heroBackground}
       />
-      <div className={styles.headerContain}>
-      <div className={styles.heroTitle}>器材租借
-      </div>
-      <p className={styles.heroContent}>工欲善其事，必先利其器，你想要的器材GYM在這裡，快來挑選你要的器材吧!</p>
-
+      <div className="headerContain">
+      <h1 className={styles.heroTitle}>器材租借</h1>
       </div>
     </header>
   );

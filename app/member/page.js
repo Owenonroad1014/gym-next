@@ -1,7 +1,13 @@
 'use client'
 
-import React from 'react'
+import Link from 'next/link'
+// import { useNavigate } from "react-router-dom";
 
 export default function MemberPage() {
-  return <>member page</>
+  return (
+    <>
+      {/* <Link to="/login" /> */}
+      <div>member page</div>
+    </>
+  )
 }

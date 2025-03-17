@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './_styles/search.module.css';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-function Search() {
+function Search({ onSearch}) {
   const router = useRouter();
   const searchParams = useSearchParams()
   const [showLocation, setShowLocation] = useState(false);

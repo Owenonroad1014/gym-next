@@ -9,7 +9,7 @@
   
   .select {
     /* padding: 3px; */
-    width: 80%;
+    width: 250px;
     border-radius: 3px;
     font-family: "Noto Serif TC", serif;
     font-size: 18px;
@@ -31,17 +31,4 @@
   /* 可以添加懸停效果 */
   .button:hover {
     background-color: #e56c00;
-  }
-
-  @media (width <= 960px) {
-    .searchContainer {
-      width: 80%;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    .contentTitle{
-      flex-direction: column;
-
-    }
   }

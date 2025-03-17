@@ -12,36 +12,19 @@ import SearchForm from '../_components/search-form'
 import { COACHES_LIST } from '../../../config/api-path'
 
 
-
 export default function CoachesListPage(props) {
   const [coaches, setCoaches] = useState([])
   const [loading, setLoading] = useState(true)
   const searchParams = useSearchParams()
-  const breadcrumb = ['home', '教練列表']
-  const [currentPage, setCurrentPage] = useState(1)
-  const perPage = 1
-  const totalPages = Math.ceil(coaches.length / perPage)
-  const currentCoaches = coaches.slice(
-    (currentPage - 1) * perPage,
-    currentPage * perPage
-  );
-
+   const breadcrumb = ['home', '教練列表']
 
   useEffect(() => {
     const fetchCoaches = async () => {
       try {
         const location = searchParams.get('location')
         const branch = searchParams.get('branch')
-        const keyword = searchParams.get('keyword')
-        
         const response = await fetch(
-          `${COACHES_LIST}?${
-            location ? `location=${location}&` : ''
-          }${
-            branch ? `branch=${branch}&` : ''
-          }${
-            keyword ? `keyword=${keyword}` : ''
-          }`
+          `${COACHES_LIST}?location=${location || ''}&branch=${branch || ''}`
         )
         const data = await response.json()
         if(data.success) {
@@ -53,10 +36,10 @@ export default function CoachesListPage(props) {
         setLoading(false)
       }
     }
-    fetchCoaches()
-  }, [searchParams])
-  
 
+    fetchCoaches()
+  }, [searchParams]) // 當 URL 參數改變時重新獲取資料
+  
  
 
 
@@ -86,17 +69,13 @@ export default function CoachesListPage(props) {
         
       </div>
       <div className={styles.coachesContainer}>
-      {currentCoaches.map(coach => (
-        <CoachesCard key={coach.id} id={coach.id} name={coach.name} email={coach.email} phone={coach.phone} skill={coach.skill} description={coach.description}
-        avatar={coach.avatar}/>
+      {coaches.map(coach => (
+        <CoachesCard key={coach.id}  name={coach.name} email={coach.email} phone={coach.phone} skill={coach.skill} description={coach.description}
+         />
       ))}
       </div>
       </div>
-      <Pagination 
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
+      <Pagination currentPage="1" totalPages="5"/>
       </div> 
 
     </>
