@@ -35,7 +35,27 @@ export const IMG_PATH = `${API_SERVER}/img`
 // 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`
 
+
+
+
+//**************** ARTICLE *****************
 // 獲取文章列表的資料
-export const ARTICLES_LIST = `${API_SERVER}/api/articles`
+export const ARTICLES_LIST = `${API_SERVER}/articles/api`
 // 獲取單一文章列表的資料 `${API_SERVER}/api/articles/:articleid`
-export const ARTICLE_ITEM = `${API_SERVER}/api/articles`
+export const ARTICLE_ITEM = `${API_SERVER}/articles/api`
+// 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
+export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+
+// TOP5
+export const ARTICLE_TOP5 = `${API_SERVER}/articles/api/top-five`
+// Reccomand /articles/api/recommand/1
+export const ARTICLE_RECOMMAND = `${API_SERVER}/articles/api/recommand`
+
+//**************** CHAT  *****************
+// 獲取好友列表
+export const FRIEND_LIST = `${API_SERVER}/friends/api`
+// 獲取好友邀請列表
+export const FRIEND_REQ_LIST = `${API_SERVER}/friends/api/invite`
+
+// 好友請求api/request
+export const FRIEND_REQUEST = `${API_SERVER}/friends/api/request`
