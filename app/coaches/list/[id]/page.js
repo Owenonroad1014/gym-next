@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import CoachDetail from '../../_components/coaches-detail';
-import { COACHES_ITEM_GET } from '@/config/api-path';
 
 function CoachDetailPage() {
   const { id } = useParams();
@@ -14,29 +13,9 @@ function CoachDetailPage() {
     const fetchCoachData = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${COACHES_ITEM_GET}/${id}`);
-        const { data } = await response.json();
-
-        const formattedData = {
-          avatar: data.avatar,
-          name: data.name,
-          title: data.title,
-          email: data.email,
-          phone: data.phone,
-          skill: data.skill,
-          socialMedia: {
-            facebook: data.socialMedia?.find(sm => sm.platform === 'facebook')?.url || '',
-            instagram: data.socialMedia?.find(sm => sm.platform === 'instagram')?.url || '',
-            twitter: data.socialMedia?.find(sm => sm.platform === 'twitter')?.url || '',
-            linkedin: data.socialMedia?.find(sm => sm.platform === 'linkedin')?.url || ''
-          },
-          description: data.description,
-          certifications: data.certifications?.map(cert => cert.certification)
-        };
-        console.log('Formatted data:', formattedData);
-setCoachData(formattedData);
-        
-        setCoachData(formattedData);
+        const response = await fetch(`/coaches/api/${id}`);
+        const data = await response.json();
+        setCoachData(data);
         setLoading(false);
       } catch (err) {
         setError('無法載入教練資料');
@@ -52,11 +31,9 @@ setCoachData(formattedData);
   if (error) return <div>{error}</div>;
   if (!coachData) return <div>找不到教練資料</div>;
 
-
-
   return (
     <>
-      <CoachDetail {...coachData}/>
+      <CoachDetail {...coachData} />
     </>
   );
 }

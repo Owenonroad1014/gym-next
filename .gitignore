@@ -6,9 +6,6 @@
 .pnp.js
 .yarn/install-state.gz
 
-
-
-
 # testing
 /coverage
 
@@ -18,7 +15,6 @@
 
 # production
 /build
-
 
 # debug
 npm-debug.log*
@@ -59,6 +55,3 @@ yarn.lock
 /.temp
 /.html
 .vercel
-.vscode
-
-note-pao
