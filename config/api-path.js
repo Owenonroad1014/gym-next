@@ -11,10 +11,14 @@ export const COACHES_LIST = `${API_SERVER}/coaches/api`;
 export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
 
 
-
-
 // 取得課程的資料 GET
 export const CLASSES_LIST = `${API_SERVER}/classes/api`;
+
+// 取得課程人數限制 GET 
+export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`;
+
+// 送出課程預約 POST 
+export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`;
 
 // 通訊錄: 取得單一項目資料
 // `${API_SERVER}/address-book/api/${ab_id}`
