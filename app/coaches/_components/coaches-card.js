@@ -1,16 +1,18 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import styles from './_styles/coaches-card.module.css';
+import { AVATAR_PATH } from '../../../config/api-path';
+
 
 const CoachesCard = ({
-    // avatarUrl,
+    id = "1",
+    avatar,
     name,
     email,
     phone,
     skill,
     description,
-    // detailsUrl
   }) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -19,6 +21,9 @@ const CoachesCard = ({
         if (text.length <= limit) return text;
         return text.slice(0, limit) + '...';
       };
+
+      
+      
 
   
     return (
@@ -31,7 +36,7 @@ const CoachesCard = ({
           <div className={styles['card-left']}>
             <div className={styles['avatar-container']}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {/* <img src={avatarUrl} alt={name} className={styles.avatar} /> */}
+              <img src={`${AVATAR_PATH}/${avatar}`} alt={name} className={styles.avatar} />
             </div>
           </div>
           <div className={styles['card-right']}>
@@ -41,9 +46,9 @@ const CoachesCard = ({
             <p className={styles.contact}>電話:{phone}</p>
             <p className={styles.skill}>專長:{skill}</p>
             <p className={styles.description}>資訊:{truncateDescription(description)}</p>
-            {/* <a href={detailsUrl} className={styles['arrow-circle']}>
+            <a href={`/coaches/list/${id}`} className={styles['arrow-circle']}>
               <span className={styles.arrow}>→</span>
-            </a> */}
+            </a>
           </div>
         </div>
       </>

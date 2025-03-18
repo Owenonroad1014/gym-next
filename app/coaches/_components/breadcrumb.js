@@ -2,13 +2,14 @@
 
 import sytles from './_styles/breadcrumb.module.css'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useParams } from 'next/navigation'
 
 export default function Breadcrumb({ breadcrumb = [] }) {
+  const { id } = useParams();
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(null)
   useEffect(() => {
-    if (pathname.includes('/coaches/list/detail')) {
+    if (pathname.includes(`/coaches/list/${id}`)) {
       setActiveIndex(2)
     } else {
       if (pathname.includes('/coaches/list')) {
@@ -18,7 +19,7 @@ export default function Breadcrumb({ breadcrumb = [] }) {
       }
     }
   }, [pathname])
-  const breadcrumbLinks = ['/', '/coaches/list', '/coaches/list/detail']
+  const breadcrumbLinks = ['/', '/coaches/list', `/coaches/list/${id}`]
 
   return (
     <>

@@ -3,14 +3,15 @@ import React from 'react';
 import styles from './_styles/coach-detail.module.css';
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import Breadcrumb from './breadcrumb';
+import { AVATAR_PATH } from '../../../config/api-path';
 
 const CoachDetail = ({
-  // avatarUrl = '',
+  avatar = '',
   name = "",
   title = "",
   email = "",
   phone = "",
-  skills = [],
+  skill = "",
   socialMedia = {
     facebook: "",
     instagram: "",
@@ -20,6 +21,10 @@ const CoachDetail = ({
   description = "",
   certifications = []
 }) => {
+  console.log('Received props:', {
+    avatar, name, title, email, phone, skill,
+    socialMedia, description, certifications
+  });
 
     const breadcrumb = ['home', '教練列表', '教練資訊']
 
@@ -31,8 +36,9 @@ const CoachDetail = ({
        
       <div className={styles['coach-content']}>
         <div className={styles['coach-image-container']}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
-            src={avatarUrl} 
+            src={`${AVATAR_PATH}/${avatar}`} 
             alt={`${name} 教練照片`} 
             className={styles['coach-image']} 
           />
@@ -75,12 +81,10 @@ const CoachDetail = ({
             </div>
           </div>
           
-          <div className={styles['skills-section']}>
+          <div className={styles['skill-section']}>
             <h4 className={styles['section-title']}>專長領域</h4>
-            <div className={styles['skills-list']}>
-              {skills.map((skill, index) => (
-                <span key={index} className={styles['skill-tag']}>{skill}</span>
-              ))}
+            <div className={styles['skill-list']}>
+                <span className={styles['skill-tag']}>{skill}</span>
             </div>
           </div>
           
