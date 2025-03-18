@@ -8,43 +8,43 @@ import TabButton from '../_components/tabButton'
 import Filter from '../_components/filter'
 import Sort from '../_components/sort'
 import ClassesIntro from '../../_components/classes-intro'
-
+import { CLASSES_LIST } from '../../../config/api-path'
+import { useSearchParams } from 'next/navigation'
 import Calendar from '../_components/calendar'
 
 export default function ClassCalenderPage(props) {
   const [activeTab, setActiveTab] = useState('search')
-  const courses = [
-    {
-      id: '1',
-      date: new Date(2025, 3, 11),
-      title: '瑜珈初級班',
-      time: '19:00 - 20:00',
-    },
-    {
-      id: '2',
-      date: new Date(2025, 3, 11),
-      title: '重訓班',
-      time: '19:00 - 20:00',
-    },
-    {
-      id: '3',
-      date: new Date(2025, 3, 15),
-      title: '重訓班',
-      time: '19:00 - 20:00',
-    },
-    {
-      id: '4',
-      date: new Date(2025, 3, 5),
-      title: '重訓班',
-      time: '19:00 - 20:00',
-    },
-    {
-      id: '5',
-      date: new Date(2025, 3, 5),
-      title: '重訓班',
-      time: '19:00 - 20:00',
-    },
-  ]
+  const searchParams = useSearchParams()
+  const [classes, setClasses] = useState([])
+  const [loading, setLoading] = useState(true)
+  const location = searchParams.get('location')
+  const branch = searchParams.get('branch')
+          
+
+  useEffect(() => {
+      const fetchClasses = async () => {
+        try {
+          
+          
+          const response = await fetch(
+            `${CLASSES_LIST}?${
+              location ? `location=${location}&` : ''
+            }${
+              branch ? `branch=${branch}&` : ''
+            }`
+          )
+          const data = await response.json()
+          if(data.success) {
+            setClasses(data.rows)
+          }
+          setLoading(false)
+        } catch (error) {
+          console.error('Error:', error)
+          setLoading(false)
+        }
+      }
+      fetchClasses()
+    }, [searchParams, location, branch])
 
   return (
     <>
@@ -91,7 +91,19 @@ export default function ClassCalenderPage(props) {
             </div>
 
             <div>{/* filter */}</div>
-            <Calendar courses={courses} />
+            <Calendar 
+      classes={classes.map(classes => ({
+        id: classes.id,
+        date: classes.class_date ? new Date(classes.class_date) : "No Date",
+        title: classes.title,
+        time: `${classes.start_time.slice(0, 5)} - ${classes.end_time.slice(0, 5)}`,
+        coach_name: classes.coach_name,
+        max_capacity: classes.max_capacity,
+        current_capacity: classes.current_capacity,
+        
+      }))} 
+      location={location}
+      branch={branch} />
           </div>
         ) : (
           <>

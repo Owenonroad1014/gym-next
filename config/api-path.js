@@ -13,6 +13,13 @@ export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
 
 
 
+// 取得課程的資料 GET
+export const CLASSES_LIST = `${API_SERVER}/classes/api`;
+
+// 通訊錄: 取得單一項目資料
+// `${API_SERVER}/address-book/api/${ab_id}`
+export const AB_ITEM_GET = `${API_SERVER}/address-book/api`
+
 // 通訊錄: 新增資料 POST
 export const AB_ADD_POST = `${API_SERVER}/address-book/api`;
 
