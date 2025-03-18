@@ -45,7 +45,7 @@
   line-height: 2rem;
   padding: 5px;
 }
-.user_info .user_detail li span{
+.user_info .user_detail li span {
   margin-right: 5px;
   text-decoration: underline;
   text-underline-offset: 5px;
@@ -66,8 +66,8 @@
 .sendBtn {
   max-width: 1100px;
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 60px;
+  bottom: 20px;
 }
 .btn {
   font-family: inherit;
@@ -123,6 +123,75 @@
     transform: translateY(-0.1em);
   }
 }
+
+/* 成功 */
+.success {
+  margin: 20px 10px;
+  position: absolute;
+  right: 5px;
+  bottom: 20px;
+}
+
+.checkmark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #4bb71b;
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #4bb71b;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+  position: relative;
+  top: 5px;
+  right: 5px;
+  margin: 0 auto;
+}
+.checkmarkCircle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #4bb71b;
+  fill: #f2f3f3;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmarkCheck {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+.msg {
+  margin: 10px 10px;
+  position: absolute;
+  right: 60px;
+  bottom: 0px;
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4bb71b;
+  }
+}
 @media (max-width: 768px) {
   .user_info {
     padding: 10px;
@@ -130,7 +199,7 @@
     flex-direction: column;
     gap: 0px;
   }
-  .user_info .user_avatar{
+  .user_info .user_avatar {
     width: 180px;
     height: 180px;
   }
@@ -153,22 +222,20 @@
     padding: 3px 8px;
   }
   .sendBtn {
-    position: static; 
-    margin-right: auto; 
+    position: static;
+    margin-right: auto;
   }
-  .breadcrumbItem a{
+  .breadcrumbItem a {
     font-size: 14px;
   }
-  
 }
 
 @media (max-width: 440px) {
-  .user_info .user_avatar 
-  {
+  .user_info .user_avatar {
     width: 150px;
     height: 150px;
   }
-  .user_info .user_avatar img{
+  .user_info .user_avatar img {
     width: 150px;
     height: 150px;
   }
@@ -180,6 +247,4 @@
   .user_info .user_detail ul li {
     font-size: 12px;
   }
-
-
 }
