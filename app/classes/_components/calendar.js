@@ -1,6 +1,6 @@
 // CourseCalendar.js
 import styles from './_styles/calendar.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import moment from 'moment-timezone'
 import ReservationModal from './reservation-modal'
 import { CLASSES_CAPACITY_GET } from '../../../config/api-path'
@@ -28,10 +28,8 @@ export default function CourseCalendar({
 
   // 生成週曆天數陣列
   const weekDays = Array.from({ length: 7 }, (_, i) => {
-    const day = new Date(selectedDate)
-    day.setDate(selectedDate.getDate() - selectedDate.getDay() + i)
-    return day
-  })
+    return moment(selectedDate).tz('Asia/Taipei').startOf('week').add(i, 'days').toDate();
+  });
 
   // 處理週期切換
   const handleNextWeek = () => {
@@ -50,15 +48,12 @@ export default function CourseCalendar({
 
   // 根據日期過濾課程
   const getCoursesByDay = (day) => {
+    const dayMoment = moment(day).tz('Asia/Taipei').startOf('day');
     return classes.filter((course) => {
-      const courseDate = new Date(course.date || course.class_date)
-      return (
-        courseDate.getDate() === day.getDate() &&
-        courseDate.getMonth() === day.getMonth() &&
-        courseDate.getFullYear() === day.getFullYear()
-      )
-    })
-  }
+      const courseMoment = moment(course.date || course.class_date).tz('Asia/Taipei').startOf('day');
+      return dayMoment.isSame(courseMoment, 'day');
+    });
+  };
 
   const isPastWeek = () => {
     const today = moment().tz('Asia/Taipei').endOf('day')
@@ -87,40 +82,50 @@ export default function CourseCalendar({
       date: formattedDate.toISOString(),
     })
     setIsModalOpen(true)
-  }
-
-  // 獲取課程預約人數
-  const fetchClassCapacity = async (classId) => {
-    try {
-      const res = await fetch(`${CLASSES_CAPACITY_GET}/${classId}`)
-      const data = await res.json()
-      return data
-    } catch (error) {
-      console.error('Error:', error);
-      throw error;
-    }
-  }
-
+  }  
 
   // 處理預約提交
   const handleReservationSubmit = async () => {
     try {
-      // 檢查課程是否已滿
-      const capacity = await fetchClassCapacity(selectedClass.id)
       
-      if(capacity.current_capacity >= capacity.max_capacity) {
-        throw new Error('課程已額滿');
-    
+      const capacityRes = await fetch(`${CLASSES_CAPACITY_GET}/${selectedClass.id}`);
+      const capacity = await capacityRes.json()
+      if (capacity.current_capacity >= capacity.max_capacity) {
+        throw new Error('課程已額滿')
+      }
+      
+      // 提交預約
+      const res = await fetch(`${CLASSES_RESERVATION_POST}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          member_id: 1,
+          class_id: selectedClass.id,
+          coach_id: selectedClass.coach_id,
+          reservation_date: moment(selectedClass.date).format('YYYY-MM-DD'),
+          reservation_time: selectedClass.start_time,
+        }),
+      })
+      console.log('Submitting reservation for:', selectedClass)
+
+      // 重複預約
+      if(res.status === 400) {
+        throw new Error('您已預約過此課程') 
       }
 
-      // 提交預約
-      const res = await fetch(`${CLASSES_RESERVATION_POST}`)
-      console.log('Submitting reservation for:', selectedClass)
+      if (!res.ok) {
+        throw new Error('預約失敗')
+      }
+      
       setIsModalOpen(false)
+      alert('預約成功')
     } catch (error) {
       console.error('Reservation failed:', error)
+      alert(error.message)
     }
-  };
+  }
 
   return (
     <>
@@ -224,7 +229,8 @@ export default function CourseCalendar({
                           ) : (
                             <span className={styles.available}>
                               人數 :
-                              {course.max_capacity - course.current_capacity} / {course.max_capacity}
+                              {course.max_capacity - course.current_capacity} /{' '}
+                              {course.max_capacity}
                             </span>
                           )}
                         </div>
