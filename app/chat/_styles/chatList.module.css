@@ -1,0 +1,81 @@
+.chatsPage {
+  /* height: 50vh; */
+  width: 80%;
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #e5effa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chatsPage h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search input {
+  padding: 8px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.search button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.search button:hover {
+  background-color: #45a049;
+}
+
+.chatsPage h2 {
+  margin-top: 30px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.chatsPage ul {
+  list-style: none;
+  padding: 0;
+}
+
+.chatsPage ul li {
+  background-color: #fff;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.chatsPage ul li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatsPage button {
+  margin: 5px;
+  padding: 6px 10px;
+  border: none;
+  background-color: #ecb246;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.chatsPage button:hover {
+  background-color: #ecb246;
+}
+
+.chatsPage button:active {
+  background-color: #ecb246;
+}

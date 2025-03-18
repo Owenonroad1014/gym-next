@@ -1,11 +1,40 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import friendStyle from './_styles/friend.module.css'
 import FriendBanner from '../_components/friend-banner'
 import Breadcrumb from '../_components/breadcrumb'
-// import FloatingBar from '@/app/_components/float-bar'
+import { useAuth } from '@/contexts/auth-context'
+import { FRIEND_REQUEST } from '@/config/api-path'
+
 export default function PersonPage() {
+  // **************** TODO 處理發送邀請後刷新步要改變狀態
   const breadcrumb = ['首頁', '找GYM友', '王小明']
+  const { auth, getAuthHeader } = useAuth()
+  const [isSend, setIsSend] = useState(false)
+  const sendFriendRequest = async (receiverId) => {
+    try {
+      const response = await fetch(FRIEND_REQUEST, {
+        method: 'POST',
+        headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ receiver_id: receiverId }),
+      })
+      if (!response.ok) {
+        throw new Error('請求失敗')
+      }
+      const result = await response.json()
+      console.log(result)
+      if (result.success) {
+        console.log('好友請求已發送')
+        setIsSend(true)
+      } else {
+        console.log('發送失敗:', result.error)
+      }
+    } catch (error) {
+      console.error('發送請求時發生錯誤:', error)
+    }
+  }
+
   return (
     <>
       <FriendBanner />
@@ -43,29 +72,85 @@ export default function PersonPage() {
               </ul>
             </div>
           </div>
-          <div className={friendStyle.sendBtn}>
-            <button className={friendStyle.btn}>
-              <div class={friendStyle.svgWrapper - 1}>
-                <div class={friendStyle.svgWrapper}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                  >
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path
-                      fill="currentColor"
-                      d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                    ></path>
-                  </svg>
-                </div>
+          {isSend ? (
+            <>
+              <div className={friendStyle.sendBtn}>
+                <button className={friendStyle.btn} disabled>
+                  <div class={friendStyle.svgWrapper - 1}>
+                    <div class={friendStyle.svgWrapper}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                          fill="currentColor"
+                          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span>已發送邀請</span>
+                </button>
               </div>
-              <span>發送邀請</span>
-            </button>
-          </div>
+
+              <div className={friendStyle.success}>
+                <svg
+                  className={friendStyle.checkmark}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    className={friendStyle.checkmarkCircle}
+                    cx={26}
+                    cy={26}
+                    r={25}
+                    fill="none"
+                  />
+                  <path
+                    className={friendStyle.checkmarkCheck}
+                    fill="none"
+                    d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                  />
+                </svg>
+              </div>
+              <div className={friendStyle.msg}>
+                <pre>正在等待對方同意...</pre>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className={friendStyle.sendBtn}
+                onClick={() => {
+                  sendFriendRequest(2)
+                }}
+              >
+                <button className={friendStyle.btn}>
+                  <div class={friendStyle.svgWrapper - 1}>
+                    <div class={friendStyle.svgWrapper}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                          fill="currentColor"
+                          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span>發送邀請</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
-        {/* <FloatingBar /> */}
       </div>
     </>
   )
