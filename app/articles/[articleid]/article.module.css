@@ -89,6 +89,10 @@
   background: #f87808;
   color: #fff;
 }
+.wrapper .icon.heartActive {
+  background: #f87808;
+  color: #fff;
+}
 
 /* TOP5 */
 .hotRankingArea {
@@ -124,6 +128,10 @@
 .hotRankingArea ol li a {
   display: flex;
   padding: 10px;
+}
+.hotRankingArea a:hover {
+  text-decoration: none;
+  color: black;
 }
 .hotRankingArea ol li a span:first-child {
   color: #f87808;

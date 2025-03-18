@@ -84,6 +84,7 @@
 .articlesContainer {
   max-width: 1440px;
   margin: auto;
+  margin-bottom: 100px;
 }
 
 /* #region ================= Search Start ====================== */
@@ -92,7 +93,6 @@
   display: flex;
   justify-content: flex-end;
   margin-right: 10px;
-  margin-bottom: 10px;
 }
 
 .searchForm {
@@ -131,11 +131,22 @@
   display: flex;
   position: relative;
 }
-
+.clearSearch {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.clearSearch:hover {
+  color: #db6318;
+}
 /* #region ================= Select  Start ====================== */
 
 .selectArea {
-  width: 15%;
+  width: 20%;
   align-items: center;
   margin: 0 15px;
   display: block;
@@ -178,9 +189,9 @@
 
 .selectPart li {
   cursor: pointer;
-  width: 80%;
+  width: 85%;
   height: 60px;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   line-height: 60px;
   color: #666;
@@ -197,16 +208,17 @@
   transition: all 0.3s;
 }
 
-.active {
+.selectPart li.active {
   color: #f87808;
-  font-weight: 600;
+  font-weight: 400;
+  border-bottom: #f87808 1px solid;
 }
 /* #endregion ================= Select  End ====================== */
 
 /* #region ================= List  Start ====================== */
 
 .articleRight {
-  max-width: 85%;
+  max-width: 80%;
 }
 .articleList {
   padding: 10px;
@@ -214,7 +226,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 3vw;
+  gap: 1vw;
 }
 /* card */
 .card {
@@ -233,6 +245,10 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   transition: all 0.3s;
+}
+.card a:hover {
+  color: white;
+  text-decoration: none;
 }
 .images {
   position: relative;
@@ -333,15 +349,6 @@
 }
 /* #endregion ================= Pagination  End ====================== */
 
-.personList {
-  /* background-color: #fff6;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 10px;
-  justify-content: flex-start; */
-}
-
 /* #region ================= RWD ====================== */
 @media (max-width: 1440px) {
   .banner {
@@ -349,18 +356,12 @@
   }
 }
 @media (max-width: 1390px) {
-  .selectArea {
-    width: 20%;
-  }
-  .articleRight {
-    max-width: 80%;
-  }
   .articleList {
     gap: 4vw;
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1140px) {
   .selectBtn {
     display: block;
   }
@@ -377,6 +378,9 @@
   }
   .categoryTitle {
     background-color: #dee5e7;
+  }
+  .selectPart li {
+    font-size: 20px;
   }
 }
 @media (max-width: 768px) {
