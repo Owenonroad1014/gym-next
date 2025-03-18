@@ -71,7 +71,7 @@ export default function Header() {
           <Link href="member/register" className={headerstyles.navLink}>
             註冊
           </Link>
-          <Link href="/cart" className={headerstyles.navLink}>
+          <Link href="/carts" className={headerstyles.navLink}>
             <FaCartPlus />
           </Link>
         </div>

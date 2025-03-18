@@ -5,6 +5,7 @@ import CheckoutProgress from "./_components/checkout-progress";
 import CartHeader from "./_components/cart-header";
 import CartProductList from "./_components/cart-product-list";
 import OrderSummary from "./_components/order-summary";
+import { CartProvider } from "@/context/cart-context"; // 引入 CartProvider
 
 function ShoppingCart() {
   return (
@@ -13,14 +14,16 @@ function ShoppingCart() {
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500&family=Poppins:wght@400;500&display=swap"
         rel="stylesheet"
       />
-      
+
       <main className={styles.cartContainer}>
-      <CheckoutProgress />
+        <CheckoutProgress />
         <CartHeader />
-        <section className={styles.cartContent}>
-          <CartProductList />
-          <OrderSummary />
-        </section>
+        <CartProvider> {/* 這裡包住購物車相關組件 */}
+          <section className={styles.cartContent}>
+            <CartProductList />
+            <OrderSummary />
+          </section>
+        </CartProvider>
       </main>
     </>
   );

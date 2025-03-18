@@ -1,37 +1,61 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./_styles/cart-product-item.module.css";
+import { useCart } from "@/context/cart-context";
 
-function CartProductItem({ product }) {
+function CartProductItem({ product, onRemove }) {
+  const { updateCartItem } = useCart(); //取得購物車更新函式
   const [quantity, setQuantity] = useState(product.quantity);
-  const [rentalStartDate, setRentalStartDate] = useState("");
-  const [rentalEndDate, setRentalEndDate] = useState("");
+  const [rentalStartDate, setRentalStartDate] = useState(product.rentalStartDate || "");
+  const [rentalEndDate, setRentalEndDate] = useState(product.rentalEndDate || "");
 
+  // 遞增 遞減
   const handleIncrement = () => {
     setQuantity((prev) => prev + 1);
+    updateCartItem(product.id, { quantity: quantity + 1 });
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
+      updateCartItem(product.id, { quantity: quantity - 1 });
     }
   };
 
+  // 計算租借天數
+  const calculateRentalDays = (startDate, endDate) => {
+    if (!startDate || !endDate) return 1; // 若未選擇日期，天數為 1
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = end - start;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // 轉換成天數
+    return diffDays > 0 ? diffDays : 1; // 確保天數不為負數
+  };
+
+  const rentalDays = calculateRentalDays(rentalStartDate, rentalEndDate);
+
+  // 處理開始日期變更
   const handleStartDateChange = (event) => {
     const newStartDate = event.target.value;
     setRentalStartDate(newStartDate);
+    updateCartItem(product.id, { rentalStartDate: newStartDate });
 
     // 如果結束日期比開始日期早，重置結束日期
     if (rentalEndDate && rentalEndDate < newStartDate) {
       setRentalEndDate("");
+      updateCartItem(product.id, { rentalEndDate: "" });
     }
   };
 
+  // 處理結束日期變更
   const handleEndDateChange = (event) => {
-    setRentalEndDate(event.target.value);
+    const newEndDate = event.target.value;
+    setRentalEndDate(newEndDate);
+    updateCartItem(product.id, { rentalEndDate: newEndDate });
   };
 
-  const subtotal = product.price * quantity;
+
+  const subtotal = product.price * quantity * rentalDays; 
 
   return (
     <article className={styles.productItem}>
@@ -44,7 +68,8 @@ function CartProductItem({ product }) {
         <div className={styles.productDetails}>
           <h3 className={styles.productName}>{product.name}</h3>
           <p className={styles.productWeight}>{product.weight}</p>
-          <button className={styles.removeButton}>
+          {/*新增刪除按鈕 */}
+          <button className={styles.removeButton} onClick={() => onRemove(product.id)}>
             <div className={styles.removeButtonContent}>
               <i className={styles.removeIcon} />
               <span>移除</span>
@@ -72,8 +97,10 @@ function CartProductItem({ product }) {
           min={rentalStartDate} // 限制結束日期不能早於開始日期
           disabled={!rentalStartDate} // 未選擇開始日期時，禁用結束日期
         />
+        <p>租借天數：{rentalDays} 天</p>
       </div>
 
+        {/* 價格計算 */}
       <div className={styles.productPricing}>
         <div className={styles.quantityControl}>
           <div className={styles.quantityButtons}>
