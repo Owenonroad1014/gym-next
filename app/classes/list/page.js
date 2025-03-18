@@ -94,12 +94,15 @@ export default function ClassCalenderPage(props) {
             <Calendar 
       classes={classes.map(classes => ({
         id: classes.id,
-        date: classes.class_date ? new Date(classes.class_date) : "No Date",
+        date: classes.class_date,
         title: classes.title,
         time: `${classes.start_time.slice(0, 5)} - ${classes.end_time.slice(0, 5)}`,
         coach_name: classes.coach_name,
         max_capacity: classes.max_capacity,
         current_capacity: classes.current_capacity,
+        coach_id: classes.coach_id,
+        start_time: classes.start_time,
+        end_time: classes.end_time,
         
       }))} 
       location={location}

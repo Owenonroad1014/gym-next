@@ -78,9 +78,9 @@
     text-align: center;
     letter-spacing: -0.4px;
     cursor: pointer;
+    transform: skew(-35deg);
     background-color: #eb854a;
     border: none;
-    border-radius: 3px;
     align-self: stretch;
     gap: 8px;
     margin-top: 49px;
@@ -88,6 +88,11 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 32px;
+  }
+
+  .checkoutButton span {
+    display: inline-block;
+    transform: skew(35deg); /* 讓文字回正 */
   }
   
   @media (width<=991px) {

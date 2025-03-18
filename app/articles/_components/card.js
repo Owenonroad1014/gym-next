@@ -1,48 +1,116 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import articlesStyle from '../styles/articles.module.css'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-export default function Card() {
-  const [like, setLike] = useState(false)
-  const toggle = (event) => {
-    event.preventDefault()
-    setLike(!like)
+import { ARTICLE_FAV } from '@/config/api-path'
+import { useAuth } from '@/contexts/auth-context'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+export default function Card({
+  articles = {
+    category_id: 0,
+    content: '',
+    created_at: '',
+    id: 0,
+    imageURL: '',
+    intro: '',
+    title: '',
+    updated_at: '',
+    views: 0,
+  },setRefresh=false,refresh=false
+}) {
+  const { auth, getAuthHeader } = useAuth()
+  const router = useRouter()
+  const [like, setLike] = useState(articles.like_id || false)
+  const [listData, setListData] = useState({
+    success: false,
+    perpage: 0,
+    totalRows: 0,
+    totalPages: 0,
+    page: 0,
+    rows: [],
+    keyword: '',
+  })
+
+  const toggleLike = (e, article_id) => {
+    e.preventDefault()
+    fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+        if (result.error == '需要登入會員') {
+          needlogin()
+          return
+        }
+        if (result.success) {
+          setRefresh(!refresh)//充新抓資料
+          //另一種作法
+          const newListData = structuredClone(listData)
+          newListData.rows.forEach((r) => {
+            if (r.id == result.article_id) {
+              r.like_id = result.action == 'add' ? true : false
+            }
+          })
+          setListData(newListData)
+        }
+      })
+      .catch((error) => {
+        console.error('Error while updating favorite status:', error)
+      })
+  }
+  // ==== TODO 加入或移除收藏自動渲染
+  useEffect(() => {
+    // 每次文章內容變更後，重新顯示最新的收藏狀態
+    setLike(articles.like_id || false)
+  }, [articles])
+  const needlogin = () => {
+    const MySwal = withReactContent(Swal)
+    MySwal.fire({
+      title: '登入會員即可收藏!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#0b3760',
+      confirmButtonText: '登入',
+      cancelButtonText:'取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/quick-login')
+      }
+    })
   }
   return (
     <>
-      {' '}
       <div className={articlesStyle.card}>
-        <Link href="/articles/article">
+        <Link href={`/articles/${articles.id}`}>
           <div className={articlesStyle.images}>
             <Image
-              src="/imgs/article/article01.jpg"
+              src={`${articles.imageURL}`}
               width={240}
               height={170}
-              alt="揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！"
+              alt={articles.title}
             />
             <div className={articlesStyle.heartArea}>
               {like ? (
                 <FaHeart
                   className={articlesStyle.heartActive}
-                  onClick={toggle}
+                  onClick={(e) => toggleLike(e, articles.id)}
                 />
               ) : (
-                <FaRegHeart className={articlesStyle.heart} onClick={toggle} />
+                <FaRegHeart
+                  className={articlesStyle.heart}
+                  onClick={(e) => toggleLike(e, articles.id)}
+                />
               )}
             </div>
           </div>
           <div className={articlesStyle.content}>
-            <h5>
-              <Link href="/articles/article">
-                如何開始健身：初學者指南揭開健身與飲食間的神秘聯繫，輕鬆達成理想身形！
-              </Link>
-            </h5>
+            <h5>{articles.title}</h5>
             <hr />
-            <p>
-              健身是一個改變生活方式的過程，無論是為了增強體能、提高健康水平，還是簡單地希望擁有更好的外觀。對於初學者來說，開始健身可能會感覺有些困難，因為健身的選擇和資訊琳瑯滿目。然而，只要掌握一些基本原則和步驟，你就能夠在這條道路上順利啟航。這篇文章將為你提供一個清晰的健身入門指南，幫助你輕鬆開始健身並建立長期的健身習慣。
-            </p>
+            <p>{articles.intro}</p>
           </div>
         </Link>
       </div>
