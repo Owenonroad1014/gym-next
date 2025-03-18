@@ -68,6 +68,7 @@ function OrderConfirmation() {
         <OrderDetails />
       </article>
     </main>
+    
   );
 }
 
