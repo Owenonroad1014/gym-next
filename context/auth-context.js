@@ -7,7 +7,7 @@ const AuthContext = createContext()
 const emptyAuth = {
   id: 0,
   account: '',
-  nickname: '',
+  // avatar: '',
   token: '',
 }
 const storageKey = 'gymboo-auth'

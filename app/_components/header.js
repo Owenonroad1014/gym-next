@@ -67,7 +67,7 @@ export default function Header() {
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
-                {auth.nickname}
+                {/* {auth.avatar} */}
               </Link>
               <a
                 href="/qs"
