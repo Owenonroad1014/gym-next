@@ -1,16 +1,16 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import articleStyle from '../article.module.css'
 import Slider from 'react-slick'
 import Card from '../../_components/card'
 import Link from 'next/link'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import { GrArticle } from 'react-icons/gr'
+import { ARTICLE_RECOMMAND } from '@/config/api-path'
+import { useAuth } from '@/contexts/auth-context'
 
-
-
-export default function Recommend() {
+export default function Recommend({ articleid = 0 }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -37,6 +37,19 @@ export default function Recommend() {
       },
     ],
   }
+  const { auth, getAuthHeader } = useAuth()
+  const [recommand, setRecommand] = useState([])
+  useEffect(() => {
+    const headers = auth ? { ...getAuthHeader() } : {}
+    fetch(`${ARTICLE_RECOMMAND}/${articleid}`, {
+      headers,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result)
+        setRecommand(result.data)
+      })
+  }, [articleid, auth])
   return (
     <>
       <div className={articleStyle.sliderContainer}>
@@ -44,28 +57,21 @@ export default function Recommend() {
           <GrArticle /> &nbsp;分類精選文章
         </h5>
         <hr />
-        <Slider {...settings}>
-          <div className={articleStyle.sliderItem}>
-            <Link href="#">
-              <Card />
-            </Link>
-          </div>
-          <div className={articleStyle.sliderItem}>
-            <Link href="#">
-              <Card />
-            </Link>
-          </div>
-          <div className={articleStyle.sliderItem}>
-            <Link href="#">
-              <Card />
-            </Link>
-          </div>
-          <div className={articleStyle.sliderItem}>
-            <Link href="#">
-              <Card />
-            </Link>
-          </div>
-        </Slider>
+        {recommand.length === 0 ? (
+          <p>目前沒有更多推薦文章。</p>
+        ) : (
+          <Slider {...settings}>
+            {recommand.map((article, i) => {
+              return (
+                <div className={articleStyle.sliderItem} key={article.id}>
+                  <Link href={`/article/${article.id}`}>
+                    <Card articles={article} />
+                  </Link>
+                </div>
+              )
+            })}
+          </Slider>
+        )}
       </div>
     </>
   )

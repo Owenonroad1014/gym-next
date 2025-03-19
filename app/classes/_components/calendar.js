@@ -1,9 +1,10 @@
 // CourseCalendar.js
 import styles from './_styles/calendar.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import moment from 'moment-timezone'
 import ReservationModal from './reservation-modal'
-import moment from 'moment-timezone'
+import { CLASSES_CAPACITY_GET } from '../../../config/api-path'
+import { CLASSES_RESERVATION_POST } from '../../../config/api-path'
 
 export default function CourseCalendar({
   currentDate = new Date(),
@@ -27,10 +28,8 @@ export default function CourseCalendar({
 
   // 生成週曆天數陣列
   const weekDays = Array.from({ length: 7 }, (_, i) => {
-    const day = new Date(selectedDate)
-    day.setDate(selectedDate.getDate() - selectedDate.getDay() + i)
-    return day
-  })
+    return moment(selectedDate).tz('Asia/Taipei').startOf('week').add(i, 'days').toDate();
+  });
 
   // 處理週期切換
   const handleNextWeek = () => {
@@ -49,44 +48,84 @@ export default function CourseCalendar({
 
   // 根據日期過濾課程
   const getCoursesByDay = (day) => {
-    return courses.filter(
-      (course) =>
-        course.date.getDate() === day.getDate() &&
-        course.date.getMonth()  === day.getMonth() &&
-        course.date.getFullYear() === day.getFullYear()
-    )
-  }
+    const dayMoment = moment(day).tz('Asia/Taipei').startOf('day');
+    return classes.filter((course) => {
+      const courseMoment = moment(course.date || course.class_date).tz('Asia/Taipei').startOf('day');
+      return dayMoment.isSame(courseMoment, 'day');
+    });
+  };
 
   const isPastWeek = () => {
-    const today = moment().tz('Asia/Taipei').endOf('day');
-    
+    const today = moment().tz('Asia/Taipei').endOf('day')
+
     const selectedWeekStart = moment(selectedDate)
       .tz('Asia/Taipei')
       .startOf('week')
-      .endOf('day');
-      
-    
-    return selectedWeekStart.isSameOrBefore(today);
-  }
-  
-  
-  
-  
-  
-const handlePrevWeek = () => {
-  const prev = new Date(selectedDate);
-  prev.setDate(selectedDate.getDate() - 7);
- 
-  if (!isPastWeek()) {
-    setSelectedDate(prev);
-  }
-}
+      .endOf('day')
 
-  
-  
-  
-  
-  
+    return selectedWeekStart.isSameOrBefore(today)
+  }
+
+  // 處理卡片點擊
+  const handleCardClick = (classData) => {
+    console.log('Clicked classData:', classData)
+
+    if (!classData || !classData.date) {
+      console.error('Error: classData or date is undefined')
+      return
+    }
+
+    console.log('Formatted date:', new Date(classData.date).toISOString())
+    const formattedDate = new Date(classData.date) // 確保 date 是 Date 物件
+    setSelectedClass({
+      ...classData,
+      date: formattedDate.toISOString(),
+    })
+    setIsModalOpen(true)
+  }  
+
+  // 處理預約提交
+  const handleReservationSubmit = async () => {
+    try {
+      
+      const capacityRes = await fetch(`${CLASSES_CAPACITY_GET}/${selectedClass.id}`);
+      const capacity = await capacityRes.json()
+      if (capacity.current_capacity >= capacity.max_capacity) {
+        throw new Error('課程已額滿')
+      }
+      
+      // 提交預約
+      const res = await fetch(`${CLASSES_RESERVATION_POST}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          member_id: 1,
+          class_id: selectedClass.id,
+          coach_id: selectedClass.coach_id,
+          reservation_date: moment(selectedClass.date).format('YYYY-MM-DD'),
+          reservation_time: selectedClass.start_time,
+        }),
+      })
+      console.log('Submitting reservation for:', selectedClass)
+
+      // 重複預約
+      if(res.status === 400) {
+        throw new Error('您已預約過此課程') 
+      }
+
+      if (!res.ok) {
+        throw new Error('預約失敗')
+      }
+      
+      setIsModalOpen(false)
+      alert('預約成功')
+    } catch (error) {
+      console.error('Reservation failed:', error)
+      alert(error.message)
+    }
+  }
 
   return (
     <>
@@ -97,8 +136,7 @@ const handlePrevWeek = () => {
             onClick={handlePrevWeek}
             className={styles.nextWeek}
             disabled={isPastWeek(selectedDate)}
-          
-          disabled={isPastWeek(selectedDate)}>
+          >
             ＜
           </button>
           <div className={styles.dateInfo}>
@@ -191,7 +229,8 @@ const handlePrevWeek = () => {
                           ) : (
                             <span className={styles.available}>
                               人數 :
-                              {course.max_capacity - course.current_capacity} / {course.max_capacity}
+                              {course.max_capacity - course.current_capacity} /{' '}
+                              {course.max_capacity}
                             </span>
                           )}
                         </div>
