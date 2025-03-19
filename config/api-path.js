@@ -52,6 +52,7 @@ export const IMG_PATH = `${API_SERVER}/img`;
 // 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
 
+
 //**************** ARTICLE *****************
 // 獲取文章列表的資料
 export const ARTICLES_LIST = `${API_SERVER}/articles/api`

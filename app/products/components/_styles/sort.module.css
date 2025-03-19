@@ -89,6 +89,7 @@
 @media (width <= 960px) {
   .selectBtn {
     display: block;
+    margin-bottom: 15px;
 
   }
   .container{
