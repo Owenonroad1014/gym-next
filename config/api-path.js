@@ -11,7 +11,18 @@ export const COACHES_LIST = `${API_SERVER}/coaches/api`;
 export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
 
 
+// 取得課程的資料 GET
+export const CLASSES_LIST = `${API_SERVER}/classes/api`;
 
+// 取得課程人數限制 GET 
+export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`;
+
+// 送出課程預約 POST 
+export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`;
+
+// 通訊錄: 取得單一項目資料
+// `${API_SERVER}/address-book/api/${ab_id}`
+export const AB_ITEM_GET = `${API_SERVER}/address-book/api`
 
 // 通訊錄: 新增資料 POST
 export const AB_ADD_POST = `${API_SERVER}/address-book/api`;
@@ -41,3 +52,38 @@ export const IMG_PATH = `${API_SERVER}/img`;
 // 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
 
+
+//**************** ARTICLE *****************
+// 獲取文章列表的資料
+export const ARTICLES_LIST = `${API_SERVER}/articles/api`
+// 獲取單一文章列表的資料 `${API_SERVER}/api/articles/:articleid`
+export const ARTICLE_ITEM = `${API_SERVER}/articles/api`
+// 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
+export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+
+// TOP5
+export const ARTICLE_TOP5 = `${API_SERVER}/articles/api/top-five`
+// Reccomand /articles/api/recommand/1
+export const ARTICLE_RECOMMAND = `${API_SERVER}/articles/api/recommand`
+
+//**************** FRIEND  *****************
+// 獲取好友列表
+export const FRIEND_LIST = `${API_SERVER}/friends/api`
+// 獲取好友邀請列表
+export const FRIEND_REQ_LIST = `${API_SERVER}/friends/api/invite`
+// 刪除好友
+export const FRIEND_DELETE = `${API_SERVER}/friends/api/delete`
+// 好友請求api/request
+export const FRIEND_REQUEST = `${API_SERVER}/friends/api/request`
+// 接受好友邀請api
+export const FRIEND_ACCEPT = `${API_SERVER}/friends/api/accept`
+// 拒絕好友邀請api
+export const FRIEND_REJECT = `${API_SERVER}/friends/api/reject`
+
+//**************** CHAT  *****************
+// 獲取聊天室列表
+export const CHATS_LIST = `${API_SERVER}/chats/api`
+// 獲取指定單一聊天室 chats/api/:chatroomid
+export const CHATS_ITEM = `${API_SERVER}/chats/api`
+// 獲取聊天室訊息
+export const CHATS_MSG = `${API_SERVER}/chats/api/chatroom/1`

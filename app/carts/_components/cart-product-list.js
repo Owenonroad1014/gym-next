@@ -2,27 +2,15 @@
 import React from "react";
 import styles from "./_styles/cart-product-list.module.css";
 import CartProductItem from "./cart-product-item";
+import { useCart } from "@/context/cart-context"; // 引入 Context
 
 function CartProductList() {
-  // Sample product data - in a real app, this would come from a state or props
-  const products = [
-    {
-      id: 1,
-      name: "飛輪健身車",
-      weight: "5kg",
-      price: 500,
-      quantity: 1,
-      image: "/cart-img/飛輪車.jpg",
-    },
-    {
-      id: 2,
-      name: "飛輪健身車",
-      weight: "5kg",
-      price: 500,
-      quantity: 1,
-      image: "/cart-img/飛輪車.jpg",
-    },
-  ];
+  const { cartItems, setCartItems } = useCart();
+
+  // 移除商品
+  const handleRemoveProduct = (productId) => {
+    setCartItems(cartItems.filter((item) => item.id !== productId));
+  };
 
   return (
     <section className={styles.productSection}>
@@ -36,9 +24,11 @@ function CartProductList() {
         </div>
       </div>
 
-      {products.map((product) => (
-        <CartProductItem key={product.id} product={product} />
+      {cartItems.map((product) => (
+        <CartProductItem key={product.id} product={product} onRemove={handleRemoveProduct} />
       ))}
+
+      {cartItems.length === 0 && <p className={styles.emptyCart}>購物車是空的</p>}
     </section>
   );
 }

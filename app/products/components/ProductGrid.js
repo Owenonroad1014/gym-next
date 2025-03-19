@@ -39,6 +39,7 @@ const ProductGrid = () => {
     <section className={styles.productGrid}>
           <Sort router={router}/>
           <div className={styles.productArea}>
+        
           <div className={styles.productItem}>
               {Products.rows.map((product) => (
                 <ProductCard key={product.id} {...product} />

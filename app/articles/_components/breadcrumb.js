@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
-export default function Breadcrumb({ breadcrumb = [] }) {
+export default function Breadcrumb({ breadcrumb = [], articleid = 0 }) {
   const pathname = usePathname()
   const [activeIndex, setActiveIndex] = useState(null)
   useEffect(() => {
-    if (pathname.includes('/articles/article')) {
+    if (pathname.includes(`/articles/${articleid}`)) {
       setActiveIndex(2)
     } else {
       if (pathname.includes('/articles')) {
@@ -19,7 +19,7 @@ export default function Breadcrumb({ breadcrumb = [] }) {
       }
     }
   }, [pathname])
-  const breadcrumbLinks = ['/', '/articles', '/articles/article']
+  const breadcrumbLinks = ['/', '/articles', `/articles/${articleid}`]
 
   return (
     <>

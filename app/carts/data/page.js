@@ -10,16 +10,16 @@ import Button from "./_components/Button";
 
 function Body2() {
   return (
+    <>
     <main className={styles.body2}>
       <CheckoutProgress />
-      
       <OrderSummary />
       <CustomerForm />
       <PaymentForm />
       <InvoiceForm />
-      <Button />
-            
+      <Button />      
     </main>
+    </>
   );
 }
 

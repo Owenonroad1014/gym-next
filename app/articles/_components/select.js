@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import articleStyle from '../styles/articles.module.css'
 import { MdMenu, MdMenuOpen } from 'react-icons/md'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 export default function Select() {
   const [menuShow, setMenuShow] = useState(true)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category')
+  const selectArea1 = [
+    '健身基礎與入門',
+    '燃脂與減重',
+    '增肌與力量訓練',
+    '有氧與心肺運動',
+    '訓練計劃與挑戰',
+    '運動傷害與恢復',
+    '健康維持',
+  ]
+  const selectArea2 = ['素食專區', '飲食專區']
+  const selectArea3 = ['名人專訪', '資深GYM友']
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 960) {
+      if (window.innerWidth < 1140) {
         setMenuShow(false)
       } else {
         setMenuShow(true)
@@ -34,36 +49,63 @@ export default function Select() {
       >
         <ul className={articleStyle.selectPart}>
           <span className={articleStyle.categoryTitle}>健身</span>
-          <li>
-            <Link
-              href="#"
-              onClick={(e) => {
-                e.preventDefault()
-                if (window.innerWidth < 960) {
-                  setMenuShow(false)
-                }
-              }}
-            >
-              {' '}
-              新手上路
-            </Link>
-          </li>
-          <li>重量訓練</li>
-          <li>徒手訓練</li>
-          <li>柔軟度訓練</li>
-          <li>有氧運動</li>
-          <li>伸展運動</li>
-          <li>健康維持</li>
+          {selectArea1.map((v, i) => {
+            return (
+              <li
+                key={i}
+                className={v === category ? articleStyle.active : ''}
+                onClick={(e) => {
+                  e.preventDefault()
+                  router.push(`?category=${v}`)
+                  if (window.innerWidth < 960) {
+                    setMenuShow(false)
+                  }
+                }}
+              >
+                {v}
+              </li>
+            )
+          })}
         </ul>
         <ul className={articleStyle.selectPart}>
           <span className={articleStyle.categoryTitle}>飲食</span>
-          <li>素食專區</li>
-          <li>飲食營養</li>
+          {selectArea2.map((v, i) => {
+            return (
+              <li
+                key={i}
+                className={v === category ? articleStyle.active : ''}
+                onClick={(e) => {
+                  e.preventDefault()
+                  router.push(`?category=${v}`)
+                  if (window.innerWidth < 960) {
+                    setMenuShow(false)
+                  }
+                }}
+              >
+                {v}
+              </li>
+            )
+          })}
         </ul>
         <ul className={articleStyle.selectPart}>
           <span className={articleStyle.categoryTitle}>GYM友怎麼做</span>
-          <li>名人專訪</li>
-          <li>資深GYM友</li>
+          {selectArea3.map((v, i) => {
+            return (
+              <li
+                key={i}
+                className={v === category ? articleStyle.active : ''}
+                onClick={(e) => {
+                  e.preventDefault()
+                  router.push(`?category=${v}`)
+                  if (window.innerWidth < 960) {
+                    setMenuShow(false)
+                  }
+                }}
+              >
+                {v}
+              </li>
+            )
+          })}
         </ul>
       </section>
     </>

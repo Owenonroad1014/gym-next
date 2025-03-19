@@ -96,7 +96,11 @@
     text-align: center;
     border-radius: 4px;
   }
-  
+
+  .today{
+    color:#ff6600;
+  }
+
   .dayNumber {
     font-size: 28px;
     font-weight: bold;
@@ -133,6 +137,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-right: 5px solid #d35400;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 .event:not(:first-child){
   margin-top: 5px;
@@ -146,6 +151,25 @@
     font-size: 18px;
     background-color: #adaaaa;
   }
+  .eventFull {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  
+  .capacity {
+    margin-top: 4px;
+    font-size: 0.85em;
+  }
+  
+  .full {
+    color: #ff4d4f;
+    font-weight: bold;
+  }
+  
+  .available {
+    color: #081a00;
+  }
+  
   
   .time {
     font-size: 16px;
@@ -161,6 +185,11 @@
     margin-top: 8px;
     font-size: 16px;
     opacity: 0.9;
+  }
+  .name {
+    font-size: 17px;
+    color: #fffcfc;
+    margin-top: 5px;
   }
   
   @media (max-width: 768px) {
