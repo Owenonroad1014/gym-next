@@ -59,6 +59,8 @@
   text-align: center;
 }
 
+
+
 @media (max-width: 768px) {
   /* .container {
     padding: 10px;
@@ -69,6 +71,47 @@
     font-size: 12px;
   }
 }
+
+
+@media (max-width: 440px) {
+  .container {
+    padding: 5px;
+  }
+  
+  .secTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .searchSection {
+    padding: 30px 10px 150px 10px;
+    height: 200px;
+  }
+  
+  .coachIcon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .toolsContainer {
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .resultsContainer {
+    margin: 15px 5px;
+    padding: 15px;
+  }
+  
+  .coachesContainer {
+    margin: 0px 5px;
+    gap: 20px;
+  }
+}
+
 
 .coachesContainer{
   display: flex;

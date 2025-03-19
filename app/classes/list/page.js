@@ -43,7 +43,7 @@ export default function ClassCalenderPage(props) {
           setLoading(false)
         }
       }
-      fetchClasses()
+      fetchClasses();
     }, [searchParams, location, branch])
 
   return (
