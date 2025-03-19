@@ -4,7 +4,7 @@ import styles from './_styles/ProductGrid.module.css'
 import Pagination from "./Pagination";
 import { useState, useEffect} from "react";
 import Sort from "./sort";
-import { PRODUCTS_LIST , IMG_PATH} from "@/config/api-path";
+import { PRODUCTS_LIST } from "@/config/api-path";
 import { useRouter, useSearchParams } from "next/navigation";
 
 

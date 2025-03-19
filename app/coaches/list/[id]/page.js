@@ -34,7 +34,6 @@ function CoachDetailPage() {
           certifications: data.certifications?.map(cert => cert.certification)
         };
         console.log('Formatted data:', formattedData);
-setCoachData(formattedData);
         
         setCoachData(formattedData);
         setLoading(false);

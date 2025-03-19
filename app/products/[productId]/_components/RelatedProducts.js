@@ -8,28 +8,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const RelatedProducts = () => {
-  // function SampleNextArrow(props) {
-  //   const { className, style, onClick } = props;
-  //   return (
-  //     <div
-  //       className={classname}
-  //       style={{ ...style, display: "block", background: "#f87808",borderRadius: "50%" }}
-  //       onClick={onClick}
-  //     />
-  //   );
-  // }
-  
-  // function SamplePrevArrow(props) {
-  //   const { className, style, onClick } = props;
-  //   return (
-  //     <div
-  //       className={className}
-  //       style={{ ...style, display: "block", background: "#f87808" ,borderRadius: "50%"}}
-  //       onClick={onClick}
-  //     />
-  //   );
-  // }
-
   const settings = {
     dots: true,
     infinite: true,
