@@ -40,3 +40,4 @@ export const IMG_PATH = `${API_SERVER}/img`;
 
 // 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
+
