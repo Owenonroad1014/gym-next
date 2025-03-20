@@ -5,20 +5,26 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { REGISTER_POST } from '@/config/api-path'
-
-// import { useRouter } from 'next/navigation'
+import { useAuth } from '@/context/auth-context'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
+
   const [errors, setErrors] = useState({})
-  // const router = useRouter()
+  const { login } = useAuth()
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectUrl = searchParams.get('redirect') || '/'
 
   const [registerForm, setRegisterForm] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   })
+
   const RegisterChangeForm = (e) => {
     setRegisterForm({ ...registerForm, [e.target.name]: e.target.value })
   }
@@ -45,9 +51,8 @@ export default function RegisterPage() {
     if (Object.keys(newErrrors).length > 0) {
       setErrors(newErrrors)
       return
-    }else{
+    } else {
       setErrors({})
-
     }
 
     const r = await fetch(REGISTER_POST, {
@@ -67,6 +72,19 @@ export default function RegisterPage() {
         password: '',
         confirmPassword: '',
       })
+      const success = await login(
+        result.bodyData.email,
+        result.bodyData.password
+      )
+      if (success) {
+        if (redirectUrl) {
+          router.push(redirectUrl) // 轉跳原來的頁面
+        } else {
+          router.push('/') // 預設回首頁
+        }
+      } else {
+        alert('登入失敗')
+      }
     } else {
       console.warn(result)
       if (result.error?.issues) {
@@ -76,10 +94,9 @@ export default function RegisterPage() {
         })
         setErrors(bkErrors)
       }
-      if (result.error ==="用戶已註冊") {
+      if (result.error === '用戶已註冊') {
         // modal.show()
         alert(result.error)
-        
       }
     }
   }
