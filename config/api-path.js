@@ -5,6 +5,9 @@ export const API_SERVER = `http://localhost:3005`;
 // 頭貼的路由
 export const AVATAR_PATH = `${API_SERVER}/imgs`;
 
+// 註冊路由
+export const REGISTER_POST = `${API_SERVER}/register/api`;
+
 // 取得教練的資料 GET
 export const COACHES_LIST = `${API_SERVER}/coaches/api`;
 // 取得單筆教練資料 GET
