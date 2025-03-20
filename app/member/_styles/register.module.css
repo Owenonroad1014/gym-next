@@ -1,0 +1,133 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  max-width: 1440px;
+  margin: 66px;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 180px 30px;
+  width: 15%;
+  background-image: linear-gradient(
+    to bottom,
+    #013056,
+    #003560,
+    #003a69,
+    #004073,
+    #00457d,
+    #0e4f8a,
+    #1a5a97,
+    #2465a5,
+    #3779b9,
+    #488dcd,
+    #5aa2e2,
+    #6bb7f6
+  );
+  color: #fff;
+  border-radius: 3px 0px 0px 3px;
+}
+.left div {
+  display: flex;
+  flex-direction: column;
+}
+.left span {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.switchBtn {
+  background-color: #db6318;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 3px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding: 30px;
+  border: 1px solid #88a9c8;
+  border-radius: 0px 3px 3px 0px;
+  color: #0b3760;
+}
+.right h1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.inputGroup {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.formGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+}
+.formGroup label {
+  padding: 10px;
+  width: 15%;
+  display: flex;
+  justify-content: flex-end;
+  color: #0b3760;
+}
+.right input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #88a9c8;
+}
+.right input:focus {
+  outline: none;
+  border: 1px solid #db6318;
+  border-radius: 3px;
+}
+
+.textDanger {
+  color: red;
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.iconBtn {
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+  color: #9c9c9c;
+  font-size: 16px;
+  background-color: transparent;
+}
+.formGroup:first-child .iconBtn {
+  visibility:hidden
+}
+
+.registerBtn {
+  padding: 8px 18px;
+  margin-top: 50px;
+  width: 80%;
+  text-align: center;
+  border-radius: 3px;
+  background: #0b3760;
+  color: #fff;
+  font-size: 18px;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btns a {
+  font-size: 12px;
+  margin-right: 4px;
+}
