@@ -130,7 +130,7 @@ export default function CourseCalendar({
   return (
     <>
       <div className={styles.container}>
-        <h2>{`${location}${branch}課程表`}</h2>
+        <h2 className={styles.containerH2}>{`${location}${branch}課程表`}</h2>
         <div className={styles.header}>
           <button
             onClick={handlePrevWeek}
