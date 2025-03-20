@@ -61,3 +61,11 @@
     font-weight: bold;
     color: #e96d14 !important; 
   }
+
+  @media (width <= 960px) {
+  .breadcrumbContainer{
+    width: 100%;
+    margin: 0;
+  }
+
+}
