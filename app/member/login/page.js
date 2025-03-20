@@ -8,7 +8,6 @@ import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
- 
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
@@ -52,7 +51,7 @@ export default function LoginPage() {
       </div>
       <div className={memberCss.right}>
         <h1>登入GYM步空間</h1>
-        <form action="" onSubmit={onSubmit}>
+        <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>
             帳號
             <input
