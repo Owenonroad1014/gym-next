@@ -25,6 +25,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    font-size: 25px;
   }
   
   .closeButton {
@@ -36,6 +37,9 @@
   
   .classInfo {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .classInfo h3 {

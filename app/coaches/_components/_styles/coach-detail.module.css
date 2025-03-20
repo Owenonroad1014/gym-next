@@ -5,6 +5,7 @@
     max-width: 1440px;
     margin: 40px auto;
     padding: 40px 20px;
+    width: 80%;
 
   
   }
@@ -27,7 +28,7 @@
     flex: 1;
     position: relative;
     background-color: #fff;
-    margin-right: 50px;
+    margin-right: 30px;
     border-radius: 3px;
   }
   
@@ -49,13 +50,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 3px;
     background: #0b3760;
     color: white;
     transition: all 0.3s ease;
     text-decoration: none;
+    font-size: 25px;
   }
   
   .social-icon:hover {
@@ -74,6 +76,7 @@
     padding: 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     color: #E0E0E0;
+    max-width: 750px;
   }
   
   .coach-name {
@@ -190,6 +193,7 @@
   }
   
   .contact-button, .schedule-button {
+    width: 50%;
     padding: 12px 24px;
     border: none;
     border-radius: 3px;
@@ -207,6 +211,8 @@
     background: #f8f9fa;
     color: #0b3760;
     border: 1px solid #dee2e6;
+    font-size: 16px;
+    
   }
   
   .contact-button:hover {
@@ -214,13 +220,20 @@
   }
   
   .schedule-button:hover {
-    background: #e9ecef;
+    background: #db6318;
+    border: 1px solid #db6318;
+    color: #ffffff;
+    transform: translateY(-3px);
   }
   
   /* 響應式設計 */
   @media (max-width: 768px) {
     .coach-content {
       flex-direction: column;
+    }
+
+    .social-icon {
+      margin-bottom: 10px;
     }
     
     .coach-header {
@@ -239,6 +252,12 @@
   }
   
   @media (max-width: 440px) {
+
+    .info-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
     .title {
       font-size: 2rem;
     }
@@ -258,6 +277,7 @@
 
     .contact-button, .schedule-button {
       font-size: 18px;
+      width: 90%;
       
     }
     .social-media {

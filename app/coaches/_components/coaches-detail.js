@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import styles from './_styles/coach-detail.module.css'
+import { useState } from 'react'
 import {
   FaFacebookF,
   FaInstagram,
@@ -8,6 +9,7 @@ import {
   FaLinkedinIn,
 } from 'react-icons/fa'
 import Breadcrumb from './bread'
+import CoachCalendar from './coaches-calendar'
 import { AVATAR_PATH } from '../../../config/api-path'
 
 const CoachDetail = ({
@@ -39,8 +41,13 @@ const CoachDetail = ({
   })
 
   const breadcrumb = ['home', '教練列表', '教練資訊']
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClose = () => {
+    setIsOpen(!isOpen) 
+  }
 
   return (
+    <>
     <div className={styles['coach-detail-container']}>
       <Breadcrumb breadcrumb={breadcrumb} />
 
@@ -135,12 +142,15 @@ const CoachDetail = ({
           </div>
 
           <div className={styles['cta-container']}>
-            <button className={styles['contact-button']}>聯絡教練</button>
-            <button className={styles['schedule-button']}>預約課程</button>
+            {/* <button className={styles['contact-button']}>聯絡教練</button> */}
+            <button className={styles['schedule-button']} onClick={handleClose}> {isOpen ? '關閉課程表' : '預約課程'}</button>
           </div>
         </div>
       </div>
+     
     </div>
+ <CoachCalendar name={name} isOpen={isOpen} />
+ </>
   )
 }
 

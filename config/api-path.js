@@ -9,6 +9,8 @@ export const AVATAR_PATH = `${API_SERVER}/imgs`;
 export const COACHES_LIST = `${API_SERVER}/coaches/api`;
 // 取得單筆教練資料 GET
 export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
+// 取得教練課程資料
+export const COACHES_CLASSES = `${API_SERVER}/coaches/api`;
 
 
 // 取得課程的資料 GET
@@ -20,16 +22,8 @@ export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`;
 // 送出課程預約 POST 
 export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`;
 
-// 通訊錄: 取得單一項目資料
-// `${API_SERVER}/address-book/api/${ab_id}`
-export const AB_ITEM_GET = `${API_SERVER}/address-book/api`
-
-// 通訊錄: 新增資料 POST
-export const AB_ADD_POST = `${API_SERVER}/address-book/api`;
-
-// 通訊錄: 刪除項目 DELETE
-// `${API_SERVER}/address-book/api/${ab_id}`
-export const AB_DELETE = `${API_SERVER}/address-book/api`;
+// 取得分店資料
+export const LOCATIONS_LIST = `${API_SERVER}/locations/api`;
 
 // 通訊錄: 修改項目 PUT
 // `${API_SERVER}/address-book/api/${ab_id}`
