@@ -217,7 +217,24 @@
     color: rgb(141, 138, 138);
     cursor: pointer;
   }
-
+  .weightSelector{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #413f3c;
+  }
+  .weightButton {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    width: 40%;
+    height: 30px;
+  }
 
   @media (width <= 1400px) {
     .container { width: 85%; }
@@ -227,18 +244,34 @@
   @media (width <= 1200px) {
     .container { width: 100%; }
     .productSection{width: 100%;}
+    .relatedProducts {
+    width: 80%;
   }
+}
+
 
   @media (width <= 960px) {
     .container { width: 100%; }
     .productSection{
       width: 100%;
       display: block;
+      padding: 0 10px;
     }
     .productImage, .productInfo {
       width: 100%;
       margin: auto;
-      height: 450px;
+      height: 500px;
+      
     }
+    .itemTitle{
+      display: block;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .selectionContainer{
+      display: block;
+      
+    }
+
   }
   
