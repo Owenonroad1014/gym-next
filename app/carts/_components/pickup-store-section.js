@@ -1,10 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useCart } from "@/context/cart-context";
 import styles from './_styles/pickup-store-section.module.css'
 
 function PickupStoreSection() {
+  const { pickupMethod, updatePickupMethod } = useCart(); 
   const [isExpanded, setIsExpanded] = useState(false)
-  const [selectedStore, setSelectedStore] = useState('') // 儲存選擇的門市
 
   const storeOptions = ['台南中西店', '台南中華店', '台南永康店']
 
@@ -13,7 +14,7 @@ function PickupStoreSection() {
   }
 
   const handleStoreChange = (event) => {
-    setSelectedStore(event.target.value)
+    updatePickupMethod(event.target.value)
   }
 
   return (
@@ -24,7 +25,7 @@ function PickupStoreSection() {
       <div className={styles.dropdownContainer}>
         <select
           className={styles.storeDropdown}
-          value={selectedStore}
+          value={pickupMethod}
           onChange={handleStoreChange}
         >
           <option value="">請選擇門市</option>
@@ -42,7 +43,7 @@ function PickupStoreSection() {
         onClick={toggleExpanded}
         aria-expanded={isExpanded}
       >
-        {/* <i /> */}
+        
       </button>
     </div>
   )

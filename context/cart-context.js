@@ -31,6 +31,18 @@ export function CartProvider({ children }) {
     //   rentalEndDate: "",
     // },
   ])
+  const [paymentMethod, setPaymentMethod] = useState(""); // 付款方式
+  const [pickupMethod, setPickupMethod] = useState(""); // 取貨方式
+
+  // 更新付款方式
+  const updatePaymentMethod = (method) => {
+    setPaymentMethod(method);
+  };
+
+  // 更新取貨方式
+  const updatePickupMethod = (method) => {
+    setPickupMethod(method);
+  };
 
   // 計算租借天數
   const calculateRentalDays = (startDate, endDate) => {
@@ -58,7 +70,7 @@ export function CartProvider({ children }) {
     );
   };
 
-  // **新增：增加商品數量**
+  //增加商品數量
   const increaseQuantity = (productId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -67,7 +79,7 @@ export function CartProvider({ children }) {
     )
   }
 
-  // **新增：減少商品數量（最少 1）**
+  //減少商品數量（最少 1）
   const decreaseQuantity = (productId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -78,7 +90,7 @@ export function CartProvider({ children }) {
     )
   }
 
-  // **新增：加入商品**
+  //加入商品
   const addToCart = (product) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id)
@@ -96,7 +108,7 @@ export function CartProvider({ children }) {
     })
   }
 
-  // **新增：移除商品**
+  //移除商品
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId))
   }
@@ -109,7 +121,11 @@ export function CartProvider({ children }) {
       increaseQuantity,
       decreaseQuantity,
       addToCart,
-      removeFromCart, }}>
+      removeFromCart, 
+      paymentMethod,
+      updatePaymentMethod,
+      pickupMethod,
+      updatePickupMethod}}>
       {children}
     </CartContext.Provider>
   );

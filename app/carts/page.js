@@ -5,7 +5,8 @@ import CheckoutProgress from "./_components/checkout-progress";
 import CartHeader from "./_components/cart-header";
 import CartProductList from "./_components/cart-product-list";
 import OrderSummary from "./_components/order-summary";
-import { CartProvider } from "@/context/cart-context";
+// import { CartProvider } from "@/context/cart-context";
+
 
 
 function ShoppingCart() {
@@ -19,12 +20,10 @@ function ShoppingCart() {
       <main className={styles.cartContainer}>
         <CheckoutProgress />
         <CartHeader />
-        <CartProvider> 
           <section className={styles.cartContent}>
             <CartProductList />
             <OrderSummary />
           </section>
-        </CartProvider>
       </main>
     </>
   );
