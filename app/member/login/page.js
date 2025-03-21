@@ -11,6 +11,7 @@ export default function LoginPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
+
   console.log({ auth })
   const router = useRouter()
 
@@ -24,17 +25,35 @@ export default function LoginPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (!loginForm.account || !loginForm.password) {
-      alert('帳號或密碼錯誤')
+    if (!loginForm.account) {
+      alert('帳號不能為空')
       return
     }
+    if (!loginForm.password) {
+      alert('密碼不能為空')
+      return
+    }
+    const { success, error, code } = await login(
+      loginForm.account,
+      loginForm.password
+    )
 
-    const success = await login(loginForm.account, loginForm.password)
     if (success) {
+      // modal.show()
       console.log('登入成功')
+      if (router.back() === '/member/register') {
+        router.push('/')
+      }
       router.back() // qs
     } else {
-      alert('登入失敗')
+      // modal.show()
+      if (code === 404) {
+        alert(error || '用戶未註冊')
+      } else if (code === 410 || code === 420) {
+        alert(error || '帳號或密碼錯誤')
+      } else {
+        alert(error || '登入失敗，請稍後再試')
+      }
     }
   }
 
