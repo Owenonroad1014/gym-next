@@ -77,7 +77,7 @@ export default function RegisterPage() {
         result.bodyData.password
       )
       if (success) {
-        router.push('/add-profile')
+        router.push('/member/register/add-profile')
       } else {
         alert('登入失敗')
       }
