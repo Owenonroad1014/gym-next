@@ -5,7 +5,8 @@ import CheckoutProgress from "./_components/checkout-progress";
 import CartHeader from "./_components/cart-header";
 import CartProductList from "./_components/cart-product-list";
 import OrderSummary from "./_components/order-summary";
-import { CartProvider } from "@/context/cart-context"; // 引入 CartProvider
+import { CartProvider } from "@/context/cart-context";
+
 
 function ShoppingCart() {
   return (
@@ -18,7 +19,7 @@ function ShoppingCart() {
       <main className={styles.cartContainer}>
         <CheckoutProgress />
         <CartHeader />
-        <CartProvider> {/* 這裡包住購物車相關組件 */}
+        <CartProvider> 
           <section className={styles.cartContent}>
             <CartProductList />
             <OrderSummary />

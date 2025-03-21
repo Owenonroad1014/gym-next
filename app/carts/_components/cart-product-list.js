@@ -5,11 +5,11 @@ import CartProductItem from "./cart-product-item";
 import { useCart } from "@/context/cart-context"; // 引入 Context
 
 function CartProductList() {
-  const { cartItems, setCartItems } = useCart();
+  const { cartItems, updateCartItem } = useCart();
 
   // 移除商品
   const handleRemoveProduct = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+    updateCartItem(productId, { quantity: 0 }); // 設定數量為 0 來表示刪除
   };
 
   return (
@@ -24,7 +24,9 @@ function CartProductList() {
         </div>
       </div>
 
-      {cartItems.map((product) => (
+      {cartItems
+      .filter((product) => product.quantity > 0) // 確保不顯示數量為 0 的商品
+      .map((product) => (
         <CartProductItem key={product.id} product={product} onRemove={handleRemoveProduct} />
       ))}
 

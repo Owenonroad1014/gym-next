@@ -7,7 +7,7 @@ import Breadcrumb from './_components/breadcrumb'
 import Select from './_components/select'
 import articlecss from './styles/articles.module.css'
 import Search from './_components/search'
-import { useAuth } from '@/contexts/auth-context'
+import { useAuth } from '@/context/auth-context'
 import { ARTICLES_LIST } from '@/config/api-path'
 import { useSearchParams } from 'next/navigation'
 
