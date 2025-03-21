@@ -117,7 +117,7 @@ export default function ShareSidebar({
         cancelButtonText: '取消',
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push('/quick-login')
+          router.push('/member/login')
         }
       })
     }
