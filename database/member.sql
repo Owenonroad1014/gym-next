@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 
 --
 -- 資料表結構 `member`
---
+
 
 CREATE TABLE `member` (
   `member_id` int NOT NULL,

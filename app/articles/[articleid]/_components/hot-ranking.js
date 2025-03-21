@@ -36,9 +36,9 @@ export default function HotRanking() {
         <ol>
           {top5.map((v, i) => {
             return (
-              <li>
+              <li key={v.id}>
                 <Link href={`/articles/${v.id}`}>
-                  <span>{i+1}</span>
+                  <span>{i + 1}</span>
                   <span>{v.title}</span>
                 </Link>
               </li>

@@ -1,37 +1,115 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import friendStyle from '../_styles/friends.module.css'
 import { PiGenderMaleBold, PiGenderFemaleBold } from 'react-icons/pi'
+import { MdMenu, MdMenuOpen } from 'react-icons/md'
+import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+export default function Select() {
+  const [menuShow, setMenuShow] = useState(true)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category')
+  const gender = searchParams.get('gender')
+  const selectArea = [
+    '增肌',
+    '減脂',
+    '提高耐力',
+    '增強體能',
+    '健康維持',
+    '提高核心能量',
+  ]
 
-export default function SelectTarget() {
-  const [selectedGoal, setSelectedGoal] = useState('')
-  
-  const handleGoalChange = (event) => {
-    setSelectedGoal(event.target.value)
-  }
-
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1140) {
+        setMenuShow(false)
+      } else {
+        setMenuShow(true)
+      }
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
   return (
     <>
-      <div className={friendStyle.selectTarget}>
-        <div className={friendStyle.gender}>
-          <PiGenderMaleBold />
-          <PiGenderFemaleBold />
-        </div>
-
-        <div className={friendStyle.dropdown}>
-          {/* <label htmlFor="goals">選擇健身目標</label> */}
-          <select id="goals" value={selectedGoal} onChange={handleGoalChange}>
-            <option value="">選擇健身目標</option>
-            <option value="增肌">增肌</option>
-            <option value="減脂">減脂</option>
-            <option value="提高耐力">提高耐力</option>
-            <option value="增強體能">增強體能</option>
-            <option value="健康維持">健康維持</option>
-            <option value="提高核心能量">提高核心能量</option>
-          </select>
-        </div>
-      </div>
+      <button
+        onClick={() => setMenuShow(!menuShow)}
+        className={friendStyle.selectBtn}
+      >
+        {menuShow ? <MdMenuOpen /> : <MdMenu />}
+      </button>
+      <section
+        className={friendStyle.selectArea}
+        style={{
+          display: menuShow ? 'block' : 'none',
+        }}
+      >
+        <ul className={friendStyle.selectPart}>
+          <span className={friendStyle.categoryTitle}>全部分類</span>
+          <li
+            onClick={(e) => {
+              e.preventDefault()
+              if (window.innerWidth < 960) {
+                setMenuShow(false)
+              }
+            }}
+          >
+            <Link href="/friends">全部分類</Link>
+          </li>
+        </ul>
+        <ul className={friendStyle.selectPart}>
+          <span className={friendStyle.categoryTitle}>選擇性別</span>
+          <li
+            className={gender == '男性' ? friendStyle.active : ''}
+            onClick={(e) => {
+              e.preventDefault()
+              router.push(`?gender=男性`)
+              if (window.innerWidth < 960) {
+                setMenuShow(false)
+              }
+            }}
+          >
+            <PiGenderMaleBold /> 男性
+          </li>
+          <li
+            className={gender == '女性' ? friendStyle.active : ''}
+            onClick={(e) => {
+              e.preventDefault()
+              router.push(`?gender=女性`)
+              if (window.innerWidth < 960) {
+                setMenuShow(false)
+              }
+            }}
+          >
+            <PiGenderFemaleBold /> 女性
+          </li>
+        </ul>
+        <ul className={friendStyle.selectPart}>
+          <span className={friendStyle.categoryTitle}>選擇健身目標</span>
+          {selectArea.map((v, i) => {
+            return (
+              <li
+                key={i}
+                className={v === category ? friendStyle.active : ''}
+                onClick={(e) => {
+                  e.preventDefault()
+                  router.push(`?category=${v}`)
+                  if (window.innerWidth < 960) {
+                    setMenuShow(false)
+                  }
+                }}
+              >
+                {v}
+              </li>
+            )
+          })}
+        </ul>
+      </section>
     </>
   )
 }

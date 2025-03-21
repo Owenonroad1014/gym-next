@@ -48,6 +48,19 @@ export default function Select() {
         }}
       >
         <ul className={articleStyle.selectPart}>
+          <span className={articleStyle.categoryTitle}>全部分類</span>
+          <li
+            onClick={(e) => {
+              e.preventDefault()
+              if (window.innerWidth < 960) {
+                setMenuShow(false)
+              }
+            }}
+          >
+            <Link href="/articles">全部分類</Link>
+          </li>
+        </ul>
+        <ul className={articleStyle.selectPart}>
           <span className={articleStyle.categoryTitle}>健身</span>
           {selectArea1.map((v, i) => {
             return (
