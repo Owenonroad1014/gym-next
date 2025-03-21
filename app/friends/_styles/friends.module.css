@@ -6,7 +6,7 @@
   height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 20px;
   align-items: flex-start;
   padding: 50px 60px;
@@ -20,59 +20,118 @@
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
 .friendContainer {
+  max-width: 1440px;
   height: 100%;
   margin: auto;
   margin-bottom: 100px;
-  max-width: 1440px;
+  margin-top: 50px;
+  display: flex;
+  position: relative;
 }
-/* Select */
-.selectTarget {
-  margin: 20px auto;
-  max-width: 60%;
+
+/* #region ================= Select  Start ====================== */
+
+.selectArea {
+  width: 20%;
+  align-items: center;
+  margin: 0 15px;
+  display: block;
+  flex-direction: column;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.selectBtn {
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: white;
+  background-color: #f87808;
+  margin: auto;
+  border: none;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: -40px;
+  z-index: 20;
+}
+.selectPart {
+  width: 100%;
+  list-style: none;
+  margin-top: 15px;
+}
+.selectPart:last-child {
+  margin-bottom: 15px;
+}
+.categoryTitle {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+  color: rgb(16, 19, 21);
+  background-color: #dee5e7;
+  padding: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  color: #333;
-  border-radius: 3px;
-  padding: 30px;
-  background-color: #f5f5f5;
 }
 
-.selectTarget p {
-  padding: 10px 15px;
-  border-radius: 3px;
-}
-
-.selectTarget p span {
-  display: inline-block;
-  padding: 0 5px;
-}
-
-.gender {
-  height: 30px;
-  display: flex;
-  margin-right: 16px;
-  color: #333;
-  border-radius: 3px;
-  justify-content: space-around;
-  width: 20%;
-}
-
-.gender svg {
-  width: 100%;
+.selectPart li {
   cursor: pointer;
-  box-sizing: content-box;
-  height: 100%;
-  padding: 10px;
-  display: block;
-  border-bottom: 1px solid #333;
+  width: 85%;
+  height: 60px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 60px;
+  color: #666;
+  padding: 0 20px;
+  border-bottom: #cdc9c9 1px solid;
+  margin: auto;
+  position: relative;
+  transition: all 0.2s;
 }
 
-.gender svg:hover {
-  background-color: #db6318;
-  color: #fff;
-  border-radius: 3px;
+.selectPart li:hover {
+  border-bottom: #48767b 2px solid;
+  transform: translateY(-2px);
+  transition: all 0.2s;
 }
+
+.selectPart li.active {
+  color: #f87808;
+  font-weight: 400;
+  border-bottom: #f87808 1px solid;
+}
+/* #endregion ================= Select  End ====================== */
+
+.loaderContainer{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 50px;
+}
+/* #region ================= notAuthContainer  Start ====================== */
+.notAuthContainer{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+.notAuthContainer p{
+  width: 70%;
+  height:50% ;
+  background-color: #dee5e7;
+  text-align: center;
+  align-content: center;
+  font-size: 30px;
+}
+.notAuthContainer p a{
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 9px;
+  color: #0b3760;
+}
+/* #endregion ================= notAuthContainer  End ====================== */
 
 /* Dropdown */
 .dropdown {
@@ -80,7 +139,7 @@
   margin-top: 20px;
 }
 
-.dropdown label {
+/* .dropdown label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
@@ -101,7 +160,7 @@
 .dropdown select:focus {
   outline: none;
   border: 2px solid #db6318;
-}
+} */
 
 /* 麵包屑 */
 .breadcrumbContainer {
@@ -157,18 +216,6 @@
   text-underline-offset: 10px;
 }
 
-/* 底部線條動畫 */
-/* .breadcrumbItem:not(.active) a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background: #000;
-  transition: all 0.5s ease;
-} */
-
 .breadcrumbItem:hover a::after,
 .breadcrumbItem.active a::after {
   width: 100%;
@@ -218,22 +265,30 @@
   background-color: #8b8b8b;
   cursor: not-allowed;
 }
-
+.rightsection {
+  width: 80%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0 20px;
+}
 /* List */
 .personList {
-  max-width: 1440px;
+  width: 100%;
+  padding: 10px;
+  margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  padding: 10px;
   justify-content: flex-start;
-  margin: 0 auto;
+  gap: 1vw;
 }
 
 /* Card */
 
 .profileCard {
-  margin: auto;
+  margin: 10px;
   margin-top: 40px;
   margin-bottom: 20px;
   width: 228px;
@@ -393,35 +448,48 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 @media (max-width: 1440) {
   .banner {
     background-image: url('/imgs/friend/banner/friendBanner1440.jpg');
   }
 }
+@media (max-width: 1390px) {
+  .personList {
+    gap: 4vw;
+  }
+}
+@media (max-width: 1140px) {
+  .selectBtn {
+    display: block;
+  }
+  .selectArea {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    background-color: #ebeff1;
+    width: 90%;
+  }
+  .rightsection {
+    width: 100%;
+  }
+  .categoryTitle {
+    background-color: #dee5e7;
+  }
+  .selectPart li {
+    font-size: 20px;
+  }
+}
 @media (max-width: 768px) {
-  .selectTarget {
-    max-width: 80%;
+  .selectArea {
     flex-direction: column;
+    align-items: center;
   }
-
-  .selectTarget .gender {
+  .selectPart {
     width: 100%;
-    justify-content: space-evenly;
-    margin-bottom: 20px;
-  }
-
-  .selectTarget ul {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .selectTarget ul li {
-    width: 100%;
-    padding: 10px;
     border-right: none;
-    text-align: center;
+    text-align: left;
   }
-
   .dropdown select {
     padding: 12px;
   }
@@ -429,7 +497,11 @@
     font-size: 14px;
   }
 }
-
+@media (max-width: 500px) {
+  .personList {
+    justify-content: center;
+  }
+}
 @media (max-width: 480px) {
   .dropdown select {
     padding: 15px;

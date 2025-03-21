@@ -6,7 +6,7 @@ import Image from 'next/image'
 import articlesStyle from '../styles/articles.module.css'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { ARTICLE_FAV } from '@/config/api-path'
-import { useAuth } from '@/contexts/auth-context'
+import { useAuth } from '@/context/auth-context'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 export default function Card({
@@ -20,7 +20,9 @@ export default function Card({
     title: '',
     updated_at: '',
     views: 0,
-  },setRefresh=false,refresh=false
+  },
+  setIsLoding = () => {},
+  setIsLike = () => {},
 }) {
   const { auth, getAuthHeader } = useAuth()
   const router = useRouter()
@@ -34,7 +36,7 @@ export default function Card({
     rows: [],
     keyword: '',
   })
-
+  // ==== TODO 加入或移除收藏自動渲染
   const toggleLike = (e, article_id) => {
     e.preventDefault()
     fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
@@ -46,26 +48,15 @@ export default function Card({
           return
         }
         if (result.success) {
-          setRefresh(!refresh)//充新抓資料
-          //另一種作法
-          const newListData = structuredClone(listData)
-          newListData.rows.forEach((r) => {
-            if (r.id == result.article_id) {
-              r.like_id = result.action == 'add' ? true : false
-            }
-          })
-          setListData(newListData)
+          setLike(!like)
+          setIsLike(like)
         }
       })
       .catch((error) => {
         console.error('Error while updating favorite status:', error)
+        setIsLoding(false)
       })
   }
-  // ==== TODO 加入或移除收藏自動渲染
-  useEffect(() => {
-    // 每次文章內容變更後，重新顯示最新的收藏狀態
-    setLike(articles.like_id || false)
-  }, [articles])
   const needlogin = () => {
     const MySwal = withReactContent(Swal)
     MySwal.fire({
@@ -75,7 +66,7 @@ export default function Card({
       confirmButtonColor: '#f87808',
       cancelButtonColor: '#0b3760',
       confirmButtonText: '登入',
-      cancelButtonText:'取消'
+      cancelButtonText: '取消',
     }).then((result) => {
       if (result.isConfirmed) {
         router.push('/quick-login')
