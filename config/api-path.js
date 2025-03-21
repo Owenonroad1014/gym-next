@@ -55,15 +55,25 @@ export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
 export const ARTICLES_LIST = `${API_SERVER}/articles/api`
 // 獲取單一文章列表的資料 `${API_SERVER}/api/articles/:articleid`
 export const ARTICLE_ITEM = `${API_SERVER}/articles/api`
-// 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
-export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
-
 // TOP5
 export const ARTICLE_TOP5 = `${API_SERVER}/articles/api/top-five`
 // Reccomand /articles/api/recommand/1
 export const ARTICLE_RECOMMAND = `${API_SERVER}/articles/api/recommand`
+// 所有文章我的最愛/api/fav
+export const ARTICLE_ALL_FAV = `${API_SERVER}/articles/api/fav`
+// 單一文章我的最愛/api/fav/:articleid
+export const ARTICLE_ITEM_FAV = `${API_SERVER}/articles/api/fav`
+// 單一文章我的最愛/api/fav/:articleid
+export const ARTICLE_ITEM_FAVTOGGLE = `${API_SERVER}/articles/api/favToggle`
 
-//**************** FRIEND  *****************
+// 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
+export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+
+//**************** GYMFRIEND  *****************
+// 獲取GYM友列表
+export const GYMFRIEND_LIST = `${API_SERVER}/gymfriends/api`
+
+//**************** MYFRIEND  *****************
 // 獲取好友列表
 export const FRIEND_LIST = `${API_SERVER}/friends/api`
 // 獲取好友邀請列表
@@ -82,5 +92,7 @@ export const FRIEND_REJECT = `${API_SERVER}/friends/api/reject`
 export const CHATS_LIST = `${API_SERVER}/chats/api`
 // 獲取指定單一聊天室 chats/api/:chatroomid
 export const CHATS_ITEM = `${API_SERVER}/chats/api`
-// 獲取聊天室訊息
-export const CHATS_MSG = `${API_SERVER}/chats/api/chatroom/1`
+// 獲取聊天室訊息 /api/chatroom/:chatroomid
+export const CHATS_MSG = `${API_SERVER}/chats/api/chatroom`
+// 新增聊天訊息
+export const SEND_MSG = `${API_SERVER}/chats/api/sendMsg`
