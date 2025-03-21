@@ -76,15 +76,13 @@
   
   .header {
     justify-content: space-between;
-    /* align-items: start; */
-    /* gap: 20px 20px; */
     width: 100%;
     font-size: 12px;
     font-weight: 600;
     display: flex;
   }
-  .title{
-    /* width: 60%; */
+  .hearts{
+    color: coral;
   }
 
   .price{
@@ -118,7 +116,7 @@
 
   .heart{
     font-size: 24px;
-    color: rgb(141, 138, 138);
+    color: rgb(232, 123, 33);
     cursor: pointer;
   }
   
