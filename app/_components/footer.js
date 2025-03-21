@@ -4,8 +4,17 @@
 
 import React from 'react'
 import styles from './_styles/footer.module.css'
+import { usePathname } from 'next/navigation'
+
+
 
 export default function Footer() {
+  const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
+  if (pathname.startsWith('/member' || '/member/register')) {
+    return null
+    // `/member` 底下的頁面不顯示 Footer
+  }
+  
   return (
     <>
       <div className={styles.container}>
