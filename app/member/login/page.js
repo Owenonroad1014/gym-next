@@ -41,6 +41,7 @@ export default function LoginPage() {
     if (success) {
       // modal.show()
       console.log('登入成功')
+  
       if (router.back() === '/member/register') {
         router.push('/')
       }

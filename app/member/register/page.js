@@ -77,11 +77,7 @@ export default function RegisterPage() {
         result.bodyData.password
       )
       if (success) {
-        if (redirectUrl) {
-          router.push(redirectUrl) // 轉跳原來的頁面
-        } else {
-          router.push('/') // 預設回首頁
-        }
+        router.push('/add-profile')
       } else {
         alert('登入失敗')
       }
