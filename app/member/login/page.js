@@ -8,11 +8,12 @@ import { useAuth } from '@/context/auth-context'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
- 
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
-  console.log({ auth })
+
+
+
   const router = useRouter()
 
   const [loginForm, setLoginForm] = useState({
@@ -25,17 +26,35 @@ export default function LoginPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (!loginForm.account || !loginForm.password) {
-      alert('帳號或密碼錯誤')
+    if (!loginForm.account) {
+      alert('帳號不能為空')
       return
     }
+    if (!loginForm.password) {
+      alert('密碼不能為空')
+      return
+    }
+    const { success, error, code } = await login(
+      loginForm.account,
+      loginForm.password
+    )
 
-    const success = await login(loginForm.account, loginForm.password)
     if (success) {
-      console.log('登入成功')
+      // modal.show()
+      console.log('登入成功', { auth })
+      if (router.back() === '/member/register') {
+        router.push('/')
+      }
       router.back() // qs
     } else {
-      alert('登入失敗')
+      // modal.show()
+      if (code === 404) {
+        alert(error || '用戶未註冊')
+      } else if (code === 410 || code === 420) {
+        alert(error || '帳號或密碼錯誤')
+      } else {
+        alert(error || '登入失敗，請稍後再試')
+      }
     }
   }
 
@@ -52,7 +71,7 @@ export default function LoginPage() {
       </div>
       <div className={memberCss.right}>
         <h1>登入GYM步空間</h1>
-        <form action="" onSubmit={onSubmit}>
+        <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>
             帳號
             <input

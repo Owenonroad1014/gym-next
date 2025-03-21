@@ -1,11 +1,14 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import articleStyle from '../article.module.css'
-import { FaList, FaRegHeart } from 'react-icons/fa'
+import { FaList, FaRegHeart, FaHeart } from 'react-icons/fa'
 import { IoShareSocialSharp } from 'react-icons/io5'
 import Link from 'next/link'
+import { ARTICLE_ITEM_FAV, ARTICLE_ITEM_FAVTOGGLE } from '@/config/api-path'
 import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useAuth } from '@/context/auth-context'
 
 export default function ShareSidebar({
   articles = {
@@ -21,12 +24,15 @@ export default function ShareSidebar({
   },
 }) {
   const router = useRouter()
+  const { articleid } = useParams()
   const Swal = require('sweetalert2')
-  const [isShow, setIsShow] = useState(false)
-  const [like, setLike] = useState(articles.like_id || false)
+  const [like, setLike] = useState(false)
+  const { auth, getAuthHeader } = useAuth()
+  const [error, setError] = useState('')
+
   const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'top-start',
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: false,
@@ -35,30 +41,6 @@ export default function ShareSidebar({
       toast.onmouseleave = Swal.resumeTimer
     },
   })
-
-  const toggleLike = (e, article_id) => {
-    e.preventDefault()
-
-    fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
-      .then((r) => r.json())
-      .then((result) => {
-        console.log(result)
-        if (result.success) {
-          // setRefresh(!refresh)//充新抓資料
-          //另一種作法
-          const newListData = structuredClone(listData)
-          newListData.rows.forEach((r) => {
-            if (r.id == result.article_id) {
-              r.like_id = result.action == 'add' ? true : false
-            }
-          })
-          setListData(newListData)
-        }
-      })
-      .catch((error) => {
-        console.error('Error while updating favorite status:', error)
-      })
-  }
 
   const copyUrl = () => {
     // 獲取當前頁面的 URL
@@ -82,30 +64,71 @@ export default function ShareSidebar({
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      const distanceToBottom = documentHeight - scrollPosition - windowHeight // 到頁面底部的距離
-      if (window.scrollY > 300 && distanceToBottom > 220) {
-        setIsShow(true)
-      } else {
-        setIsShow(false)
+    const getFetchFav = async () => {
+      try {
+        const res = await fetch(`${ARTICLE_ITEM_FAV}/${articleid}`, {
+          headers: { ...getAuthHeader() },
+        })
+        if (!res.ok) {
+          setError('Failed to fetch fav')
+        }
+        const data = await res.json()
+        if (data.data[0].like_id > 0) {
+          setLike(true)
+        }
+      } catch (err) {
+        setError(err.message || 'Something went wrong')
       }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+    getFetchFav()
+  }, [articleid, auth, getAuthHeader, like])
 
+  const toggleLike = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await fetch(`${ARTICLE_ITEM_FAVTOGGLE}/${articleid}`, {
+        headers: { ...getAuthHeader() },
+      })
+      if (!res.ok) {
+        setError('Failed to fetch fav')
+      }
+      const data = await res.json()
+      console.log(data)
+      if (data.error == '需要登入會員') {
+        needlogin()
+        return
+      }
+      if (data.success) {
+        setLike(data.action == 'add' ? true : false)
+      }
+    } catch (error) {
+      console.error('Error while updating favorite status:', error)
+    }
+  }
+  const needlogin = () => {
+      const MySwal = withReactContent(Swal)
+      MySwal.fire({
+        title: '登入會員即可收藏!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#f87808',
+        cancelButtonColor: '#0b3760',
+        confirmButtonText: '登入',
+        cancelButtonText: '取消',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/quick-login')
+        }
+      })
+    }
   return (
     <>
-      <div
+      <div className={articleStyle.shareSidebar}>
+        {/* <div
         className={`${articleStyle.shareSidebar} ${
           isShow ? articleStyle.show : ''
         }`}
-      >
+      > */}
         <ul className={articleStyle.wrapper}>
           <li className={articleStyle.icon}>
             <Link href="/articles">
@@ -118,16 +141,16 @@ export default function ShareSidebar({
             <IoShareSocialSharp />
           </li>
 
-          <li className={articleStyle.icon}>
-            <span className={articleStyle.tooltip}>收藏</span>
-            {like ? (
-              <FaHeart
-                className={articleStyle.heartActive}
-                onClick={(e) => toggleLike(e, articles.id)}
-              />
-            ) : (
-              <FaRegHeart onClick={(e) => toggleLike(e, articles.id)} />
-            )}
+          <li
+            className={`${articleStyle.icon} ${
+              like ? articleStyle.heartActive : ''
+            }`}
+            onClick={(e) => toggleLike(e)}
+          >
+            <span className={articleStyle.tooltip}>
+              {like ? '取消收藏' : '收藏'}
+            </span>
+            {like ? <FaHeart /> : <FaRegHeart />}
           </li>
         </ul>
       </div>

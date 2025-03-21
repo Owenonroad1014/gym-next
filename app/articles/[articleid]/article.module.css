@@ -5,20 +5,29 @@
 .topSection {
   display: flex;
   margin-top: 40px;
+  position: relative;
+}
+.loaderContainer{
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 50px;
 }
 /* shareSidebar */
 .shareSidebar {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  /* opacity: 0; */
+  /* visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; */
 }
 .show {
   opacity: 1;
-  visibility: visible;
+  /* visibility: visible; */
 }
 .wrapper {
-  position: fixed;
-  left: 5px;
+  position: absolute;
+  left: 10px;
   top: 60px;
   list-style: none;
   height: 120px;
@@ -46,9 +55,11 @@
 }
 
 .wrapper .tooltip {
+  width: 80px;
   position: absolute;
   top: 0;
   font-size: 14px;
+  text-align: center;
   background: #f87808;
   color: #fff;
   padding: 5px 8px;
@@ -62,8 +73,8 @@
 .wrapper .tooltip::before {
   position: absolute;
   content: '';
-  height: 8px;
-  width: 8px;
+  height: 10px;
+  width: 10px;
   background: #fff;
   bottom: -3px;
   left: 50%;
@@ -89,8 +100,9 @@
   background: #f87808;
   color: #fff;
 }
+
 .wrapper .icon.heartActive {
-  background: #f87808;
+  background-color: #f87808;
   color: #fff;
 }
 
@@ -175,6 +187,46 @@
   font-weight: bold;
   color: rgb(160, 134, 82);
   margin-bottom: 16px;
+}
+.guide {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+  margin-bottom: 60px;
+}
+.backArticle {
+  width: 45%;
+}
+.nextArticle {
+  width: 45%;
+  text-align: right;
+}
+.nextArticle a {
+  transition: all 0.2s;
+}
+.nextArticle a:hover {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  transition: all 0.2s;
+  color: #f87808;
+}
+.backArticle a {
+  /* color: rgb(160, 134, 82); */
+  /* font-weight: 600; */
+
+  transition: all 0.2s;
+}
+.backArticle a:hover {
+  color: #f87808;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  transition: all 0.2s;
+}
+.nextArticle p {
+  margin-top: 8px;
+}
+.backArticle p {
+  margin-top: 8px;
 }
 /* 輪播 */
 

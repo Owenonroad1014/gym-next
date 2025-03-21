@@ -20,11 +20,8 @@ export default function ClassCalenderPage(props) {
   const location = searchParams.get('location')
   const branch = searchParams.get('branch')
           
-
-  useEffect(() => {
-      const fetchClasses = async () => {
+const fetchClasses = async () => {
         try {
-          
           
           const response = await fetch(
             `${CLASSES_LIST}?${
@@ -43,8 +40,14 @@ export default function ClassCalenderPage(props) {
           setLoading(false)
         }
       }
+  useEffect(() => {
+      
       fetchClasses();
     }, [searchParams, location, branch])
+
+    const handleReservationSuccess = () => {
+      fetchClasses();
+    }
 
   return (
     <>
@@ -103,10 +106,13 @@ export default function ClassCalenderPage(props) {
         coach_id: classes.coach_id,
         start_time: classes.start_time,
         end_time: classes.end_time,
-        
+        location: classes.location,
+        branch: classes.branch,
       }))} 
       location={location}
-      branch={branch} />
+      branch={branch} 
+      onReservationSuccess={handleReservationSuccess}
+      />
           </div>
         ) : (
           <>

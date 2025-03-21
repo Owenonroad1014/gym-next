@@ -8,7 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { GrArticle } from 'react-icons/gr'
 import { ARTICLE_RECOMMAND } from '@/config/api-path'
-import { useAuth } from '@/contexts/auth-context'
+import { useAuth } from '@/context/auth-context'
 
 export default function Recommend({ articleid = 0 }) {
   const settings = {

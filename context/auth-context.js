@@ -7,7 +7,7 @@ const AuthContext = createContext()
 const emptyAuth = {
   id: 0,
   account: '',
-  nickname: '',
+  // avatar: '',
   token: '',
 }
 const storageKey = 'gymboo-auth'
@@ -33,8 +33,10 @@ export function AuthContextProvider({ children }) {
     if (result.success) {
       localStorage.setItem(storageKey, JSON.stringify(result.data))
       setAuth(result.data)
+      return { success: true };
+    }else{
+      return { success: false, error: result.error, code: result.code  };
     }
-    return result.success
   }
 
   const getAuthHeader = () => {

@@ -5,11 +5,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
+import { usePathname } from 'next/navigation'
 
-// 再header 判斷 return null
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
+
+  const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 36) {
@@ -26,6 +29,20 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+  // 判斷是否要隱藏 Header
+  if (pathname.startsWith('/member'||'/member/register')) {
+    return null // `/member` 底下的頁面不顯示 Header
+  }
+  // const hideHeaderPages = [
+  //   '/member/login',
+  //   '/member/register',
+  //   '/member',
+  //   '/member/forgot-password',
+  //   '/member/register/add-profile',
+  // ]
+  // if (hideHeaderPages.includes(pathname)) {
+  //   return null // 這些頁面不顯示 Header
+  // }
 
   return (
     <>
@@ -67,7 +84,7 @@ export default function Header() {
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
-                {auth.nickname}
+                {/* {auth.avatar} */}
               </Link>
               <a
                 href="/qs"
