@@ -12,7 +12,8 @@ export default function LoginPage() {
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
 
-  console.log({ auth })
+
+
   const router = useRouter()
 
   const [loginForm, setLoginForm] = useState({
@@ -40,7 +41,7 @@ export default function LoginPage() {
 
     if (success) {
       // modal.show()
-      console.log('登入成功')
+      console.log('登入成功', { auth })
       if (router.back() === '/member/register') {
         router.push('/')
       }
