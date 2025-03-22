@@ -52,7 +52,7 @@ export default function List() {
       }
     }
     fetchListData()
-  }, [params])
+  }, [params, auth, getAuthHeader])
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function List() {
           <p>
             會員專屬內容 <br />
             <br />
-            <Link href="/quick-login">登入即可查看</Link>
+            <Link href="/member/login">登入即可查看</Link>
           </p>
         </div>
       ) : (
@@ -76,7 +76,7 @@ export default function List() {
             <>
               <div className={friendStyle.rightsection}>
                 <div className={friendStyle.personList}>
-                  <Item listData={listData}  />
+                  <Item listData={listData} />
                 </div>
                 <div className={friendStyle.pagination}>
                   <Link

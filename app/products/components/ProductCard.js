@@ -1,9 +1,11 @@
 import React from "react";
 import AddToCartButton from "./AddToCartButton";
 import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import styles from "./_styles/ProductCard.module.css";
 import { IMG_PATH } from "@/config/api-path";
 import Link from "next/link";
+import FavoriteButton from "./favorite-button"; // 新增 FavoriteButton
 
 const ProductCard = ({id, product_name, price, description, image_url, variant }) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
@@ -25,7 +27,9 @@ const ProductCard = ({id, product_name, price, description, image_url, variant }
         <p className={styles.description}>{description}</p>
         <div className={styles.btns}>
         <AddToCartButton variant={variant}     />
-        <FaRegHeart className={styles.heart}/>
+        <span className={styles.hearts}>
+        <FavoriteButton />
+        </span>
         </div>
       </div>
     </article>

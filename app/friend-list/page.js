@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import friendListStyle from './friendList.module.css'
-import { useAuth } from '@/contexts/auth-context'
+import { useAuth } from '@/context/auth-context'
 import {
   FRIEND_LIST,
   FRIEND_REQ_LIST,
@@ -80,7 +80,7 @@ export default function FriendListPage() {
   }
 
   // 接受好友邀請
-  const acceptFriendRequest = async (sender_id) => {
+  const acceptFriendRequest = async (sender_id, username) => {
     try {
       const res = await fetch(FRIEND_ACCEPT, {
         method: 'POST',
@@ -94,6 +94,7 @@ export default function FriendListPage() {
       setFriendAccept(data || {})
       setIsAccept(!isAccept)
       console.log(data)
+      alert('已接受好友邀請')
     } catch (err) {
       setError(err.message || 'Something went wrong')
     }
@@ -141,7 +142,12 @@ export default function FriendListPage() {
                   <div className={friendListStyle.name}>{v.sender_name}</div>
                   <div className={friendListStyle.btngroup}>
                     <button
-                      onClick={() => acceptFriendRequest(v.sender_id)}
+                      onClick={() =>
+                        acceptFriendRequest(
+                          v.sender_id,
+                          v.name == v.user1_name ? v.user2_name : v.user1_name
+                        )
+                      }
                       disabled={isAccept}
                     >
                       同意
@@ -169,7 +175,7 @@ export default function FriendListPage() {
               return (
                 <li key={i}>
                   <div className={friendListStyle.name}>
-                    {v.name == v.user1_name ? v.user2_name : v.user1_name}{' '}
+                    {v.member_id == v.user1_id ? v.user2_name : v.user1_name}{' '}
                   </div>
                   <div className={friendListStyle.btngroup}>
                     <button>
@@ -180,8 +186,8 @@ export default function FriendListPage() {
                       style={{ backgroundColor: '#c97d7d' }}
                       onClick={() => {
                         deleteFriend(
-                          v.id === v.user1_id ? v.user2_id : v.user1_id,
-                          v.id === v.user1_id ? v.user2_name : v.user1_name
+                          v.member_id === v.user1_id ? v.user2_id : v.user1_id,
+                          v.member_id === v.user1_id ? v.user2_name : v.user1_name
                         )
                       }}
                     >
