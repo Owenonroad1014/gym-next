@@ -4,22 +4,13 @@ import { PRODUCTS_LIST_TOGGLE_LIKE } from "@/config/api-path";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useRouter } from 'next/navigation'
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import styles from "./_styles/FavoriteButton.module.css"
 
-const FavoriteButton = ({ product_id, like_id, setIsLiked = () => {} }) => {
+const FavoriteButton = ({ product_id, like_id, isLiked }) => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false);
   const [like, setLike] = useState(like_id || false)
   // 取得 Auth 狀態和驗證標頭
-  const { getAuthHeader } = useAuth();
-
-  useEffect(() => {
-    setLike(like_id)
-  },[like_id])
-
-  useEffect(()=>{
-    setIsLiked(like)
-  },[ like ])
+  const { auth, getAuthHeader } = useAuth();
 
   const toggleLike = (e, product_id) => {
     e.preventDefault()
@@ -37,10 +28,12 @@ const FavoriteButton = ({ product_id, like_id, setIsLiked = () => {} }) => {
                 }
                 if (result.success) {
                   setLike(!like)
+                  setIsLiked(like)
                 }
               })
               .catch((error) => {
                 console.error('Error while updating favorite status:', error)
+                setLoading(false)
               })
           }
           const needlogin = () => {
@@ -63,9 +56,10 @@ const FavoriteButton = ({ product_id, like_id, setIsLiked = () => {} }) => {
   return (
     <button
       onClick={(e) => toggleLike(e, product_id)}
-      className={styles.hearts}
+      disabled={loading}
+      className={`p-2 rounded ${isLiked ? "bg-red-500 text-white" : "bg-gray-200 text-black"}`}
     >
-      {like ? <FaHeart className={styles.heart}/>: <FaRegHeart className={styles.heart}/> }
+      {loading ? "處理中..." : isLiked ? "❤️ 已收藏" : "🤍 收藏"}
     </button>
   );}
 

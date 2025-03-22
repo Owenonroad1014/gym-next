@@ -1,3 +1,4 @@
+
 import React from 'react'
 import ProductCard from './ProductCard'
 import styles from './_styles/ProductGrid.module.css'
@@ -6,12 +7,14 @@ import { useState, useEffect} from "react";
 import Sort from "./sort";
 import { PRODUCTS_LIST } from "@/config/api-path";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/context/auth-context";
 
 
 const ProductGrid = () => {
-
+  const { auth, getAuthHeader } = useAuth()
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isLiked, setIsLiked] = useState(false);
   const [Products, setProducts] = useState({
     success: false,
     perPage: 0,
@@ -21,17 +24,31 @@ const ProductGrid = () => {
     rows: [],
     keyword: ""
       });
-  
-  useEffect(() => {
-    fetch(`${PRODUCTS_LIST}${location.search}`)
-    .then((r) => r.json())
-      .then((obj) => {
-        console.log(`${PRODUCTS_LIST}${location.search}`);
-        if (obj.success) {
-          setProducts(obj);
-        }
-      });
-  }, [searchParams]);
+
+      useEffect(() => {
+        
+        const fetchProducts = async () => {
+
+          try {
+            const headers = auth ? { ...getAuthHeader() } : {}
+            const res = await fetch(`${PRODUCTS_LIST}${location.search}`, {
+              headers,
+              }
+            );
+            const obj = await res.json();
+            console.log("後端回傳的商品列表:", obj);
+
+            if (obj.success) {
+              setProducts(obj || {});
+            }
+
+          } catch (error) {
+            console.error("獲取商品列表錯誤:", error);
+          }
+        };
+    
+        fetchProducts();
+      }, [auth, getAuthHeader, searchParams, isLiked]);
 
   
 
@@ -42,7 +59,7 @@ const ProductGrid = () => {
         
           <div className={styles.productItem}>
               {Products.rows.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <ProductCard key={product.id} {...product} setIsLiked={setIsLiked} />
               ))}
               </div>
               <div>
