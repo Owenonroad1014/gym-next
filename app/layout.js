@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
 import { AuthContextProvider } from '@/context/auth-context'
+import { CartProvider } from "@/context/cart-context";
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
 //   variable: '--font-geist-sans',
@@ -23,9 +24,11 @@ export default function RootLayout({ children }) {
     <AuthContextProvider>
       <html lang="en">
         <body>
+        <CartProvider>
           <Header />
           {children}
           <Footer />
+        </CartProvider>
         </body>
       </html>
     </AuthContextProvider>

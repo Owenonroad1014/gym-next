@@ -4,16 +4,23 @@ import styles from "./_styles/order-summary.module.css";
 import PaymentMethodSection from "./payment-method-section";
 import PickupStoreSection from "./pickup-store-section";
 import { useCart } from "@/context/cart-context"; // 引入 Context
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'; // 改用 useRouter 進行頁面跳轉
 
 function OrderSummary() {
   const { subtotal } = useCart(); //獲取總金額
+  const router = useRouter(); // 使用 Next.js 路由
+
   const shipping = 0;
   const total = subtotal + shipping;
 
   // 這裡可以執行結帳邏輯
   const handleCheckout = () => {
+    if (subtotal === 0) {
+      alert("您的購物車是空的，請先添加商品！");
+      return;
+      }
     console.log("Processing checkout...");
+    router.push("/carts/data"); // 使用 Next.js 進行頁面跳轉
   };
 
   return (
@@ -47,10 +54,10 @@ function OrderSummary() {
             </div>
           </div>
           {/* Checkout button */}
-          
-          <button className={styles.checkoutButton} onClick={handleCheckout}>
-            <Link href="/carts/data"><span>訂單確認</span></Link>
+           <button className={styles.checkoutButton} onClick={handleCheckout} disabled={subtotal === 0} >{/*如果購物車為空，禁用按鈕 */}
+           <span>訂單確認</span>
           </button>
+          
           {/* 如果這是一個真實的購物車，handleCheckout 可能會：
           送出訂單
           導向到付款頁面
