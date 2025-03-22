@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import chatListStyle from './_styles/chatList.module.css'
-import { useAuth } from '@/contexts/auth-context'
+import { useAuth } from '@/context/auth-context'
 import {
   CHATS_LIST,
   FRIEND_REQ_LIST,
@@ -14,6 +14,7 @@ import {
 
 export default function FriendListPage() {
   const { auth, getAuthHeader } = useAuth()
+  const [user, setUser] = useState(0) //正在使用者
   const [chatListData, setChatListData] = useState({})
   const [friendRequestListData, setFriendRequestListData] = useState({})
   const [friendAccept, setFriendAccept] = useState({})
@@ -22,6 +23,7 @@ export default function FriendListPage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
+    setUser(auth.id)
     // 獲取聊天室列表
     const fetchChatsList = async () => {
       try {
@@ -116,7 +118,7 @@ export default function FriendListPage() {
                 <li key={v.id}>
                   <Link href={`/chat/${v.id}`}>
                     <div className={chatListStyle.name}>
-                      {v.id == v.user1_id ? v.user2_name : v.user1_name}{' '}
+                      {user == v.user1_id ? v.user2_name : v.user1_name}{' '}
                     </div>
                     <div className={chatListStyle.btngroup}>
                       <button style={{ backgroundColor: '#c97d7d' }}>

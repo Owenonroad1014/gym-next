@@ -1,0 +1,149 @@
+/* components/reservation-modal.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 25px;
+  position: relative;
+}
+.modalBody {
+  margin: 50px 0;
+}
+.topsection {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+.uername {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.userInfo {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.userInfo p {
+  line-height: 1.7rem;
+  margin: 10px;
+}
+.userInfo p span {
+  padding: 5px;
+  margin-right: 5px;
+  background-color: #dee5e7;
+}
+/* button */
+.sendBtn {
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  /* font-family: inherit; */
+  font-size: 16px;
+  background: #142020;
+  color: white;
+  padding: 0.7em 0.9em;
+  padding-left: 0.8em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn:hover .svgWrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.btn:hover svg {
+  transform: translateX(2.1em) rotate(45deg) scale(1.1);
+}
+
+.btn:hover span {
+  transform: translateX(5em);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+.hastag ul {
+  display: flex;
+  list-style: none;
+}
+.hastag ul li {
+  margin: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.hastag svg {
+  width: 14px;
+  height: 14px;
+  fill: #333;
+}
+.hashtag li:hover {
+  background-color: #ff7f50;
+  color: white;
+  transform: scale(1.1);
+}
