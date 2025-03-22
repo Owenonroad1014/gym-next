@@ -8,6 +8,7 @@ import { FaRegHeart } from "react-icons/fa";
 import Breadcrumb from "./_components/breadcrumb";
 import { PRODUCTS_LIST, IMG_PATH } from "@/config/api-path";
 import RentalDate from "./_components/rental-date";
+import FavoriteBbutton from "./_components/favorite-button";
 
 
 const ProductDetail = () => {
@@ -107,7 +108,8 @@ const ProductDetail = () => {
           </div>
           <div className={styles.cartActions}>
           <button className={styles.addToCartButton}>加入購物車</button>
-          <FaRegHeart className={styles.heart}/>
+          {/* <FaRegHeart className={styles.heart}/> */}
+          <FavoriteBbutton />
           </div>
 
           
