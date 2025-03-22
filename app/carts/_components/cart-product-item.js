@@ -2,6 +2,9 @@
 import React from "react";
 import styles from "./_styles/cart-product-item.module.css";
 import { useCart } from "@/context/cart-context";
+import Image from "next/image";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function CartProductItem({ product }) {
   const { 
@@ -9,6 +12,9 @@ function CartProductItem({ product }) {
     increaseQuantity,
     decreaseQuantity,
     removeFromCart, } = useCart(); //取得購物車更新函式
+
+  const MySwal = withReactContent(Swal);
+
   const today = new Date().toISOString().split("T")[0]; // 取得今天的日期
   const rentalStartDate = product.rentalStartDate || "";
   const rentalEndDate = product.rentalEndDate || "";
@@ -49,19 +55,44 @@ function CartProductItem({ product }) {
 
   const subtotal = product.price * product.quantity * rentalDays; 
 
+  // 移除前確認視窗
+  const notifyAndRemove = () => {
+    MySwal.fire({
+      title: '你確定要移除商品嗎?',
+      text: '這個動作將無法復原!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: '取消',
+      confirmButtonText: '是的，我要刪除!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeFromCart(product.id);
+        MySwal.fire({
+          title: '已成功刪除!',
+          text: `${product.name} 已從購物車中刪除!`,
+          icon: 'success',
+        });
+      }
+    });
+  };
+
   return (
     <article className={styles.productItem}>
       <div className={styles.productInfo}>
-        <img
+        <Image
           src={product.image}
           alt={product.name}
           className={styles.productImage}
+          width={100} // 設定寬度
+          height={100} 
         />
         <div className={styles.productDetails}>
           <h3 className={styles.productName}>{product.name}</h3>
           <p className={styles.productWeight}>{product.weight}</p>
           {/*刪除按鈕 */}
-          <button className={styles.removeButton} onClick={() => removeFromCart(product.id)}>
+          <button className={styles.removeButton} onClick={notifyAndRemove}>
             <div className={styles.removeButtonContent}>
               <i className={styles.removeIcon} />
               <span>移除</span>

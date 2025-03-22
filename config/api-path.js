@@ -50,6 +50,10 @@ export const IMG_PATH = `${API_SERVER}/img`;
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
 
 
+// 取得訂單列表的資料 
+export const ORDERS_LIST = `${API_SERVER}/carts/api`;
+
+
 //**************** ARTICLE *****************
 // 獲取文章列表的資料
 export const ARTICLES_LIST = `${API_SERVER}/articles/api`
