@@ -1,16 +1,21 @@
 'use client'
-
 import styles from './_styles/locations.module.css'
 import React, { useState, useEffect } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
-import { MdShareLocation } from "react-icons/md";
+import { MdShareLocation } from "react-icons/md"
+import dynamic from 'next/dynamic'
+import 'leaflet/dist/leaflet.css'
+import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'
 
+const Map = dynamic(() => import('./_components/map'), {
+  ssr: false
+});
 
-export default function locationsPage() {
-  // const [city, setCity] = useState('')
-  // const [district, setDistrict] = useState('')
-  // const [trainers, setTrainers] = useState([])
+export default function LocationsPage() {
+  const [showMap, setShowMap] = useState(false);
+  const center = [23.7577054, 120.8964954];
+  const zoom = 8;
 
   return (
     <>
@@ -40,13 +45,24 @@ export default function locationsPage() {
               <Search />
             </div>
           </div>
-          <div className={styles.mapContainer}>
-          <div className={styles.mapIcon}><MdShareLocation /></div>
-          <h3> 點擊尋找最近的據點</h3>
-
+          <div
+            className={styles.mapContainer}
+            role="button"
+            tabIndex={0}
+            onClick={() => setShowMap(true)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                setShowMap(true);
+              }
+            }}
+          >
+            <>
+              <div className={styles.mapIcon}><MdShareLocation /></div>
+              <h3>點擊尋找最近的據點</h3>
+            </>
           </div>
-
           <div className={styles.resultsContainer}>
+            {showMap && <Map center={center} zoom={zoom} />}
             <div className={styles.emptyResults}>
               <p>選擇地區以顯示據點</p>
             </div>
