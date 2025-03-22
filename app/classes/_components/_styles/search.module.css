@@ -87,3 +87,9 @@
   cursor: pointer;
   border-radius: 3px;
 }
+
+@media (max-width: 440px){
+  .searchContainer {
+    width: 350px;
+  }
+}

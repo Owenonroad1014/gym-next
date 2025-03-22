@@ -15,10 +15,10 @@
     border-bottom: 1px solid #eee;
   }
   
-  .container h2 {
-    color: #0b3760;
+  .containerH2{
+    color: #142020;
     margin-bottom: 10px;
-    font-size:  30px;
+    font-size: 35px;
     text-align: center;
   }
   
@@ -50,7 +50,7 @@
 
   .nextWeek[disabled] {
     opacity: 0.5;
-    cursor: not-allowed;
+    pointer-events: none;
     background-color: #f0f0f0;
     color: #999;
   }
@@ -106,6 +106,7 @@
     font-weight: bold;
     margin-bottom: 5px;
   }
+
   .eventsWrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -151,10 +152,6 @@
     font-size: 18px;
     background-color: #adaaaa;
   }
-  .eventFull {
-    background-color: #999;
-    cursor: not-allowed;
-  }
   
   .capacity {
     margin-top: 4px;
@@ -162,12 +159,17 @@
   }
   
   .full {
-    color: #ff4d4f;
+    background-color: #999;
+    pointer-events: none;
+    color: #000;
     font-weight: bold;
+    border-right: none;
+    opacity: 0.7;
   }
   
   .available {
     color: #081a00;
+    
   }
   
   
@@ -192,39 +194,77 @@
     margin-top: 5px;
   }
   
-  @media (max-width: 768px) {
-    .days {
-      gap: 0;
-    }
-    
-    .day {
-      min-height: 80px;
-      font-size: 0.8rem;
-    }
-    
-    .event {
-      padding: 3px;
-      font-size: 1rem;
-    }
-    .time {
-      font-size: 13px;
-      color: #fffcfc;
-      margin-top: 5px;
-    }
+ 
+@media (max-width: 768px) {
+  .containerH2{
+    font-size: 30px;
   }
   
-  @media (max-width: 375px) {
-    .container {
-      padding: 10px;
-    }
-    
-    .header {
-      flex-direction: column;
-      gap: 10px;
-      text-align: center;
-    }
-    
-    .day {
-      min-height: 60px;
-    }
+  .dateInfo {
+    font-size: 18px;
   }
+  
+  .nextWeek {
+    font-size: 24px;
+    height: 35px;
+  }
+  
+  .dayNumber {
+    font-size: 20px;
+  }
+  
+  .event {
+    min-height: 70px;
+    padding: 5px;
+    font-size: 18px;
+  }
+  
+  .eventsContainer {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 440px) {
+
+  .container h2 {
+    font-size: 22px;
+  }
+  .container {
+    padding: 5px;
+  }
+  
+  .header {
+    padding: 5px 0 ;
+    
+  }
+  
+  .dateInfo {
+    font-size: 16px;
+  }
+  
+  .nextWeek {
+    font-size: 20px;
+    height: 30px;
+  }
+  
+  .dayNumber {
+    font-size: 18px;
+  }
+  
+  .event {
+    min-height: 50px;
+    padding: 6px;
+    font-size: 18px;
+    font-weight: 400;;
+  }
+  
+  .eventsContainer {
+    min-height: 100px;
+  }
+  
+  .noEvent {
+    font-size: 22px;
+    padding-bottom: 10px;
+  }
+}
+

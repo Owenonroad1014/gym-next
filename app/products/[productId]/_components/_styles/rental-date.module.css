@@ -1,0 +1,30 @@
+.dateSelect{
+    display: flex;
+    justify-content:space-between;
+    font-weight: 800;
+    flex-direction: row;
+    color: rgb(65, 63, 60);
+}
+.label{
+    font-size: 18px;
+
+}
+.input{
+    margin-top: 10px;
+    width: 98%;
+    height: 30px;
+    font-size: 14px;
+}
+
+.rentalDays{
+    color: #eb7318;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+@media (width <= 960px) {
+    .dateSelect {
+      display: block;
+    }
+    
+  }

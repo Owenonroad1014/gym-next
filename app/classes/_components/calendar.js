@@ -11,6 +11,7 @@ export default function CourseCalendar({
   classes = [],
   location = '',
   branch = '',
+  onReservationSuccess,
 }) {
   const [selectedClass, setSelectedClass] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -67,22 +68,18 @@ export default function CourseCalendar({
   }
 
   // 處理卡片點擊
-  const handleCardClick = (classData) => {
-    console.log('Clicked classData:', classData)
 
-    if (!classData || !classData.date) {
-      console.error('Error: classData or date is undefined')
-      return
-    }
-
-    console.log('Formatted date:', new Date(classData.date).toISOString())
-    const formattedDate = new Date(classData.date) // 確保 date 是 Date 物件
-    setSelectedClass({
-      ...classData,
-      date: formattedDate.toISOString(),
-    })
-    setIsModalOpen(true)
-  }  
+const handleCardClick = (classData) => {
+  console.log('Clicked classData:', classData) // 先看看收到的資料
+  
+  if (!classData || !classData.date) {
+    console.error('Error: classData or date is undefined')
+    return
+  }
+  // 這裡不要用 setSelectedClass 覆蓋所有資料
+  setSelectedClass(classData) // 直接使用完整的 classData
+  setIsModalOpen(true)
+}
 
   // 處理預約提交
   const handleReservationSubmit = async () => {
@@ -121,6 +118,10 @@ export default function CourseCalendar({
       
       setIsModalOpen(false)
       alert('預約成功')
+      if(onReservationSuccess){
+        onReservationSuccess()
+      }
+
     } catch (error) {
       console.error('Reservation failed:', error)
       alert(error.message)
@@ -130,7 +131,7 @@ export default function CourseCalendar({
   return (
     <>
       <div className={styles.container}>
-        <h2>{`${location}${branch}課程表`}</h2>
+        <h2 className={styles.containerH2}>{location && branch ? `${location}${branch}課程表` : '課程表'}</h2>
         <div className={styles.header}>
           <button
             onClick={handlePrevWeek}

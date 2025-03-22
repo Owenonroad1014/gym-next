@@ -45,8 +45,21 @@
     display: block;
   }
 
+  .breadcrumbItem span {
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Noto Serif TC', serif;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, color 0.3s ease;
+    height: 60px;
+    line-height: 60px;
+    display: block;
+  }
+
   .active{
     color: #db6318;
+    font-weight: bold;
   }
 
   /* .breadcrumbItem .activeLink {
