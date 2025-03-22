@@ -1,14 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { useCart } from "@/context/cart-context"; // 引入 Context
 import styles from "./_styles/payment-method-section.module.css";
 
 function PaymentMethodSection() {
-  const [selectedMethod, setSelectedMethod] = useState(""); // 儲存選擇的付款方式
-  const paymentMethods = ["信用卡", "現金"]; // 選項
-
-  const handleMethodChange = (event) => {
-    setSelectedMethod(event.target.value);
-  };
+  const { paymentMethod, updatePaymentMethod } = useCart(); // 從 Context 取得狀態
+  const paymentMethods = ["信用卡", "現金"]; 
 
   return (
     <div className={styles.sectionContainer}>
@@ -18,8 +15,8 @@ function PaymentMethodSection() {
       <div className={styles.dropdownContainer}>
         <select
           className={styles.paymentDropdown}
-          value={selectedMethod}
-          onChange={handleMethodChange}
+          value={paymentMethod}
+          onChange={(e) => updatePaymentMethod(e.target.value)} // 更新 Context 狀態
         >
           <option value="">請選擇付款方式</option>
           {paymentMethods.map((method, index) => (
