@@ -120,3 +120,12 @@
   margin: 0px 10px;
   gap: 35px;
 }
+
+.loaderContainer{
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 50px;
+}

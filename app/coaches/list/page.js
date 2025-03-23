@@ -10,6 +10,7 @@ import Search from '../_components/search'
 import Pagination from '../_components/pagination'
 import SearchForm from '../_components/search-form'
 import { COACHES_LIST } from '../../../config/api-path'
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 export default function CoachesListPage(props) {
   const [coaches, setCoaches] = useState([])
@@ -41,6 +42,7 @@ export default function CoachesListPage(props) {
           setCoaches(data.rows)
         }
         setLoading(false)
+        
       } catch (error) {
         console.error('Error:', error)
         setLoading(false)
@@ -48,6 +50,7 @@ export default function CoachesListPage(props) {
     }
     fetchCoaches()
   }, [searchParams])
+  
 
   return (
     <>
@@ -79,34 +82,40 @@ export default function CoachesListPage(props) {
               <Search />
             </div>
           </div>
-
-          <div>
             <div className={styles.toolsContainer}>
               <Breadcrumb breadcrumb={breadcrumb} />
               <SearchForm />
             </div>
-          </div>
-          <div className={styles.coachesContainer}>
-            {currentCoaches.map((coach) => (
-              <CoachesCard
-                key={coach.id}
-                id={coach.id}
-                name={coach.name}
-                email={coach.email}
-                phone={coach.phone}
-                skill={coach.skill}
-                description={coach.description}
-                avatar={coach.avatar}
-              />
-            ))}
-          </div>
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
+            {loading ? (
+  <div className={styles.loaderContainer}>
+    <div className={loaderStyle.loader}></div>
+  </div>
+) : (
+  <>
+    <div className={styles.coachesContainer}>
+      {currentCoaches.map((coach) => (
+        <CoachesCard
+          key={coach.id}
+          id={coach.id}
+          name={coach.name}
+          email={coach.email}
+          phone={coach.phone}
+          skill={coach.skill}
+          description={coach.description}
+          avatar={coach.avatar}
         />
+      ))}
+    </div>
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  </>
+)}
+        </div>
       </div>
     </>
   )
 }
+

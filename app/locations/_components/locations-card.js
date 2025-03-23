@@ -2,23 +2,24 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './_styles/locations-card.module.css';
+import { AVATAR_PATH } from '../../../config/api-path';
 
 const LocationCard = ({ location }) => {
   return (
     <div className={styles.innerContainer}>
       <div className={styles.imageWrapper}>
-        {/* <Image 
-          src={location.avatar || "https://placehold.co/225x200"}
+        <Image 
+          src={`${AVATAR_PATH}/${location.avatar}`}
           alt="場地照片"
-          width={225}
-          height={200}
-        /> */}
+          width={296}
+          height={212}
+        />
       </div>
       
       <div className={styles.contentWrapper}>
         <div className={styles.titleSection}>
           <div className={styles.titleContainer}>
-            <h1 className={styles.title}>{location.location}</h1>
+            <h1 className={styles.title}>{location.location}{location.branch}</h1>
           </div>
           
           <div className={styles.infoContainer}>

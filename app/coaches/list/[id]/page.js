@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import CoachDetail from '../../_components/coaches-detail';
 import { COACHES_ITEM_GET } from '@/config/api-path';
+import loaderStyle from '@/app/_components/_styles/loading.module.css';
 
 function CoachDetailPage() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ function CoachDetailPage() {
     fetchCoachData();
   }, [id]);
 
-  if (loading) return <div>載入中...</div>;
+  if (loading) return  <div className={loaderStyle.loader}></div>;
   if (error) return <div>{error}</div>;
   if (!coachData) return <div>找不到教練資料</div>;
 
