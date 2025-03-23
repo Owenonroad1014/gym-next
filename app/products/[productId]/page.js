@@ -4,11 +4,14 @@ import { useParams, useRouter } from "next/navigation";
 import styles from "./_components/_styles/ProductDetail.module.css";
 import QuantitySelector from "./_components/QuantitySelector";
 import RelatedProducts from "./_components/RelatedProducts";
-import { FaRegHeart } from "react-icons/fa";
 import Breadcrumb from "./_components/breadcrumb";
 import { PRODUCTS_LIST, IMG_PATH } from "@/config/api-path";
 import RentalDate from "./_components/rental-date";
 import FavoriteBbutton from "./_components/favorite-button";
+import { useAuth } from "@/context/auth-context";
+import { useCart } from "@/context/cart-context";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 
 const ProductDetail = () => {
@@ -18,15 +21,26 @@ const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]); // 新增狀態
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [selectedWeight, setSelectedWeight] = useState(null);
+  const [likeId, setLikeId] = useState(false); // 新增狀態
+  const { auth, getAuthHeader } = useAuth()
+  const [quantity, setQuantity] = useState(1);
+  const [rentalStartDate, setRentalStartDate] = useState("");
+  const [rentalEndDate, setRentalEndDate] = useState("");
+  const MySwal = withReactContent(Swal);
+  const { addToCart } = useCart()
+
 
   useEffect(() => {
     console.log(params);
+    const headers = auth ? { ...getAuthHeader() } : {}
     const productId = params.productId;
     if (!productId) {
       router.push("/products"); // 沒給 productId, 跳到列表頁
       return;
     }
-    fetch(`${PRODUCTS_LIST}/${productId}`)
+    fetch(`${PRODUCTS_LIST}/${productId}`, {
+      headers,
+      })
       .then((r) => r.json())
       .then((result) => {
         console.log(result);
@@ -36,6 +50,7 @@ const ProductDetail = () => {
           const relatedProducts = result.relatedProducts
           setProduct({ id, product_name, description, price, image_url, average_rating, variants, category_name});
           setRelatedProducts(relatedProducts); // 設定相關商品
+          setLikeId(result.like_id); // 設定收藏狀態
 
           const newBreadcrumbs = [
             { label: "首頁", link: "/" },
@@ -52,7 +67,7 @@ const ProductDetail = () => {
           router.push("/products");
         }
       });
-  }, []);
+  }, [auth, getAuthHeader, likeId]);
 
     // 儲存選擇的重量到本地端
     const handleWeightChange = (event) => {
@@ -61,8 +76,59 @@ const ProductDetail = () => {
       localStorage.setItem("selectedVariant", variantId);
     };
 
+    // 更新數量
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
 
+  // 更新租借日期
+  const handleRentalDateChange = (startDate, endDate) => {
+    setRentalStartDate(startDate);
+    setRentalEndDate(endDate);
+  };
 
+  // 加入購物車
+  const handleAddToCart = () => {
+    if (!selectedWeight) {
+      MySwal.fire({
+        title: "請選擇重量!",
+        text: "請選擇商品的重量才能加入購物車。",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (!rentalStartDate || !rentalEndDate) {
+      MySwal.fire({
+        title: "請選擇租借日期!",
+        text: "請選擇租借的開始與結束日期。",
+        icon: "warning",
+      });
+      return;
+    }
+
+    const selectedVariant = product.variants.find((variant) => variant.variant_id == selectedWeight);
+
+    const cartItem = {
+      id: product.id,
+      name: product.product_name,
+      image: product.image_url,
+      price: product.price,
+      weight: selectedVariant ? `${selectedVariant.weight} 公斤` : "N/A",
+      quantity,
+      rentalStartDate,
+      rentalEndDate,
+    };
+
+    addToCart(cartItem);
+
+    MySwal.fire({
+      title: "成功加入購物車!",
+      text: `${product.product_name} 已加入購物車!`,
+      icon: "success",
+    });
+
+};
 
   return (
     <main className={styles.container}>
@@ -107,9 +173,9 @@ const ProductDetail = () => {
           <QuantitySelector />
           </div>
           <div className={styles.cartActions}>
-          <button className={styles.addToCartButton}>加入購物車</button>
-          {/* <FaRegHeart className={styles.heart}/> */}
-          <FavoriteBbutton />
+          <FavoriteBbutton product_id={product.id} likeId={likeId}/>
+          <button className={styles.addToCartButton} onClick={handleAddToCart}>加入購物車</button>
+
           </div>
 
           

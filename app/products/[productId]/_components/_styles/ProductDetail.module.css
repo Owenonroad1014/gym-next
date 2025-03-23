@@ -106,7 +106,7 @@
     width: 100%;
     /* background-color: white; */
     box-sizing: content-box;
-    margin: 10px 0 15px 0;
+    margin: 5px 0 5px 0;
     text-align: center;
   }
 
@@ -225,15 +225,18 @@
     font-size: 18px;
     font-weight: bold;
     color: #413f3c;
+    text-align: center;
   }
   .weightButton {
     background-color: #fff;
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
     width: 40%;
     height: 30px;
+    text-align: center;
+    font-size: 16px;
   }
 
   @media (width <= 1400px) {
@@ -260,7 +263,7 @@
     .productImage, .productInfo {
       width: 100%;
       margin: auto;
-      height: 500px;
+      height: 580px;
       
     }
     .itemTitle{
@@ -270,6 +273,16 @@
     }
     .selectionContainer{
       display: block;
+      
+    }
+
+  }
+
+  @media (width <= 390px) {
+    .productImage, .productInfo {
+      width: 100%;
+      margin: auto;
+      height: 600px;
       
     }
 

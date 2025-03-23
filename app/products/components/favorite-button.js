@@ -44,6 +44,7 @@ const FavoriteButton = ({ product_id, like_id, setIsLiked = () => {} }) => {
               })
           }
           const needlogin = () => {
+            document.body.style.overflow = 'hidden'
             const MySwal = withReactContent(Swal)
             MySwal.fire({
               title: '登入會員即可收藏!',
@@ -53,9 +54,12 @@ const FavoriteButton = ({ product_id, like_id, setIsLiked = () => {} }) => {
               cancelButtonColor: '#0b3760',
               confirmButtonText: '登入',
               cancelButtonText: '取消',
+              didClose: () => {
+                document.body.style.overflow = ''
+              },
             }).then((result) => {
               if (result.isConfirmed) {
-                router.push('/login')
+                router.push('/member/login')
               }
             })
       };
