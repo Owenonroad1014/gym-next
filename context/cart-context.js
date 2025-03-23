@@ -34,24 +34,24 @@ export function CartProvider({ children }) {
   const [paymentMethod, setPaymentMethod] = useState(""); // 付款方式
   const [pickupMethod, setPickupMethod] = useState(""); // 取貨方式
 
-  // 更新付款方式
+  // 付款方式
   const updatePaymentMethod = (method) => {
     setPaymentMethod(method);
   };
 
-  // 更新取貨方式
+  // 取貨方式
   const updatePickupMethod = (method) => {
     setPickupMethod(method);
   };
 
   // 計算租借天數
   const calculateRentalDays = (startDate, endDate) => {
-    if (!startDate || !endDate) return 1; // 若未選擇日期，至少算 1 天
+    if (!startDate || !endDate) return 1; 
     const start = new Date(startDate);
     const end = new Date(endDate);
     const diffTime = end - start;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? diffDays : 1; // 確保最少為 1 天
+    return diffDays > 0 ? diffDays : 1; 
   };
 
 
