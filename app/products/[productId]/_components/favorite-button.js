@@ -4,13 +4,23 @@ import { PRODUCTS_LIST_TOGGLE_LIKE } from "@/config/api-path";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useRouter } from 'next/navigation'
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import styles from "./_styles/FavoriteButton.module.css"
 
-const FavoriteButton = ({ product_id, like_id, isLiked }) => {
+const FavoriteButton = ({ product_id, likeId, setIsLiked = () => {} }) => {
   const router = useRouter()
-  const [loading, setLoading] = useState(false);
-  const [like, setLike] = useState(like_id || false)
+  const [like, setLike] = useState(likeId || false)
   // 取得 Auth 狀態和驗證標頭
-  const { auth, getAuthHeader } = useAuth();
+  const { getAuthHeader } = useAuth();
+
+  useEffect(() => {
+    setLike(likeId)
+  },[likeId])
+
+  useEffect(()=>{
+    setIsLiked(like)
+  },[ like ])
+
 
   const toggleLike = (e, product_id) => {
     e.preventDefault()
@@ -28,15 +38,14 @@ const FavoriteButton = ({ product_id, like_id, isLiked }) => {
                 }
                 if (result.success) {
                   setLike(!like)
-                  setIsLiked(like)
                 }
               })
               .catch((error) => {
                 console.error('Error while updating favorite status:', error)
-                setLoading(false)
               })
           }
           const needlogin = () => {
+            document.body.style.overflow = 'hidden'
             const MySwal = withReactContent(Swal)
             MySwal.fire({
               title: '登入會員即可收藏!',
@@ -46,21 +55,22 @@ const FavoriteButton = ({ product_id, like_id, isLiked }) => {
               cancelButtonColor: '#0b3760',
               confirmButtonText: '登入',
               cancelButtonText: '取消',
+                            didClose: () => {
+                document.body.style.overflow = ''}
             }).then((result) => {
               if (result.isConfirmed) {
-                router.push('/login')
+                router.push('/member/login')
               }
             })
       };
 
   return (
     <button
-      onClick={(e) => toggleLike(e, product_id)}
-      disabled={loading}
-      className={`p-2 rounded ${isLiked ? "bg-red-500 text-white" : "bg-gray-200 text-black"}`}
-    >
-      {loading ? "處理中..." : isLiked ? "❤️ 已收藏" : "🤍 收藏"}
-    </button>
+    onClick={(e) => toggleLike(e, product_id)}
+    className={styles.hearts}
+  >
+    {like ? <FaHeart className={styles.heart}/>: <FaRegHeart className={styles.heart}/> }
+  </button>
   );}
 
 
