@@ -1,123 +1,168 @@
-
 .innerContainer {
-    width: 250px;
-    max-width: 250px;
-    height: 400px;
-    padding: 4px 3px;
-    background: #0B3760;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
+  width: 280px;
+  max-width: 280px;
+  height: 400px;
+  padding: 4px 3px;
+  background: #0b3760;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  margin-top: 5px;
+}
+
+.imageWrapper {
+  width: 225px;
+  height: 212px;
+  position: relative;
+}
+
+.contentWrapper {
+  width: 250px;
+  height: 100%;
+  padding: 0px 12px 9px 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.titleSection {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 180px;
+}
+
+.title {
+  padding: 5px 0;
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  max-height: 100px; 
+  overflow: hidden; 
+}
+
+.titleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.titleContainer::after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: -5px;
+  background: #ffffff;
+  display: block;
+  margin-top: 5px;
+}
+
+.infoContainer {
+  padding: 8px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  letter-spacing: 1.1px;
+}
+
+.buttonContainer {
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.button {
+  border: none;
+  width: 50%;
+  height: 47px;
+  background: #e76317;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #eee;
+  color: rgb(23, 23, 23);
+}
+.button:first-child {
+  background: #eee;
+  color: rgb(23, 23, 23);
+}
+
+.button:hover:first-child {
+  background: #e76317;
+  color: white;
+}
+
+@media screen and (max-width: 440px) {
+  .innerContainer {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 400px;
   }
-  
+
   .imageWrapper {
-    width: 225px;
-    height: 212px;
-    position: relative;
+    width: 100%;
+    max-width: 225px;
+    height: auto;
   }
-  
+
   .contentWrapper {
-    width: 250px;
-    height: 100%;
-    padding: 0px 16px 9px 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
+    width: 100%;
+    padding: 0px 10px;
   }
-  
+
   .titleSection {
-    width: 100%;
-    padding: 13px 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    padding: 10px 0;
   }
-  
+
   .titleContainer {
-    width: 269px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+    width: 100%;
   }
+
   .title {
-    padding: 5px 0;
-    text-align: center;
-    color: white;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-size: 28px;
   }
 
-  .titleContainer::after{
-    content: "";
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    bottom: -5px;
-    background: #ffffff;
-    display: block;
-    margin-top: 5px;
-  }
-  
-  .infoContainer {
-    padding: 8px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
   .info {
-    width: 256px;
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    letter-spacing: 1.08px;
-  }
-  
-  .buttonContainer {
     width: 100%;
-    padding: 10px;
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 10px;
-    
-    
-  }
-  
-  .button {
-    border: none;
-    width: 50%;
-    height: 47px;
-    background: #E76317;
-    border-radius: 3px;
     font-size: 16px;
-    cursor: pointer;
-  }
-  .button:hover{
-    background: #eee;;
-    color: rgb(23, 23, 23);
-  }
-  .button:first-child {
-    background: #eee;
-    color: rgb(23, 23, 23);
   }
 
-  .button:hover:first-child {
-    background: #E76317;
-    color: white;
+  .buttonContainer {
+    flex-direction: column;
+    gap: 8px;
   }
-  
+
+  .button {
+    width: 100%;
+  }
+}

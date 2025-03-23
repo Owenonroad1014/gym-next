@@ -3,7 +3,7 @@ import styles from "./_styles/ProductCard.module.css";
 import { IMG_PATH } from "@/config/api-path";
 import Link from "next/link";
 
-const ProductCard = ({id, product_name, price, description, image_url, variant }) => {
+const ProductCard = ({id, product_name, price, description, image_url, variant}) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
 
   

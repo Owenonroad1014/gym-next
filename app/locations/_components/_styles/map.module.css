@@ -1,0 +1,49 @@
+/* Map.module.css */
+.map {
+    width: 100%;
+    height: 80vh; /* 固定高度 */
+    position: relative;
+    z-index: 0;
+    margin-bottom: 2rem; /* 添加間距 */
+}
+
+.locationsList {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto; /* 自動高度 */
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+@media screen and (max-width: 440px) {
+  .map {
+    height: 50vh; /* 手機版高度 */
+  }
+}
+
+
+:global(.leaflet-control-locate a) {
+  cursor: pointer;
+}
+
+:global(.leaflet-control-locate-location circle) {
+  animation: leaflet-control-locate-throb 4s ease infinite;
+}
+
+@keyframes leaflet-control-locate-throb {
+  0% {
+    stroke-width: 1;
+  }
+  50% {
+    stroke-width: 3;
+    transform: scale(0.8, 0.8);
+  }
+  100% {
+    stroke-width: 1;
+  }
+}
+

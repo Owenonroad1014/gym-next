@@ -6,21 +6,20 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
- 
 }
 .content {
   display: flex;
   flex-direction: column;
 }
 
-.locationsContainer{
+.locationsContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 10px ;
-  gap: 30px;
+  justify-content: flex-start;
+  margin: 10px 30px;
+  gap: 50px;
   margin-top: 50px;
-
+  padding-left: 50px;
 }
 .secTitle {
   font-size: 35px;
@@ -44,24 +43,29 @@
   color: #666;
 }
 
-.toolsContainer{
+.toolsContainer {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
 }
 
-
 .resultsContainer {
-  flex-grow: 1;
-  background-color: #ccc;
-  padding: 20px;
-  min-height: 200px;
-  border-radius: 4px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%;
+  border-radius: 4px;
   margin: 20px 10px;
+  position: relative;
+  gap: 2rem;
 }
+
+.mapContainer {
+  flex: 2;
+  height: 60vh;
+  position: relative;
+}
+
 .mapContainer {
   margin-top: 2px;
   background-color: #0b3760;
@@ -72,12 +76,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.mapContainer:hover {
+  background-color: #0a2e4d;
 }
 .mapContainer h3 {
   font-size: 22px;
   color: white;
-  
 }
 .mapIcon {
   font-size: 30px;
@@ -101,5 +109,3 @@
     font-size: 12px;
   }
 }
-
-
