@@ -9,6 +9,9 @@ import { PRODUCTS_LIST, IMG_PATH } from "@/config/api-path";
 import RentalDate from "./_components/rental-date";
 import FavoriteBbutton from "./_components/favorite-button";
 import { useAuth } from "@/context/auth-context";
+import { useCart } from "@/context/cart-context";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 
 const ProductDetail = () => {
@@ -20,6 +23,12 @@ const ProductDetail = () => {
   const [selectedWeight, setSelectedWeight] = useState(null);
   const [likeId, setLikeId] = useState(false); // 新增狀態
   const { auth, getAuthHeader } = useAuth()
+  const [quantity, setQuantity] = useState(1);
+  const [rentalStartDate, setRentalStartDate] = useState("");
+  const [rentalEndDate, setRentalEndDate] = useState("");
+  const MySwal = withReactContent(Swal);
+  const { addToCart } = useCart()
+
 
   useEffect(() => {
     console.log(params);
@@ -67,8 +76,59 @@ const ProductDetail = () => {
       localStorage.setItem("selectedVariant", variantId);
     };
 
+    // 更新數量
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
 
+  // 更新租借日期
+  const handleRentalDateChange = (startDate, endDate) => {
+    setRentalStartDate(startDate);
+    setRentalEndDate(endDate);
+  };
 
+  // 加入購物車
+  const handleAddToCart = () => {
+    if (!selectedWeight) {
+      MySwal.fire({
+        title: "請選擇重量!",
+        text: "請選擇商品的重量才能加入購物車。",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (!rentalStartDate || !rentalEndDate) {
+      MySwal.fire({
+        title: "請選擇租借日期!",
+        text: "請選擇租借的開始與結束日期。",
+        icon: "warning",
+      });
+      return;
+    }
+
+    const selectedVariant = product.variants.find((variant) => variant.variant_id == selectedWeight);
+
+    const cartItem = {
+      id: product.id,
+      name: product.product_name,
+      image: product.image_url,
+      price: product.price,
+      weight: selectedVariant ? `${selectedVariant.weight} 公斤` : "N/A",
+      quantity,
+      rentalStartDate,
+      rentalEndDate,
+    };
+
+    addToCart(cartItem);
+
+    MySwal.fire({
+      title: "成功加入購物車!",
+      text: `${product.product_name} 已加入購物車!`,
+      icon: "success",
+    });
+
+};
 
   return (
     <main className={styles.container}>
@@ -113,9 +173,9 @@ const ProductDetail = () => {
           <QuantitySelector />
           </div>
           <div className={styles.cartActions}>
-          <button className={styles.addToCartButton}>加入購物車</button>
-          {/* <FaRegHeart className={styles.heart}/> */}
           <FavoriteBbutton product_id={product.id} likeId={likeId}/>
+          <button className={styles.addToCartButton} onClick={handleAddToCart}>加入購物車</button>
+
           </div>
 
           

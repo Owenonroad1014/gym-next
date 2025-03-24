@@ -57,6 +57,10 @@ export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
 export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
 
 
+// 取得訂單列表的資料 
+export const ORDERS_LIST = `${API_SERVER}/carts/api`;
+
+
 //**************** ARTICLE *****************
 // 獲取文章列表的資料
 export const ARTICLES_LIST = `${API_SERVER}/articles/api`
