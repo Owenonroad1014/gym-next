@@ -44,11 +44,11 @@ function Search({ onSearch }) {
     e.preventDefault()
     router.replace(`/locations/list?location=${location}&branch=${branch}`, {
       scroll: false,
-    });
+    })
     // 觸發搜索回調
     if (onSearch) {
-      const searchTerm = `${location} ${branch}`.trim();
-      onSearch(searchTerm);
+      const searchTerm = `${location} ${branch}`.trim()
+      onSearch(searchTerm)
     }
   }
 
@@ -122,7 +122,7 @@ function Search({ onSearch }) {
         <button
           type="submit"
           className={styles.button}
-          disabled={!location || !branch} // 兩個都選了才能送出
+          disabled={!location} // 只需選擇地區即可送出
         >
           搜尋
         </button>

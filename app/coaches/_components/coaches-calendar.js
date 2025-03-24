@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import styles from './_styles/coaches-calendar.module.css'
 import { COACHES_CLASSES } from '@/config/api-path'
@@ -7,6 +7,7 @@ import moment from 'moment-timezone'
 import ReservationModal from '../../classes/_components/reservation-modal'
 import { CLASSES_CAPACITY_GET } from '@/config/api-path'
 import { CLASSES_RESERVATION_POST } from '@/config/api-path'
+import gsap from 'gsap'
 
 const CoachCalendar = ({name="", isOpen}) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -14,6 +15,7 @@ const CoachCalendar = ({name="", isOpen}) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedClass, setSelectedClass] = useState(null);
   const { id } = useParams()
+  const calendarRef = useRef(null)
 
  const fetchCoachCourses = async () => {
       try {
@@ -29,10 +31,43 @@ const CoachCalendar = ({name="", isOpen}) => {
 
   // 獲取教練課程資料
   useEffect(() => {
-    if(!isOpen) return; 
-    
+    const calendar = calendarRef.current
+    if(!isOpen) return;
     fetchCoachCourses()
-  }, [id, selectedDate, isOpen])
+    if (isOpen) {
+      gsap.fromTo(calendar,
+        {
+          opacity: 0,
+          y: 100,
+          height: 0,
+          duration: 0
+        },
+        {
+          opacity: 1,
+          y: 0,
+          height: 'auto',
+          duration: 0.8,
+          ease: 'power2.out',
+          clearProps: 'all' // 確保動畫結束後清除樣式
+        }
+      );
+      
+    }
+    if (isOpen && calendarRef.current) {
+      // 加入偏移量，確保完整顯示
+      const offset = 100; // 可依需求調整
+      const elementPosition = calendarRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    
+    
+  }, [id, isOpen])
+  
 
   if (!isOpen) return null;
 
@@ -107,25 +142,7 @@ const CoachCalendar = ({name="", isOpen}) => {
     
     setIsModalOpen(true)
   }
-  // // 處理課程預約
-  // const handleBooking = async (courseId) => {
-  //   try {
-  //     const response = await fetch('/api/book-course', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ courseId }),
-  //     })
-
-  //     if (response.ok) {
-  //       // 重新獲取課程資料以更新狀態
-  //       // fetchCoachCourses();
-  //     }
-  //   } catch (error) {
-  //     console.error('預約失敗:', error)
-  //   }
-  // }
+  
 
   // 處理預約提交
     const handleReservationSubmit = async () => {
@@ -176,6 +193,7 @@ const CoachCalendar = ({name="", isOpen}) => {
 
   return (
     <>
+    <div ref={calendarRef} style={{ overflow: 'hidden' }}>
     <div className={styles.container}>
     <h2 className={styles.containerH2}>{ name ? `${name}教練課程表` : '教練課程表'}</h2>
       <div className={styles.header}>
@@ -285,6 +303,7 @@ const CoachCalendar = ({name="", isOpen}) => {
           ))}
         </div>
       </div>
+    </div>
     </div>
     <ReservationModal
             isOpen={isModalOpen}

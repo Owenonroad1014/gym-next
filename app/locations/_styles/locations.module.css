@@ -17,9 +17,8 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 10px 30px;
-  gap: 50px;
-  margin-top: 50px;
-  padding-left: 50px;
+  gap: 30px;
+  margin-top: 50px
 }
 .secTitle {
   font-size: 35px;

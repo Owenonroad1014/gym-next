@@ -16,6 +16,7 @@ export default function LocationsPage() {
   const [showMap, setShowMap] = useState(false);
   const center = [23.7577054, 120.8964954];
   const zoom = 8;
+  
 
   return (
     <>
@@ -42,7 +43,7 @@ export default function LocationsPage() {
             </div>
             <h2 className={styles.secTitle}>尋找據點</h2>
             <div className={styles.filterContainer}>
-              <Search />
+              <Search/>
             </div>
           </div>
           <div

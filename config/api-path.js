@@ -7,6 +7,8 @@ export const AVATAR_PATH = `${API_SERVER}/imgs`;
 
 // 註冊路由
 export const REGISTER_POST = `${API_SERVER}/register/api`;
+// 註冊後填寫資料路由
+export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`;
 
 // 取得教練的資料 GET
 export const COACHES_LIST = `${API_SERVER}/coaches/api`;
