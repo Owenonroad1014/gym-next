@@ -1,8 +1,35 @@
-.chatsPage {
-  /* height: 50vh; */
+/* 聊天室預設畫面 */
+.intoChatRoom {
+  min-height: 100vh;
   width: 80%;
-  max-width: 600px;
-  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+.intoChatRoom p {
+  font-size: 30px;
+}
+.intoChatRoom a {
+  font-size: 20px;
+  color: #f87808;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+.intoChatRoom a:hover {
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+/* end */
+.chatsPage {
+  min-height: 80vh;
+  width: 80%;
+  margin: 0 20px;
   padding: 20px;
   background-color: #e5effa;
   border-radius: 8px;

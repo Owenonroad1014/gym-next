@@ -4,11 +4,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
 import chatStyle from './chatroom.module.css'
-import { CHATS_MSG, CHATS_ITEM, SEND_MSG, API_SERVER } from '@/config/api-path'
+import { CHATS_MSG, CHATS_ITEM } from '@/config/api-path'
 import { IoPerson } from 'react-icons/io5'
 import moment from 'moment'
 import io from 'socket.io-client'
-// import { io } from 'socket.io-client'
 export default function ChatRoomPage() {
   const params = useParams()
   const { auth, getAuthHeader } = useAuth()
@@ -17,49 +16,33 @@ export default function ChatRoomPage() {
   // const [user, setUser] = useState(0) //正在使用者
   const [error, setError] = useState('')
   const [isConnected, setIsConnected] = useState(false)
-  const [transport, setTransport] = useState('N/A')
   const [messages, setMessages] = useState([]) // 獲取聊天內容
   const [chatItem, setChatItem] = useState([]) //聊天室
   const [inputMsg, setInputMsg] = useState('') //正在輸入得文字內容
+  const [username, setUsername] = useState('')
   const user = auth.id
 
   let socket
-  socket = io('http://localhost:3006')
+  socket = io('http://localhost:3006/chat')
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('connect to ws server')
+    socket.on('sysmsg', (msg) => {
+      console.log(msg)
       setIsConnected(true)
     })
-    // socket.on('message', (message) => {
-    //   setMessages((pre) => {
-    //     return [...pre, JSON.parse(message)]
-    //   })
-    // })
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
-
-  // 連線聊天室
-  useEffect(() => {
-    const socket = io('http://localhost:3006')
-    socket.on('connect', () => {
-      setIsConnected(true)
-      setTransport(socket.io.engine.transport.name)
-      console.log('connect to ws server')
-      // console.log(transport) polling
+    console.log(user)
+    socket.emit('userId', user)
+    socket.emit('join_room', chatroomId) // 傳給後端房間號
+    socket.on('message', (msg) => {
+      console.log(msg)
     })
-    socket.on('message', (message) => {
-      console.log('message: ' + message)
-      setMessages((pre) => {
-        return [...pre, JSON.parse(message)]
-      })
+    socket.on('receive_message', (messageData) => {
+      console.log('receive_message', messageData)
+      setMessages((prevMessages) => [...prevMessages, messageData])
     })
     return () => {
       socket.disconnect()
     }
-  }, [])
-
+  }, [auth, chatroomId])
   useEffect(() => {
     // 獲取聊天室單一數據
     const fetchChatItem = async () => {
@@ -96,49 +79,19 @@ export default function ChatRoomPage() {
     fetchMsg()
   }, [auth, getAuthHeader])
 
-  // 按發送
-  // const handleOnclickSend = () => {
-  //   socket.emit('message', inputMsg)
-  //   setMessages((prevMessages) => [
-  //     ...prevMessages,
-  //     { use: 'Me', message: inputMsg },
-  //   ])
-  //   setInputMsg('')
-  // }
   const handleOnclickSend = async () => {
+    const now = new Date()
     if (inputMsg.trim() === '') return
-
     const messageData = {
       sender_id: user,
-      chat_id: chatroomId,
+      chat_id: parseInt(chatroomId),
       message: inputMsg,
+      created_at: moment(now),
     }
-    const now = new Date()
-    socket.emit('message', inputMsg)
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { user: user, message: inputMsg, time: moment(now).format('HH:mm') },
-    ])
-    console.log(messageData)
-    try {
-      const res = await fetch(SEND_MSG, {
-        method: 'POST',
-        headers: {
-          ...getAuthHeader(),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(messageData),
-      })
 
-      if (res.ok) {
-        // 發送後清空輸入框
-        setInputMsg('')
-      } else {
-        setError('Failed to send message')
-      }
-    } catch (err) {
-      setError(err.message || 'Something went wrong')
-    }
+    socket.emit('send_message', messageData)
+    console.log(messageData)
+    setInputMsg('')
   }
 
   return (
@@ -151,35 +104,40 @@ export default function ChatRoomPage() {
               ? chatItem.user2_name
               : chatItem.user1_name}
           </div>
+          <div
+            className={isConnected ? chatStyle.connect : chatStyle.disconnect}
+          >
+            {isConnected ? 'connection' : 'disconnection'}
+          </div>
           <div className={chatStyle.chatBox}>
             {/* 顯示消息 */}
-            <div className={chatStyle.messages}>
+            <ul className={chatStyle.messages}>
               {messages?.length > 0 ? (
-                messages?.map((message, index) => (
-                  <div key={index}>
+                messages?.map((v, index) => (
+                  <li key={index}>
                     <div
                       className={`${chatStyle.message} ${
-                        user == message.sender_id
+                        user == v.sender_id
                           ? chatStyle.sent
                           : chatStyle.received
                       }`}
                     >
-                      {message.message}
+                      {v.message}
                     </div>
                     <pre
                       className={chatStyle.time}
                       style={{
-                        textAlign: user == message.sender_id ? 'right' : 'left',
+                        textAlign: user == v.sender_id ? 'right' : 'left',
                       }}
                     >
-                      {moment(message.created_at).format('HH:mm')}
+                      {moment(v.created_at).format('HH:mm')}
                     </pre>
-                  </div>
+                  </li>
                 ))
               ) : (
-                <div className={chatStyle.noMessages}>暫無消息</div>
+                <li className={chatStyle.noMessages}>暫無消息</li>
               )}
-            </div>
+            </ul>
 
             {/* 用戶輸入區域 <button onClick={sendMessage}>發送</button>*/}
             <div

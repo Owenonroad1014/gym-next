@@ -86,7 +86,7 @@
   margin: auto;
   margin-bottom: 100px;
 }
-.loaderContainer{
+.loaderContainer {
   width: 80%;
   display: flex;
   justify-content: center;
@@ -221,6 +221,15 @@
   border-bottom: #f87808 1px solid;
 }
 /* #endregion ================= Select  End ====================== */
+.noarticle {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+.noarticle p {
+  font-size: 20px;
+}
 
 /* #region ================= List  Start ====================== */
 
