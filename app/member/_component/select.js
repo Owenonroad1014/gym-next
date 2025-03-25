@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import articleStyle from '../_styles/member.module.css'
+import selectStyle from '../_styles/member.module.css'
 import { MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -15,8 +15,9 @@ export default function Select() {
     '好友列表',
     
   ]
-  const selectArea2 = ['文章', '影片']
-  const selectArea3 = ['個人檔案', '修改密碼']
+  const selectArea2 = ['我的預約']
+  const selectArea3 = ['文章', '影片','器械用品']
+  const selectArea4 = ['個人檔案', '修改密碼']
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1140) {
@@ -44,24 +45,24 @@ export default function Select() {
       <>
         <button
           onClick={() => setMenuShow(!menuShow)}
-          className={articleStyle.selectBtn}
+          className={selectStyle.selectBtn}
         >
           {menuShow ? <MdMenuOpen /> : <MdMenu />}
         </button>
         <section
-          className={articleStyle.selectArea}
+          className={selectStyle.selectArea}
           style={{
             display: menuShow ? 'block' : 'none',
           }}
         >
           
-          <ul className={articleStyle.selectPart}>
-            <span className={articleStyle.categoryTitle}>我的GYM友</span>
+          <ul className={selectStyle.selectPart}>
+            {/* <span className={selectStyle.categoryTitle}>我的GYM友</span> */}
             {selectArea1.map((v, i) => {
               return (
                 <li
                   key={i}
-                  className={v === category ? articleStyle.active : ''}
+                  className={v === category ? selectStyle.active : ''}
                   onClick={(e) => {
                     e.preventDefault()
                     router.push(`?category=${v}`)
@@ -75,26 +76,13 @@ export default function Select() {
               )
             })}
           </ul>
-          <ul className={articleStyle.selectPart}>
-            <span className={articleStyle.categoryTitle}>我的預約</span>
-            <li
-              onClick={(e) => {
-                e.preventDefault()
-                if (window.innerWidth < 960) {
-                  setMenuShow(false)
-                }
-              }}
-            >
-              <Link href="/articles">我的預約</Link>
-            </li>
-          </ul>
-          <ul className={articleStyle.selectPart}>
-            <span className={articleStyle.categoryTitle}>GYM享收藏</span>
+          <ul className={selectStyle.selectPart}>
+            {/* <span className={selectStyle.categoryTitle}>GYM享收藏</span> */}
             {selectArea2.map((v, i) => {
               return (
                 <li
                   key={i}
-                  className={v === category ? articleStyle.active : ''}
+                  className={v === category ? selectStyle.active : ''}
                   onClick={(e) => {
                     e.preventDefault()
                     router.push(`?category=${v}`)
@@ -108,13 +96,33 @@ export default function Select() {
               )
             })}
           </ul>
-          <ul className={articleStyle.selectPart}>
-            <span className={articleStyle.categoryTitle}>個人檔案</span>
+          <ul className={selectStyle.selectPart}>
+            {/* <span className={selectStyle.categoryTitle}>個人檔案</span> */}
             {selectArea3.map((v, i) => {
               return (
                 <li
                   key={i}
-                  className={v === category ? articleStyle.active : ''}
+                  className={v === category ? selectStyle.active : ''}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    router.push(`?category=${v}`)
+                    if (window.innerWidth < 960) {
+                      setMenuShow(false)
+                    }
+                  }}
+                >
+                  {v}
+                </li>
+              )
+            })}
+          </ul>
+          <ul className={selectStyle.selectPart}>
+            {/* <span className={selectStyle.categoryTitle}>GYM享收藏</span> */}
+            {selectArea4.map((v, i) => {
+              return (
+                <li
+                  key={i}
+                  className={v === category ? selectStyle.active : ''}
                   onClick={(e) => {
                     e.preventDefault()
                     router.push(`?category=${v}`)

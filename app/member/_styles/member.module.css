@@ -112,7 +112,7 @@
   line-height: 60px;
   color: #666;
   padding: 0 20px;
-  border-bottom: #cdc9c9 1px solid;
+  /* border-bottom: #cdc9c9 1px solid; */
   margin: auto;
   position: relative;
   transition: all 0.2s;
@@ -123,11 +123,18 @@
   transform: translateY(-2px);
   transition: all 0.2s;
 }
-
+.selectPart:has(li:hover) {
+ border: 1px solid #ccdce7;
+ border-radius: 3px;
+}
 .selectPart li.active {
   color: #f87808;
   font-weight: 400;
   border-bottom: #f87808 1px solid;
+}
+.selectPart:has(li.active) {
+  background-color: #dbedf9;
+  border-radius: 3px;
 }
 /* #endregion ================= Select  End ====================== */
 
@@ -135,10 +142,11 @@
 /* memberContainer、memberContent in layout.js */
 .memberContainer {
   display: flex;
-  margin:0px 80px;
+  margin: 0px 80px;
 }
 .memberContent {
   display: flex;
+  flex-direction: column;
   margin: 18px;
   width: 100%;
 }
@@ -172,6 +180,9 @@
   color: #fff;
   font-size: 18px;
 }
+.memberBtnRegister {
+  background-color: #f87808;
+}
 /* #endregion ================= Member no admin ====================== */
 
 /* #region ================= FavCard====================== */
@@ -182,8 +193,14 @@
   margin-bottom: 20px;
   border-radius: 3px;
   overflow: hidden;
-  box-shadow: 1px 1px 10px #04477d81;
+  box-shadow: 1px 1px 8px #04477d81;
 }
+.favCard:hover {
+  box-shadow: 1px 1px 15px #04477d81;
+  transform: translateZ(-2px);
+  transition: all 0.2s;
+}
+
 .images {
   object-position: cover;
 }
