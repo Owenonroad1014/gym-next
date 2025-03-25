@@ -3,7 +3,7 @@
   justify-content: center;
   max-width: 1440px;
   margin: 0px auto;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 /* profile form */
@@ -134,48 +134,42 @@
 }
 
 /* public switch */
-.formGroup.status {
+.status {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0;
-}
-.status{
-  padding:5px;
 }
 .status input {
   display: none;
 }
+.switch + span {
+  margin-top: 2px;
+}
 .switch {
   width: 40px;
   height: 20px;
-  margin: 0px 20px;
-  background: #0b3760;
+  margin: 4px 10px 0px 20px;
+  background: #db6318;
   display: inline-block;
   border-radius: 100px;
   position: relative;
 }
 .switchBtn {
   position: absolute;
-  left: 2px;
+  left: calc(100% - 18px);
   top: 2px;
   width: 16px;
   height: 16px;
   background: #fff;
   border-radius: 50%;
-  transition: 0.3s;
+  transition: transform 0.3s, left 0.3s; /* 確保兩個屬性都能順利過渡 */
 }
-.status input:checked + label {
-  background: #db6318;
+.status input:not(:checked) + label {
+  background: #0b3760;
 }
-
- .status input:checked + label .switchBtn {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
+.status input:not(:checked) + label .switchBtn {
+  left: 2px;
 }
 
-
-.btn{
+.btn {
   padding: 8px 18px;
   text-align: center;
   border-radius: 3px;
@@ -185,10 +179,25 @@
 }
 /* 同loginBtn樣式 */
 
-
+.intro {
+  width: 95%;
+  height: 150px;
+  font-size: 14px;
+  resize: none;
+  padding: 10px;
+  margin: 0px auto;
+  background: transparent;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+}
+.intro:focus {
+  outline: none;
+  border: 1px solid #db6318;
+}
 .textDanger {
-  color: red;
-  font-size: 12px;
+  margin-left: 15px;
   display: flex;
   justify-content: flex-start;
+  color: red;
+  font-size: 12px;
 }

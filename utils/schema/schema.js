@@ -33,17 +33,21 @@ export const pfSchema = z
       .length(10, { message: '請填寫正確的手機號碼' }) // 確保長度為 10
       .regex(/^09\d{8}$/, { message: '手機號碼格式錯誤' }), // 確保是台灣手機號碼格式
     intro: z.string().optional(),
-    item: z.string().max(15, { message: '喜愛運動項目最多15個字元' }),
+    item: z
+      .array(z.string())
+      .optional() // 可選
+      .refine((val) => val.length <= 5, { message: '最多可寫五項運動項目' }), // 陣列最多 5 項
     goal: z.array(z.string()).optional(),
     status: z.boolean(),
   })
   .refine(
     (data) => {
       if (data.status === true) {
-        // 確保 intro 在公開狀態下是必填且至少有 30 個字元
-        return data.intro && data.intro.trim().trim('').length >= 30;
+        // Correctly check intro length after trimming whitespace
+        const trimmedIntro = data.intro ? data.intro.trim() : ''
+        return trimmedIntro.length >= 30
       }
-      return true; // 若 status 為 false，不進行檢查
+      return true // 若 status 為 false，不進行檢查
     },
     {
       message: '狀態為公開時，自我簡介需為必填，且至少需要30個字元',
