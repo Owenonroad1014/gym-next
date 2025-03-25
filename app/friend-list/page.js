@@ -11,6 +11,8 @@ import {
   FRIEND_REJECT,
   FRIEND_DELETE,
 } from '@/config/api-path'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function FriendListPage() {
   const { auth, getAuthHeader } = useAuth()
@@ -20,6 +22,115 @@ export default function FriendListPage() {
   const [isAccept, setIsAccept] = useState(false) //控制更新狀態刷新
   const [isDelete, setIsDelete] = useState(false) //控制更新狀態刷新
   const [error, setError] = useState('')
+  // 通知接受好友邀請
+  const notifyacceptRequest = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'success',
+      title: `已接受${username}的好友邀請`,
+    })
+  }
+  // 無法接受好友邀請
+  const notifyacceptRequestError = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'error',
+      title: `無法接受${username}的好友邀請`,
+    })
+  }
+  // 通知刪除好友
+  const notifydeleteFriend = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'success',
+      title: `已刪除${username}的好友`,
+    })
+  }
+  // 無法刪除好友
+  const notifydeleteFriendError = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'error',
+      title: `無法刪除${username}的好友`,
+    })
+  }
+  // 拒絕好友邀請
+  const notifyrejectFriend = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'success',
+      title: `已拒絕${username}的好友邀請`,
+    })
+  }
+  // 無法拒絕好友邀請
+  const notifyrejectFriendError = (username) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'error',
+      title: `無法拒絕${username}的好友邀請`,
+    })
+  }
+
 
   useEffect(() => {
     // 獲取好友列表
@@ -67,10 +178,10 @@ export default function FriendListPage() {
       })
       if (!res.ok) {
         setError('無法刪除好友')
-        alert(`無法刪除好友${username}`)
+        notifydeleteFriendError(username)
       }
       const data = await res.json()
-      alert(`成功刪除好友${username}`)
+      notifydeleteFriend(username)
       setIsDelete(!isDelete)
       //************* */ 好友邀請刪除
       console.log(data)
@@ -78,7 +189,6 @@ export default function FriendListPage() {
       setError(err.message || 'Something went wrong')
     }
   }
-
   // 接受好友邀請
   const acceptFriendRequest = async (sender_id, username) => {
     try {
@@ -89,18 +199,19 @@ export default function FriendListPage() {
       })
       if (!res.ok) {
         setError('無法接受好友邀請')
+        notifyacceptRequestError(username)
       }
       const data = await res.json()
       setFriendAccept(data || {})
       setIsAccept(!isAccept)
       console.log(data)
-      alert('已接受好友邀請')
+      notifyacceptRequest(username)
     } catch (err) {
       setError(err.message || 'Something went wrong')
     }
   }
   // 拒絕好友邀請
-  const rejectFriendRequest = async (sender_id) => {
+  const rejectFriendRequest = async (sender_id,username) => {
     try {
       const res = await fetch(FRIEND_REJECT, {
         method: 'POST',
@@ -109,19 +220,16 @@ export default function FriendListPage() {
       })
       if (!res.ok) {
         setError('無法接受好友邀請')
+        notifyrejectFriendError(username)
       }
       const data = await res.json()
       setFriendAccept(data || {})
       setIsAccept(!isAccept)
-      console.log(data)
+      notifyrejectFriend(username)
     } catch (err) {
       setError(err.message || 'Something went wrong')
     }
   }
-  // 點擊好友進入到聊天室
-  // const handleFriendClick = (friendId) => {
-  //   router.push(`/chat/${friendId}`)
-  // }
 
   return (
     <>
@@ -145,15 +253,16 @@ export default function FriendListPage() {
                       onClick={() =>
                         acceptFriendRequest(
                           v.sender_id,
-                          v.name == v.user1_name ? v.user2_name : v.user1_name
+                          v.sender_name
                         )
+                        
                       }
                       disabled={isAccept}
                     >
                       同意
                     </button>
                     <button
-                      onClick={() => rejectFriendRequest(v.sender_id)}
+                      onClick={() => rejectFriendRequest(v.sender_id,v.sender_name)}
                       disabled={isAccept}
                     >
                       拒絕
@@ -187,7 +296,9 @@ export default function FriendListPage() {
                       onClick={() => {
                         deleteFriend(
                           v.member_id === v.user1_id ? v.user2_id : v.user1_id,
-                          v.member_id === v.user1_id ? v.user2_name : v.user1_name
+                          v.member_id === v.user1_id
+                            ? v.user2_name
+                            : v.user1_name
                         )
                       }}
                     >

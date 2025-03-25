@@ -1,0 +1,12 @@
+.chatLayout {
+  background-color: #f4f4f4;
+  display: flex;
+  min-height: 100vh;
+  margin: 100px auto;
+}
+.chatSidebar {
+  width: 30%;
+}
+.messageArea {
+  width: 70%;
+}
