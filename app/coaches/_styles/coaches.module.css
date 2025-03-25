@@ -119,6 +119,7 @@
   justify-content: flex-start;
   margin: 0px 10px;
   gap: 35px;
+  margin-top: 20px;
 }
 
 .loaderContainer{
