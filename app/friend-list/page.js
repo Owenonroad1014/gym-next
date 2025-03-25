@@ -24,6 +24,7 @@ export default function FriendListPage() {
   const [error, setError] = useState('')
   // 通知接受好友邀請
   const notifyacceptRequest = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -42,6 +43,7 @@ export default function FriendListPage() {
   }
   // 無法接受好友邀請
   const notifyacceptRequestError = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -60,6 +62,7 @@ export default function FriendListPage() {
   }
   // 通知刪除好友
   const notifydeleteFriend = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -78,6 +81,7 @@ export default function FriendListPage() {
   }
   // 無法刪除好友
   const notifydeleteFriendError = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -96,6 +100,7 @@ export default function FriendListPage() {
   }
   // 拒絕好友邀請
   const notifyrejectFriend = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -114,6 +119,7 @@ export default function FriendListPage() {
   }
   // 無法拒絕好友邀請
   const notifyrejectFriendError = (username) => {
+    setIsAccept(!isAccept)
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -130,7 +136,6 @@ export default function FriendListPage() {
       title: `無法拒絕${username}的好友邀請`,
     })
   }
-
 
   useEffect(() => {
     // 獲取好友列表
@@ -172,7 +177,7 @@ export default function FriendListPage() {
   const deleteFriend = async (user, username) => {
     try {
       const res = await fetch(FRIEND_DELETE, {
-        method: 'DELETE',
+        method: 'POST',
         headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify({ user }),
       })
@@ -211,7 +216,7 @@ export default function FriendListPage() {
     }
   }
   // 拒絕好友邀請
-  const rejectFriendRequest = async (sender_id,username) => {
+  const rejectFriendRequest = async (sender_id, username) => {
     try {
       const res = await fetch(FRIEND_REJECT, {
         method: 'POST',
@@ -251,18 +256,16 @@ export default function FriendListPage() {
                   <div className={friendListStyle.btngroup}>
                     <button
                       onClick={() =>
-                        acceptFriendRequest(
-                          v.sender_id,
-                          v.sender_name
-                        )
-                        
+                        acceptFriendRequest(v.sender_id, v.sender_name)
                       }
                       disabled={isAccept}
                     >
                       同意
                     </button>
                     <button
-                      onClick={() => rejectFriendRequest(v.sender_id,v.sender_name)}
+                      onClick={() =>
+                        rejectFriendRequest(v.sender_id, v.sender_name)
+                      }
                       disabled={isAccept}
                     >
                       拒絕
@@ -281,6 +284,12 @@ export default function FriendListPage() {
         <ul>
           {friendListData.totalRows > 0 ? (
             friendListData?.rows?.map((v, i) => {
+              if (
+                (auth.id == v.user1_id && v.user1_delete == 1) ||
+                (auth.id == v.user2_id && v.user2_delete == 1)
+              ) {
+                return null
+              }
               return (
                 <li key={i}>
                   <div className={friendListStyle.name}>

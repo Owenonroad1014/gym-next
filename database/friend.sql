@@ -24,6 +24,8 @@ CREATE TABLE chats (
   user1_id INT NOT NULL,  -- 用戶 1 ID
   user2_id INT NOT NULL,  -- 用戶 2 ID
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 聊天創建時間
+  user1_delete INT NOT NULL DEFAULT 0,
+  user2_delete INT NOT NULL DEFAULT 0,
   FOREIGN KEY (user1_id) REFERENCES  member(member_id),
   FOREIGN KEY (user2_id) REFERENCES  member(member_id)
 );
