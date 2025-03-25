@@ -74,7 +74,7 @@ export default function Card({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        router.push('/member/login')
+        router.push('/quick-login')
       }
     })
   }

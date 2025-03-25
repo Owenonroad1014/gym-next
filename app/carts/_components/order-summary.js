@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./_styles/order-summary.module.css";
 import PaymentMethodSection from "./payment-method-section";
 import PickupStoreSection from "./pickup-store-section";
@@ -7,11 +7,17 @@ import { useCart } from "@/context/cart-context"; // 引入 Context
 import { useRouter } from 'next/navigation'; // 改用 useRouter 進行頁面跳轉
 
 function OrderSummary() {
-  const { subtotal } = useCart(); //獲取總金額
+  const { cartItems, subtotal } = useCart(); //獲取總金額
   const router = useRouter(); // 使用 Next.js 路由
 
   const shipping = 0;
   const total = subtotal + shipping;
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
 
   // 這裡可以執行結帳邏輯
   const handleCheckout = () => {
@@ -20,6 +26,7 @@ function OrderSummary() {
       return;
       }
     console.log("Processing checkout...");
+    localStorage.setItem("cart", JSON.stringify(cartItems));
     router.push("/carts/data"); // 使用 Next.js 進行頁面跳轉
   };
 
@@ -57,12 +64,6 @@ function OrderSummary() {
            <button className={styles.checkoutButton} onClick={handleCheckout} disabled={subtotal === 0} >{/*如果購物車為空，禁用按鈕 */}
            <span>訂單確認</span>
           </button>
-          
-          {/* 如果這是一個真實的購物車，handleCheckout 可能會：
-          送出訂單
-          導向到付款頁面
-          驗證用戶資訊 */}
-
         </div> 
       </section>
     </aside>

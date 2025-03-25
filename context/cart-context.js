@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 
 // 創建 Context
 const CartContext = createContext()
@@ -33,16 +33,46 @@ export function CartProvider({ children }) {
   ])
   const [paymentMethod, setPaymentMethod] = useState(""); // 付款方式
   const [pickupMethod, setPickupMethod] = useState(""); // 取貨方式
+  const [cartQuantity, setCartQuantity] = useState(0);
+  // 記錄首次渲染是否完成的信號值
+  const [didMount, setDidMount] = useState(false)
 
-  // 付款方式
-  const updatePaymentMethod = (method) => {
-    setPaymentMethod(method);
-  };
+   // 首次渲染時，從 LocalStorage 取出購物車資料
+   useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const savedPaymentMethod = localStorage.getItem('paymentMethod') || "";
+    const savedPickupMethod = localStorage.getItem('pickupMethod') || "";
 
-  // 取貨方式
-  const updatePickupMethod = (method) => {
-    setPickupMethod(method);
-  };
+    setCartItems(savedCart);
+    setPaymentMethod(savedPaymentMethod);
+    setPickupMethod(savedPickupMethod);
+    setDidMount(true); // 標記初始化完成
+  }, []);
+
+  // 當購物車資料變更時，同步更新 LocalStorage
+  useEffect(() => {
+    if (didMount) {
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+      updateCartQuantity()}
+  }, [cartItems, didMount])
+
+  const updateCartQuantity = () => {
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+    setCartQuantity(totalQuantity)
+  }
+
+  useEffect(() => {
+    if (didMount) {
+      localStorage.setItem('paymentMethod', paymentMethod);
+    }
+  }, [paymentMethod, didMount]);
+
+  useEffect(() => {
+    if (didMount) {
+      localStorage.setItem('pickupMethod', pickupMethod);
+    }
+  }, [pickupMethod, didMount]);
+
 
   // 計算租借天數
   const calculateRentalDays = (startDate, endDate) => {
@@ -55,11 +85,23 @@ export function CartProvider({ children }) {
   };
 
 
-  // 計算購物車的總金額（考慮租借天數）
+  // 計算購物車的總金額
   const subtotal = cartItems.reduce((acc, item) => {
     const rentalDays = calculateRentalDays(item.rentalStartDate, item.rentalEndDate);
     return acc + item.price * item.quantity * rentalDays
   }, 0);
+
+  // 付款方式
+  const updatePaymentMethod = (method) => {
+    setPaymentMethod(method);
+    localStorage.setItem('paymentMethod', method)
+  };
+
+  // 取貨方式
+  const updatePickupMethod = (method) => {
+    setPickupMethod(method);
+    localStorage.setItem('pickupMethod', method)
+  };
 
   // 更新購物車商品資訊（更新數量 & 租借日期）
   const updateCartItem = (productId, updatedData) => {
@@ -106,16 +148,32 @@ export function CartProvider({ children }) {
         return [...prevItems, { ...product, quantity: 1 }]
       }
     })
+    setPaymentMethod(""); 
+    setPickupMethod("");
+    localStorage.removeItem('paymentMethod');
+    localStorage.removeItem('pickupMethod');
   }
 
   //移除商品
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId))
-  }
+    setCartItems((prevItems) => {
+      const updatedCart = prevItems.filter((item) => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // 立即更新 LocalStorage
+      if (updatedCart.length === 0) {
+        setPaymentMethod(""); 
+        setPickupMethod("");
+        localStorage.removeItem('paymentMethod');
+        localStorage.removeItem('pickupMethod');
+      }
+      return updatedCart;
+    });
+  };
+
 
   return (
     <CartContext.Provider value={{ 
       cartItems,
+      cartQuantity,
       subtotal,
       updateCartItem,
       increaseQuantity,

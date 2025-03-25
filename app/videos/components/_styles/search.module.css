@@ -1,0 +1,47 @@
+.searchContainer {
+  padding: 10px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+}
+
+.select {
+  /* padding: 3px; */
+  width: 80%;
+  border-radius: 3px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 18px;
+  border: 2px rgb(221, 215, 215) solid;
+}
+
+.button {
+  width: 60px;
+  padding: 12px 10px;
+  background-color: #f87808;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 15px;
+  font-family: "Noto Serif TC", serif;
+}
+
+/* 可以添加懸停效果 */
+.button:hover {
+  background-color: #e56c00;
+}
+
+@media (width <= 960px) {
+  .searchContainer {
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .contentTitle{
+    flex-direction: column;
+
+  }
+}

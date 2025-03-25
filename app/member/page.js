@@ -2,6 +2,14 @@
 
 import React from 'react'
 
+
+// import { useAuth } from '@/context/auth-context'
+
 export default function MemberPage() {
-  return <>member page</>
+  
+// const {auth, getAuthHeader} =useAuth()
+return <>
+    
+    {/* {auth.id ? ():()} */}
+  </>
 }
