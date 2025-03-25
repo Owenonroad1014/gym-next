@@ -1,28 +1,30 @@
 'use client'
 
-import articleStyle from '../_styles/member.module.css'
 import { useState, useEffect } from 'react'
-import {useAuth} from '@/context/auth-context'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import breadcrumbStyle from '../_styles/member.module.css'
+import { useAuth } from '@/context/auth-context'
 
-export default function Breadcrumb({ breadcrumb = [], }) {
+export default function Breadcrumb({ breadcrumb = [] }) {
+  const { auth } = useAuth
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category')
   const [activeIndex, setActiveIndex] = useState(null)
   useEffect(() => {
-    if (pathname.includes(`/member`)) {
-      setActiveIndex(1)
-    // } else {
-    //   if (pathname.includes('/articles')) {
-    //     setActiveIndex(1)
-    //   } else {
-    //     setActiveIndex(null)
-    //   }
+    if (category) {
+      setActiveIndex(2)
+    } else {
+      if (pathname.includes('/member')) {
+        setActiveIndex(1)
+      } else {
+        setActiveIndex(null)
+      }
     }
-  }, [pathname])
-  const breadcrumbLinks = ['/', '/member', ]
-  // const breadcrumbLinks = ['/', '/articles', `/articles/${articleid}`]
-  
+  }, [pathname, category])
+  const breadcrumbLinks = ['/', '/member', `/member?category=${category}`]
+
   const hideBreadcrumbPages = [
     '/member/login',
     '/member/register',
@@ -31,23 +33,25 @@ export default function Breadcrumb({ breadcrumb = [], }) {
   if (hideBreadcrumbPages.includes(pathname)) {
     return null // 這些頁面不顯示 Header
   }
-  
+
   return (
     <>
-      <div className={articleStyle.breadcrumbContainer}>
-        <nav className={articleStyle.breadcrumb}>
-          {breadcrumb.map((v, index) => (
-            <div
-              key={index}
-              className={`${articleStyle.breadcrumbItem} ${
-                index === activeIndex ? articleStyle.active : ''
-              }`}
-            >
-              <Link href={breadcrumbLinks[index]}>{v}</Link>
-            </div>
-          ))}
-        </nav>
-      </div>
+      {auth > 0 ? (
+        <div className={breadcrumbStyle.breadcrumbContainer}>
+          <nav className={breadcrumbStyle.breadcrumb}>
+            {breadcrumb.map((v, index) => (
+              <div
+                key={index}
+                className={`${breadcrumbStyle.breadcrumbItem} ${
+                  index === activeIndex ? breadcrumbStyle.active : ''
+                }`}
+              >
+                <Link href={breadcrumbLinks[index]}>{v}</Link>
+              </div>
+            ))}
+          </nav>
+        </div>
+      ) : null}
     </>
   )
 }

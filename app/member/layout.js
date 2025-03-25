@@ -1,19 +1,23 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Breadcrumb from './_component/breadcrumb'
 import memberCss from './_styles/member.module.css'
 import Select from './_component/select'
 // import { useAuth } from '@/context/auth-context'
 
 export default function MemberLayout({children}) {
-    const breadcrumb = ['首頁', '會員中心']
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category') || '' // 確保 category 存在
+  const breadcrumb = ['首頁', '會員中心', category].filter(Boolean) // 避免空值
   return (
     <>
-    <Breadcrumb breadcrumb={breadcrumb}/>
+   
     <div className={memberCss.memberContainer} >
     <Select/>
     <div className={memberCss.memberContent}>
+    <Breadcrumb breadcrumb={breadcrumb}/>
       {children}
     </div>
     </div>

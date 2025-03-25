@@ -4,15 +4,15 @@ import React from 'react'
 import Link from 'next/link'
 import memberCss from './_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
-import Card from './_component/card'
-// import FavList from './_component/fav-list'
+import FavList from './_component/fav-list'
+
 export default function MemberPage() {
-  const { auth, getAuthHeader } = useAuth()
+  const { auth} = useAuth()
   return (
     <>
       {auth.id ? (
         <>
-          <div className={memberCss.memberAdmin}><Card/></div>
+          <div className={memberCss.memberAdmin}><FavList/></div>
         </>
       ) : (
         <>
@@ -25,7 +25,7 @@ export default function MemberPage() {
               <Link className={memberCss.memberBtn} href="/member/login">
                 會員登入
               </Link>
-              <Link className={memberCss.memberBtn} href="/member/register">
+              <Link className={`${memberCss.memberBtn} ${memberCss.memberBtnRegister}`} href="/member/register">
                 註冊會員
               </Link>
             </div>
