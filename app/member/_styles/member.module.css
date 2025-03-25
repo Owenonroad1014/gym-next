@@ -131,6 +131,93 @@
 }
 /* #endregion ================= Select  End ====================== */
 
+/* #region ================= Member no admin  Start ====================== */
+/* memberContainer、memberContent in layout.js */
+.memberContainer {
+  display: flex;
+  margin:0px 80px;
+}
+.memberContent {
+  display: flex;
+  margin: 18px;
+  width: 100%;
+}
+
+.memberNoAdmin {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  margin: auto;
+}
+.memberSpan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memberBtns {
+  display: flex;
+  justify-content: center;
+  width: 350px;
+}
+.memberBtn {
+  width: 300px;
+  margin: 0px 10px;
+  padding: 8px 18px;
+  text-align: center;
+  border-radius: 3px;
+  background: #0b3760;
+  color: #fff;
+  font-size: 18px;
+}
+/* #endregion ================= Member no admin ====================== */
+
+/* #region ================= FavCard====================== */
+.favCard {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 1px 1px 10px #04477d81;
+}
+.images {
+  object-position: cover;
+}
+.images img {
+  height: 100%;
+}
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 100%;
+  padding: 0px 30px;
+}
+.cardDesc {
+  width: 80%;
+}
+.favCard button {
+  margin: auto;
+  width: 10%;
+  height: 30%;
+  border-radius: 3px;
+  border: transparent;
+  color: #fff;
+  background-color: #db6318;
+  box-shadow: 1px 1px 3px #5f534bd4;
+}
+/* #endregion ================= FavCard ====================== */
+
 .container {
   display: flex;
   justify-content: center;
@@ -232,91 +319,3 @@
   font-size: 12px;
   margin-right: 4px;
 }
-
-/* #region ================= Member no admin  Start ====================== */
-/* memberContainer、memberContent in layout.js */
-.memberContainer {
-  display: flex;
-  margin:0px 80px;
-}
-.memberContent {
-  display: flex;
-  margin: 18px;
-  width: 100%;
-  border: 1px solid salmon;
-}
-
-.memberNoAdmin {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 180px;
-  margin: auto;
-}
-.memberSpan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.memberBtns {
-  display: flex;
-  justify-content: center;
-  width: 350px;
-}
-.memberBtn {
-  width: 300px;
-  margin: 0px 10px;
-  padding: 8px 18px;
-  text-align: center;
-  border-radius: 3px;
-  background: #0b3760;
-  color: #fff;
-  font-size: 18px;
-}
-/* #endregion ================= Member no admin ====================== */
-
-/* #region ================= FavCard====================== */
-.favCard {
-  display: flex;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 20px;
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 1px 1px 10px #04477d81;
-}
-.images {
-  object-position: cover;
-}
-.images img {
-  height: 100%;
-}
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 80%;
-  height: 100%;
-  padding: 0px 30px;
-}
-.cardDesc {
-  width: 80%;
-}
-.favCard button {
-  margin: auto;
-  width: 10%;
-  height: 30%;
-  border-radius: 3px;
-  border: transparent;
-  color: #fff;
-  background-color: #db6318;
-  box-shadow: 1px 1px 3px #5f534bd4;
-}
-/* #endregion ================= FavCard ====================== */
