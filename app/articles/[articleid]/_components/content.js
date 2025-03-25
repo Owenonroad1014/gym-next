@@ -15,8 +15,8 @@ export default function Content({ article = {}, date = '' }) {
   const [backArticle, setBackArticle] = useState('')
   const [error, setError] = useState(null)
   const [totalArticle, setTotalArticle] = useState(0)
-  const nextid = +articleid + 1 > totalArticle ? 1 : articleid + 1
-  const backid = +articleid - 1 < totalArticle ? 1 : articleid - 1
+  const nextid = +articleid + 1 > +totalArticle ? 1 : +articleid + 1
+  const backid = +articleid - 1 < +totalArticle ? 1 : +articleid - 1
   useEffect(() => {
     const fetchTotalArticle = async () => {
       try {
@@ -63,7 +63,7 @@ export default function Content({ article = {}, date = '' }) {
     fetchTotalArticle()
     fetchNextArticle()
     fetchBackArticle()
-  }, [])
+  }, [nextid, backid])
   return (
     <>
       <div className={articleStyle.articleContent}>

@@ -32,7 +32,7 @@ export default function List() {
   const [allListData, setAllListData] = useState({})
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(true)
-
+  const [sended, setSended] = useState(false) 
   useEffect(() => {
     const fetchListData = async () => {
       try {
