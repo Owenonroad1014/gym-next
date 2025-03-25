@@ -2,9 +2,10 @@
 import React from "react";
 import styles from "./_styles/cart-product-item.module.css";
 import { useCart } from "@/context/cart-context";
-import Image from "next/image";
+// import Image from "next/image";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { IMG_PATH } from "@/config/api-path";
 
 function CartProductItem({ product }) {
   const { 
@@ -18,7 +19,7 @@ function CartProductItem({ product }) {
   const today = new Date().toISOString().split("T")[0]; // 取得今天的日期
   const rentalStartDate = product.rentalStartDate || "";
   const rentalEndDate = product.rentalEndDate || "";
-
+ 
   
 
   // 計算租借天數
@@ -77,16 +78,15 @@ function CartProductItem({ product }) {
       }
     });
   };
+  
 
   return (
     <article className={styles.productItem}>
       <div className={styles.productInfo}>
-        <Image
-          src={product.image}
+        <img
+          src={`${IMG_PATH}/${product.image}`}
           alt={product.name}
           className={styles.productImage}
-          width={100} // 設定寬度
-          height={100} 
         />
         <div className={styles.productDetails}>
           <h3 className={styles.productName}>{product.name}</h3>
