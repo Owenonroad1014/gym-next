@@ -5,13 +5,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
-import { useCart } from '@/context/cart-context'
 import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
-  const { cartQuantity } = useCart()
 
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
 
@@ -32,7 +30,7 @@ export default function Header() {
     }
   }, [])
   // 判斷是否要隱藏 Header
-  if (pathname.startsWith('/member'||'/member/register')) {
+  if (pathname.startsWith('/member' || '/member/register')) {
     return null // `/member` 底下的頁面不顯示 Header
   }
   // const hideHeaderPages = [
@@ -86,7 +84,16 @@ export default function Header() {
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
-                {/* {auth.avatar} */}
+                <div className={headerstyles.navAvatar}>
+                  <img
+                    src={
+                      auth.avatar
+                        ? `img/${auth.avatar}`
+                        : '/imgs/avatar/default-avatar.png'
+                    }
+                    alt=""
+                  />
+                </div>
               </Link>
               <a
                 href="/qs"
@@ -112,12 +119,7 @@ export default function Header() {
             </>
           )}
           <Link href="/carts" className={headerstyles.navLink}>
-          <div className={headerstyles.cartIcon}>
             <FaCartPlus />
-            {cartQuantity > 0 && (
-            <span className={headerstyles.cartCount}>{cartQuantity}</span>
-          )}
-          </div>
           </Link>
         </div>
       </div>
