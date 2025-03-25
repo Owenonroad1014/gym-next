@@ -12,9 +12,10 @@
     font-family: helvetica;
     color: white;
     font-size: 20px;
-    background-color: #ffb300;
+    background-color: #eb854a;
     text-decoration: none;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
     transform: skew(35deg); /* 讓按鈕變成平行四邊形 */
     overflow: hidden;
@@ -32,9 +33,10 @@
     font-family: helvetica;
     color: white;
     font-size: 20px;
-    background-color: #ffb300;
+    background-color: #eb854a;
     text-decoration: none;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
     transform: skew(-35deg); /* 讓按鈕變成平行四邊形 */
     overflow: hidden;

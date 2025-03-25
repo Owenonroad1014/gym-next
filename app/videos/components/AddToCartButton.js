@@ -1,12 +1,20 @@
 import React from "react";
 import styles from "./_styles/AddToCartButton.module.css";
 
-const AddToCartButton = ({ variant }) => {
+const AddToCartButton = ({ variant, onClick }) => {
   const buttonClass =
     variant === "light" ? styles.buttonLight : styles.buttonDark;
 
   return (
-    <button className={`${styles.button} ${buttonClass}`}>加入購物車</button>
+    <>
+
+    <div
+      className={`${styles.button} ${buttonClass}`}
+      // onClick={onClick}
+    >
+      查看更多
+    </div>
+    </>
   );
 };
 

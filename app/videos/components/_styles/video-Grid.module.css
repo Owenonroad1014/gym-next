@@ -1,14 +1,12 @@
 .productGrid {
-  width: 100%;
   justify-content: center;
   margin: auto;
-  width: 100%;
+  width: 1440PX;
   padding: 20px;
   display: flex;
   flex-direction: row;
   position: relative;
   overflow: hidden;
-
 }
 
 .productArea{
@@ -28,9 +26,17 @@
   margin-left: 1%;
 }
 
-@media (width <= 991px) {
+@media (width <= 1440px) {
   .productGrid {
     max-width: 100%;
     margin-bottom: 10px;
+  }
+}
+
+@media (width <= 960px) {
+  .productGrid {
+    max-width: 100%;
+    margin-bottom: 10px;
+    flex-direction: column;
   }
 }

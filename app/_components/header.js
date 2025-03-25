@@ -5,11 +5,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
+import { useCart } from '@/context/cart-context'
 import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
+  const { cartQuantity } = useCart()
 
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
 
@@ -110,7 +112,12 @@ export default function Header() {
             </>
           )}
           <Link href="/carts" className={headerstyles.navLink}>
+          <div className={headerstyles.cartIcon}>
             <FaCartPlus />
+            {cartQuantity > 0 && (
+            <span className={headerstyles.cartCount}>{cartQuantity}</span>
+          )}
+          </div>
           </Link>
         </div>
       </div>
