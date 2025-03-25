@@ -109,3 +109,5 @@ export const CHATS_ITEM = `${API_SERVER}/chats/api`
 export const CHATS_MSG = `${API_SERVER}/chats/api/chatroom`
 // 新增聊天訊息
 export const SEND_MSG = `${API_SERVER}/chats/api/sendMsg`
+// 刪除聊天室
+export const DELETE_CHAT = `${API_SERVER}/chats/api/deleteChatroom`

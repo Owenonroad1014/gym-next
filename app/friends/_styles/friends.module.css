@@ -104,7 +104,7 @@
 }
 /* #endregion ================= Select  End ====================== */
 
-.loaderContainer{
+.loaderContainer {
   width: 60%;
   display: flex;
   justify-content: center;
@@ -112,20 +112,24 @@
   margin-top: 50px;
 }
 /* #region ================= notAuthContainer  Start ====================== */
-.notAuthContainer{
-  width: 80%;
+.notAuthContainer {
+  width: 50%;
+  height: 500px;
+  padding: 50px 20px;
+  margin: auto;
   display: flex;
   justify-content: center;
-}
-.notAuthContainer p{
-  width: 70%;
-  height:50% ;
+  align-items: flex-start;
   background-color: #dee5e7;
+}
+.notAuthContainer p {
+  width: 70%;
+  height: 100%;
   text-align: center;
   align-content: center;
   font-size: 30px;
 }
-.notAuthContainer p a{
+.notAuthContainer p a {
   font-size: 16px;
   text-decoration: underline;
   text-underline-offset: 9px;
@@ -138,29 +142,6 @@
   width: 80%;
   margin-top: 20px;
 }
-
-/* .dropdown label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.dropdown select {
-  width: 100%;
-  height: 50px;
-  padding: 10px 20px;
-  border: 1px solid #0b3760;
-  border-radius: 3px;
-  background-color: #fff;
-  color: #333;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.dropdown select:focus {
-  outline: none;
-  border: 2px solid #db6318;
-} */
 
 /* 麵包屑 */
 .breadcrumbContainer {
@@ -478,6 +459,9 @@
   }
   .selectPart li {
     font-size: 20px;
+  }
+  .notAuthContainer {
+    height: 250px;
   }
 }
 @media (max-width: 768px) {
