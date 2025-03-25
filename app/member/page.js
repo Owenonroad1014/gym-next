@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import memberCss from './_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import FavList from './_component/fav-list'
