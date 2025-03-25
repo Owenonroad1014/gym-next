@@ -8,7 +8,6 @@ import { useAuth } from '@/context/auth-context'
 
 const ProductCard = ({ id, product_name, price, description, image_url, variant, like_id, setIsLiked  }) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
-  const { auth } = useAuth(); // 取得登入資訊
 
   return (
     <Link href={`/products/${id}`} className={`${styles.card} ${cardClass}`}>

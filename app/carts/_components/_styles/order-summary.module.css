@@ -81,6 +81,7 @@
     transform: skew(-35deg);
     background-color: #eb854a;
     border: none;
+    border-radius: 3px;
     align-self: stretch;
     gap: 8px;
     margin-top: 49px;

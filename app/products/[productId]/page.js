@@ -47,7 +47,7 @@ const ProductDetail = () => {
         if (result.success) {
           // 排除不要的欄位資料
           const { id, product_name, description, price, image_url, average_rating, variants,category_name } = result.data;
-          const relatedProducts = result.relatedProducts
+          const relatedProducts = result.relatedProducts;
           setProduct({ id, product_name, description, price, image_url, average_rating, variants, category_name});
           setRelatedProducts(relatedProducts); // 設定相關商品
           setLikeId(result.like_id); // 設定收藏狀態
@@ -136,7 +136,7 @@ const ProductDetail = () => {
       <section className={styles.productSection}>
         <img
           src={`${IMG_PATH}/${product.image_url}`}
-          alt="Boxing Gloves"
+          alt={product.product_name}
           className={styles.productImage}
         />
         <article className={styles.productInfo}>
@@ -149,11 +149,17 @@ const ProductDetail = () => {
           {product.description}
           </p>
           <div className={styles.selectionContainer}>
-            <RentalDate price={product.price} {...product}/>
-              <div className={styles.quantityLabels}>
-              </div>
+          <RentalDate 
+            price={product.price} 
+            id={product.id} 
+            rentalStartDate={rentalStartDate} 
+            rentalEndDate={rentalEndDate} 
+            onDateChange={handleRentalDateChange} />
+
+              {/* <div className={styles.quantityLabels}>
+              </div> */}
             </div>
-  {(product.variants && product.variants.length > 0) && (
+  {product.variants && product.variants.length > 0 && (
   <div className={styles.weightSelector}>
     <label>選擇重量：</label>
     <select value={selectedWeight} onChange={handleWeightChange} className={styles.weightButton}>
@@ -170,7 +176,7 @@ const ProductDetail = () => {
 )}
           <div className={styles.quantityWrapper}>
           <div className={styles.label}>租借數量 :</div>
-          <QuantitySelector />
+          <QuantitySelector onQuantityChange={handleQuantityChange}/>
           </div>
           <div className={styles.cartActions}>
           <FavoriteBbutton product_id={product.id} likeId={likeId}/>

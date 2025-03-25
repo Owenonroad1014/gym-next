@@ -84,9 +84,7 @@ export default function Header() {
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
-              <div className={headerstyles.navAvatar}>
-                <img src={auth.avatar?`img/${auth.avatar}`:"/imgs/avatar/default-avatar.png"} alt="" />
-              </div>
+             c
               </Link>
               <a
                 href="/qs"

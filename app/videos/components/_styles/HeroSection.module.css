@@ -1,18 +1,13 @@
 .hero {
   color: #fff;
   white-space: nowrap;
-  text-transform: uppercase;
-  flex-direction: column;
   height: 500px;
   padding: 70px;
   font-size: 40px;
   font-weight: 700;
-  display: flex;
   position: relative;
   overflow: hidden;
-  margin: auto;
 }
-
 .hero::after {
   content: '';
   position: absolute;
@@ -20,10 +15,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3); /* 灰色覆蓋層 */
+  background-color: rgba(0, 0, 0, 0.3); 
   z-index: 1;
 }
-
 
 .heroBackground {
   object-fit: cover;
@@ -35,31 +29,38 @@
 }
 
 .heroTitle {
-  width: 300px;
-  height: 300px;
   position: relative;
-  z-index: 1;
-  /* background-image: url(/img/Ellipse36-2.png); */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat; 
   display: flex;
   justify-content: left;
   align-items: center;
+  z-index: 2;
+  font-size: 54px;
 }
 
+.heroContent{
+  font-size: 24px;
+}
 
 .headerContain{
-  position: relative;
+  position: absolute;
+  top: 60%;
   z-index: 10;
-
 }
 
-@media (width <= 991px) {
+@media (width <= 960px) {
   .hero {
     max-width: 100%;
-    white-space: initial;
     padding: 100px 20px 110px;
-    font-size: 40px;
+    font-size: 24px;
+  }
+
+  .heroContent{
+    width: 100%;
+    font-size: 14px;
+    /* height: 50px; */
+    white-space: normal;
   }
 }

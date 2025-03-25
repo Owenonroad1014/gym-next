@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-
-const Pagination = ({ totalPages,page,searchParams }) => 
-  {
-    return (
+const Pagination = ({ totalPages,page,searchParams }) => {
+  return (
     <nav aria-label="Page navigation example">
       <ul className={styles.pagination}>
 
@@ -51,7 +49,6 @@ const Pagination = ({ totalPages,page,searchParams }) =>
     </nav>
   );
 };
-
 
 export default Pagination;
 
