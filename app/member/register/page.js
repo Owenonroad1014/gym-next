@@ -11,7 +11,8 @@ import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
-  const [show, setShow] = useState(false)
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({})
   const { login } = useAuth()
 
@@ -44,9 +45,8 @@ export default function RegisterPage() {
       zResult.error?.issues.forEach((item) => {
         const pathKey = item.path[0]
         if (!errMap.has(pathKey)) {
-          errMap.set(pathKey,item.message)
+          errMap.set(pathKey, item.message)
           newErrors[pathKey] = item.message
-        
         }
       })
       setErrors(newErrors)
@@ -83,7 +83,7 @@ export default function RegisterPage() {
       if (result.error === '用戶已註冊') {
         // modal.show()
         alert(result.error)
-      } 
+      }
     }
   }
   return (
@@ -120,11 +120,9 @@ export default function RegisterPage() {
             <button
               className={registerCss.iconBtn}
               type="button"
-              onClick={() => {
-                setShow(!show)
-              }}
+              onClick={() => setPasswordVisible((prev) => !prev)}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {passwordVisible? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
 
@@ -132,7 +130,7 @@ export default function RegisterPage() {
             <label htmlFor="password">密碼</label>
             <div className={registerCss.inputGroup}>
               <input
-                type={show ? 'text' : 'password'}
+                type={passwordVisible ? 'text' : 'password'}
                 value={registerForm.password}
                 onChange={RegisterChangeForm}
                 placeholder="請輸入密碼"
@@ -151,17 +149,17 @@ export default function RegisterPage() {
               className={registerCss.iconBtn}
               type="button"
               onClick={() => {
-                setShow(!show)
+                setPasswordVisible((prev) => !prev)
               }}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
           <div className={registerCss.formGroup}>
             <label htmlFor="confirmPassword">確認密碼</label>
             <div className={registerCss.inputGroup}>
               <input
-                type={show ? 'text' : 'password'}
+                type={confirmPasswordVisible ? 'text' : 'password'}
                 value={registerForm.confirmPassword}
                 onChange={RegisterChangeForm}
                 placeholder="請再次輸入密碼"
@@ -180,10 +178,10 @@ export default function RegisterPage() {
               className={registerCss.iconBtn}
               type="button"
               onClick={() => {
-                setShow(!show)
+                setConfirmPasswordVisible((prev) => !prev)
               }}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
           <div className={registerCss.btns}>
