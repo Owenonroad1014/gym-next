@@ -3,7 +3,7 @@ export const API_SERVER = `http://localhost:3005`;
 
 
 // 頭貼的路由
-export const AVATAR_PATH = `${API_SERVER}/imgs`;
+export const AVATAR_PATH = `${API_SERVER}/img/avatar`;
 
 // 註冊路由
 export const REGISTER_POST = `${API_SERVER}/register/api`;

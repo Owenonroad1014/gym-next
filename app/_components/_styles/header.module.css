@@ -92,3 +92,7 @@
   font-size: 14px;
   font-family: 'Noto Serif TC', serif;
 }
+
+.navAvatar img{
+  width: 20px;
+}
