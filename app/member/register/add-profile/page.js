@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useRouter } from 'next/navigation'
@@ -11,6 +12,8 @@ import { REGISTER_PROFILE_POST } from '@/config/api-path'
 
 export default function AddProfileJsPage() {
   const { auth, getAuthHeader } = useAuth()
+  const searchParams=useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')|| '/'
   const [status, setStatus] = useState(true)
   const router = useRouter()
   const [previewAvatar, setPreviewAvatar] = useState(
@@ -91,9 +94,6 @@ export default function AddProfileJsPage() {
         },
       }).then((result) => {
         if (result.isConfirmed) {
-          // if (profileForm.intro.length <= 0) {
-          //   confirmIntro()
-          // }
           resolve()
         } else {
           reject()
@@ -113,7 +113,8 @@ export default function AddProfileJsPage() {
     const result = await r.json()
     if (result.success) {
       alert('個人檔案已建立')
-      router.push('/')
+      // router.push('/')
+      router.replace(callbackUrl)
     } else {
       alert('個人檔案建立失敗')
       console.warn(result)
