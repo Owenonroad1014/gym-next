@@ -228,7 +228,7 @@ export default function GymdetailModal({
           <div className={styles.userInfo}>
             <p>
               <span>性別：</span>
-              {sex}
+              {sex == 'male' ? '男' : '女'}
             </p>
             <p>
               <span>喜愛運動項目：</span>
