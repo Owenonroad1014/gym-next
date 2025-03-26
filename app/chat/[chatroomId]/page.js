@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
 import chatStyle from './chatroom.module.css'
-import { CHATS_MSG, CHATS_ITEM } from '@/config/api-path'
+import { CHATS_MSG, CHATS_ITEM, CHATS_LIST, READ_CHAT } from '@/config/api-path'
 import { IoPerson } from 'react-icons/io5'
 import moment from 'moment'
 import EmojiPicker from 'emoji-picker-react'
@@ -41,16 +41,21 @@ export default function ChatRoomPage() {
   // const messagesEndRef = useRef(null)
   const [socketStatus, setSocketStatus] = useState('等待連接...')
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-
+  const [isRead, setIsRead] = useState(false) //刷新用
+  const [someoneInto, setSomeoneInto] = useState(false) //刷新用
+  const chatBoxRef = useRef(null)
   // 自動滾動到訊息底部
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  // }
+  const scrollToBottom = () => {
+    const chatBox = chatBoxRef.current
+    if (chatBox) {
+      chatBox.scrollTop = chatBox.scrollHeight
+    }
+  }
 
   // 訊息變化時滾動
-  // useEffect(() => {
-  //   scrollToBottom()
-  // }, [messages])
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   // 處理 Socket 連接
   useEffect(() => {
@@ -96,6 +101,37 @@ export default function ChatRoomPage() {
     const handleRoomJoined = (data) => {
       console.log('房間加入確認:', data)
       setSocketStatus(`已加入聊天室 ${data.room}`)
+
+      // 當用戶加入聊天室時，發送已讀請求
+      if (data.room === chatroomId) {
+        // 獲取所有未讀訊息
+        const unreadMessages = messages.filter(
+          (msg) => msg.sender_id !== user && msg.is_read === 0
+        )
+
+        if (unreadMessages.length > 0) {
+          const messageIds = unreadMessages.map((msg) => msg.id)
+          console.log('發送已讀請求:', {
+            messageIds,
+            chat_id: chatroomId,
+            userId: user,
+          })
+
+          // 立即更新本地訊息狀態
+          setMessages((prevMessages) =>
+            prevMessages.map((msg) =>
+              messageIds.includes(msg.id) ? { ...msg, is_read: 1 } : msg
+            )
+          )
+
+          // 發送已讀請求到伺服器
+          socket.emit('markAsRead', {
+            messageIds,
+            chat_id: chatroomId,
+            userId: user,
+          })
+        }
+      }
     }
 
     // 接收聊天消息
@@ -181,6 +217,72 @@ export default function ChatRoomPage() {
       setError(`伺服器錯誤: ${error}`)
     }
 
+    // 處理已讀更新
+    const fetchRead = async (id) => {
+      try {
+        const res = await fetch(READ_CHAT, {
+          method: 'POST',
+          headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: id }),
+        })
+        if (!res.ok) {
+          setError('Failed to read chat room')
+        }
+        const data = await res.json()
+        setIsRead(!isRead)
+      } catch (err) {
+        setError(err.message || 'Something went wrong')
+      }
+    }
+
+    // 設置訊息為已讀
+    const handleReadMessage = ({ messageIds, userId }) => {
+      console.log('收到已讀更新:', { messageIds, userId })
+
+      // 當接收到已讀訊息時，更新訊息的狀態
+      setMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          messageIds.includes(msg.id)
+            ? { ...msg, is_read: 1 } // 設置已讀
+            : msg
+        )
+      )
+
+      // 如果是自己發送的訊息被標記為已讀，更新未讀數量
+      if (
+        messageIds.some((id) =>
+          messages.find((msg) => msg.id === id && msg.sender_id === user)
+        )
+      ) {
+        console.log('自己的訊息被標記為已讀，更新未讀數量')
+        // 重新獲取聊天列表以更新未讀數量
+        fetchChatsList()
+      }
+      fetchRead(chatroomId)
+      console.log(`訊息 ${messageIds} 已被用戶 ${userId} 標記為已讀`)
+    }
+
+    // 獲取聊天室列表
+    const fetchChatsList = async () => {
+      try {
+        const res = await fetch(CHATS_LIST, {
+          headers: { ...getAuthHeader() },
+        })
+        if (!res.ok) {
+          setError('Failed to fetch chats')
+        }
+        const data = await res.json()
+      } catch (err) {
+        setError(err.message || 'Something went wrong')
+      }
+    }
+
+    // 有人進入房間
+    const handlesomeoneIntoRoom = (msg) => {
+      console.log(msg)
+      setSomeoneInto(!someoneInto)
+    }
+
     // 註冊事件監聽器
     socket.on('connect', handleConnect)
     socket.on('disconnect', handleDisconnect)
@@ -189,6 +291,8 @@ export default function ChatRoomPage() {
     socket.on('room_joined', handleRoomJoined)
     socket.on('receive_message_chat', handleChatMessage)
     socket.on('error_message', handleErrorMessage)
+    socket.on('messageRead', handleReadMessage)
+    socket.on('someoneIntoRoom', handlesomeoneIntoRoom)
 
     // 如果已連接則手動執行處理函數
     if (socket.connected) {
@@ -204,11 +308,13 @@ export default function ChatRoomPage() {
       socket.off('room_joined', handleRoomJoined)
       socket.off('receive_message_chat', handleChatMessage)
       socket.off('error_message', handleErrorMessage)
+      socket.off('messageRead', handleReadMessage)
+      socket.off('someoneIntoRoom', handlesomeoneIntoRoom)
 
       // 離開聊天室但不斷開連接
       socket.emit('leave_room', chatroomId)
     }
-  }, [chatroomId, user])
+  }, [chatroomId, user, isRead])
 
   // 獲取聊天數據
   useEffect(() => {
@@ -228,8 +334,10 @@ export default function ChatRoomPage() {
         setError(err.message || '獲取聊天室資訊時發生錯誤')
       }
     }
+    // 修改已讀狀態
 
     // 獲取聊天內容
+
     const fetchMsg = async () => {
       try {
         const res = await fetch(`${CHATS_MSG}/${chatroomId}`, {
@@ -250,7 +358,7 @@ export default function ChatRoomPage() {
       fetchChatItem()
       fetchMsg()
     }
-  }, [chatroomId, getAuthHeader])
+  }, [chatroomId, getAuthHeader, someoneInto])
 
   // 發送訊息處理
   const handleOnclickSend = (event) => {
@@ -283,6 +391,7 @@ export default function ChatRoomPage() {
       chat_id: chatIdNum,
       message: inputMsg,
       created_at: now.toISOString(),
+      is_read: 0,
     }
 
     console.log('發送訊息:', messageData)
@@ -305,6 +414,7 @@ export default function ChatRoomPage() {
       if (sendButton) sendButton.disabled = false
     }, 1000)
   }
+
   // 處理 emoji 點擊
   const handleEmojiClick = (emojiObject, event) => {
     console.log(emojiObject)
@@ -319,14 +429,15 @@ export default function ChatRoomPage() {
         <div className={chatStyle.chatContainer}>
           <div className={chatStyle.friendName}>
             <IoPerson /> &nbsp;
-            {chatItem.user1_id == user
+            {chatroomId == 'official'
+              ? 'GYM部空間官方'
+              : chatItem.user1_id == user
               ? chatItem.user2_name
               : chatItem.user1_name}
           </div>
-          <div className={chatStyle.chatBox}>
+          <div className={chatStyle.chatBox} ref={chatBoxRef}>
             {/* 顯示錯誤 */}
             {error && <div className={chatStyle.errorMessage}>{error}</div>}
-
             {/* 顯示消息 */}
             <ul className={chatStyle.messages}>
               {messages?.length > 0 ? (
@@ -350,6 +461,13 @@ export default function ChatRoomPage() {
                         textAlign: user == v.sender_id ? 'right' : 'left',
                       }}
                     >
+                      {user == v.sender_id && v.is_read === 1 ? (
+                        <span style={{ color: '#f87808', marginRight: '5px' }}>
+                          Read
+                        </span>
+                      ) : (
+                        ''
+                      )}
                       {typeof v.created_at === 'string'
                         ? moment(v.created_at).format('HH:mm')
                         : moment(v.created_at).isValid()
@@ -361,48 +479,48 @@ export default function ChatRoomPage() {
               ) : (
                 <li className={chatStyle.noMessages}>暫無消息</li>
               )}
-              {/* <div ref={messagesEndRef} /> 滾動錨點 */}
+              {/* 滾動錨點
+              <div ref={messagesEndRef} /> */}
             </ul>
-
-            {/* 訊息輸入區域 */}
-            <div className={chatStyle.inputArea}>
-              {/* 顯示表情符號選擇器 */}
-              <div className={chatStyle.emojiArea}>
-                <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                  {showEmojiPicker ? <FaRegSmileWink /> : <FaRegSmile />}
-                </button>
-
-                {showEmojiPicker && (
-                  <EmojiPicker
-                    onEmojiClick={handleEmojiClick}
-                    style={{ position: 'absolute', bottom: '50px' }}
-                  />
-                )}
-              </div>
-
-              <input
-                className={chatStyle.textInput}
-                type="text"
-                placeholder="輸入消息..."
-                value={inputMsg}
-                onChange={(e) => setInputMsg(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault()
-                    handleOnclickSend(e)
-                  }
-                }}
-                disabled={!isConnected}
-              />
-              <button
-                className={chatStyle.sendButton}
-                onClick={handleOnclickSend}
-                disabled={!isConnected}
-                type="submit"
-              >
-                發送
+          </div>
+          {/* 訊息輸入區域 */}
+          <div className={chatStyle.inputArea}>
+            {/* 顯示表情符號選擇器 */}
+            <div className={chatStyle.emojiArea}>
+              <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                {showEmojiPicker ? <FaRegSmileWink /> : <FaRegSmile />}
               </button>
+
+              {showEmojiPicker && (
+                <EmojiPicker
+                  onEmojiClick={handleEmojiClick}
+                  style={{ position: 'absolute', bottom: '50px' }}
+                />
+              )}
             </div>
+
+            <input
+              className={chatStyle.textInput}
+              type="text"
+              placeholder="輸入消息..."
+              value={inputMsg}
+              onChange={(e) => setInputMsg(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  handleOnclickSend(e)
+                }
+              }}
+              disabled={!isConnected}
+            />
+            <button
+              className={chatStyle.sendButton}
+              onClick={handleOnclickSend}
+              disabled={!isConnected}
+              type="submit"
+            >
+              發送
+            </button>
           </div>
         </div>
       </div>

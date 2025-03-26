@@ -61,23 +61,28 @@ export default function FriendListPage() {
     })
   }
   // 通知刪除好友
-  const notifydeleteFriend = (username) => {
+  const notifydeleteFriend = (user,username) => {
     setIsAccept(!isAccept)
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: false,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer
-        toast.onmouseleave = Swal.resumeTimer
-      },
-    })
-    Toast.fire({
-      icon: 'success',
-      title: `已刪除${username}的好友`,
-    })
+    Swal.fire({
+      title: `確定要刪除好友${username}?`,
+      text: "刪除後無法復原",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgba(0, 0, 0, 0.5)",
+      cancelButtonColor: "#f87808",
+      confirmButtonText: "是",
+      cancelButtonText: "否",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteFriend(user,username)
+        Swal.fire({
+          title: `已成功刪除好友${username}`,
+          icon: "success",
+          confirmButtonColor: "#f87808",
+        });
+      }
+    });
+    
   }
   // 無法刪除好友
   const notifydeleteFriendError = (username) => {
@@ -183,12 +188,9 @@ export default function FriendListPage() {
       })
       if (!res.ok) {
         setError('無法刪除好友')
-        notifydeleteFriendError(username)
       }
       const data = await res.json()
-      notifydeleteFriend(username)
       setIsDelete(!isDelete)
-      //************* */ 好友邀請刪除
       console.log(data)
     } catch (err) {
       setError(err.message || 'Something went wrong')
@@ -303,12 +305,10 @@ export default function FriendListPage() {
                     <button
                       style={{ backgroundColor: '#c97d7d' }}
                       onClick={() => {
-                        deleteFriend(
-                          v.member_id === v.user1_id ? v.user2_id : v.user1_id,
+                        notifydeleteFriend( v.member_id === v.user1_id ? v.user2_id : v.user1_id,
                           v.member_id === v.user1_id
                             ? v.user2_name
-                            : v.user1_name
-                        )
+                            : v.user1_name)
                       }}
                     >
                       刪除好友
