@@ -36,6 +36,7 @@ export function CartProvider({ children }) {
   const [cartQuantity, setCartQuantity] = useState(0);
   // 記錄首次渲染是否完成的信號值
   const [didMount, setDidMount] = useState(false)
+  
 
    // 首次渲染時，從 LocalStorage 取出購物車資料
    useEffect(() => {
