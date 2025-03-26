@@ -6,7 +6,7 @@ import FavoriteButton from "./favorite-button";
 import { useAuth } from '@/context/auth-context'
 
 
-const ProductCard = ({ id, product_name, price, description, image_url, variant, like_id, setIsLiked  }) => {
+const ProductCard = ({ id, product_name, price, description, image_url, variant, like_id, setIsLiked, average_rating  }) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
 
   return (
@@ -22,10 +22,25 @@ const ProductCard = ({ id, product_name, price, description, image_url, variant,
           </div>
           <hr className={styles.divider} />
           <p className={styles.description}>{description}</p>
+          
+          <div className={styles.rating}>
+  {average_rating !== null ? (
+    [1, 2, 3, 4, 5].map((star) => (
+      <span key={star} className={styles.star}>
+        {average_rating >= star 
+          ? "★" 
+          : average_rating >= star - 0.5 
+          ? "✭"  // 改用較為普遍的半顆星符號
+          : "☆"}
+      </span>
+    ))
+  ) : (
+    <div></div>
+  )}
+</div>
           <div className={styles.btns}>
             <AddToCartButton variant={variant} />
       <FavoriteButton product_id={id} like_id={like_id} setIsLiked={setIsLiked}/>
-
           </div>
         </div>
       </article>
