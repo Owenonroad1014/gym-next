@@ -12,12 +12,15 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'
+import MapModal from '../_components/map-modal'
 
 const Map = dynamic(() => import('../_components/map'), {
   ssr: false,
 })
 
 export default function LocationsPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedAddress, setSelectedAddress] = useState([])
   const [locations, setLocations] = useState([])
   const [filteredLocations, setFilteredLocations] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -30,68 +33,79 @@ export default function LocationsPage() {
   const Router = useRouter()
   // 處理數據獲取和搜索
   useEffect(() => {
-    const location = searchParams.get('location') || ''
-    const branch = searchParams.get('branch') || ''
-    const searchTerm = `${location} ${branch}`.trim()
-   
-
-
-    const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Fetched data:', data)
-        setLocations(data.rows)
-
-        // 處理搜索和排序
-        if (!searchTerm) {
-          setFilteredLocations(data.rows)
-          return
+    const fetchData = async () => {
+      const location = searchParams.get('location') || '';
+      const branch = searchParams.get('branch') || '';
+      const searchTerm = `${location} ${branch}`.trim();
+      const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`;
+  
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
         }
-
-        const searchParts = searchTerm
-          .toLowerCase()
-          .split(' ')
-          .filter((part) => part.length > 0)
-
-        // 獲取選擇的地區和分店
-        const selectedLocation = searchParts[0] || ''
-        const selectedBranch = searchParts[1] || ''
-
-        // 過濾出同地區的所有分店
-        const filtered = data.rows.filter((location) => {
-          const locationName = location.location?.toLowerCase() || ''
-          return locationName === selectedLocation
-        })
-
-        // 根據選擇進行排序
-        const sorted = filtered.sort((a, b) => {
-          const aBranch = a.branch?.toLowerCase() || ''
-          const bBranch = b.branch?.toLowerCase() || ''
-
-          // 如果選擇了特定分店，將該分店排在最前面
-          if (selectedBranch) {
-            if (aBranch === selectedBranch) return -1
-            if (bBranch === selectedBranch) return 1
+        const data = await res.json();
+        console.log('Fetched data:', data);
+        
+        if (data && data.success) {
+          setLocations(data.rows || []);
+          
+          if (!searchTerm) {
+            setFilteredLocations(data.rows || []);
+            return;
           }
-
-          // 按字母順序排序
-          return aBranch.localeCompare(bBranch)
-        })
-
-        setFilteredLocations(sorted)
-      })
-      .catch((error) => console.error('獲取locations數據失敗:', error))
-  }, [searchParams])
-
+  
+          const searchParts = searchTerm
+            .toLowerCase()
+            .split(' ')
+            .filter((part) => part.length > 0);
+  
+          const selectedLocation = searchParts[0] || '';
+          const selectedBranch = searchParts[1] || '';
+  
+          const filtered = data.rows.filter((location) => {
+            const locationName = location.location?.toLowerCase() || '';
+            return locationName === selectedLocation;
+          });
+  
+          const sorted = filtered.sort((a, b) => {
+            const aBranch = a.branch?.toLowerCase() || '';
+            const bBranch = b.branch?.toLowerCase() || '';
+            
+            if (selectedBranch) {
+              if (aBranch === selectedBranch) return -1;
+              if (bBranch === selectedBranch) return 1;
+            }
+            return aBranch.localeCompare(bBranch);
+          });
+  
+          setFilteredLocations(sorted);
+        } else {
+          setLocations([]);
+          setFilteredLocations([]);
+        }
+      } catch (error) {
+        console.error('獲取locations數據失敗:', error);
+        setLocations([]);
+        setFilteredLocations([]);
+      }
+    };
+  
+    fetchData();
+  }, [searchParams]);
+  
   const handleSearch = (term) => {
     setSearchTerm(term)
     setShowMap(false)
     setShowLocations(true)
   }
 
-  
+  const handleLocationClick = (location) => {
+    console.log('Location clicked:', location)
+
+    setSelectedAddress(location)
+    setIsModalOpen(true)
+  }
 
   return (
     <>
@@ -149,38 +163,54 @@ export default function LocationsPage() {
             {showMap && <Map center={center} zoom={zoom} />}
           </div>
         </div>
-        
-  {showLocations && (
-    filteredLocations.length === 0 ? (
-      <>
-      <div className={styles.toolsContainer}>
-          <Breadcrumb breadcrumb={breadcrumb} />
-        </div>
-        <div className={styles.locationsContainer}>
-      <div className={styles.emptyResults}>
-        <p>
-          {searchTerm
-            ? '未找到符合條件的據點'
-            : '請輸入搜索條件以顯示據點'}
-        </p>
-      </div>
-      </div>
-      </>
-    ) : (
-      <>
-      <div className={styles.toolsContainer}>
-          <Breadcrumb breadcrumb={breadcrumb} />
-        </div>
-      <div className={styles.locationsContainer}>
-      
-        {filteredLocations.map((location) => (
-          <LocationCard key={location.id} location={location} />
-        ))}
-        </div>
-      </>
-    )
-  )}
 
+        {showLocations &&
+          (filteredLocations.length === 0 ? (
+            <>
+              <div className={styles.toolsContainer}>
+                <Breadcrumb breadcrumb={breadcrumb} />
+              </div>
+              <div className={styles.locationsContainer}>
+                <div className={styles.emptyResults}>
+                  <p>
+                    {searchTerm
+                      ? '未找到符合條件的據點'
+                      : '請輸入搜索條件以顯示據點'}
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.toolsContainer}>
+                <Breadcrumb breadcrumb={breadcrumb} />
+              </div>
+              <div className={styles.locationsContainer}>
+                {filteredLocations.map((location) => (
+               
+                    <div
+                      key={location.id}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => handleLocationClick(location)}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleLocationClick(location)
+                        }
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <LocationCard location={location} />
+                    </div>
+                ))}
+                <MapModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  selectedAddress={selectedAddress}
+                />
+              </div>
+            </>
+          ))}
       </div>
     </>
   )

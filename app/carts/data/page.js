@@ -9,20 +9,17 @@ import Button from "./_components/Button"
 function Data() {
 
   const [isFormValid, setIsFormValid] = useState(false);
-
-  // 這個函式接收 `CustomerForm` 驗證結果，並更新狀態
-  const handleValidationResult = (isValid) => {
-    setIsFormValid(isValid);
-  };
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [customerInfo, setCustomerInfo] = useState({});
 
   return (
     <>
     <CheckoutProgress/>
     <main className={styles.data}>
-      <CustomerForm onValidationResult={handleValidationResult} />
+      <CustomerForm onValidationResult={setIsFormValid} isSubmitted={isSubmitted} onCustomerInfoChange={setCustomerInfo}/>
       <OrderSummary />
     </main>
-    <Button isFormValid={isFormValid}/>
+    <Button isFormValid={isFormValid} setIsSubmitted={setIsSubmitted} customerInfo={customerInfo}/>
     </>
   );
 }

@@ -1,0 +1,124 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .modal {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  .title h2 {
+    font-size: 24px;
+    color: #142020;
+    margin-bottom: 10px;
+  }
+  
+  .content img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .address {
+    margin-top: 10px;
+    font-size: 28px;
+  }
+  
+  .address p {
+    margin: 8px 0;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+  
+  .closeButton {
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    border: none;
+    background: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+  }
+  
+  .closeButton:hover {
+    color: #142020;
+  }
+  
+  .mapContainer {
+    width: 100%;
+    height: 60vh;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media (max-width: 736px) {
+    .content img {
+        height: 180px;
+      }
+    .modal {
+      grid-template-columns: 1fr;
+      width: 95%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+  
+    .content {
+      padding: 10px;
+    }
+  
+    .mapContainer {
+      height: 400px;
+    }
+  }
+  
+  @media (max-width: 440px) {
+    .modal {
+      padding: 15px;
+    }
+  
+    .content img {
+        height: 150px;
+      }
+      
+      .title h2 {
+        font-size: 20px;
+      }
+      
+      .address p {
+        font-size: 14px;
+      }
+  
+    .mapContainer {
+      height: 300px;
+    }
+  
+    
+  }
+  

@@ -8,6 +8,9 @@ export const REGISTER_POST = `${API_SERVER}/register/api`
 // 註冊後填寫資料路由
 export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
 
+// 教練 地圖 照片路由
+export const IMGS_PATH = `${API_SERVER}/imgs`
+
 // 取得教練的資料 GET
 export const COACHES_LIST = `${API_SERVER}/coaches/api`
 // 取得單筆教練資料 GET
@@ -23,6 +26,9 @@ export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`
 
 // 送出課程預約 POST
 export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`
+
+// 取得課程分類 GET
+export const CLASSES_CATEGORY_GET = `${API_SERVER}/classes/class_categories/api`
 
 // 取得分店資料
 export const LOCATIONS_LIST = `${API_SERVER}/locations/api`
@@ -71,8 +77,11 @@ export const FAVORITES_LIST = `${API_SERVER}/favorites/api`;
 export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
 
-// 取得訂單列表的資料
-export const ORDERS_LIST = `${API_SERVER}/carts/api`
+// 取得訂單列表的資料 
+export const ORDERS_LIST = `${API_SERVER}/carts/api`;
+//
+// export const ecpay = `${API_SERVER}/ecpay-test-only/api`;
+
 
 //**************** ARTICLE *****************
 // 獲取文章列表的資料
