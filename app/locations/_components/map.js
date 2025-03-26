@@ -153,9 +153,19 @@ const Map = ({ center = [23.0252956, 120.226376], zoom = 18 }) => {
             `
              <img src="${AVATAR_PATH}/${location.avatar}" alt="${location.location}" width=200px/>
               <h3>${location.location}${location.branch}</h3>
-              <p>${location.address}</p>
-              <p>營業時間: ${location.business_hours}</p>
-          `,
+              <div style="display: flex; align-items: center; margin: 0.5rem 0">
+                <svg style="width: 1.2rem; height: 1.2rem; margin-right: 0.3rem ; color: black" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9A2.5 2.5 0 0 1 12 11.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>
+                <span>${location.address}</span>
+              </div>
+              <div style="display: flex; align-items: center; margin: 0.5rem 0">
+                <svg style="width: 1.2rem; height: 1.2rem; margin-right: 0.3rem ; color: black" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg>
+                <span>${location.phone}</span>
+              </div>
+              <div style="display: flex; align-items: center; margin: 0.5rem 0">
+                <svg style="width: 1.2rem; height: 1.2rem; margin-right: 0.3rem ; color: black" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m.5-13H11v6l5.2 3.2l.8-1.3l-4.5-2.7V7z"/></svg>
+                <span>${location.business_hours}</span>
+              </div>
+            `,
             {
               className: styles.customPopup,
               maxWidth: 300,
@@ -177,7 +187,7 @@ const Map = ({ center = [23.0252956, 120.226376], zoom = 18 }) => {
           position: 'topleft',
           locateOptions: {
             enableHighAccuracy: true,
-            setView: 'once', // 只在首次定位時移動地圖
+            setView: 'false', // 只在首次定位時移動地圖
             watch: true, // 持續監控位置變化
           },
           strings: {

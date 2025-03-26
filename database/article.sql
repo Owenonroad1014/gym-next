@@ -6,7 +6,7 @@ CREATE TABLE articles (
   intro TEXT,
   content TEXT NOT NULL,
 	imageURL VARCHAR(255),
-     category_id INT,
+  category_id INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   views INT DEFAULT 0

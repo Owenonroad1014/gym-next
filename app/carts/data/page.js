@@ -1,26 +1,30 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./_styles/data.module.css";
-import CheckoutProgress from "./_components/checkout-progress";
-import OrderSummary from "./_components/order-summary";
-import CustomerForm from "./_components/customer-form";
-import PaymentForm from "./_components/payment-form";
-import InvoiceForm from "./_components/invoice-form";
-import Button from "./_components/Button";
+import CheckoutProgress from "./_components/checkout-progress"
+import CustomerForm from "./_components/CustomerForm";
+import OrderSummary from "./_components/OrderSummary";
+import Button from "./_components/Button"
 
-function Body2() {
+function Data() {
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // 這個函式接收 `CustomerForm` 驗證結果，並更新狀態
+  const handleValidationResult = (isValid) => {
+    setIsFormValid(isValid);
+  };
+
   return (
     <>
-    <main className={styles.body2}>
-      <CheckoutProgress />
+    <CheckoutProgress/>
+    <main className={styles.data}>
+      <CustomerForm onValidationResult={handleValidationResult} />
       <OrderSummary />
-      <CustomerForm />
-      <PaymentForm />
-      <InvoiceForm />
-      <Button />      
     </main>
+    <Button isFormValid={isFormValid}/>
     </>
   );
 }
 
-export default Body2;
+export default Data;

@@ -1,9 +1,8 @@
 .innerContainer {
   width: 320px;
-  max-width: 350px;
   min-height: 400px;
   padding: 12px;
-  background: #bdbebf;
+  background: #eee;
   overflow: visible;
   display: flex;
   flex-direction: column;
@@ -15,7 +14,7 @@
   transition: all 0.3s ease-in-out;
 }
 .innerContainer:hover {
-  background: #eee;
+  background: #f0eded;
   transform: scale(1.05);
 }
 
@@ -84,18 +83,19 @@
 
 .infoContainer {
   padding: 8px 0;
-  width: 100%;
+  width: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
+ 
 }
-
 .info {
   width: 100%;
-  text-align: center;
+  text-align: left;
   color: rgb(0, 0, 0);
   font-size: 18px;
   letter-spacing: 1.1px;
+  line-height: 30px;
 }
 
 .buttonContainer {
@@ -103,7 +103,7 @@
   padding: 10px;
   overflow: hidden;
   display: flex;
-  justify-content: flex-start;
+  justify-content: end;
   align-items: flex-start;
   gap: 10px;
 }
@@ -121,58 +121,71 @@
   background: #b9b3b3;;
   color: rgb(23, 23, 23);
 }
-.button:first-child {
-  background: #b9b3b3;
-  color: rgb(23, 23, 23);
+.icon {
+  font-size: 20px;
+  color: #e76317;
+  flex-shrink: 0;
 }
 
-.button:hover:first-child {
-  background: #e76317;
-  color: white;
+.infoItem span {
+  font-size: 16px;
+  color: #333;
+  flex-grow: 1;
 }
 
-@media screen and (max-width: 440px) {
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
   .innerContainer {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    min-height: 400px;
+    width: 90%;
+    min-height: 350px;
+    margin: auto;
   }
-
+  
   .imageWrapper {
-    width: 100%;
-    max-width: 225px;
-    height: auto;
+    height: 180px;
   }
-
-  .contentWrapper {
-    width: 100%;
-    padding: 0px 10px;
-  }
-
-  .titleSection {
-    padding: 10px 0;
-  }
-
-  .titleContainer {
-    width: 100%;
-  }
-
+  
   .title {
     font-size: 28px;
   }
-
+  
   .info {
-    width: 100%;
     font-size: 16px;
   }
-
+  
   .buttonContainer {
     flex-direction: column;
     gap: 8px;
   }
-
+  
   .button {
     width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .innerContainer {
+    width: 80%;
+    min-height: 300px;
+    margin: auto;
+  }
+  
+  .imageWrapper {
+    height: 150px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .info {
+    font-size: 14px;
   }
 }

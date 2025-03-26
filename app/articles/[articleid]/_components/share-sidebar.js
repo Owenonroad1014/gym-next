@@ -106,21 +106,21 @@ export default function ShareSidebar({
     }
   }
   const needlogin = () => {
-      const MySwal = withReactContent(Swal)
-      MySwal.fire({
-        title: '登入會員即可收藏!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
-        confirmButtonText: '登入',
-        cancelButtonText: '取消',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push('/member/login')
-        }
-      })
-    }
+    const MySwal = withReactContent(Swal)
+    MySwal.fire({
+      title: '登入會員即可收藏!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#0b3760',
+      confirmButtonText: '登入',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/quick-login')
+      }
+    })
+  }
   return (
     <>
       <div className={articleStyle.shareSidebar}>
@@ -131,8 +131,8 @@ export default function ShareSidebar({
       > */}
         <ul className={articleStyle.wrapper}>
           <li className={articleStyle.icon}>
+            <span className={articleStyle.tooltip}>菜單</span>
             <Link href="/articles">
-              <span className={articleStyle.tooltip}>菜單</span>
               <FaList />
             </Link>
           </li>

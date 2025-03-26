@@ -5,6 +5,10 @@ import moment from 'moment-timezone'
 import ReservationModal from './reservation-modal'
 import { CLASSES_CAPACITY_GET } from '../../../config/api-path'
 import { CLASSES_RESERVATION_POST } from '../../../config/api-path'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/context/auth-context'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 export default function CourseCalendar({
   currentDate = new Date(),
@@ -17,6 +21,21 @@ export default function CourseCalendar({
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState(currentDate)
   const today = moment().tz('Asia/Taipei').startOf('day')
+  const { auth, getAuthHeader } = useAuth()
+  const router = useRouter()
+
+  // Toast
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
 
   // 計算週期範圍
   const getWeekRange = (date) => {
@@ -67,9 +86,35 @@ export default function CourseCalendar({
     return selectedWeekStart.isSameOrBefore(today)
   }
 
+  const needlogin = () => {
+      document.body.style.overflow = 'hidden'
+      const MySwal = withReactContent(Swal)
+      MySwal.fire({
+        title: '登入會員即可預約!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#f87808',
+        cancelButtonColor: '#0b3760',
+        confirmButtonText: '登入',
+        cancelButtonText: '取消',
+        didClose: () => {
+          document.body.style.overflow = ''
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/member/login')
+        }
+      })
+    }
+
   // 處理卡片點擊
 
 const handleCardClick = (classData) => {
+  if (!auth.id) {
+    needlogin()
+    return 
+  }
+
   console.log('Clicked classData:', classData) // 先看看收到的資料
   
   if (!classData || !classData.date) {
@@ -83,50 +128,79 @@ const handleCardClick = (classData) => {
 
   // 處理預約提交
   const handleReservationSubmit = async () => {
+    if(!auth.id) {
+      needlogin()
+      return
+    }
+    
     try {
-      
-      const capacityRes = await fetch(`${CLASSES_CAPACITY_GET}/${selectedClass.id}`);
+      const capacityRes = await fetch(`${CLASSES_CAPACITY_GET}/${selectedClass.id}`)
       const capacity = await capacityRes.json()
-      if (capacity.current_capacity >= capacity.max_capacity) {
-        throw new Error('課程已額滿')
-      }
       
+      if (capacity.current_capacity >= capacity.max_capacity) {
+        setIsModalOpen(false)
+        Toast.fire({
+          icon: 'error',
+          title: '課程已額滿'
+        })
+        return
+      }
+  
       // 提交預約
       const res = await fetch(`${CLASSES_RESERVATION_POST}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          ...getAuthHeader(),
         },
         body: JSON.stringify({
-          member_id: 1,
+          member_id: auth.id,
           class_id: selectedClass.id,
           coach_id: selectedClass.coach_id,
           reservation_date: moment(selectedClass.date).format('YYYY-MM-DD'),
           reservation_time: selectedClass.start_time,
         }),
       })
-      console.log('Submitting reservation for:', selectedClass)
-
+  
       // 重複預約
       if(res.status === 400) {
-        throw new Error('您已預約過此課程') 
+        setIsModalOpen(false)
+        Toast.fire({
+          icon: 'info',
+          title: '你已預約過此課程'
+        })
+        return
       }
-
+  
       if (!res.ok) {
-        throw new Error('預約失敗')
+        setIsModalOpen(false)
+        Toast.fire({
+          icon: 'error',
+          title: '預約失敗'
+        })
+        return
       }
-      
+  
       setIsModalOpen(false)
-      alert('預約成功')
+      Toast.fire({
+        icon: 'success',
+        title: '預約成功'
+      })
+      
       if(onReservationSuccess){
         onReservationSuccess()
       }
-
+  
     } catch (error) {
       console.error('Reservation failed:', error)
-      alert(error.message)
+      setIsModalOpen(false)
+      Toast.fire({
+        icon: 'error',
+        title: error.message
+      })
     }
   }
+  
 
   return (
     <>

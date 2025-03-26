@@ -32,7 +32,7 @@ export default function List() {
   const [allListData, setAllListData] = useState({})
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(true)
-
+  const [sended, setSended] = useState(false) 
   useEffect(() => {
     const fetchListData = async () => {
       try {
@@ -61,7 +61,7 @@ export default function List() {
           <p>
             會員專屬內容 <br />
             <br />
-            <Link href="/member/login">登入即可查看</Link>
+            <Link href="/quick-login">登入即可查看</Link>
           </p>
         </div>
       ) : (

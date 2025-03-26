@@ -8,7 +8,7 @@ import { MdShareLocation } from 'react-icons/md'
 import LocationCard from '../_components/locations-card'
 import Breadcrumb from '../_components/breadcrumb'
 import { LOCATIONS_LIST } from '@/config/api-path'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'
@@ -26,12 +26,15 @@ export default function LocationsPage() {
   const [showMap, setShowMap] = useState(false)
   const center = [23.7577054, 120.8964954]
   const zoom = 8
-
+  const [showLocations, setShowLocations] = useState(true)
+  const Router = useRouter()
   // 處理數據獲取和搜索
   useEffect(() => {
     const location = searchParams.get('location') || ''
     const branch = searchParams.get('branch') || ''
     const searchTerm = `${location} ${branch}`.trim()
+   
+
 
     const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`
 
@@ -84,7 +87,11 @@ export default function LocationsPage() {
 
   const handleSearch = (term) => {
     setSearchTerm(term)
+    setShowMap(false)
+    setShowLocations(true)
   }
+
+  
 
   return (
     <>
@@ -118,10 +125,16 @@ export default function LocationsPage() {
             className={styles.mapContainer}
             role="button"
             tabIndex={0}
-            onClick={() => setShowMap(true)}
+            onClick={() => {
+              setShowMap(true)
+              setShowLocations(false)
+              Router.push('/locations/list', { scroll: false })
+            }}
             onKeyPress={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 setShowMap(true)
+                setShowLocations(false)
+                Router.push('/locations/list', { scroll: false })
               }
             }}
           >
@@ -136,24 +149,38 @@ export default function LocationsPage() {
             {showMap && <Map center={center} zoom={zoom} />}
           </div>
         </div>
-        <div className={styles.toolsContainer}>
+        
+  {showLocations && (
+    filteredLocations.length === 0 ? (
+      <>
+      <div className={styles.toolsContainer}>
           <Breadcrumb breadcrumb={breadcrumb} />
         </div>
         <div className={styles.locationsContainer}>
-          {filteredLocations.length === 0 ? (
-            <div className={styles.emptyResults}>
-              <p>
-                {searchTerm
-                  ? '未找到符合條件的據點'
-                  : '請輸入搜索條件以顯示據點'}
-              </p>
-            </div>
-          ) : (
-            filteredLocations.map((location) => (
-              <LocationCard key={location.id} location={location} />
-            ))
-          )}
+      <div className={styles.emptyResults}>
+        <p>
+          {searchTerm
+            ? '未找到符合條件的據點'
+            : '請輸入搜索條件以顯示據點'}
+        </p>
+      </div>
+      </div>
+      </>
+    ) : (
+      <>
+      <div className={styles.toolsContainer}>
+          <Breadcrumb breadcrumb={breadcrumb} />
         </div>
+      <div className={styles.locationsContainer}>
+      
+        {filteredLocations.map((location) => (
+          <LocationCard key={location.id} location={location} />
+        ))}
+        </div>
+      </>
+    )
+  )}
+
       </div>
     </>
   )

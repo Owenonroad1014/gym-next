@@ -30,7 +30,7 @@ export default function Header() {
     }
   }, [])
   // 判斷是否要隱藏 Header
-  if (pathname.startsWith('/member'||'/member/register')) {
+  if (pathname.startsWith('/member' || '/member/register')) {
     return null // `/member` 底下的頁面不顯示 Header
   }
   // const hideHeaderPages = [
@@ -84,7 +84,16 @@ export default function Header() {
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
-                {/* {auth.avatar} */}
+                <div className={headerstyles.navAvatar}>
+                  <img
+                    src={
+                      auth.avatar
+                        ? `img/${auth.avatar}`
+                        : '/imgs/avatar/default-avatar.png'
+                    }
+                    alt=""
+                  />
+                </div>
               </Link>
               <a
                 href="/qs"
