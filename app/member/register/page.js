@@ -6,19 +6,17 @@ import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { REGISTER_POST } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { rgSchema } from '@/utils/schema/schema'
+import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
-  const [show, setShow] = useState(false)
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({})
   const { login } = useAuth()
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const redirectUrl = searchParams.get('redirect') || '/'
-
   const [registerForm, setRegisterForm] = useState({
     email: '',
     password: '',
@@ -31,30 +29,29 @@ export default function RegisterPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    setErrors({}) // 清空舊錯誤
 
-    const newErrrors = {}
+    const zResult = rgSchema.safeParse(registerForm)
 
-    if (!registerForm.email) {
-      newErrrors.email = '電子郵箱為必填'
+    if (!zResult.success) {
+      const newErrors = {
+        email: '',
+        password: '',
+        confirmPassword: '',
+      }
+
+      const errMap = new Map()
+
+      zResult.error?.issues.forEach((item) => {
+        const pathKey = item.path[0]
+        if (!errMap.has(pathKey)) {
+          errMap.set(pathKey, item.message)
+          newErrors[pathKey] = item.message
+        }
+      })
+      setErrors(newErrors)
+      return // 阻止發送 API 請求
     }
-
-    if (!registerForm.password) {
-      newErrrors.password = '密碼為必填'
-    } else if (registerForm.password.length < 8) {
-      newErrrors.password = '密碼至少8個字元'
-    }
-
-    if (registerForm.confirmPassword !== registerForm.password) {
-      newErrrors.confirmPassword = '密碼不一致'
-    }
-
-    if (Object.keys(newErrrors).length > 0) {
-      setErrors(newErrrors)
-      return
-    } else {
-      setErrors({})
-    }
-
     const r = await fetch(REGISTER_POST, {
       method: 'POST',
       body: JSON.stringify(registerForm),
@@ -63,10 +60,10 @@ export default function RegisterPage() {
       },
     })
     const result = await r.json()
+
     if (result.success) {
       // modal.show()
       alert('註冊成功')
-      setErrors({})
       setRegisterForm({
         email: '',
         password: '',
@@ -83,13 +80,6 @@ export default function RegisterPage() {
       }
     } else {
       console.warn(result)
-      if (result.error?.issues) {
-        const bkErrors = {}
-        result.error.issues.forEach((issue) => {
-          bkErrors[issue.path[0]] = issue.message
-        })
-        setErrors(bkErrors)
-      }
       if (result.error === '用戶已註冊') {
         // modal.show()
         alert(result.error)
@@ -130,11 +120,9 @@ export default function RegisterPage() {
             <button
               className={registerCss.iconBtn}
               type="button"
-              onClick={() => {
-                setShow(!show)
-              }}
+              onClick={() => setPasswordVisible((prev) => !prev)}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {passwordVisible? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
 
@@ -142,7 +130,7 @@ export default function RegisterPage() {
             <label htmlFor="password">密碼</label>
             <div className={registerCss.inputGroup}>
               <input
-                type={show ? 'text' : 'password'}
+                type={passwordVisible ? 'text' : 'password'}
                 value={registerForm.password}
                 onChange={RegisterChangeForm}
                 placeholder="請輸入密碼"
@@ -161,17 +149,17 @@ export default function RegisterPage() {
               className={registerCss.iconBtn}
               type="button"
               onClick={() => {
-                setShow(!show)
+                setPasswordVisible((prev) => !prev)
               }}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
           <div className={registerCss.formGroup}>
             <label htmlFor="confirmPassword">確認密碼</label>
             <div className={registerCss.inputGroup}>
               <input
-                type={show ? 'text' : 'password'}
+                type={confirmPasswordVisible ? 'text' : 'password'}
                 value={registerForm.confirmPassword}
                 onChange={RegisterChangeForm}
                 placeholder="請再次輸入密碼"
@@ -190,10 +178,10 @@ export default function RegisterPage() {
               className={registerCss.iconBtn}
               type="button"
               onClick={() => {
-                setShow(!show)
+                setConfirmPasswordVisible((prev) => !prev)
               }}
             >
-              {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              {confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
             </button>
           </div>
           <div className={registerCss.btns}>

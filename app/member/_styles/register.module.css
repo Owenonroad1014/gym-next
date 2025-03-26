@@ -1,9 +1,8 @@
 .container {
   display: flex;
   justify-content: center;
-  padding: 30px;
-  max-width: 1440px;
-  margin: 66px;
+  width: 100%;
+  margin: 140px auto;
 }
 .left {
   display: flex;
@@ -108,7 +107,7 @@
   background-color: transparent;
 }
 .formGroup:first-child .iconBtn {
-  visibility:hidden
+  visibility: hidden;
 }
 
 .registerBtn {

@@ -11,6 +11,7 @@ import {
 import Breadcrumb from './bread'
 import CoachCalendar from './coaches-calendar'
 import { AVATAR_PATH } from '../../../config/api-path'
+import { MdEmail, MdPhone } from 'react-icons/md'
 
 const CoachDetail = ({
   avatar = '',
@@ -109,11 +110,11 @@ const CoachDetail = ({
 
           <div className={styles['contact-info']}>
             <div className={styles['info-item']}>
-              <span className={styles['info-label']}>電子郵件：</span>
+              <MdEmail style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
               <span>{email}</span>
             </div>
             <div className={styles['info-item']}>
-              <span className={styles['info-label']}>電話：</span>
+              <MdPhone style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
               <span>{phone}</span>
             </div>
           </div>

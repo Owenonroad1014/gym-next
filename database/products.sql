@@ -95,3 +95,19 @@ INSERT INTO `productvariants` (`id`, `product_id`, `weight`, `image_url`, `creat
 (15, 16, 10, 'products.jpg', '2025-03-13 07:37:05'),
 (16, 20, 20, 'products.jpg', '2025-03-13 07:37:05'),
 (17, 20, 30, 'products.jpg', '2025-03-13 07:37:05');
+
+
+--我的最愛資料表
+CREATE TABLE `favorites` (
+  `like_id` INT NOT NULL AUTO_INCREMENT,
+  `member_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`like_id`),
+  UNIQUE KEY `unique_favorite` (`member_id`, `product_id`),
+  FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+

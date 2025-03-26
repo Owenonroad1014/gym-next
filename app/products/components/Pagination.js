@@ -6,7 +6,8 @@ import Link from "next/link";
 
 
 const Pagination = ({ totalPages,page,searchParams }) => 
-  {return (
+  {
+    return (
     <nav aria-label="Page navigation example">
       <ul className={styles.pagination}>
 

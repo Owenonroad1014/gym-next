@@ -10,6 +10,7 @@ import Search from '../_components/search'
 import Pagination from '../_components/pagination'
 import SearchForm from '../_components/search-form'
 import { COACHES_LIST } from '../../../config/api-path'
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 export default function CoachesListPage(props) {
   const [coaches, setCoaches] = useState([])
@@ -25,8 +26,12 @@ export default function CoachesListPage(props) {
   )
 
   useEffect(() => {
+    setCurrentPage(1) // Reset to first page on new search
     const fetchCoaches = async () => {
       try {
+        setCoaches([]) // Clear previous results
+        setLoading(true)
+        
         const location = searchParams.get('location')
         const branch = searchParams.get('branch')
         const keyword = searchParams.get('keyword')
@@ -41,13 +46,16 @@ export default function CoachesListPage(props) {
           setCoaches(data.rows)
         }
         setLoading(false)
+        
       } catch (error) {
         console.error('Error:', error)
+        setCoaches([]) // Clear results on error
         setLoading(false)
       }
     }
     fetchCoaches()
   }, [searchParams])
+  
 
   return (
     <>
@@ -79,33 +87,44 @@ export default function CoachesListPage(props) {
               <Search />
             </div>
           </div>
-
-          <div>
             <div className={styles.toolsContainer}>
               <Breadcrumb breadcrumb={breadcrumb} />
               <SearchForm />
             </div>
-          </div>
-          <div className={styles.coachesContainer}>
-            {currentCoaches.map((coach) => (
-              <CoachesCard
-                key={coach.id}
-                id={coach.id}
-                name={coach.name}
-                email={coach.email}
-                phone={coach.phone}
-                skill={coach.skill}
-                description={coach.description}
-                avatar={coach.avatar}
-              />
-            ))}
-          </div>
+            {loading ? (
+  <div className={styles.loaderContainer}>
+    <div className={loaderStyle.loader}></div>
+  </div>
+) : (
+  <>
+    <div className={styles.coachesContainer}>
+      {currentCoaches.length > 0 ? (
+        currentCoaches.map((coach) => (
+          <CoachesCard
+            key={coach.id}
+            id={coach.id}
+            name={coach.name}
+            email={coach.email}
+            phone={coach.phone}
+            skill={coach.skill}
+            description={coach.description}
+            avatar={coach.avatar}
+          />
+        ))
+      ) : (
+        <div className={styles.noResults}>
+          <p>沒有該分店的教練資料</p>
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+      )}
+    </div>
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  </>
+)}
+        </div>
       </div>
     </>
   )

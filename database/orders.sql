@@ -1,5 +1,3 @@
-
-
 CREATE TABLE orders (
   order_id INT AUTO_INCREMENT PRIMARY KEY, 
   member_id INT NOT NULL,  -- 參考會員 ID
@@ -10,8 +8,8 @@ CREATE TABLE orders (
   payment_status ENUM('未付款', '已付款', '退款中', '已退款') NOT NULL DEFAULT '未付款',  -- 付款狀態
   pickup_method ENUM('台南中西店', '台南中華店', '台南永康店') NOT NULL DEFAULT '台南中西店',
   payment_method ENUM('現金', '信用卡') NOT NULL DEFAULT '信用卡',
-  added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 訂單建立時間  
-  #FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE
+  added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 訂單建立時間  
+  FOREIGN KEY (member_id) REFERENCES member(member_id) ON DELETE CASCADE
 );
 
 
@@ -33,18 +31,18 @@ INSERT INTO orders (
 
 CREATE TABLE order_items (
   order_item_id INT AUTO_INCREMENT PRIMARY KEY,
-  order_id INT NOT NULL,  -- 參考 orders 訂單 ID
-  product_id INT NOT NULL,  -- 參考 products 商品 ID
-  product_variant_id INT DEFAULT NULL,  -- 參考 productvariants 變體 ID (重量)
+  order_id INT NOT NULL,  -- 參考 `orders` 訂單 ID
+  product_id INT NOT NULL,  -- 參考 `products` 商品 ID
+  product_variant_id INT DEFAULT NULL,  -- 參考 `productvariants` 變體 ID (重量)
   rental_start_date DATE NOT NULL,  -- 租賃開始日期
   rental_end_date DATE NOT NULL,  -- 租賃結束日期
   rental_days INT GENERATED ALWAYS AS (DATEDIFF(rental_end_date, rental_start_date)) STORED,  -- 自動計算租賃天數
   quantity INT NOT NULL,  -- 商品數量
   price DECIMAL(10, 0) NOT NULL,  -- 單品租借價格
-  total_price DECIMAL(10, 0) GENERATED ALWAYS AS (rental_days * price * quantity) STORED  -- 自動計算租金
-  #FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
-  #FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
-  #FOREIGN KEY (product_variant_id) REFERENCES productvariants(id) ON DELETE SET NULL
+  total_price DECIMAL(10, 0) GENERATED ALWAYS AS (rental_days * price * quantity) STORED,  -- 自動計算租金
+  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_variant_id) REFERENCES productvariants(id) ON DELETE SET NULL
 );
 
 INSERT INTO order_items (

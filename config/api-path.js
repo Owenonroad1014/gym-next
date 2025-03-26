@@ -1,53 +1,67 @@
-
-export const API_SERVER = `http://localhost:3005`;
-
+export const API_SERVER = `http://localhost:3005`
 
 // 頭貼的路由
-export const AVATAR_PATH = `${API_SERVER}/imgs`;
+export const AVATAR_PATH = `${API_SERVER}/img/avatar`
 
 // 註冊路由
-export const REGISTER_POST = `${API_SERVER}/register/api`;
+export const REGISTER_POST = `${API_SERVER}/register/api`
+// 註冊後填寫資料路由
+export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
 
 // 取得教練的資料 GET
-export const COACHES_LIST = `${API_SERVER}/coaches/api`;
+export const COACHES_LIST = `${API_SERVER}/coaches/api`
 // 取得單筆教練資料 GET
-export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`;
+export const COACHES_ITEM_GET = `${API_SERVER}/coaches/api`
 // 取得教練課程資料
-export const COACHES_CLASSES = `${API_SERVER}/coaches/api`;
-
+export const COACHES_CLASSES = `${API_SERVER}/coaches/api`
 
 // 取得課程的資料 GET
-export const CLASSES_LIST = `${API_SERVER}/classes/api`;
+export const CLASSES_LIST = `${API_SERVER}/classes/api`
 
-// 取得課程人數限制 GET 
-export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`;
+// 取得課程人數限制 GET
+export const CLASSES_CAPACITY_GET = `${API_SERVER}/classes/api`
 
-// 送出課程預約 POST 
-export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`;
+// 送出課程預約 POST
+export const CLASSES_RESERVATION_POST = `${API_SERVER}/classes/api/reservations`
 
 // 取得分店資料
-export const LOCATIONS_LIST = `${API_SERVER}/locations/api`;
+export const LOCATIONS_LIST = `${API_SERVER}/locations/api`
 
 // 通訊錄: 修改項目 PUT
 // `${API_SERVER}/address-book/api/${ab_id}`
-export const AB_ITEM_PUT = `${API_SERVER}/address-book/api`;
-
-
+export const AB_ITEM_PUT = `${API_SERVER}/address-book/api`
 
 // JWT 登入
-export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`;
+export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`
 
 // Toggle like
 // `${API_SERVER}/address-book/toggle-like/${ab_id}`
-export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`;
-
+export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`
 
 // export const API_SERVER = `http://localhost:3001`;
 
 export const IMG_PATH = `${API_SERVER}/img`;
 
-// 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
+export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
+
+//影片路由
+export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
+export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
+
+//商品評價路由
+export const REVIEWS_LIST = `${API_SERVER}/products/api/review`;
+
+export const SUBMIT_REVIEW_API= `${API_SERVER}/products/api/add-review`;
+
+export const EDIT_REVIEW_API = `${API_SERVER}/products/api/edit-review`;
+
+export const PENDING_REVIEWS_LIST= `${API_SERVER}/products/api/review/pending`;
+
+
+
+// 取得商品列表的資料 GET
+export const PRODUCTS_LIST = `${API_SERVER}/products/api`
 
 export const PRODUCTS_LIST_FAV = `${API_SERVER}/products`;
 
@@ -109,3 +123,5 @@ export const CHATS_ITEM = `${API_SERVER}/chats/api`
 export const CHATS_MSG = `${API_SERVER}/chats/api/chatroom`
 // 新增聊天訊息
 export const SEND_MSG = `${API_SERVER}/chats/api/sendMsg`
+// 刪除聊天室
+export const DELETE_CHAT = `${API_SERVER}/chats/api/deleteChatroom`
