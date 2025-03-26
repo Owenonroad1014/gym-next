@@ -1,21 +1,19 @@
 'use client'
 
-import memberCss from '../_styles/member.module.css'
+import { useState,useEffect } from 'react'
+import { useSearchParams,useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
-import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const { auth, login } = useAuth()
-
-
-
+  const searchParams=useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')||'/'
   const router = useRouter()
-
   const [loginForm, setLoginForm] = useState({
     account: '',
     password: '',
@@ -23,6 +21,11 @@ export default function LoginPage() {
   const LoginForm = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
+  useEffect(() => {
+    if (auth.id) {
+      router.push(callbackUrl) // 已登入就直接跳轉
+    }
+  }, [auth, callbackUrl, router])
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -45,7 +48,7 @@ export default function LoginPage() {
       if (router.back() === '/member/register') {
         router.push('/')
       }
-      router.back() // qs
+      router.push(callbackUrl) // 已登入就直接跳轉
     } else {
       // modal.show()
       if (code === 404) {

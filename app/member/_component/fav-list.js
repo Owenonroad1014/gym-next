@@ -1,23 +1,24 @@
 'use client'
 
 import React from 'react'
+import { useSearchParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import memberCss from './_styles/member.module.css'
+import Card from '../_component/card'
+import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
-import FavList from './_component/fav-list'
 
-export default function MemberPage() {
-  const pathname = usePathname()
-  
+export default function FavList() {
   const { auth } = useAuth()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const category = searchParams.get('category') || ''
+
   return (
     <>
-      {auth.id ? (
+      {auth > 0 ? (
         <>
-          <div className={memberCss.memberAdmin}>
-            <FavList />
-          </div>
+          <h2>{category}</h2>
+          <Card />
         </>
       ) : (
         <>
@@ -27,7 +28,12 @@ export default function MemberPage() {
               <span>若您尚未成為會員，請先註冊</span>
             </div>
             <div className={memberCss.memberBtns}>
-              <Link className={memberCss.memberBtn} href={`/member/login?callbackUrl=${encodeURIComponent(pathname)}`}>
+              <Link
+                className={memberCss.memberBtn}
+                href={`/member/login?callbackUrl=${encodeURIComponent(
+                  pathname
+                )}`}
+              >
                 會員登入
               </Link>
               <Link

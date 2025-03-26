@@ -1,6 +1,10 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useRouter } from 'next/navigation'
 import addProfileCss from '../../_styles/add-profile.module.css'
 import { useAuth } from '@/context/auth-context'
 import { pfSchema } from '@/utils/schema/schema'
@@ -8,7 +12,10 @@ import { REGISTER_PROFILE_POST } from '@/config/api-path'
 
 export default function AddProfileJsPage() {
   const { auth, getAuthHeader } = useAuth()
-  const [status, setStatus] = useState(false)
+  const searchParams=useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')|| '/'
+  const [status, setStatus] = useState(true)
+  const router = useRouter()
   const [previewAvatar, setPreviewAvatar] = useState(
     '/imgs/avatar/default-avatar.png'
   ) // 預設頭貼
@@ -18,7 +25,7 @@ export default function AddProfileJsPage() {
     sex: '',
     mobile: '',
     intro: '',
-    item: '',
+    item: [],
     goal: [],
     status: status,
   })
@@ -38,17 +45,101 @@ export default function AddProfileJsPage() {
       reader.readAsDataURL(file)
     }
   }
+  // console.log(items)
+
   const statusChangeForm = () => {
     setStatus((prevStatus) => !prevStatus)
     setProfileForm((prev) => ({ ...prev, status: !prev.status }))
   }
-
+  const confirmIntro = () => {
+    return new Promise((resolve, reject) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      const MySwal = withReactContent(Swal)
+      MySwal.fire({
+        text: '未填寫自我簡介將影響您使用GYM友功能，確定暫不填寫嗎?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0b3760',
+        cancelButtonColor: '#f87808',
+        confirmButtonText: '確定',
+        cancelButtonText: '返回表單',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          resolve()
+        } else {
+          reject()
+        }
+      })
+    })
+  }
+  const confirmStatus = () => {
+    return new Promise((resolve, reject) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      const MySwal = withReactContent(Swal)
+      MySwal.fire({
+        text: '選擇不公開檔案將影響您使用GYM友功能，確定暫不公開嗎?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0b3760',
+        cancelButtonColor: '#f87808',
+        confirmButtonText: '確定',
+        cancelButtonText: '返回表單',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          resolve()
+        } else {
+          reject()
+        }
+      })
+    })
+  }
+  const sendFormData = async () => {
+    const r = await fetch(REGISTER_PROFILE_POST, {
+      method: 'PUT',
+      body: JSON.stringify(profileForm),
+      headers: {
+        ...getAuthHeader(),
+        'Content-type': 'application/json',
+      },
+    })
+    const result = await r.json()
+    if (result.success) {
+      alert('個人檔案已建立')
+      // router.push('/')
+      router.replace(callbackUrl)
+    } else {
+      alert('個人檔案建立失敗')
+      console.warn(result)
+    }
+  }
   const onSubmit = async (e) => {
     e.preventDefault()
-    const zResult = pfSchema.safeParse(profileForm)
-    console.log(JSON.stringify(zResult, null, 4))
+    setErrors({})
 
-    if (!zResult.success) {
+    let formData = { ...profileForm }
+
+    if (typeof formData.item === 'string' && formData.item.length > 0) {
+      formData.item = formData.item
+        .split(/[\s、,]+/)
+        .filter((s) => s.length > 0)
+    } else if (!Array.isArray(formData.item)) {
+      // Make sure item is an array even if it's null/undefined
+      formData.item = []
+    }
+    const zResult = pfSchema.safeParse(formData)
+    console.log(JSON.stringify(zResult, null, 4))
+    
+    if (zResult.success) {
+      setProfileForm(formData)
+    } else {
       const newErrors = {
         pname: '',
         avatar: previewAvatar,
@@ -69,30 +160,32 @@ export default function AddProfileJsPage() {
           newErrors[pathKey] = item.message
         }
       })
+
+      if (newErrors.status) {
+        newErrors.intro = '狀態為公開時，自我簡介需為必填，且至少需要30個字元'
+      }
       setErrors(newErrors)
-      console.log(newErrors);
+      console.log(newErrors)
       return
     }
 
-    if (profileForm.intro.length<=0) {
-      alert("未填自我簡介，將影響您使用平台內部分功能，確定暫不填寫嗎?")
-    }
-    const r = await fetch(REGISTER_PROFILE_POST, {
-      method: 'POST',
-      body: JSON.stringify(profileForm),
-      headers: {
-        'Content-Type': 'application/json',
-        // ...getAuthHeader(),
-      },
-    })
+    try {
+      if (profileForm.status === false) {
+        await confirmStatus()
+      } else {
+        await sendFormData()
+        return
+      }
+      if (profileForm.intro.length <= 0) {
+        await confirmIntro()
+      }
 
-    const result = await r.json()
-    if (result.success) {
-      alert('個人檔案填寫完成')
-    } else {
-      console.warn(result)
+      await sendFormData()
+    } catch (ex) {
+      console.log('取消送出，返回表單')
     }
   }
+
   return (
     <>
       <div className={addProfileCss.container}>
@@ -123,7 +216,7 @@ export default function AddProfileJsPage() {
                 id="name"
                 value={profileForm.pname}
                 onChange={profileChangeForm}
-                placeholder="此欄為必填"
+                placeholder="此欄為必填，請輸入完整姓名"
               />
               <div>
                 {errors.pname && (
@@ -161,9 +254,7 @@ export default function AddProfileJsPage() {
               </div>
               <div>
                 {errors.sex && (
-                  <span className={addProfileCss.textDanger}>
-                    {errors.sex}
-                  </span>
+                  <span className={addProfileCss.textDanger}>{errors.sex}</span>
                 )}
               </div>
             </div>
@@ -173,10 +264,11 @@ export default function AddProfileJsPage() {
                 type="tel"
                 name="mobile"
                 id="mobile"
+                placeholder="此欄為必填，手機格式為09xxxxxx"
                 value={profileForm.mobile}
                 onChange={profileChangeForm}
               />
-               <div>
+              <div>
                 {errors.mobile && (
                   <span className={addProfileCss.textDanger}>
                     {errors.mobile}
@@ -186,11 +278,11 @@ export default function AddProfileJsPage() {
             </div>
             <div className={addProfileCss.formGroup}>
               <label htmlFor="intro">自我簡介</label>
-              <input
+              <textarea
                 className={addProfileCss.intro}
-                type="textarea"
                 name="intro"
                 id="intro"
+                rows="5"
                 placeholder="我是一名瑜珈老師，最近正在增肌訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。"
                 value={profileForm.intro}
                 onChange={profileChangeForm}
@@ -207,13 +299,21 @@ export default function AddProfileJsPage() {
               <label htmlFor="item">喜愛運動項目</label>
               <input
                 className={addProfileCss.item}
-                type="textarea"
+                type="text"
                 name="item"
                 id="item"
-                placeholder="跑步、抱石...，請填寫15字以內"
+              
+                placeholder="跑步、抱石...，最多填寫五個項目"
                 value={profileForm.item}
                 onChange={profileChangeForm}
               />
+              <div>
+                {errors.item && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.item}
+                  </span>
+                )}
+              </div>
             </div>
             <div className={addProfileCss.formGroup}>
               <label>健身目標</label>
@@ -252,18 +352,19 @@ export default function AddProfileJsPage() {
             <div
               className={`${addProfileCss.formGroup} ${addProfileCss.status}`}
             >
-              <label>是否公開檔案</label>
               <div className={addProfileCss.status}>
+                <label>是否公開檔案</label>
                 <input
                   type="checkbox"
                   name="status"
                   id="public"
+                  checked={status}
                   onChange={statusChangeForm}
                 />
                 <label htmlFor="public" className={addProfileCss.switch}>
                   <span className={addProfileCss.switchBtn}></span>
                 </label>
-                <span class="text">{status?"公開":"不公開"}</span>
+                <span>{status ? '公開' : '不公開'}</span>
               </div>
             </div>
             <div>

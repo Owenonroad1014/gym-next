@@ -26,8 +26,12 @@ export default function CoachesListPage(props) {
   )
 
   useEffect(() => {
+    setCurrentPage(1) // Reset to first page on new search
     const fetchCoaches = async () => {
       try {
+        setCoaches([]) // Clear previous results
+        setLoading(true)
+        
         const location = searchParams.get('location')
         const branch = searchParams.get('branch')
         const keyword = searchParams.get('keyword')
@@ -45,6 +49,7 @@ export default function CoachesListPage(props) {
         
       } catch (error) {
         console.error('Error:', error)
+        setCoaches([]) // Clear results on error
         setLoading(false)
       }
     }
@@ -93,18 +98,24 @@ export default function CoachesListPage(props) {
 ) : (
   <>
     <div className={styles.coachesContainer}>
-      {currentCoaches.map((coach) => (
-        <CoachesCard
-          key={coach.id}
-          id={coach.id}
-          name={coach.name}
-          email={coach.email}
-          phone={coach.phone}
-          skill={coach.skill}
-          description={coach.description}
-          avatar={coach.avatar}
-        />
-      ))}
+      {currentCoaches.length > 0 ? (
+        currentCoaches.map((coach) => (
+          <CoachesCard
+            key={coach.id}
+            id={coach.id}
+            name={coach.name}
+            email={coach.email}
+            phone={coach.phone}
+            skill={coach.skill}
+            description={coach.description}
+            avatar={coach.avatar}
+          />
+        ))
+      ) : (
+        <div className={styles.noResults}>
+          <p>沒有該分店的教練資料</p>
+        </div>
+      )}
     </div>
     <Pagination
       currentPage={currentPage}
@@ -118,4 +129,3 @@ export default function CoachesListPage(props) {
     </>
   )
 }
-

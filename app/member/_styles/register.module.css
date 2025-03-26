@@ -1,9 +1,8 @@
 .container {
   display: flex;
   justify-content: center;
-  max-width: 1440px;
-  margin: 0px auto;
-  background-color: pink;
+  width: 100%;
+  margin: 140px auto;
 }
 .left {
   display: flex;

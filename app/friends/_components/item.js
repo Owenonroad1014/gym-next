@@ -32,7 +32,7 @@ export default function List({
   return (
     <>
       {listData.map((v, i) => (
-        <>
+        
           <div key={v.member_id} className={friendStyle.profileCard}>
             <div className={friendStyle.profileCard_container}>
               <div className={friendStyle.circle}>
@@ -51,7 +51,7 @@ export default function List({
               </section>
             </div>
           </div>
-        </>
+        
       ))}
       {selectedUser && (
         <GymdetailModal
@@ -64,6 +64,7 @@ export default function List({
           item={selectedUser.item}
           goal={selectedUser.goal}
           member_id={selectedUser.member_id}
+          avatar={selectedUser.avatar}
         />
       )}
     </>

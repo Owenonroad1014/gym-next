@@ -35,6 +35,19 @@ export default function Select() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+  const handleFilterChange = (newCategory, newGender) => {
+    const params = new URLSearchParams(searchParams.toString())
+
+    if (newCategory) {
+      params.set('category', newCategory)
+    }
+
+    if (newGender) {
+      params.set('gender', newGender)
+    }
+
+    router.push(`?${params.toString()}`)
+  }
   return (
     <>
       <button
@@ -54,6 +67,7 @@ export default function Select() {
           <li
             onClick={(e) => {
               e.preventDefault()
+              router.push(`/friends`)
               if (window.innerWidth < 960) {
                 setMenuShow(false)
               }
@@ -65,10 +79,11 @@ export default function Select() {
         <ul className={friendStyle.selectPart}>
           <span className={friendStyle.categoryTitle}>選擇性別</span>
           <li
-            className={gender == '男性' ? friendStyle.active : ''}
+            className={gender == 'male' ? friendStyle.active : ''}
             onClick={(e) => {
               e.preventDefault()
-              router.push(`?gender=男性`)
+              handleFilterChange(null, gender)
+              handleFilterChange(category, 'male')
               if (window.innerWidth < 960) {
                 setMenuShow(false)
               }
@@ -77,10 +92,10 @@ export default function Select() {
             <PiGenderMaleBold /> 男性
           </li>
           <li
-            className={gender == '女性' ? friendStyle.active : ''}
+            className={gender == 'female' ? friendStyle.active : ''}
             onClick={(e) => {
               e.preventDefault()
-              router.push(`?gender=女性`)
+              handleFilterChange(category, 'female')
               if (window.innerWidth < 960) {
                 setMenuShow(false)
               }
@@ -98,7 +113,8 @@ export default function Select() {
                 className={v === category ? friendStyle.active : ''}
                 onClick={(e) => {
                   e.preventDefault()
-                  router.push(`?category=${v}`)
+                  handleFilterChange(v, gender)
+                  // router.push(`?category=${v}`)
                   if (window.innerWidth < 960) {
                     setMenuShow(false)
                   }

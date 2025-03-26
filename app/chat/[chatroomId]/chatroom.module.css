@@ -1,22 +1,23 @@
 .tempbody {
-  background-color: #f4f4f4;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  padding: 0 20px;
+  height: calc(100% - 50px);
+  box-sizing: border-box;
+  border-radius: 3px;
 }
 .chatContainer {
   width: 100%;
-  max-width: 400px;
-  /* height: 500px; */
+  height: 100%;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .friendName {
-  padding: 15px 10px;
-  background-color: #fff;
+  padding: 15px 20px;
+  background-color: #333;
   border-bottom: 2px solid #ddd;
+  color: white;
 }
 
 .chatBox {
@@ -31,36 +32,39 @@
   overflow-y: auto;
   border-bottom: 1px solid #ddd;
   background-color: #f9f9f9;
+  word-wrap: break-word;
 }
-
+/* 輸入區 */
 .inputArea {
   display: flex;
-  padding: 10px;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+  height: 3rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
 }
 
 .textInput {
-  flex-grow: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  margin-right: 10px;
-}
-
-.chatContainer button {
-  background-color: #4caf50;
-  color: white;
   border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 0 1rem;
+  flex-grow: 1;
+  border-radius: 2rem;
+  margin: 0.25rem;
+  height: 2rem;
 }
-
-.chatContainer button:hover {
-  background-color: #45a049;
+.textInput:focus {
+  outline: none;
+}
+.sendButton {
+  height: 2rem;
+  background: #333;
+  border: none;
+  padding: 0 1rem;
+  margin: 0.25rem;
+  border-radius: 3px;
+  outline: none;
+  color: #fff;
 }
 
 /* 消息樣式 */
@@ -72,7 +76,7 @@
 
 .sent {
   width: 80%;
-  background-color: #e1ffc7;
+  background-color: #efefef;
   text-align: right;
   margin-left: auto;
   padding: 10px 20px;
@@ -89,4 +93,18 @@
   padding: 0 10px;
   margin-bottom: 20px;
   color: #333;
+}
+
+/* 表情 */
+.emojiArea {
+  position: relative;
+}
+.emojiArea button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+  font-size: 20px;
+  fill: #333;
 }
