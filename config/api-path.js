@@ -48,8 +48,6 @@ export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`
 
 export const IMG_PATH = `${API_SERVER}/img`;
 
-export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
-export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
 //影片路由
 export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
