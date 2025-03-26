@@ -1,11 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import headerstyles from './_styles/header.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
-import { usePathname } from 'next/navigation'
+import { AVATAR_PATH } from '@/config/api-path'
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
@@ -88,11 +89,12 @@ export default function Header() {
                   <img
                     src={
                       auth.avatar
-                        ? `img/${auth.avatar}`
+                        ? `${AVATAR_PATH}/${auth.avatar}`
                         : '/imgs/avatar/default-avatar.png'
                     }
-                    alt=""
+                    alt={auth.name ? `${auth.name}的頭貼` : ''}
                   />
+                  <span>{auth.name ? auth.name : ''}</span>
                 </div>
               </Link>
               <a
