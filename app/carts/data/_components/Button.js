@@ -68,7 +68,7 @@ export default function Button({ isFormValid, setIsSubmitted, customerInfo })
     window.location.href = "/complete";
   } catch (error) {
     console.error("提交訂單時發生錯誤：", error);
-    alert("訂單提交失敗，請稍後再試！");
+    alert("訂單提交失敗，請稍後再試！")
   }
 };
 
