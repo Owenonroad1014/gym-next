@@ -1,0 +1,18 @@
+.centerLayout {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  max-height: 100vh;
+  padding: 20px;
+  margin-top: 70px;
+  min-height: 100vh;
+}
+.centerSidebar {
+  width: 20%;
+  max-height: 100vh;
+}
+.centerList {
+  width: 70%;
+  max-height: 100vh;
+  padding: 50px;
+}
