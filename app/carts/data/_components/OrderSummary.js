@@ -20,7 +20,7 @@ function OrderSummary() {
     setPaymentMethod(storedPaymentMethod);
     setPickupStore(storedPickupStore);
 
-    // ✅ 計算總金額
+    // 計算總金額
     const calculatedSubtotal = storedCart.reduce((acc, item) => {
       const rentalDays =
         (new Date(item.rentalEndDate) - new Date(item.rentalStartDate)) /

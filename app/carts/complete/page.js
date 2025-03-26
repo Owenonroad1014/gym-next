@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import { useEffect, useState } from "react";
 import styles from "./_styles/order-confirmation.module.css";
 
 function OrderConfirmationHeader({ imageUrl }) {
@@ -24,36 +24,57 @@ function OrderDetailItem({ label, value, className }) {
 }
 
 function OrderDetails() {
+  const [orderInfo, setOrderInfo] = useState(null);
+
+  useEffect(() => {
+    // 從 localStorage 取得訂單資訊
+    const orderId = localStorage.getItem("lastOrderId");
+    const orderDate = localStorage.getItem("orderDate");
+    const orderAmount = localStorage.getItem("orderAmount");
+    const pickupStore = localStorage.getItem("pickupStore");
+    const invoiceNumber = localStorage.getItem("invoiceNumber");
+
+    if (orderId) {
+      setOrderInfo({
+        orderId,
+        orderDate: orderDate || "未知",
+        orderAmount: orderAmount || "未知",
+        pickupStore: pickupStore || "未知",
+        invoiceNumber: invoiceNumber || "N/A",
+        status: "處理中"
+      });
+    }
+  }, []);
+
+  if (!orderInfo) {
+    return <p className={styles.errorMessage}>無法取得訂單資訊。</p>;
+  }
+
   return (
     <section className={styles.orderDetailsContainer}>
       <OrderDetailItem
         label="訂單日期"
-        value="2024-12-28 23:30:59"
+        value={orderInfo.orderDate}
         className={styles.orderDetailItem}
       />
       <OrderDetailItem
         label="訂單編號"
-        value="241225GGG1989Y"
+        value={orderInfo.orderId}
         className={styles.orderDetailItem}
       />
       <OrderDetailItem
         label="訂單金額"
-        value="$2500"
+        value={`$${orderInfo.orderAmount}`}
         className={styles.orderDetailItem}
       />
       <OrderDetailItem
         label="訂單狀態"
-        value="處理中"
+        value={orderInfo.status}
         className={styles.orderDetailItem}
       />
       <OrderDetailItem
         label="自取門市"
-        value="中西gym"
-        className={styles.orderDetailItem}
-      />
-      <OrderDetailItem
-        label="發票號碼"
-        value="SB0123456789"
+        value={orderInfo.pickupStore}
         className={styles.orderDetailItem}
       />
     </section>
@@ -67,6 +88,10 @@ function OrderConfirmation() {
         <OrderConfirmationHeader imageUrl="/cart-img/check.png" />
         <OrderDetails />
       </article>
+
+      <div className={styles.buttonContainer}>
+        <a href="/" className={styles.homeButton}>回首頁</a>
+      </div>
     </main>
     
   );
