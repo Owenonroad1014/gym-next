@@ -6,8 +6,6 @@ import Search from './_components/search'
 import Banner from './_components/banner'
 import TabButton from './_components/tabButton'
 import Filter from './_components/filter'
-import Sort from './_components/sort'
-import ClassesIntro from '../_components/classes-intro'
 
 
 export default function ClassesPage() {
@@ -67,37 +65,9 @@ export default function ClassesPage() {
             </div>
           </div>
         ) : (
-          <>
+
             <Filter />
-            <h2>靜態課程</h2>
-            <Sort />
-            <ClassesIntro
-              title="靜態課程-1"
-              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
-              avatarUrl="images/yoga.jpg"
-            />
-
-            <ClassesIntro
-              title="靜態課程-2"
-              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
-              avatarUrl="images/yoga.jpg"
-              variant='type2'
-
-            />
-            <ClassesIntro
-              title="靜態課程-1"
-              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
-              avatarUrl="images/yoga.jpg"
-            />
-
-            <ClassesIntro
-              title="靜態課程-2"
-              description="採用重量訓練的正金字塔訓練法，相同肌群的抗阻力訓練會重覆進行三個循環並逐次增加負重，給予肌肉不同抗阻的刺激，突破肌耐力的訓練瓶頸。"
-              avatarUrl="images/yoga.jpg"
-              variant='type2'
-
-            />
-          </>
+         
         )}
       </div>
     </>

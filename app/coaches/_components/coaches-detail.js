@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa'
 import Breadcrumb from './bread'
 import CoachCalendar from './coaches-calendar'
-import { AVATAR_PATH } from '../../../config/api-path'
+import { IMGS_PATH } from '../../../config/api-path'
 import { MdEmail, MdPhone } from 'react-icons/md'
 
 const CoachDetail = ({
@@ -56,7 +56,7 @@ const CoachDetail = ({
         <div className={styles['coach-image-container']}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${AVATAR_PATH}/${avatar}`}
+            src={`${IMGS_PATH}/${avatar}`}
             alt={`${name} 教練照片`}
             className={styles['coach-image']}
           />

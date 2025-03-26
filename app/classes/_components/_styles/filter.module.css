@@ -1,47 +1,47 @@
 .filter {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    border-radius: 3px;
-    background-color: #e6e6e6;
-    
-  }
-  .filter ul {
-    /* background-color: #0b3760; */
-    /* color: white; */
-    margin: 0;
-    padding: 10px 15px;
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* box-shadow: 5px 3px 5px #33333388; */
-    border-radius: 3px;
-  }
-  .filter ul li {
-    font-size: 19px;
-    cursor: pointer;
-    padding: 0px 15px;
-    /* border-right: 1px solid white; */
-    
-  }
-  .filter ul li:hover {
-    /* color: #f87808; */
-    text-decoration: none;
-    text-underline-offset: 5px;
-    color: #ea6715;
-  }
+  width: 100%;
+  height: 100px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  border-radius: 3px;
+  background-color: #e6e6e6;
+}
 
-  .filter ul li.active {
-    /* color: #f87808; */
-    text-decoration: none;
-    color: #ea5c03;
-    font-weight: bold;
-  }
+.filter ul {
+  margin: 0;
+  padding: 10px 15px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
 
+.filter ul li {
+  padding: 0 15px;
+}
 
- 
+.filter ul li button {
+  font-size: 21px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.filter ul li button:hover {
+  text-decoration: none;
+  text-underline-offset: 5px;
+  color: #ea6715;
+}
+
+.filter ul li button.active {
+  text-decoration: none;
+  color: #ea5c03;
+  font-weight: bold;
+}
