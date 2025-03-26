@@ -75,8 +75,11 @@ export const FAVORITES_LIST = `${API_SERVER}/favorites/api`;
 export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
 
-// 取得訂單列表的資料
-export const ORDERS_LIST = `${API_SERVER}/carts/api`
+// 取得訂單列表的資料 
+export const ORDERS_LIST = `${API_SERVER}/carts/api`;
+//
+// export const ecpay = `${API_SERVER}/ecpay-test-only/api`;
+
 
 //**************** ARTICLE *****************
 // 獲取文章列表的資料
