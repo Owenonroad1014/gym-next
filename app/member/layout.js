@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import Breadcrumb from './_component/breadcrumb'
 import memberCss from './_styles/member.module.css'
 import Select from './_component/select'
-// import { useAuth } from '@/context/auth-context'
+
 
 export default function MemberLayout({children}) {
   const searchParams = useSearchParams()
