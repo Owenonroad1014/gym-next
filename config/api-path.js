@@ -46,17 +46,21 @@ export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`;
 
 //商品路由
 export const IMG_PATH = `${API_SERVER}/img`;
-
-// 取得商品列表的資料 GET
 export const PRODUCTS_LIST = `${API_SERVER}/products/api`;
-
-
 export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
 //影片路由
 export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
-
 export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
+
+//商品評價路由
+export const REVIEWS_LIST = `${API_SERVER}/products/api/review`;
+
+export const SUBMIT_REVIEW_API= `${API_SERVER}/products/api/add-review`;
+
+export const EDIT_REVIEW_API = `${API_SERVER}/products/api/edit-review`;
+
+export const PENDING_REVIEWS_LIST= `${API_SERVER}/products/api/review/pending`;
 
 
 // 取得訂單列表的資料 
