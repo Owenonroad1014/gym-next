@@ -12,8 +12,8 @@ import { REGISTER_PROFILE_POST } from '@/config/api-path'
 
 export default function AddProfileJsPage() {
   const { auth, getAuthHeader } = useAuth()
-  const searchParams=useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl')|| '/'
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
   const [status, setStatus] = useState(true)
   const router = useRouter()
   const [previewAvatar, setPreviewAvatar] = useState(
@@ -102,12 +102,25 @@ export default function AddProfileJsPage() {
     })
   }
   const sendFormData = async () => {
+    const formData = new FormData()
+
+    Object.keys(profileForm).forEach((key) => {
+      if (key === 'avatar' && profileForm.avatar instanceof File) {
+        formData.append('avatar', profileForm.avatar)
+      } else if (Array.isArray(profileForm[key])) {
+        profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
+      } else if (key === 'status') {
+        formData.append(key, profileForm[key] === 'true')
+      }else{
+        formData.append(key,profileForm[key])
+      }
+    })
+
     const r = await fetch(REGISTER_PROFILE_POST, {
       method: 'PUT',
-      body: JSON.stringify(profileForm),
+      body: formData,
       headers: {
         ...getAuthHeader(),
-        'Content-type': 'application/json',
       },
     })
     const result = await r.json()
@@ -136,13 +149,14 @@ export default function AddProfileJsPage() {
     }
     const zResult = pfSchema.safeParse(formData)
     console.log(JSON.stringify(zResult, null, 4))
-    
+
     if (zResult.success) {
       setProfileForm(formData)
+      console.log("zResult's formData:", profileForm)
     } else {
       const newErrors = {
         pname: '',
-        avatar: previewAvatar,
+        avatar: '',
         sex: '',
         mobile: '',
         intro: '',
@@ -207,6 +221,13 @@ export default function AddProfileJsPage() {
                 <img src={previewAvatar} alt="頭貼預覽" />
               </label>
               <label htmlFor="avatar">上傳大頭貼</label>
+              <div>
+                {errors.avatar && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.avatar}
+                  </span>
+                )}
+              </div>
             </div>
             <div className={addProfileCss.formGroup}>
               <label htmlFor="name">姓名</label>
@@ -302,7 +323,6 @@ export default function AddProfileJsPage() {
                 type="text"
                 name="item"
                 id="item"
-              
                 placeholder="跑步、抱石...，最多填寫五個項目"
                 value={profileForm.item}
                 onChange={profileChangeForm}
