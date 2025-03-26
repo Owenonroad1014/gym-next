@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './_styles/coaches-card.module.css';
-import { AVATAR_PATH } from '../../../config/api-path';
+import { IMGS_PATH } from '../../../config/api-path';
 import { MdEmail, MdPhone, MdSportsHandball } from 'react-icons/md';
 import { FaInfoCircle } from 'react-icons/fa';
 
@@ -31,7 +31,7 @@ const CoachesCard = ({
       <div className={styles['card-left']}>
         <div className={styles['avatar-container']}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`${AVATAR_PATH}/${avatar}`} alt={name} className={styles.avatar} />
+          <img src={`${IMGS_PATH}/${avatar}`} alt={name} className={styles.avatar} />
         </div>
       </div>
       

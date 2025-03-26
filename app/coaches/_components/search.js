@@ -36,7 +36,7 @@ function Search() {
     }
     document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('click', handleClickOutside)
     }
   }, [])
 

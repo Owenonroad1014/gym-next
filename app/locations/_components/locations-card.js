@@ -3,7 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import styles from './_styles/locations-card.module.css'
-import { AVATAR_PATH } from '../../../config/api-path'
+import { IMGS_PATH } from '../../../config/api-path'
 import { MdLocationOn, MdPhone, MdAccessTime } from 'react-icons/md'
 
 const LocationCard = ({ location }) => {
@@ -13,7 +13,7 @@ const LocationCard = ({ location }) => {
     <div className={styles.innerContainer}>
       <div className={styles.imageWrapper}>
         <Image
-          src={`${AVATAR_PATH}/${location.avatar}`}
+          src={`${IMGS_PATH}/${location.avatar}`}
           alt="場地照片"
           fill
           sizes="(max-width: 440px) 200px, 296px"

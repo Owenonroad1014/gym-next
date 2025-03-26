@@ -36,17 +36,17 @@ function Search() {
     }
     document.addEventListener('click', handleClickOutside)
     return () => {
-      document.removeEventListener('click', handleClickOutside)
+    document.removeEventListener('click', handleClickOutside)
     }
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    router.replace(`/classes/list?location=${location}&branch=${branch}`, {
+    router.push(`/classes/list?location=${location}&branch=${branch}`, {
       scroll: false,
-    })
-  }
-
+    });
+  };
+  
   return (
     <div className={styles.searchContainer}>
       <form className={styles.searchForm} onSubmit={handleSubmit}>
