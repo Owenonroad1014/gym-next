@@ -86,15 +86,7 @@ export default function Header() {
             <>
               <Link href="/member" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                  <img
-                    src={
-                      auth.avatar
-                        ? `${AVATAR_PATH}/${auth.avatar}`
-                        : '/imgs/avatar/default-avatar.png'
-                    }
-                    alt={auth.name ? `${auth.name}的頭貼` : ''}
-                  />
-                  <span>{auth.name ? auth.name : ''}</span>
+                <span>{auth.name?auth.name:'hello'}</span>
                 </div>
               </Link>
               <a
