@@ -45,7 +45,6 @@ export default function AddProfileJsPage() {
       reader.readAsDataURL(file)
     }
   }
-  // console.log(items)
 
   const statusChangeForm = () => {
     setStatus((prevStatus) => !prevStatus)
@@ -103,20 +102,23 @@ export default function AddProfileJsPage() {
   }
   const sendFormData = async () => {
     const formData = new FormData()
-
+    if (profileForm.avatar && profileForm.avatar instanceof File) {
+      formData.append('avatar', profileForm.avatar)
+    }
     Object.keys(profileForm).forEach((key) => {
-      if (key === 'avatar' && profileForm.avatar instanceof File) {
-        formData.append('avatar', profileForm.avatar)
-      } else if (Array.isArray(profileForm[key])) {
+      if (key === 'avatar') return
+      if (key === 'item' && Array.isArray(profileForm[key])) {
+        profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
+      } else if (key === 'goal' && Array.isArray(profileForm[key])) {
         profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
       } else if (key === 'status') {
         formData.append(key, profileForm[key] === 'true')
-      }else{
-        formData.append(key,profileForm[key])
+      } else {
+        formData.append(key, profileForm[key])
       }
     })
 
-    const r = await fetch(REGISTER_PROFILE_POST, {
+    const r = await fetch(`${REGISTER_PROFILE_POST}?folder=avatar`, {
       method: 'PUT',
       body: formData,
       headers: {
@@ -127,6 +129,7 @@ export default function AddProfileJsPage() {
     if (result.success) {
       alert('個人檔案已建立')
       // router.push('/')
+      console.log('回傳結果', result)
       router.replace(callbackUrl)
     } else {
       alert('個人檔案建立失敗')
@@ -139,7 +142,7 @@ export default function AddProfileJsPage() {
 
     let formData = { ...profileForm }
 
-    if (typeof formData.item === 'string' && formData.item.length > 0) {
+    if (typeof profileForm.item === 'string' && formData.item.length > 0) {
       formData.item = formData.item
         .split(/[\s、,]+/)
         .filter((s) => s.length > 0)
@@ -152,7 +155,7 @@ export default function AddProfileJsPage() {
 
     if (zResult.success) {
       setProfileForm(formData)
-      console.log("zResult's formData:", profileForm)
+      // console.log("zResult's formData:", profileForm)
     } else {
       const newErrors = {
         pname: '',
@@ -175,8 +178,9 @@ export default function AddProfileJsPage() {
         }
       })
 
-      if (newErrors.status) {
-        newErrors.intro = '狀態為公開時，自我簡介需為必填，且至少需要30個字元'
+      if (newErrors.status && formData.intro == '') {
+        newErrors.intro =
+          '檔案狀態為公開時，自我簡介需為必填，且至少需要30個字元'
       }
       setErrors(newErrors)
       console.log(newErrors)
