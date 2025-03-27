@@ -2,14 +2,48 @@
   background-color: #f4f4f4;
   display: flex;
   max-height: 100vh;
-  padding: 20px;
-  margin-top: 70px;
+  position: relative;
 }
-.chatSidebar {
+.friendSidebar {
   width: 30%;
-  max-height: 100vh;
+  min-height: 80vh;
+  margin-bottom: 30px;
 }
 .messageArea {
   width: 70%;
-  max-height: 100vh;
+  min-height: 80vh;
+}
+.selectBtn {
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: white;
+  background-color: #333;
+  margin: auto;
+  border: none;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 30;
+}
+
+@media (max-width: 1430px) {
+  .selectBtn {
+    display: block;
+  }
+  .friendSidebar {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    background-color: #ebeff1;
+    width: 90%;
+  }
+  .messageArea {
+    width: 100%;
+    margin: auto;
+    padding: 0 40px;
+  }
 }
