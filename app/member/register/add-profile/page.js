@@ -107,9 +107,7 @@ export default function AddProfileJsPage() {
     }
     Object.keys(profileForm).forEach((key) => {
       if (key === 'avatar') return
-      if (key === 'item' && Array.isArray(profileForm[key])) {
-        profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
-      } else if (key === 'goal' && Array.isArray(profileForm[key])) {
+      if (key === 'goal' && Array.isArray(profileForm[key])) {
         profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
       } else if (key === 'status') {
         formData.append(key, profileForm[key] === 'true')
@@ -117,7 +115,7 @@ export default function AddProfileJsPage() {
         formData.append(key, profileForm[key])
       }
     })
-
+    console.log('appendFormData:', ...formData)
     const r = await fetch(`${REGISTER_PROFILE_POST}?folder=avatar`, {
       method: 'PUT',
       body: formData,
@@ -153,10 +151,8 @@ export default function AddProfileJsPage() {
     const zResult = pfSchema.safeParse(formData)
     console.log(JSON.stringify(zResult, null, 4))
 
-    if (zResult.success) {
-      setProfileForm(formData)
-      // console.log("zResult's formData:", profileForm)
-    } else {
+    if (!zResult.success) {
+      console.log("zResult's formData:", profileForm)
       const newErrors = {
         pname: '',
         avatar: '',
