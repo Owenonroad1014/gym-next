@@ -11,7 +11,7 @@
 }
 .messageArea {
   width: 70%;
-  min-height: 80vh;
+  max-height: 80vh;
 }
 .selectBtn {
   cursor: pointer;
@@ -30,7 +30,7 @@
   z-index: 30;
 }
 
-@media (max-width: 1430px) {
+@media (max-width: 1590px) {
   .selectBtn {
     display: block;
   }
@@ -39,7 +39,7 @@
     position: absolute;
     z-index: 20;
     background-color: #ebeff1;
-    width: 90%;
+    width: 50%;
   }
   .messageArea {
     width: 100%;

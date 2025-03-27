@@ -15,7 +15,10 @@ import {
 } from '@/config/api-path'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-export default function FriendListPage(menuShow = true) {
+export default function FriendListPage(
+  setMenuShow = () => {},
+  menuShow = true
+) {
   const { auth, getAuthHeader } = useAuth()
   const [friendRequestListData, setFriendRequestListData] = useState({})
   const [chatListData, setChatListData] = useState({})

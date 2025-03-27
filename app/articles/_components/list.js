@@ -65,6 +65,11 @@ export default function List() {
                   className={
                     articlesData.page == 1 ? articleStyle.disabled : ''
                   }
+                  onClick={(e) => {
+                    if (articlesData.page == 1) {
+                      e.preventDefault()
+                    }
+                  }}
                 >
                   <MdArrowBackIos />
                 </Link>
@@ -98,6 +103,11 @@ export default function List() {
                       ? articleStyle.disabled
                       : ''
                   }
+                  onClick={(e) => {
+                    if (articlesData.page == articlesData.totalPages) {
+                      e.preventDefault()
+                    }
+                  }}
                 >
                   <MdArrowForwardIos />
                 </Link>

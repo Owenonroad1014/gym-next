@@ -11,7 +11,7 @@ export default function ChatLayout({ children }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1140) {
+      if (window.innerWidth < 1590) {
         setMenuShow(false)
       } else {
         setMenuShow(true)
@@ -37,7 +37,7 @@ export default function ChatLayout({ children }) {
           display: menuShow ? 'block' : 'none',
         }}
       >
-        <FriendListPage />
+        <FriendListPage setMenuShow={setMenuShow} menuShow={menuShow} />
       </div>
       <div className={styles.messageArea}>
         {children} {/* 這裡插入訊息區域的內容 */}

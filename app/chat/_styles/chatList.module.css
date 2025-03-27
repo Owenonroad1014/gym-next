@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  margin-top: 50px;
+  justify-content: center;
   align-items: center;
 }
 .intoChatRoom p {
@@ -111,4 +111,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media (max-width: 1430px) {
+  .chatsPage {
+    min-height: 80vh;
+  }
+  .tempbody {
+    min-height: 80vh;
+  }
 }
