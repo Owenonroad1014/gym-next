@@ -13,7 +13,6 @@ export default function CenterList() {
   const pathname = usePathname()
   const [menuShow, setMenuShow] = useState(true)
   const router = useRouter()
-  const searchParams = useSearchParams()
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1140) {
@@ -28,14 +27,8 @@ export default function CenterList() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  const hideSelectPages = [
-    '/member/login',
-    '/member/register',
-    '/member/register/add-profile',
-  ]
-  if (hideSelectPages.includes(pathname)) {
-    return null // 這些頁面不顯示 Header
-  } else {
+  
+  
     return (
       <>
         <section
@@ -53,35 +46,35 @@ export default function CenterList() {
           )}
           <hr />
           <ul className={selectStyle.selectPart}>
-            <li>
+            <li className={pathname === '/member-center/friend-list' ? selectStyle.active : ''}>
               <Link href="/member-center/friend-list">好友列表</Link>
             </li>
-            <li>
+            <li className={pathname === '/member-center/chat' ? selectStyle.active : ''}>
               <Link href="/member-center/chat">聊天室</Link>
             </li>
           </ul>
           <ul className={selectStyle.selectPart}>
-            <li>
+            <li className={pathname === '/member-center/reservation' ? selectStyle.active : ''}>
               <Link href="/member-center/reservation">我的預約</Link>
             </li>
           </ul>
           <ul className={selectStyle.selectPart}>
-            <li>
+            <li className={pathname === '/member-center/articles' ? selectStyle.active : ''}>
               <Link href="/member-center/articles">收藏文章</Link>
             </li>
-            <li>
+            <li className={pathname === '/member-center/videos' ? selectStyle.active : ''}>
               <Link href="/member-center/videos">收藏影片</Link>
             </li>
-            <li>
+            <li className={pathname === '/member-center/products' ? selectStyle.active : ''}>
               <Link href="/member-center/products">收藏產品</Link>
             </li>
           </ul>
           <ul className={selectStyle.selectPart}>
-            <li>
+            <li className={pathname === '/member-center/person' ? selectStyle.active : ''}>
               <Link href="/member-center/person">個人檔案</Link>
             </li>
-            <li>
-              <Link href="/member-center/sedit-password">修改密碼</Link>
+            <li className={pathname === '/member-center/edit-password' ? selectStyle.active : ''}>
+              <Link href="/member-center/edit-password">修改密碼</Link>
             </li>
           </ul>
 
@@ -102,4 +95,4 @@ export default function CenterList() {
       </>
     )
   }
-}
+
