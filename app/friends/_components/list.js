@@ -32,7 +32,7 @@ export default function List() {
   const [allListData, setAllListData] = useState({})
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(true)
-  const [sended, setSended] = useState(false) 
+  const [sended, setSended] = useState(false)
   useEffect(() => {
     const fetchListData = async () => {
       try {
@@ -84,6 +84,11 @@ export default function List() {
                     className={
                       allListData.page == 1 ? friendStyle.disabled : ''
                     }
+                    onClick={(e) => {
+                      if (allListData.page == 1) {
+                        e.preventDefault()
+                      }
+                    }}
                   >
                     <MdArrowBackIos />
                   </Link>
@@ -107,6 +112,11 @@ export default function List() {
                         ? friendStyle.disabled
                         : ''
                     }
+                    onClick={(e) => {
+                      if (allListData.page == allListData.totalPages) {
+                        e.preventDefault()
+                      }
+                    }}
                   >
                     <MdArrowForwardIos />
                   </Link>
