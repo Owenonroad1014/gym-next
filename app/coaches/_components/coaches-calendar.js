@@ -21,7 +21,6 @@ const CoachCalendar = ({ name = '', isOpen }) => {
   const calendarRef = useRef(null)
   const { auth, getAuthHeader } = useAuth()
   const router = useRouter()
-  
 
   // Toast
   const Toast = Swal.mixin({
@@ -248,7 +247,7 @@ const CoachCalendar = ({ name = '', isOpen }) => {
       console.error('Reservation failed:', error)
       Toast.fire({
         icon: 'error',
-        title: error.message
+        title: error.message,
       })
     }
   }
@@ -290,7 +289,12 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                 <div key={index} className={styles.day}>
                   {day ? (
                     <>
-                      <span className={styles.dayNumber}>{day}</span>
+                      <span className={`${styles.dayNumber} ${
+                        moment().isSame(
+                          moment(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day)), 
+                          'day'
+                        ) ? styles.currentDay : ''
+                      }`}>{day}</span>
                       <div className={styles.eventsWrapper}>
                         {getCoursesByDay(
                           new Date(
@@ -299,21 +303,25 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                             day
                           )
                         ).map((course) => (
-                          <div
+                            <div
                             key={course.id}
                             className={`${styles.event} ${
                               course.current_capacity >= course.max_capacity
                                 ? styles.full
+                                : moment(course.class_date).isBefore(moment(), 'day')
+                                ? styles.expired
                                 : ''
                             }`}
                             role="button"
                             tabIndex={
-                              course.current_capacity >= course.max_capacity
+                              course.current_capacity >= course.max_capacity ||
+                              moment(course.class_date).isBefore(moment(), 'day')
                                 ? -1
                                 : 0
                             }
                             onClick={() =>
-                              course.current_capacity >= course.max_capacity
+                              course.current_capacity >= course.max_capacity ||
+                              moment(course.class_date).isBefore(moment(), 'day')
                                 ? null
                                 : handleCardClick(course)
                             }
@@ -333,7 +341,9 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                               {course.end_time.slice(0, 5)}
                             </div>
                             <div className={styles.capacity}>
-                              {course.current_capacity >=
+                              {moment(course.class_date).isBefore(moment(), 'day') ? (
+                                <span className={styles.expired}>已過期</span>
+                              ) : course.current_capacity >=
                               course.max_capacity ? (
                                 <span className={styles.full}>已額滿</span>
                               ) : (
@@ -347,15 +357,6 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                             </div>
                           </div>
                         ))}
-                        {getCoursesByDay(
-                          new Date(
-                            selectedDate.getFullYear(),
-                            selectedDate.getMonth(),
-                            day
-                          )
-                        ).length === 0 && (
-                          <div className={styles.noEvent}></div>
-                        )}
                       </div>
                     </>
                   ) : (

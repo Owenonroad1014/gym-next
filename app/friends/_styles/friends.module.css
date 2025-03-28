@@ -232,12 +232,12 @@
 }
 
 .pagination a:hover {
-  background-color: #db6318c7;
+  background-color: #f87808;
   transform: scale(1.1);
 }
 
 .pagination .active {
-  background-color: #db6318;
+  background-color: #f87808;
   font-weight: bold;
   cursor: default;
 }

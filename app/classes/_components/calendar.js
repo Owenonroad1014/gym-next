@@ -269,26 +269,31 @@ const handleCardClick = (classData) => {
                 >
                   {dayCourses.length > 0 ? (
                     dayCourses.map((course) => (
-                      <div
+                        <div
                         key={course.id}
                         className={`${styles.event} ${
-                          course.current_capacity >= course.max_capacity
+                          moment(course.class_date).isBefore(moment(), 'day')
+                            ? styles.expired
+                            : course.current_capacity >= course.max_capacity
                             ? styles.full
                             : ''
                         }`}
                         role="button"
                         tabIndex={
+                          moment(course.class_date).isBefore(moment(), 'day') ||
                           course.current_capacity >= course.max_capacity
                             ? -1
                             : 0
                         }
                         onClick={() =>
+                          moment(course.class_date).isBefore(moment(), 'day') ||
                           course.current_capacity >= course.max_capacity
                             ? null
                             : handleCardClick(course)
                         }
                         onKeyPress={(e) => {
-                          if (course.current_capacity >= course.max_capacity)
+                          if (moment(course.class_date).isBefore(moment(), 'day') ||
+                            course.current_capacity >= course.max_capacity)
                             return
                           if (e.key === 'Enter' || e.key === ' ') {
                             handleCardClick(course)
@@ -299,7 +304,9 @@ const handleCardClick = (classData) => {
                         <div className={styles.time}>{course.time}</div>
                         <div className={styles.name}>{course.coach_name}</div>
                         <div className={styles.capacity}>
-                          {course.current_capacity >= course.max_capacity ? (
+                          {moment(course.class_date).isBefore(moment(), 'day') ? (
+                            <span className={styles.expired}>已過期</span>
+                          ) : course.current_capacity >= course.max_capacity ? (
                             <span className={styles.full}>已額滿</span>
                           ) : (
                             <span className={styles.available}>

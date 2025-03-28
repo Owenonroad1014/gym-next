@@ -7,6 +7,8 @@ import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
 import { AVATAR_PATH } from '@/config/api-path'
+import Drawer from './drawer'
+
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
@@ -47,6 +49,7 @@ export default function Header() {
 
   return (
     <>
+
       <div
         className={`${headerstyles.header} ${
           isScrolling ? headerstyles.hscrolling : ''
@@ -65,8 +68,18 @@ export default function Header() {
         </div>
 
         {/* 導航選單 */}
-        <div className={headerstyles.navMenu}>
-          <Link href="/coaches" className={headerstyles.navLink}>
+       
+       
+         
+        
+          
+        
+
+        {/* 右側圖示與搜尋欄 */}
+        <div className={headerstyles.rightSection}>
+       <Drawer/> 
+        {/* <div className={headerstyles.navMenu}>
+       <Link href="/coaches" className={headerstyles.navLink}>
             找GYM身教練
           </Link>
           <Link href="/articles" className={headerstyles.navLink}>
@@ -78,15 +91,6 @@ export default function Header() {
           <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>
-          <Link href="/friend-list" className={headerstyles.navLink}>
-            好友列表
-          </Link>
-          <Link href="/videos" className={headerstyles.navLink}>
-            影片
-          </Link>
-          <Link href="/products" className={headerstyles.navLink}>
-            產品
-          </Link>
         </div>
 
         {/* 右側圖示與搜尋欄 */}
@@ -95,7 +99,14 @@ export default function Header() {
             <>
               <Link href="/member" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                <span>{auth.name?auth.name:'hello'}</span>
+                  <img
+                    src={
+                      auth.avatar
+                        ? `img/${auth.avatar}`
+                        : '/imgs/avatar/default-avatar.png'
+                    }
+                    alt=""
+                  />
                 </div>
               </Link>
               <a
