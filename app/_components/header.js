@@ -77,6 +77,15 @@ export default function Header() {
           <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>
+          <Link href="/friend-list" className={headerstyles.navLink}>
+            好友列表
+          </Link>
+          <Link href="/videos" className={headerstyles.navLink}>
+            影片
+          </Link>
+          <Link href="/products" className={headerstyles.navLink}>
+            產品
+          </Link>
         </div>
 
         {/* 右側圖示與搜尋欄 */}
