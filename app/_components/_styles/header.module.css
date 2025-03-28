@@ -140,7 +140,13 @@
   justify-content: center;
   font-weight: bold;
 }
-
+.navAvatar{
+  display: flex;
+  align-items: center;
+}
 .navAvatar img{
-  width: 20px;
+  width: 35px;
+  border-radius: 3px;
+  margin-right: 8px;
+  border: 1px solid salmon;
 }

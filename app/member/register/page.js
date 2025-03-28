@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({})
   const { login } = useAuth()
 
@@ -159,7 +158,7 @@ export default function RegisterPage() {
             <label htmlFor="confirmPassword">確認密碼</label>
             <div className={registerCss.inputGroup}>
               <input
-                type={confirmPasswordVisible ? 'text' : 'password'}
+                type={passwordVisible? 'text' : 'password'}
                 value={registerForm.confirmPassword}
                 onChange={RegisterChangeForm}
                 placeholder="請再次輸入密碼"
@@ -174,15 +173,7 @@ export default function RegisterPage() {
                 )}
               </div>
             </div>
-            <button
-              className={registerCss.iconBtn}
-              type="button"
-              onClick={() => {
-                setConfirmPasswordVisible((prev) => !prev)
-              }}
-            >
-              {confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-            </button>
+            
           </div>
           <div className={registerCss.btns}>
             <button type="submit" className={registerCss.registerBtn}>

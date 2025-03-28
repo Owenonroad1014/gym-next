@@ -334,6 +334,7 @@ export default function ChatRoomPage() {
         setError(err.message || '獲取聊天室資訊時發生錯誤')
       }
     }
+    // 修改已讀狀態
 
     // 獲取聊天內容
 
@@ -357,10 +358,7 @@ export default function ChatRoomPage() {
       fetchChatItem()
       fetchMsg()
     }
-    if (someoneInto) {
-      fetchMsg();  
-    }
-  }, [chatroomId, getAuthHeader,someoneInto])
+  }, [chatroomId, getAuthHeader, someoneInto])
 
   // 發送訊息處理
   const handleOnclickSend = (event) => {

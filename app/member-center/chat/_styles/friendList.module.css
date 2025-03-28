@@ -1,0 +1,109 @@
+.friendsPage {
+  height: 100%;
+  width: 80%;
+  margin: 0 20px;
+  padding: 20px;
+  /* background-color: rgba(0, 0, 0, 0.15); */
+  border-radius: 3px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.nofriReq {
+  background-color: #c0c2c54f;
+  height: 50px;
+  margin: 5px 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.dash {
+  border-top: 2px solid #bbb;
+  margin: 10px 0;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* height: 50px; */
+  /* background-color: #333; */
+  color: #333;
+  font-weight: bold;
+  padding: 5px 5px;
+  border-radius: 5px;
+  margin: 0px 0;
+  /* margin-bottom: 20px; */
+}
+
+.friendsPage ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friendsPage ul li {
+  background-color: #c0c2c54f;
+  height: 50px;
+  margin: 5px 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.friendsPage button {
+  margin: 5px;
+  padding: 6px 10px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.friendsPage button a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.friendsPage button:hover {
+  background-color: #ecb246;
+}
+
+.friendsPage button:active {
+  background-color: #ecb246;
+}
+
+.trash {
+  margin: 5px;
+  padding: 6px 10px;
+  border: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.trash:hover {
+  background-color: #da5a51;
+}
+
+.trash:active {
+  background-color: #da5a51;
+}
+
+@media (max-width: 1430px) {
+  .friendsPage {
+    margin: auto;
+    
+  }
+}

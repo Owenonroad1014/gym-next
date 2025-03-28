@@ -1,11 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import headerstyles from './_styles/header.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
-import { usePathname } from 'next/navigation'
+import { AVATAR_PATH } from '@/config/api-path'
 import Drawer from './drawer'
 
 
@@ -90,23 +91,22 @@ export default function Header() {
           <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>
-          </div> */}
-          
-    
-       
-          
+        </div>
+
+        {/* 右側圖示與搜尋欄 */}
+        <div className={headerstyles.rightSection}>
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                  {/* <img
+                  <img
                     src={
                       auth.avatar
                         ? `img/${auth.avatar}`
                         : '/imgs/avatar/default-avatar.png'
                     }
                     alt=""
-                  /> */}
+                  />
                 </div>
               </Link>
               <a

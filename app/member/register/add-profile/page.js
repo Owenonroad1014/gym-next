@@ -12,8 +12,8 @@ import { REGISTER_PROFILE_POST } from '@/config/api-path'
 
 export default function AddProfileJsPage() {
   const { auth, getAuthHeader } = useAuth()
-  const searchParams=useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl')|| '/'
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
   const [status, setStatus] = useState(true)
   const router = useRouter()
   const [previewAvatar, setPreviewAvatar] = useState(
@@ -45,7 +45,6 @@ export default function AddProfileJsPage() {
       reader.readAsDataURL(file)
     }
   }
-  // console.log(items)
 
   const statusChangeForm = () => {
     setStatus((prevStatus) => !prevStatus)
@@ -102,18 +101,33 @@ export default function AddProfileJsPage() {
     })
   }
   const sendFormData = async () => {
-    const r = await fetch(REGISTER_PROFILE_POST, {
+    const formData = new FormData()
+    if (profileForm.avatar && profileForm.avatar instanceof File) {
+      formData.append('avatar', profileForm.avatar)
+    }
+    Object.keys(profileForm).forEach((key) => {
+      if (key === 'avatar') return
+      if (key === 'goal' && Array.isArray(profileForm[key])) {
+        profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
+      } else if (key === 'status') {
+        formData.append(key, profileForm[key] === 'true')
+      } else {
+        formData.append(key, profileForm[key])
+      }
+    })
+    console.log('appendFormData:', ...formData)
+    const r = await fetch(`${REGISTER_PROFILE_POST}?folder=avatar`, {
       method: 'PUT',
-      body: JSON.stringify(profileForm),
+      body: formData,
       headers: {
         ...getAuthHeader(),
-        'Content-type': 'application/json',
       },
     })
     const result = await r.json()
     if (result.success) {
       alert('個人檔案已建立')
       // router.push('/')
+      console.log('回傳結果', result)
       router.replace(callbackUrl)
     } else {
       alert('個人檔案建立失敗')
@@ -126,7 +140,7 @@ export default function AddProfileJsPage() {
 
     let formData = { ...profileForm }
 
-    if (typeof formData.item === 'string' && formData.item.length > 0) {
+    if (typeof profileForm.item === 'string' && formData.item.length > 0) {
       formData.item = formData.item
         .split(/[\s、,]+/)
         .filter((s) => s.length > 0)
@@ -136,13 +150,12 @@ export default function AddProfileJsPage() {
     }
     const zResult = pfSchema.safeParse(formData)
     console.log(JSON.stringify(zResult, null, 4))
-    
-    if (zResult.success) {
-      setProfileForm(formData)
-    } else {
+
+    if (!zResult.success) {
+      console.log("zResult's formData:", profileForm)
       const newErrors = {
         pname: '',
-        avatar: previewAvatar,
+        avatar: '',
         sex: '',
         mobile: '',
         intro: '',
@@ -161,8 +174,9 @@ export default function AddProfileJsPage() {
         }
       })
 
-      if (newErrors.status) {
-        newErrors.intro = '狀態為公開時，自我簡介需為必填，且至少需要30個字元'
+      if (newErrors.status && formData.intro == '') {
+        newErrors.intro =
+          '檔案狀態為公開時，自我簡介需為必填，且至少需要30個字元'
       }
       setErrors(newErrors)
       console.log(newErrors)
@@ -207,6 +221,13 @@ export default function AddProfileJsPage() {
                 <img src={previewAvatar} alt="頭貼預覽" />
               </label>
               <label htmlFor="avatar">上傳大頭貼</label>
+              <div>
+                {errors.avatar && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.avatar}
+                  </span>
+                )}
+              </div>
             </div>
             <div className={addProfileCss.formGroup}>
               <label htmlFor="name">姓名</label>
@@ -302,7 +323,6 @@ export default function AddProfileJsPage() {
                 type="text"
                 name="item"
                 id="item"
-              
                 placeholder="跑步、抱石...，最多填寫五個項目"
                 value={profileForm.item}
                 onChange={profileChangeForm}
