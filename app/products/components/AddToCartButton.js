@@ -6,7 +6,7 @@ const AddToCartButton = ({ variant }) => {
     variant === "light" ? styles.buttonLight : styles.buttonDark;
 
   return (
-    <button className={`${styles.button} ${buttonClass}`}>加入購物車</button>
+    <button className={`${styles.button} ${buttonClass}`}>查看更多</button>
   );
 };
 

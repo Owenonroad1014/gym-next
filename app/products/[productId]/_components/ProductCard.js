@@ -2,9 +2,26 @@ import React from "react";
 import styles from "./_styles/ProductCard.module.css";
 import { IMG_PATH } from "@/config/api-path";
 import Link from "next/link";
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 
-const ProductCard = ({id, product_name, price, description, image_url, variant}) => {
+const ProductCard = ({id, product_name, price, description, image_url, variant, average_rating}) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
+
+const renderStars = (rating) => {
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} color="#f87808" size={20} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaRegStar key={i} color="#f87808" size={20} />);
+      } else {
+        stars.push(<FaStarHalfAlt key={i} color="#f87808" size={20} />);
+      }
+    }
+
+    return stars;
+  };
 
   
 
@@ -23,10 +40,16 @@ const ProductCard = ({id, product_name, price, description, image_url, variant})
         </div>
         <hr className={styles.divider} />
         <p className={styles.description}>{description}</p>
-        <div className={styles.btns}>
-        <div className={styles.iconWrapper}>
-        </div>
-        </div>
+        <div className={styles.rating}>
+            {average_rating !== null ? (
+              <>
+                {renderStars(average_rating)}
+                {average_rating > 0 && <span className={styles.reviewCount}>({average_rating})</span>}
+              </>
+            ) : (
+              <span className={styles.noReviews}>尚無評價</span>
+            )}
+          </div>
       </div>
     </article>
     </Link>

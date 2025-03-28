@@ -70,6 +70,7 @@ const FavoriteButton = ({ product_id, likeId, setIsLiked = () => {} }) => {
     className={styles.hearts}
   >
     {like ? <FaHeart className={styles.heart}/>: <FaRegHeart className={styles.heart}/> }
+    {/* <span className={styles.text}>加入收藏</span> */}
   </button>
   );}
 

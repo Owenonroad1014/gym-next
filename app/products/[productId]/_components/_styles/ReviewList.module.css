@@ -1,0 +1,102 @@
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px;
+    max-width: 600px;
+    width: 40%;
+    margin: 30px auto;
+    /* height: 300px; */
+    overflow: scroll;
+    /* align-items: center; */
+    justify-content: space-around;
+  }
+  
+  .reviewCard {
+    padding: 12px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .memberName {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ebe4e4;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 4px;
+    
+  }
+  
+  .filled {
+    color: #f87808;
+  }
+  
+  .half {
+    color: #f87808;
+  }
+  
+  .empty {
+    color: #c5bcbc;
+  }
+
+
+  
+  .reviewText {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #e8e1e1;
+    height: 50px;
+  }
+  
+  .date {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .loading,
+  .noMore {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+
+
+  .scrollbox {
+    width: 50%;  /* 設定寬度 */
+    height: 360px; /* 設定高度 */
+    overflow-y: auto; /* 允許垂直滾動 */
+    overflow-x: hidden; /* 隱藏水平滾動 */
+    /* border: 1px solid #ddd;  */
+    padding-right: 10px;
+    background: #fff;
+  }
+  
+  /* 滾動條樣式 */
+  .scrollbox::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .scrollbox::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  .scrollbox::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  .scrollbox::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  
