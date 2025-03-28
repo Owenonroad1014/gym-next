@@ -111,11 +111,11 @@ const CoachDetail = ({
           <div className={styles['contact-info']}>
             <div className={styles['info-item']}>
               <MdEmail style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
-              <span>{email}</span>
+              <a href={`mailto:${email}`} className={styles['contact-link']}>{email}</a>
             </div>
             <div className={styles['info-item']}>
               <MdPhone style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
-              <span>{phone}</span>
+              <a href={`tel:${phone}`} className={styles['contact-link']}>{phone}</a>
             </div>
           </div>
 

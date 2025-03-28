@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-.containerH2{
+.containerH2 {
   color: #142020;
   margin-bottom: 10px;
   font-size: 28px;
@@ -27,7 +27,7 @@
   height: 30px;
   padding: 4px 4px;
   background-color: white;
-  color:  #142020;
+  color: #142020;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -35,13 +35,11 @@
   font-size: 25px;
   text-align: center;
   line-height: 15px;
-
 }
 
 .nextWeek:hover {
   background-color: #142020;
   color: white;
-
 }
 
 .nextWeek[disabled] {
@@ -92,6 +90,12 @@
   font-weight: bold;
 }
 
+.currentDay {
+  color: orange;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
 .event {
   margin-top: 2px;
   padding: 5px 8px;
@@ -129,7 +133,7 @@
   margin: 3px 0;
   color: #0b3760;
 }
-.capacity{
+.capacity {
   font-size: 14px;
   letter-spacing: -1px;
 }
@@ -160,16 +164,33 @@
   border-radius: 10px;
 }
 
+/* Expired course styles */
+.event.expired {
+  background: #f0f0f0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.event.expired .title,
+.event.expired .time {
+  color: #999;
+}
+
+.event.expired .capacity {
+  color: #999;
+}
+
+
 @media (max-width: 768px) {
   .container {
     width: 95%;
     padding: 10px;
   }
-  
+
   .weekdays {
     font-size: 14px; /* 調整星期文字大小 */
   }
-  
+
   .day {
     min-height: 80px;
     font-size: 0.8rem;
@@ -192,7 +213,8 @@
     margin: 2px 0;
   }
 
-  .time, .capacity {
+  .time,
+  .capacity {
     font-size: 11px;
   }
 }
@@ -202,7 +224,7 @@
     width: 100%;
     padding: 5px;
   }
-  
+
   .weekdays {
     font-size: 12px;
     padding: 8px 0;
@@ -229,6 +251,3 @@
     box-shadow: none;
   }
 }
-
-
-

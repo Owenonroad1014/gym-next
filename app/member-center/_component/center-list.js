@@ -56,7 +56,8 @@ export default function CenterList() {
         {auth ? (
           <>
             <div className={selectStyle.welcome}>
-              <SiOpenaigym className={selectStyle.welcomeicon}/> WELOCOME ! {name}{' '}
+              <SiOpenaigym className={selectStyle.welcomeicon} /> WELOCOME !{' '}
+              {name}{' '}
             </div>
           </>
         ) : (
@@ -64,15 +65,6 @@ export default function CenterList() {
         )}
         <hr />
         <ul className={selectStyle.selectPart}>
-          <li
-            className={
-              pathname === '/member-center/friend-list'
-                ? selectStyle.active
-                : ''
-            }
-          >
-            <Link href="/member-center/friend-list">好友列表</Link>
-          </li>
           <li
             className={
               pathname === '/member-center/chat' ? selectStyle.active : ''

@@ -2,6 +2,10 @@
 import { useEffect, useState } from 'react'
 import styles from './_styles/sort.module.css'
 import ClassesIntro from '@/app/_components/classes-intro'
+import { motion } from "framer-motion"
+
+
+
 
 function Sort({ category, classTypes }) {
   const [showClasses, setShowClasses] = useState(false)
@@ -70,14 +74,32 @@ function Sort({ category, classTypes }) {
       </form>
     </div>
     <div>
-        {sortedClasses?.map((classType, index) => (
-          <ClassesIntro 
-            key={index}
-            classType={classType}
-            variant={index % 2 === 0 ? 'type1' : 'type2'}
-          />
+    {sortedClasses?.map((classType, index) => (
+  <motion.div
+    key={index}
+    initial={{ 
+      opacity: 0, 
+      x: index % 2 === 0 ? -100 : 100 
+    }}
+    whileInView={{ 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: "easeOut"
+      }
+    }}
+    viewport={{ once: true }}
+  >
+    <ClassesIntro
+      classType={classType}
+      variant={index % 2 === 0 ? 'type1' : 'type2'}
+    />
+  </motion.div>
         ))}
       </div>
+     
     </>
   )
 }
