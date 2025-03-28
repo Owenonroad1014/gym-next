@@ -247,51 +247,55 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 1vw;
+  gap: 2vw;
 }
 /* card */
 .card {
   cursor: pointer;
-  width: 250px;
-  height: 380px;
-  color: white;
-  background-color: #0b3760;
+  width: 335px;
+  height: 420px;
   padding: 5px 5px;
-  margin: 10px 0;
+  margin: 20px 0;
   border-radius: 3px;
   transition: all 0.3s;
   overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 .card:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   transition: all 0.3s;
 }
 .card a:hover {
-  color: white;
   text-decoration: none;
 }
 .images {
   position: relative;
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  overflow: hidden;
 }
+
 .heartArea {
   width: 60px;
   height: 60px;
   background-color: white;
-  border: 5px solid #0b3760;
+  /* border: 3px solid #333; */
   border-radius: 50%;
   position: absolute;
-  right: -30px;
+  right: -24px;
   top: -30px;
 }
 .heart {
   cursor: pointer;
   box-sizing: content-box;
-  color: #0b3760;
+  color: #333;
   font-size: 22px;
   position: absolute;
-  left: 7px;
-  bottom: 5px;
+  left: 10px;
+  bottom: 8px;
   transition: all 0.3s;
 }
 .heart:hover {
@@ -304,13 +308,21 @@
   font-size: 22px;
   color: #f87808;
   position: absolute;
-  left: 7px;
-  bottom: 5px;
+  left: 10px;
+  bottom: 8px;
   transition: all 0.3s;
 }
 .content {
-  padding: 5px 10px;
+  height: 50%;
+  width: 94%;
+  background-color: #cdc9c9da;
+  padding: 10px 20px;
   margin: 10px 0;
+  position: absolute;
+  top: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .content h5 {
   font-size: 20px;
@@ -320,8 +332,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.content hr {
+.content pre {
+  font-size: 14px;
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 .content p {
   font-size: 14px;
