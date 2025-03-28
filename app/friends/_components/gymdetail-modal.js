@@ -86,16 +86,13 @@ export default function GymdetailModal({
           {/* <div className={styles.dash}></div> */}
           <div className={styles.userInfo}>
             <p>
-              <span>性別：</span>
-              {sex == 'male' ? '男' : '女'}
+              <span>性別</span>：{sex == 'male' ? '男' : '女'}
             </p>
             <p>
-              <span>喜愛運動項目：</span>
-              {item}
+              <span>喜愛運動項目</span>：{item}
             </p>
             <p>
-              <span>簡短介紹：</span>
-              {intro}
+              <span>簡短介紹</span>： {intro}
             </p>
             <div className={styles.hastag}>
               <ul>{goalItems}</ul>

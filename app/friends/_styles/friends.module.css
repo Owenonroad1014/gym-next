@@ -277,6 +277,8 @@
   width: 228px;
   height: 250px;
   background: var(--bg-color);
+  /* border: 2px solid var(--main-color); */
+  /* box-shadow: 4px 4px var(--main-color); */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.295), 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   display: flex;
