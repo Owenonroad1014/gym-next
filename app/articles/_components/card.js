@@ -9,6 +9,9 @@ import { ARTICLE_FAV } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { IoMdTime } from 'react-icons/io'
+import moment from 'moment'
+
 export default function Card({
   articles = {
     category_id: 0,
@@ -78,15 +81,16 @@ export default function Card({
       }
     })
   }
+  const date = moment(articlesStyle.created_at).format('YYYY/MM/DD')
   return (
     <>
-      <div className={articlesStyle.card}>
-        <Link href={`/articles/${articles.id}`}>
+      <Link href={`/articles/${articles.id}`}>
+        <div className={articlesStyle.card}>
           <div className={articlesStyle.images}>
             <Image
               src={`${articles.imageURL}`}
-              width={240}
-              height={170}
+              width={335}
+              height={(335 / 700) * 522}
               alt={articles.title}
             />
             <div className={articlesStyle.heartArea}>
@@ -105,11 +109,13 @@ export default function Card({
           </div>
           <div className={articlesStyle.content}>
             <h5>{articles.title}</h5>
-            <hr />
+            <pre>
+              <IoMdTime /> &nbsp;{date} &nbsp;&nbsp;&nbsp;
+            </pre>
             <p>{articles.intro}</p>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </>
   )
 }
