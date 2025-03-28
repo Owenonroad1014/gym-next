@@ -48,7 +48,6 @@ export default function List() {
         setAllListData(data)
       } catch (err) {
         setError('發送請求時發生錯誤:', error)
-        setIsloading(false)
       }
     }
     fetchListData()
