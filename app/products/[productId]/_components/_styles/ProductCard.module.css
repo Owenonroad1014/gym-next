@@ -4,7 +4,7 @@
     flex-shrink: 1;
     align-self: stretch;
     width: 250px;
-    height: 350px;
+    height: 340px;
     /* margin: auto; */
     /* padding: 10px; */
     overflow: hidden;
@@ -67,7 +67,7 @@
     font-size: 14px;
     font-weight: 600;
     display: flex;
-    height: 50px;
+    height: 30px;
   }
 
   .price{
@@ -87,11 +87,29 @@
     color: #646b6f;
     margin-top: 11px;
     font-size: 14px;
+    height: 43px;
   }
   
   .cardLight .description {
     color: #0f1819;
     margin-top: 11px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .reviewCount {
+    font-size: 14px;
+    color: #666;
+    margin-left: 4px;
+  }
+  
+  .noReviews {
+    font-size: 14px;
+    color: #999;
   }
   
   @media (width <= 390px) {

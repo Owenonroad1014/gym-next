@@ -4,6 +4,7 @@ import { REVIEWS_LIST, EDIT_REVIEW_API, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import styles from "./_component/_styles/review.module.css";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
@@ -100,20 +101,24 @@ const Review = () => {
                 <img src={`${IMG_PATH}/${product.image_url}`} alt={product.name} className={styles.img} />
               </div>
             <div className={styles.content}>
+            
+
+            {/* <div>訂單資訊</div> */}
             <div className={styles.contentItem}>
-            <div>訂單編號:{product.order_id}</div>
-              <p>商品名稱: {product.name}</p>
+            <div>訂單編號: #{product.order_id}</div>
+              <div>商品名稱: {product.name}</div>
               {product.weight !== null && <div>商品重量: {product.weight}</div>}
               <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
-
-
             </div>
               
               <div className={styles.latest_review}>
                 <p>
                 {renderStars(product.latest_review.rating)}</p>
-                <p>評論: {product.latest_review.comment}</p>
-                <button onClick={() => handleOpenReview(product)}>編輯評價</button>
+                <div>評論:<button onClick={() => handleOpenReview(product)}
+                className={styles.button}
+                ><CiEdit /></button></div>
+                <div className={styles.comment}> {product.latest_review.comment}</div>
+                
               </div>
             </div>
             </div>

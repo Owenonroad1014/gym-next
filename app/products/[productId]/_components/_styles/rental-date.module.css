@@ -17,10 +17,13 @@
 }
 
 .rentalDays{
-    color: #eb7318;
+    color: rgb(65, 63, 60);
     font-weight: 600;
     font-size: 18px;
     margin: 0;
+    display: flex;
+    align-items: center;
+    height: 3.px;
 }
 
 @media (width <= 960px) {

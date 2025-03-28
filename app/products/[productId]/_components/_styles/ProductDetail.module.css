@@ -1,11 +1,12 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding: 120px 0;
+    padding: 30px 0;
     overflow: hidden;
     margin: auto;
     width: 1440px;
     max-width: 1440px;
+    /* margin-top: 30px; */
   }
   
   .productSection, .productInfo, .productDescription, .cartActions, .relatedProducts {
@@ -20,7 +21,8 @@
   }
   
   .productSection {
-    width:80%;
+    position: relative;
+    width:90%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -36,7 +38,7 @@
   .productImage, .productInfo {
     width: 50%;
     margin: auto;
-    height: 450px;
+    height: 500px;
   }
   
   .productImage {
@@ -44,33 +46,34 @@
     object-fit: cover;
     object-position: center;
     width: 50%;
+    border-radius: 5px;
   }
   
   .productInfo {
-    background-color: #f0eeee;
+    /* background-color: #f0eeee; */
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding: 30px 45px;
+    padding: 10px 30px;
     margin-left: 10px;
     overflow: hidden;
     width: 50%;
   }
   
-  .productTitle, .productPrice {
-    font-size: 35px;
+ .productPrice {
+    font-size: 40px;
     font-weight: 600;
     margin: 10px 0;
   }
   
   .productTitle {
     color: #000;
-    font-size: 35px;
+    font-size: 40px;
     margin: 5px 0;
   }
 
-  .divider {
+  .dividerOne {
     border: 1px solid rgb(189, 191, 195);
     width: 100%;
     min-height: 1px;
@@ -79,7 +82,7 @@
   
   
   .productPrice {
-    color: #0b3760;
+    /* color: #e76317; */
     margin: 5px 0;
   }
   
@@ -97,10 +100,10 @@
     justify-content: start;
     align-items: center;
     width: 100%;
+    margin: auto;
   }
   
   .quantityWrapper{
-    display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -149,10 +152,11 @@
     gap: 20px;
     width: 40%;
     height: 30px;
+    border: 1px solid #6c7273;
   }
   
   .quantityButton {
-    background-color: #0b3760;
+    background-color: #6c7273;
     color: #fff;
     border: none;
     padding: 15px 15px;
@@ -169,17 +173,19 @@
   }
   
   .addToCartButton {
+    margin-top: 10px;
     background-color: #e76317;
     color: #fff;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    width: 50%;
     min-width: 150px;
     min-height: 30px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     cursor: pointer;
+    height: 40px;
   }
 
   .cartActions{
@@ -190,18 +196,15 @@
   }
   
   .relatedTitle {
-    color: #6c7273;
     width: 80%;
-    text-align: center;
-    margin: 35px auto;
-    padding: 0 75px;
+    margin: 10px auto 5px auto;
     font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
     font-size: 36px;
-    font-weight: 600;
+    padding-left: 15px;
   }
 
   .relatedProducts{
-    width: 70%;
+    width: 80%;
     /* display: flex;
     flex-direction: row; */
   }
@@ -220,12 +223,12 @@
   .weightSelector{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
     color: #413f3c;
-    text-align: center;
   }
   .weightButton {
     background-color: #fff;
@@ -237,6 +240,70 @@
     height: 30px;
     text-align: center;
     font-size: 16px;
+    margin-top: 5px;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0;
+    
+  }
+
+  .ratings{
+    color: #e76317;
+    text-align: center;
+  }
+
+
+  
+  .reviewCount {
+    font-size: 14px;
+    color: #aea4a4;
+    margin-left: 4px;
+  }
+
+  .reviewCounts{
+    font-size: 14px;
+    color: #f5efef;
+    margin-left: 4px;
+
+
+  }
+  
+  .noReviews {
+    font-size: 14px;
+    color: #999;
+  }
+
+  .review{
+    width: 87%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 50px;
+  }
+
+  .reviewTitle{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 36px;
+    padding: 15px;
+  }
+
+  .point{
+    font-size: 108px;
+    font-weight: 700;
+  
+    /* color: #e76317; */
+  }
+  .divider{
+    width: 80%;
+    margin: 5px auto 20px auto;
   }
 
   @media (width <= 1400px) {
