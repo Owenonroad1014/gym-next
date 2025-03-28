@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
 import { usePathname } from 'next/navigation'
+import Drawer from './drawer'
+
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
@@ -46,6 +48,7 @@ export default function Header() {
 
   return (
     <>
+
       <div
         className={`${headerstyles.header} ${
           isScrolling ? headerstyles.hscrolling : ''
@@ -64,8 +67,18 @@ export default function Header() {
         </div>
 
         {/* 導航選單 */}
-        <div className={headerstyles.navMenu}>
-          <Link href="/coaches" className={headerstyles.navLink}>
+       
+       
+         
+        
+          
+        
+
+        {/* 右側圖示與搜尋欄 */}
+        <div className={headerstyles.rightSection}>
+       <Drawer/> 
+        {/* <div className={headerstyles.navMenu}>
+       <Link href="/coaches" className={headerstyles.navLink}>
             找GYM身教練
           </Link>
           <Link href="/articles" className={headerstyles.navLink}>
@@ -77,22 +90,23 @@ export default function Header() {
           <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>
-        </div>
-
-        {/* 右側圖示與搜尋欄 */}
-        <div className={headerstyles.rightSection}>
+          </div> */}
+          
+    
+       
+          
           {auth.id ? (
             <>
               <Link href="/member" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                  <img
+                  {/* <img
                     src={
                       auth.avatar
                         ? `img/${auth.avatar}`
                         : '/imgs/avatar/default-avatar.png'
                     }
                     alt=""
-                  />
+                  /> */}
                 </div>
               </Link>
               <a
