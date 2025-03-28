@@ -2,11 +2,14 @@ export const API_SERVER = `http://localhost:3005`
 
 // 頭貼的路由
 export const AVATAR_PATH = `${API_SERVER}`
-
 // 註冊路由
 export const REGISTER_POST = `${API_SERVER}/register/api`
 // 註冊後填寫資料路由
 export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
+// 忘記密碼路由
+export const FORGET_PASS_POST = `${API_SERVER}/forget-password`
+export const VERIFRY_TOKEN_GET = `${API_SERVER}/verify-token`
+export const RESET_PASS_POST =`${API_SERVER}/reset-password`
 
 // 教練 地圖 照片路由
 export const IMGS_PATH = `${API_SERVER}/imgs`
