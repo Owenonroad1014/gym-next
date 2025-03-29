@@ -1,10 +1,24 @@
 .hearts{
+    position: fixed;
     color: coral;
     border:0;
-    background-color:none ;
-    width: 20px;
+    background-color:rgb(210, 216, 221) ;
     height: 20px;
+    text-align: start;
+    display: flex;
+    font-size: 16px;
+    bottom: 50px;
+    right: 80px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text{
+    margin-left: 10PX;
   }
   .heart{
-    font-size: 22px;
+    font-size: 28px;
   }
