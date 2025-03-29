@@ -304,7 +304,8 @@ export default function AddProfileJsPage() {
                 name="intro"
                 id="intro"
                 rows="5"
-                placeholder="我是一名瑜珈老師，最近正在增肌訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。"
+                maxLength={300}
+                placeholder="我是一名瑜珈老師，最近正在增肌訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。(至少30個字元，最多300個字元)"
                 value={profileForm.intro}
                 onChange={profileChangeForm}
               />
