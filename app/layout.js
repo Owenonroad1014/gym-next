@@ -4,7 +4,7 @@ import Header from './_components/header'
 import Footer from './_components/footer'
 import { AuthContextProvider } from '@/context/auth-context'
 import { CartProvider } from "@/context/cart-context";
-import { ChakraProvider } from "@chakra-ui/react";
+
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
 //   variable: '--font-geist-sans',
