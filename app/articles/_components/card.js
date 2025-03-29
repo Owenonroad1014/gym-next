@@ -90,7 +90,7 @@ export default function Card({
             <Image
               src={`${articles.imageURL}`}
               width={335}
-              height={(335 / 700) * 522}
+              height={250}
               alt={articles.title}
             />
             <div className={articlesStyle.heartArea}>

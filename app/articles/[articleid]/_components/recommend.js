@@ -20,6 +20,7 @@ export default function Recommend({ articleid = 0 }) {
     autoplaySpeed: 2000,
     pauseOnHover: true,
     centerMode: true,
+
     responsive: [
       {
         breakpoint: 900,
