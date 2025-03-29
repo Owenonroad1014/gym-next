@@ -3,13 +3,12 @@
   width: 80%;
   margin: 0 20px;
   padding: 20px;
-  /* background-color: rgba(0, 0, 0, 0.15); */
   border-radius: 3px;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  background-color: #c0c2c54f;
 }
 
 .nofriReq {
-  background-color: #c0c2c54f;
+  background-color: #ffffffbd;
   height: 50px;
   margin: 5px 0;
   padding: 5px 15px;
@@ -35,14 +34,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* height: 50px; */
-  /* background-color: #333; */
+
   color: #333;
   font-weight: bold;
   padding: 5px 5px;
   border-radius: 5px;
   margin: 0px 0;
-  /* margin-bottom: 20px; */
 }
 
 .friendsPage ul {
@@ -51,7 +48,7 @@
 }
 
 .friendsPage ul li {
-  background-color: #c0c2c54f;
+  background-color: #ffffffbd;
   height: 50px;
   margin: 5px 0;
   padding: 5px 15px;
@@ -77,11 +74,11 @@
 }
 
 .friendsPage button:hover {
-  background-color: #ecb246;
+  background-color: #db6318;
 }
 
 .friendsPage button:active {
-  background-color: #ecb246;
+  background-color: #db6318;
 }
 
 .trash {
@@ -94,16 +91,22 @@
   border-radius: 4px;
 }
 .trash:hover {
-  background-color: #da5a51;
+  background-color: #db6318;
 }
 
 .trash:active {
-  background-color: #da5a51;
+  background-color: #db6318;
 }
 
-@media (max-width: 1430px) {
+@media (max-width: 1590px) {
   .friendsPage {
     margin: auto;
-    
+    background-color: #333333ec;
+  }
+  .title {
+    color: #fff;
+  }
+  .subtitle {
+    color: #fff;
   }
 }

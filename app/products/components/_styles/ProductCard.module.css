@@ -4,7 +4,7 @@
     align-self: stretch;
     width: 250px;
     max-width: 250px;
-    height: 365px;
+    height: 350px;
     /* margin: auto; */
     /* padding: 10px; */
     overflow: hidden;
@@ -118,6 +118,23 @@
     font-size: 24px;
     color: rgb(232, 123, 33);
     cursor: pointer;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .reviewCount {
+    font-size: 14px;
+    color: #666;
+    margin-left: 4px;
+  }
+  
+  .noReviews {
+    font-size: 14px;
+    color: #999;
   }
   
   @media (width <= 991px) {

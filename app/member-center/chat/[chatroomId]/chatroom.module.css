@@ -2,11 +2,11 @@
   display: flex;
   justify-content: center;
   padding: 0 20px;
-  height: 95%;
+  height: 100%;
+  max-height: 80vh;
   box-sizing: border-box;
   border-radius: 3px;
   min-width: 380px;
-  max-height: 80vh;
 }
 .chatContainer {
   width: 100%;
@@ -16,24 +16,27 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .friendName {
+  display: flex;
+  align-items: center;
   padding: 15px 20px;
   background-color: #333;
   border-bottom: 2px solid #ddd;
   color: white;
+  height: 7%;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .chatBox {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 100px);
+  height: 86%;
   overflow-y: auto;
 }
 
 .messages {
   flex-grow: 1;
   padding: 10px;
-  /* overflow-y: auto; */
-  border-bottom: 1px solid #ddd;
   background-color: #f9f9f9;
   word-wrap: break-word;
 }
@@ -43,9 +46,11 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.15);
   padding: 0.25rem;
-  height: 3rem;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
+  height: 7%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .textInput {

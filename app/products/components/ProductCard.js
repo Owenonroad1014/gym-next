@@ -1,13 +1,28 @@
-import AddToCartButton from "./AddToCartButton";
 import styles from "./_styles/ProductCard.module.css";
 import { IMG_PATH } from "@/config/api-path";
 import Link from "next/link";
 import FavoriteButton from "./favorite-button";
-import { useAuth } from '@/context/auth-context'
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 
 
 const ProductCard = ({ id, product_name, price, description, image_url, variant, like_id, setIsLiked, average_rating  }) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
+
+  const renderStars = (rating) => {
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} color="#f87808" size={20} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt  key={i} color="#f87808" size={20} />);
+      } else {
+        stars.push(<FaRegStar key={i} color="#f87808" size={20} />);
+      }
+    }
+
+    return stars;
+  };
 
   return (
     <Link href={`/products/${id}`} className={`${styles.card} ${cardClass}`}>
@@ -23,23 +38,19 @@ const ProductCard = ({ id, product_name, price, description, image_url, variant,
           <hr className={styles.divider} />
           <p className={styles.description}>{description}</p>
           
-          <div className={styles.rating}>
-  {average_rating !== null ? (
-    [1, 2, 3, 4, 5].map((star) => (
-      <span key={star} className={styles.star}>
-        {average_rating >= star 
-          ? "★" 
-          : average_rating >= star - 0.5 
-          ? "✭"  // 改用較為普遍的半顆星符號
-          : "☆"}
-      </span>
-    ))
-  ) : (
-    <div></div>
-  )}
-</div>
+
           <div className={styles.btns}>
-            <AddToCartButton variant={variant} />
+          <div className={styles.rating}>
+            {average_rating !== null ? (
+              <>
+                {renderStars(average_rating)}
+                {average_rating > 0 && <span className={styles.reviewCount}>({average_rating})</span>}
+              </>
+            ) : (
+              <span className={styles.noReviews}>尚無評價</span>
+            )}
+          </div>
+            {/* <AddToCartButton variant={variant} /> */}
       <FavoriteButton product_id={id} like_id={like_id} setIsLiked={setIsLiked}/>
           </div>
         </div>
