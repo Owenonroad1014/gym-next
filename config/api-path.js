@@ -1,7 +1,7 @@
 export const API_SERVER = `http://localhost:3005`
 
 // 頭貼的路由
-export const AVATAR_PATH = `${API_SERVER}`
+export const AVATAR_PATH = `${API_SERVER}/img/avatar`
 // JWT 登入
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`
 // 註冊路由
