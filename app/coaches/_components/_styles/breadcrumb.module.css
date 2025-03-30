@@ -23,7 +23,7 @@
   .breadcrumbItem:not(:last-child)::after {
     content: '›';
     position: absolute;
-    top: 17px;
+    top: 15px;
     right: -5px;
     color: #666;
     font-size: 20px;
@@ -50,17 +50,6 @@
     text-underline-offset: 10px;
   }
   
-  /* 底部線條動畫 */
-  /* .breadcrumbItem:not(.active) a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 1px;
-    background: #000;
-    transition: all 0.5s ease;
-  } */
   
   .breadcrumbItem:hover a::after,
   .breadcrumbItem.active a::after {
@@ -71,6 +60,6 @@
   .breadcrumbItem.active a {
     color: #f87808;
     font-weight: 600;
-    text-decoration: underline;
+  
     text-underline-offset: 10px;
   }

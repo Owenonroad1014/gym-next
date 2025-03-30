@@ -56,7 +56,8 @@ export default function CenterList() {
         {auth ? (
           <>
             <div className={selectStyle.welcome}>
-              <SiOpenaigym className={selectStyle.welcomeicon} /> WELOCOME !{' '}
+            <img src="/gymdot.svg" alt="gym-icon" className={selectStyle.welcomeicon}/>
+            WELOCOME !{' '}
               {name}{' '}
             </div>
           </>
