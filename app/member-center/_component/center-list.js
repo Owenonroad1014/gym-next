@@ -118,12 +118,12 @@ export default function CenterList() {
           </li>
           <li
             className={
-              pathname === '/member-center/edit-password'
+              pathname === '/member-center/change-password'
                 ? selectStyle.active
                 : ''
             }
           >
-            <Link href="/member-center/edit-password">修改密碼</Link>
+            <Link href="/member-center/change-password">修改密碼</Link>
           </li>
         </ul>
 
