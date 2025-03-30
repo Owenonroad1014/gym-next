@@ -31,8 +31,8 @@ export default function ResetPasswordPage() {
         },
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push('/member/forget-password')
           res()
+          router.push('/member/forget-password')
         } else {
           rej()
         }
@@ -53,8 +53,8 @@ export default function ResetPasswordPage() {
         },
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push('/member/forget-password')
           res()
+          router.push('/member/forget-password')
         } else {
           rej()
         }
