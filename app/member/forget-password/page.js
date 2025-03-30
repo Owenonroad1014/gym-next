@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { z } from 'zod'
 import { FaRegEye } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
@@ -42,7 +42,7 @@ export default function ForgetPasswordPage() {
     document.body.style.overflow = 'hidden' //畫面不要偏移使用
     const MySwal = withReactContent(Swal)
     MySwal.fire({
-      text: '重設密碼連結已發送，請到您的信箱中確認',
+      text: '重設密碼連結已發送到您的信箱!',
       icon: 'success',
       confirmButtonColor: '#0b3760',
       confirmButtonText: '返回首頁',
@@ -108,7 +108,6 @@ export default function ForgetPasswordPage() {
       })
     } else {
       if (result.token?.token && result.token?.expiresAt) {
-        await sendedModal()
         localStorage.setItem(
           storageKey,
           JSON.stringify({
@@ -116,6 +115,7 @@ export default function ForgetPasswordPage() {
             expiresAt: result.token.expiresAt,
           })
         )
+        await sendedModal()
       }
     }
   }
