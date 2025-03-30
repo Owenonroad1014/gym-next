@@ -214,6 +214,7 @@ export default function CourseCalendar({
         <h2 className={styles.containerH2}>
           {location && branch ? `${location}${branch}課程表` : '課程表'}
         </h2>
+        
         <div className={styles.header}>
           <button
             onClick={handlePrevWeek}
@@ -229,6 +230,12 @@ export default function CourseCalendar({
           <button onClick={handleNextWeek} className={styles.nextWeek}>
             ＞
           </button>
+        </div>
+        <div className={styles.filter}>
+          <div className={styles.filterItem}>入門課程</div>
+          <div className={styles.filterItem}>進階課程</div>
+          <div className={styles.filterItem}>團體課程</div>
+          <div className={styles.filterItem}>其他課程</div>
         </div>
 
         <div className={styles.calendar}>
@@ -277,7 +284,6 @@ export default function CourseCalendar({
                 >
                   {dayCourses.length > 0 ? (
                     dayCourses.map((course) => (
-                      
                       <div
                         key={course.id}
                         className={`${styles.event} ${
@@ -288,6 +294,7 @@ export default function CourseCalendar({
                             ? styles.full
                             : ''
                         }`}
+                        data-category={course.category_name}
                         role="button"
                         tabIndex={
                           moment(course.date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')

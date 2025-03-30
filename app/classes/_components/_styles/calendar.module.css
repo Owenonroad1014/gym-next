@@ -54,6 +54,43 @@
     background-color: #f0f0f0;
     color: #999;
   }
+  .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    background-color: #333;
+    border-radius: 4px;
+    height: 50px;
+  }
+  .filterItem {
+    display: flex;
+align-items: center;
+    color: #fff;
+    margin: 20px; 
+    font-size: 20px;
+  }
+  .filterItem::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+    }
+    .filterItem:nth-child(1)::before { /* 入門課程 */
+    background-color: #faaa64;
+    }
+    .filterItem:nth-child(2)::before { /* 進階課程 */
+    background-color: #75d3aa;
+    }
+    .filterItem:nth-child(3)::before { /* 團體課程 */
+    background-color: #87CEEB;
+    }
+    .filterItem:nth-child(4)::before { /* 其他課程 */
+    background-color: #f79090;
+    }
   
   
   .calendar {
@@ -140,6 +177,19 @@
   transition: all 0.3s ease;
   cursor: pointer;
 }
+.event[data-category="團體課程"] {
+  background-color: #87CEEB;
+  border-right: 5px solid #52b4db; 
+}
+.event[data-category="進階課程"] {
+  background-color: #75d3aa;
+  border-right: 5px solid #40bd87; 
+}
+.event[data-category="其他課程"] {
+  background-color: #f79090;
+  border-right: 5px solid #fa6464; 
+}
+
 .event:not(:first-child){
   margin-top: 5px;
 }
@@ -280,3 +330,5 @@
     padding-bottom: 10px;
   }
 }
+
+
