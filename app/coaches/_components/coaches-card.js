@@ -41,7 +41,7 @@ const CoachesCard = ({
         
         <div className={styles.contact}>
           <div className={styles.contactItem}>
-            <MdEmail className={styles.icon} />
+            <MdEmail className={styles.icon}/>
             <span>{email}</span>  
           </div>
           <div className={styles.contactItem}>

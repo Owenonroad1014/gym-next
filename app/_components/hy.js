@@ -1089,7 +1089,7 @@ const Hyperspeed = ({ effectOptions = {
 
   return (
     <div id="lights" ref={hyperspeed}>
-    <div className="h1">GYM</div>
+    <div className="h1" data-text="GYM">GYM</div>
      
     </div>
   );
