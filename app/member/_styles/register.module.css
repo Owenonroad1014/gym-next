@@ -1,65 +1,11 @@
-.container {
+
+
+.registerContainer .form {
   display: flex;
   justify-content: center;
   width: 100%;
   margin: 140px auto;
 }
-.left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 180px 30px;
-  width: 15%;
-  background-image: linear-gradient(
-    to bottom,
-    #013056,
-    #003560,
-    #003a69,
-    #004073,
-    #00457d,
-    #0e4f8a,
-    #1a5a97,
-    #2465a5,
-    #3779b9,
-    #488dcd,
-    #5aa2e2,
-    #6bb7f6
-  );
-  color: #fff;
-  border-radius: 3px 0px 0px 3px;
-}
-.left div {
-  display: flex;
-  flex-direction: column;
-}
-.left span {
-  font-size: 12px;
-  margin-bottom: 3px;
-}
-.switchBtn {
-  background-color: #db6318;
-  padding: 8px;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 3px;
-}
-.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  padding: 30px;
-  border: 1px solid #88a9c8;
-  border-radius: 0px 3px 3px 0px;
-  color: #0b3760;
-}
-.right h1 {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
-}
-
 .inputGroup {
   width: 60%;
   display: flex;

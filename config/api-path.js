@@ -1,7 +1,7 @@
 export const API_SERVER = `http://localhost:3005`
 
 // 頭貼的路由
-export const AVATAR_PATH = `${API_SERVER}`
+export const AVATAR_PATH = `${API_SERVER}/img/avatar`
 // JWT 登入
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`
 // 註冊路由
@@ -10,7 +10,6 @@ export const REGISTER_POST = `${API_SERVER}/register/api`
 export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
 // 忘記密碼路由
 export const FORGET_PASS_POST = `${API_SERVER}/forget-password`
-export const VERIFRY_TOKEN_GET = `${API_SERVER}/forget-password/verify-token`
 export const RESET_PASS_TOKEN_PUT = `${API_SERVER}/forget-password/reset-password`
 // 修改密碼路由
 export const CONFIRM_PASS_POST = `${API_SERVER}change-password/confirm-password`
