@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 import friendStyle from '../_styles/friends.module.css'
 import { PiGenderMaleBold, PiGenderFemaleBold } from 'react-icons/pi'
 import { MdMenu, MdMenuOpen } from 'react-icons/md'
-import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 export default function Select() {
   const [menuShow, setMenuShow] = useState(true)
   const router = useRouter()

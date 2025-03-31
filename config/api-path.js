@@ -4,6 +4,8 @@ export const API_SERVER = `http://localhost:3005`
 export const AVATAR_PATH = `${API_SERVER}/img/avatar`
 // JWT 登入
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`
+// google登入
+export const GOOGLE_LOGIN_POST = `${API_SERVER}/api/auth/google-login`
 // 註冊路由
 export const REGISTER_POST = `${API_SERVER}/register/api`
 // 註冊後填寫資料路由
@@ -12,12 +14,12 @@ export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
 export const FORGET_PASS_POST = `${API_SERVER}/forget-password`
 export const RESET_PASS_TOKEN_PUT = `${API_SERVER}/forget-password/reset-password`
 // 修改密碼路由
-export const CONFIRM_PASS_POST = `${API_SERVER}change-password/confirm-password`
+export const CONFIRM_PASS_POST = `${API_SERVER}/change-password/confirm`
 export const RESET_PASS_PUT = `${API_SERVER}/change-password/reset`
 // 取得個人檔案路由
-export const PROFILE_GET = `${API_SERVER}/api/member/get-profile`
+export const PROFILE_GET = `${API_SERVER}/profile/get-profile`
 // 更新個人檔案的路由
-export const PROFILE_PUT = `${API_SERVER}/api/member/edit-profile`
+export const PROFILE_PUT = `${API_SERVER}/profile/edit-profile`
 
 // 教練 地圖 照片路由
 export const IMGS_PATH = `${API_SERVER}/imgs`
@@ -61,8 +63,11 @@ export const IMG_PATH = `${API_SERVER}/img`;
 
 
 //影片路由
-export const VIDEOS_LIST = `${API_SERVER}/videos/api`
-export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`
+export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
+
+export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
+
+export const VIDEOS_FAV = `${API_SERVER}/videos/api/favorites`;
 
 //商品評價路由
 export const REVIEWS_LIST = `${API_SERVER}/products/api/review`
@@ -116,10 +121,15 @@ export const ARTICLE_ITEM_FAVTOGGLE = `${API_SERVER}/articles/api/favToggle`
 
 // 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
 export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+// 會員中心會員最愛文張
+export const ARTICLE_MEMBER_FAV = `${API_SERVER}/articles/api/allFav`
+
 
 //**************** GYMFRIEND  *****************
 // 獲取GYM友列表
 export const GYMFRIEND_LIST = `${API_SERVER}/gymfriends/api`
+// 獲取大頭貼
+export const GYMFRIEND_AVATAR = `${API_SERVER}/img/avatar`
 
 //**************** MYFRIEND  *****************
 // 獲取好友列表

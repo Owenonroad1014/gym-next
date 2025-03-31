@@ -1,13 +1,12 @@
 'use client'
 
 import memberCss from '../_styles/member.module.css'
-import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { REGISTER_POST } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context'
 import { rgSchema } from '@/utils/schema/schema'
-import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值

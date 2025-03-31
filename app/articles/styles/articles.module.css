@@ -2,7 +2,7 @@
 .banner {
   background-image: url('/imgs/article/banner/articlebanner2000.jpg');
   width: 100%;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -10,12 +10,12 @@
   align-items: flex-start;
   padding: 50px 60px;
 }
-.banner h3 {
+.title {
   color: white;
   font-size: clamp(2rem, 3.5vw, 3rem);
 }
-.banner p {
-  color: white;
+.subtitle {
+  color: #ddd;
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
 /* #endregion Bannner  End*/
@@ -42,7 +42,7 @@
 .breadcrumbItem:not(:last-child)::after {
   content: '›';
   position: absolute;
-  top: 13px;
+  top: 15px;
   right: -5px;
   color: #666;
   font-size: 20px;
@@ -76,8 +76,6 @@
 .breadcrumbItem.active a {
   color: #f87808;
   font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 10px;
 }
 /* #endregion ================= Breadcrumb ====================== */
 
@@ -99,7 +97,6 @@
   padding: 10px;
   display: flex;
   justify-content: flex-end;
-  margin-right: 10px;
 }
 
 .searchForm {
@@ -108,8 +105,7 @@
 }
 
 .searchForm input {
-  /* padding: 3px; */
-  max-width: 250px;
+  width: 250px;
   border-radius: 3px;
   font-size: 18px;
   border: 2px rgb(221, 215, 215) solid;
@@ -126,10 +122,6 @@
   font-size: 15px;
 }
 
-/* 可以添加懸停效果 */
-.button:hover {
-  background-color: #e56c00;
-}
 /* #endregion ================= Search  End====================== */
 
 .articleBottom {
@@ -217,7 +209,7 @@
 
 .selectPart li.active {
   color: #f87808;
-  font-weight: 400;
+  font-weight: 600;
   border-bottom: #f87808 1px solid;
 }
 /* #endregion ================= Select  End ====================== */
@@ -246,7 +238,7 @@
   margin-left: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 2vw;
 }
 /* card */
@@ -291,7 +283,7 @@
 .heart {
   cursor: pointer;
   box-sizing: content-box;
-  color: #333;
+  color: #f87808;
   font-size: 22px;
   position: absolute;
   left: 10px;
@@ -361,7 +353,7 @@
   font-size: 1rem;
   text-decoration: none;
   color: white;
-  background-color: #0b3760;
+  background-color: #333;
   padding: 10px 15px;
   margin: 0 5px;
   border-radius: 3px;

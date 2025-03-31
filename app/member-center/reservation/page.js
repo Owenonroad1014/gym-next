@@ -29,7 +29,7 @@ const Toast = Swal.mixin({
 })
 const filterReservations = reservationsData.filter(reservation => {
   if (filter === 'all') return true;
-  return reservation.status === 'cancelled';
+  return reservation.status === 'confirmed';
 })
 
   useEffect(() => {
@@ -152,14 +152,14 @@ const filterReservations = reservationsData.filter(reservation => {
         全部預約
       </button>
       <button 
-        onClick={() => setFilter('cancelled')}
-        className={filter === 'cancelled' ? styles.active : ''}
+        onClick={() => setFilter('confirmed')}
+        className={filter === 'confirmed' ? styles.active : ''}
       >
-        已取消預約
+        目前預約
       </button>
     </div>
       <div className={styles.noReservations}>
-        <p>目前沒有取消紀錄</p>
+        <p>目前沒有預約紀錄</p>
       </div>
       </>
     )
@@ -175,10 +175,10 @@ const filterReservations = reservationsData.filter(reservation => {
     全部預約
   </button>
   <button 
-    onClick={() => setFilter('cancelled')}
-    className={filter === 'cancelled' ? styles.active : ''}
+    onClick={() => setFilter('confirmed')}
+    className={filter === 'confirmed' ? styles.active : ''}
   >
-    已取消預約
+   目前預約
   </button>
 </div>
       {filterReservations.map((v) => (
