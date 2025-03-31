@@ -55,7 +55,7 @@ const SearchForm = () => {
             type="search"
             aria-label="Search"
             className={styles.select}
-            placeholder="輸入教練名稱"
+            placeholder=" 輸入教練名稱 / 專長"
           />
           <button type="submit">
             <FaSearch />

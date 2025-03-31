@@ -4,6 +4,8 @@ export const API_SERVER = `http://localhost:3005`
 export const AVATAR_PATH = `${API_SERVER}/img/avatar`
 // JWT 登入
 export const JWT_LOGIN_POST = `${API_SERVER}/login-jwt`
+// google登入
+export const GOOGLE_LOGIN_POST = `${API_SERVER}/api/auth/google-login`
 // 註冊路由
 export const REGISTER_POST = `${API_SERVER}/register/api`
 // 註冊後填寫資料路由
@@ -12,7 +14,7 @@ export const REGISTER_PROFILE_POST = `${API_SERVER}/register/api/profile`
 export const FORGET_PASS_POST = `${API_SERVER}/forget-password`
 export const RESET_PASS_TOKEN_PUT = `${API_SERVER}/forget-password/reset-password`
 // 修改密碼路由
-export const CONFIRM_PASS_POST = `${API_SERVER}change-password/confirm-password`
+export const CONFIRM_PASS_POST = `${API_SERVER}/change-password/confirm`
 export const RESET_PASS_PUT = `${API_SERVER}/change-password/reset`
 // 取得個人檔案路由
 export const PROFILE_GET = `${API_SERVER}/api/member/get-profile`
@@ -54,11 +56,18 @@ export const TOGGLE_LIKE = `${API_SERVER}/address-book/toggle-like`
 
 // export const API_SERVER = `http://localhost:3001`;
 
-export const IMG_PATH = `${API_SERVER}/img`
+
+export const IMG_PATH = `${API_SERVER}/img`;
+
+
+
 
 //影片路由
-export const VIDEOS_LIST = `${API_SERVER}/videos/api`
-export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`
+export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
+
+export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
+
+export const VIDEOS_FAV = `${API_SERVER}/videos/api/favorites`;
 
 //商品評價路由
 export const REVIEWS_LIST = `${API_SERVER}/products/api/review`
@@ -85,10 +94,14 @@ export const FAVORITES_LIST = `${API_SERVER}/favorites/api`
 
 export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
-// 取得訂單列表的資料
-export const ORDERS_LIST = `${API_SERVER}/carts/api`
-//
-// export const ecpay = `${API_SERVER}/ecpay-test-only/api`;
+
+
+// 取得訂單列表的資料 
+export const ORDERS_LIST = `${API_SERVER}/carts/api`;
+
+export const ECPAY_PAYMENT = `${API_SERVER}/ecpay-test-only/api`
+
+
 
 //**************** ARTICLE *****************
 // 獲取文章列表的資料

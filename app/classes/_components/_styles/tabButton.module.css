@@ -9,7 +9,9 @@
     border-top-right-radius: 3px;
     font-size: 22px;
     cursor: pointer;
-    background: #5b5b5b;
+    background: #333;
+    color: #fafafa;
+
     position: relative;
     transition: all 0.3s;
     text-align: center;
@@ -17,7 +19,7 @@
   
   .tabButton.active {
     background: #f87808;
-    color: #000;
+    color: #fafafa;
     font-weight: bold;
   }
   

@@ -13,8 +13,6 @@ function OrderSummary() {
   const router = useRouter(); // 使用 Next.js 路由
  
   const [user, setUser] = useState(null);
-  const [paymentMethod, setPaymentMethod] = useState(null);
-  const [pickupMethod, setPickupMethod] = useState(null);
   const shipping = 0;
   const total = subtotal + shipping;
 
@@ -28,8 +26,6 @@ function OrderSummary() {
     if (cartItems.length === 0) {
       localStorage.removeItem("paymentMethod");
       localStorage.removeItem("pickupMethod");
-      setPaymentMethod(null);
-      setPickupMethod(null);
     } else {
       localStorage.setItem("cart", JSON.stringify(cartItems));
     }
@@ -42,20 +38,13 @@ function OrderSummary() {
       return;
     }
 
-    if (!user) {
-      alert("請先登入會員才能結帳！");
-      router.push("/member/login");
-      return;
-    }
+    // if (!user) {
+    //   alert("請先登入會員才能結帳！");
+    //   router.push("/member/login");
+    //   return;
+    // }
 
-    if (!paymentMethod) {
-      alert("請選擇付款方式！");
-      return;
-    }
-    if (!pickupMethod) {
-      alert("請選擇取貨門市！");
-      return;
-    }
+
 
     console.log("Processing checkout...");
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -64,8 +53,8 @@ function OrderSummary() {
   return (
     <aside className={styles.summaryContainer}>
       <section className={styles.detailsSection}>
-      <PaymentMethodSection setPaymentMethod={setPaymentMethod} />
-      <PickupStoreSection setPickupMethod={setPickupMethod} />
+      <PaymentMethodSection  />
+      <PickupStoreSection  />
       </section>
 
       <section className={styles.totalsSection}>

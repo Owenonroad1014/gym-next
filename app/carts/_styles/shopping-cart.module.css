@@ -10,10 +10,10 @@
 
 .cartContent {
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: start;
   gap: 40px;
-  padding: 80px 12px;
+  padding: 50px 12px;
   display: flex;
 }
 
@@ -35,5 +35,18 @@
   .cartContent {
     flex-direction: column;
     gap: 24px;
+  }
+}
+
+@media (width<=375px) {
+  .cartContainer {
+    padding: 8px;
+  }
+
+  .cartContent {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 0;
+    align-items: stretch;
   }
 }

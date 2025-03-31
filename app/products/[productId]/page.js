@@ -89,12 +89,18 @@ const ProductDetail = () => {
   };
 
   // 加入購物車
+  document.body.style.overflow = 'hidden'
   const handleAddToCart = () => {
     if (!selectedWeight) {
       MySwal.fire({
         title: "請選擇重量!",
         text: "請選擇商品的重量才能加入購物車。",
         icon: "warning",
+        confirmButtonColor: '#f87808',
+        cancelButtonColor: '#0b3760',
+        didClose: () => {
+          document.body.style.overflow = ''
+        },
       });
       return;
     }
@@ -104,6 +110,9 @@ const ProductDetail = () => {
         title: "請選擇租借日期!",
         text: "請選擇租借的開始與結束日期。",
         icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: '#f87808',
+        cancelButtonColor: '#0b3760',
       });
       return;
     }
@@ -127,6 +136,9 @@ const ProductDetail = () => {
       title: "成功加入購物車!",
       text: `${product.product_name} 已加入購物車!`,
       icon: "success",
+      showCancelButton: true,
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#0b3760',
     });
 
 };
