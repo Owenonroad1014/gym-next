@@ -13,26 +13,53 @@
   flex-direction: column;
   flex-grow: 1;
 }
-.secTitle {
-  font-size: 35px;
-  margin-bottom: 15px;
-}
-
 .searchSection {
-  background-color: #e6e6e6;
-  padding: 50px 20px 250px 20px;
+  background: #ffffff;
+  padding: 4rem 2rem;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 250px;
+  min-height: 300px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(11, 55, 96, 0.1);
+}
+
+.secTitle {
+  color: #333333;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .coachIcon {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 15px;
-  color: #666;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 2rem;
+  color: #001e05;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 2;
+  animation: bounce 2s infinite;
+}
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+/* 確保按鈕和其他元件在最上層 */
+.searchSection > * {
+  position: relative;
+  z-index: 2;
 }
 
 .toolsContainer{
@@ -70,7 +97,21 @@
     width: 50px;
     font-size: 12px;
   }
+  .searchSection {
+    padding: 3rem 1.5rem;
+  }
+  
+  .secTitle {
+    font-size: 2rem;
+  }
+  
+  .coachIcon {
+    width: 60px;
+    height: 60px;
+  }
+
 }
+
 
 
 @media (max-width: 440px) {
@@ -111,7 +152,6 @@
     gap: 20px;
   }
 }
-
 
 .coachesContainer{
   display: flex;

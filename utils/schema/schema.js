@@ -4,14 +4,18 @@ export const rgSchema = z
   .object({
     email: z
       .string()
-      .min(1, { message: '電子郵箱為必填' })
-      .email({ message: '請填寫正確的電子郵箱' }),
+      .min(1, { message: '電子信箱為必填' })
+      .email({ message: '請填寫正確的電子信箱格式' }),
     password: z
       .string()
       .min(1, { message: '密碼為必填' })
-      .min(8, { message: '密碼至少8個字元' })
+      .min(8, {
+        message:
+          '密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#',
+      })
       .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])/, {
-        message: '密碼需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#',
+        message:
+          '密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#',
       }),
     confirmPassword: z.string(),
   })
@@ -22,6 +26,16 @@ export const rgSchema = z
 
 export const pfSchema = z
   .object({
+    // avatar: z
+    //   .instanceof(File)
+    //   .optional()
+    //   .refine((file) => file.size <= 5 * 1024 * 1024, {
+    //     message: '頭像大小不能超過5MB',
+    //   }) // 限制檔案大小
+    //   .refine(
+    //     (file) => ['image/jpeg', 'image/png', 'image/webp'].includes(file.type),
+    //     { message: '只接受 JPEG, PNG 或 WEBP 格式' }
+    //   ),
     pname: z
       .string()
       .min(1, { message: '姓名為必填' })
@@ -45,12 +59,14 @@ export const pfSchema = z
       if (data.status === true) {
         // Correctly check intro length after trimming whitespace
         const trimmedIntro = data.intro ? data.intro.trim() : ''
-        return trimmedIntro.length >= 30
+        if (trimmedIntro.length <= 30) {
+          return false
+        }
       }
       return true // 若 status 為 false，不進行檢查
     },
     {
-      message: '狀態為公開時，自我簡介需為必填，且至少需要30個字元',
-      path: ['intro'], // 錯誤訊息將顯示在 intro 欄位
+      message: '檔案狀態為公開時，自我簡介為必填，且至少需要30個字元',
+      path: ['intro'],
     }
   )

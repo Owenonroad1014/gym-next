@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import styles from './_styles/search.module.css'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { LOCATIONS_LIST } from '../../../config/api-path'
+import { FaSearch } from 'react-icons/fa'
+
 
 function Search() {
   const router = useRouter()
@@ -119,7 +121,7 @@ function Search() {
           className={styles.button}
           disabled={!location || !branch} // 兩個都選了才能送出
         >
-          搜尋
+          <FaSearch />
         </button>
       </form>
     </div>

@@ -1,0 +1,36 @@
+/* 預設畫面 */
+.noFavArticle {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+  }
+  .noFavArticle p {
+    font-size: 30px;
+  }
+  .noFavArticle a {
+    font-size: 20px;
+    color: #f87808;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .noFavArticle a:hover {
+    transform: scale(1.1);
+    transition: all 0.2s;
+  }
+
+  .loaderContainer{
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+  }

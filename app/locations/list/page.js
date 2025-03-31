@@ -34,66 +34,66 @@ export default function LocationsPage() {
   // 處理數據獲取和搜索
   useEffect(() => {
     const fetchData = async () => {
-      const location = searchParams.get('location') || '';
-      const branch = searchParams.get('branch') || '';
-      const searchTerm = `${location} ${branch}`.trim();
-      const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`;
-  
+      const location = searchParams.get('location') || ''
+      const branch = searchParams.get('branch') || ''
+      const searchTerm = `${location} ${branch}`.trim()
+      const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`
+
       try {
-        const res = await fetch(url);
+        const res = await fetch(url)
         if (!res.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok')
         }
-        const data = await res.json();
-        console.log('Fetched data:', data);
-        
+        const data = await res.json()
+        console.log('Fetched data:', data)
+
         if (data && data.success) {
-          setLocations(data.rows || []);
-          
+          setLocations(data.rows || [])
+
           if (!searchTerm) {
-            setFilteredLocations(data.rows || []);
-            return;
+            setFilteredLocations(data.rows || [])
+            return
           }
-  
+
           const searchParts = searchTerm
             .toLowerCase()
             .split(' ')
-            .filter((part) => part.length > 0);
-  
-          const selectedLocation = searchParts[0] || '';
-          const selectedBranch = searchParts[1] || '';
-  
+            .filter((part) => part.length > 0)
+
+          const selectedLocation = searchParts[0] || ''
+          const selectedBranch = searchParts[1] || ''
+
           const filtered = data.rows.filter((location) => {
-            const locationName = location.location?.toLowerCase() || '';
-            return locationName === selectedLocation;
-          });
-  
+            const locationName = location.location?.toLowerCase() || ''
+            return locationName === selectedLocation
+          })
+
           const sorted = filtered.sort((a, b) => {
-            const aBranch = a.branch?.toLowerCase() || '';
-            const bBranch = b.branch?.toLowerCase() || '';
-            
+            const aBranch = a.branch?.toLowerCase() || ''
+            const bBranch = b.branch?.toLowerCase() || ''
+
             if (selectedBranch) {
-              if (aBranch === selectedBranch) return -1;
-              if (bBranch === selectedBranch) return 1;
+              if (aBranch === selectedBranch) return -1
+              if (bBranch === selectedBranch) return 1
             }
-            return aBranch.localeCompare(bBranch);
-          });
-  
-          setFilteredLocations(sorted);
+            return aBranch.localeCompare(bBranch)
+          })
+
+          setFilteredLocations(sorted)
         } else {
-          setLocations([]);
-          setFilteredLocations([]);
+          setLocations([])
+          setFilteredLocations([])
         }
       } catch (error) {
-        console.error('獲取locations數據失敗:', error);
-        setLocations([]);
-        setFilteredLocations([]);
+        console.error('獲取locations數據失敗:', error)
+        setLocations([])
+        setFilteredLocations([])
       }
-    };
-  
-    fetchData();
-  }, [searchParams]);
-  
+    }
+
+    fetchData()
+  }, [searchParams])
+
   const handleSearch = (term) => {
     setSearchTerm(term)
     setShowMap(false)
@@ -102,7 +102,6 @@ export default function LocationsPage() {
 
   const handleLocationClick = (location) => {
     console.log('Location clicked:', location)
-
     setSelectedAddress(location)
     setIsModalOpen(true)
   }
@@ -187,10 +186,10 @@ export default function LocationsPage() {
               </div>
               <div className={styles.locationsContainer}>
                 {filteredLocations.map((location) => (
-               
-                    <div
-                      key={location.id}
-                      role="button"
+                  <div key={location.id} className={styles.cardWrapper}>
+                    <div 
+                      className={styles.cardContent}
+                      role="button" 
                       tabIndex={0}
                       onClick={() => handleLocationClick(location)}
                       onKeyPress={(e) => {
@@ -198,20 +197,26 @@ export default function LocationsPage() {
                           handleLocationClick(location)
                         }
                       }}
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: 'pointer', 
+                      }}
                     >
                       <LocationCard location={location} />
                     </div>
+                  </div>
                 ))}
-                <MapModal
-                  isOpen={isModalOpen}
-                  onClose={() => setIsModalOpen(false)}
-                  selectedAddress={selectedAddress}
-                />
-              </div>
+               
+              </div> 
+              
             </>
           ))}
       </div>
+      <MapModal
+                  isOpen={isModalOpen}
+                  onClose={() => {
+                    setIsModalOpen(false)
+                    }}
+                  selectedAddress={selectedAddress}
+                />
     </>
   )
 }

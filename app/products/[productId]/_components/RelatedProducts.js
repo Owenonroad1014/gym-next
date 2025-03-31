@@ -9,7 +9,7 @@ const RelatedProducts = ({ products }) => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 3.5,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,

@@ -25,17 +25,17 @@ export default function CourseCalendar({
   const router = useRouter()
 
   // Toast
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: false,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer
-        toast.onmouseleave = Swal.resumeTimer
-      },
-    })
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer
+      toast.onmouseleave = Swal.resumeTimer
+    },
+  })
 
   // 計算週期範圍
   const getWeekRange = (date) => {
@@ -48,8 +48,12 @@ export default function CourseCalendar({
 
   // 生成週曆天數陣列
   const weekDays = Array.from({ length: 7 }, (_, i) => {
-    return moment(selectedDate).tz('Asia/Taipei').startOf('week').add(i, 'days').toDate();
-  });
+    return moment(selectedDate)
+      .tz('Asia/Taipei')
+      .startOf('week')
+      .add(i, 'days')
+      .toDate()
+  })
 
   // 處理週期切換
   const handleNextWeek = () => {
@@ -68,12 +72,14 @@ export default function CourseCalendar({
 
   // 根據日期過濾課程
   const getCoursesByDay = (day) => {
-    const dayMoment = moment(day).tz('Asia/Taipei').startOf('day');
+    const dayMoment = moment(day).tz('Asia/Taipei').startOf('day')
     return classes.filter((course) => {
-      const courseMoment = moment(course.date || course.class_date).tz('Asia/Taipei').startOf('day');
-      return dayMoment.isSame(courseMoment, 'day');
-    });
-  };
+      const courseMoment = moment(course.date || course.date)
+        .tz('Asia/Taipei')
+        .startOf('day')
+      return dayMoment.isSame(courseMoment, 'day')
+    })
+  }
 
   const isPastWeek = () => {
     const today = moment().tz('Asia/Taipei').endOf('day')
@@ -87,65 +93,67 @@ export default function CourseCalendar({
   }
 
   const needlogin = () => {
-      document.body.style.overflow = 'hidden'
-      const MySwal = withReactContent(Swal)
-      MySwal.fire({
-        title: '登入會員即可預約!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
-        confirmButtonText: '登入',
-        cancelButtonText: '取消',
-        didClose: () => {
-          document.body.style.overflow = ''
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push('/member/login')
-        }
-      })
-    }
+    document.body.style.overflow = 'hidden'
+    const MySwal = withReactContent(Swal)
+    MySwal.fire({
+      title: '登入會員即可預約!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#0b3760',
+      confirmButtonText: '登入',
+      cancelButtonText: '取消',
+      didClose: () => {
+        document.body.style.overflow = ''
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/member/login')
+      }
+    })
+  }
 
   // 處理卡片點擊
 
-const handleCardClick = (classData) => {
-  if (!auth.id) {
-    needlogin()
-    return 
-  }
-
-  console.log('Clicked classData:', classData) // 先看看收到的資料
-  
-  if (!classData || !classData.date) {
-    console.error('Error: classData or date is undefined')
-    return
-  }
-  // 這裡不要用 setSelectedClass 覆蓋所有資料
-  setSelectedClass(classData) // 直接使用完整的 classData
-  setIsModalOpen(true)
-}
-
-  // 處理預約提交
-  const handleReservationSubmit = async () => {
-    if(!auth.id) {
+  const handleCardClick = (classData) => {
+    if (!auth.id) {
       needlogin()
       return
     }
-    
+
+    console.log('Clicked classData:', classData) // 先看看收到的資料
+
+    if (!classData || !classData.date) {
+      console.error('Error: classData or date is undefined')
+      return
+    }
+    // 這裡不要用 setSelectedClass 覆蓋所有資料
+    setSelectedClass(classData) // 直接使用完整的 classData
+    setIsModalOpen(true)
+  }
+
+  // 處理預約提交
+  const handleReservationSubmit = async () => {
+    if (!auth.id) {
+      needlogin()
+      return
+    }
+
     try {
-      const capacityRes = await fetch(`${CLASSES_CAPACITY_GET}/${selectedClass.id}`)
+      const capacityRes = await fetch(
+        `${CLASSES_CAPACITY_GET}/${selectedClass.id}`
+      )
       const capacity = await capacityRes.json()
-      
+
       if (capacity.current_capacity >= capacity.max_capacity) {
         setIsModalOpen(false)
         Toast.fire({
           icon: 'error',
-          title: '課程已額滿'
+          title: '課程已額滿',
         })
         return
       }
-  
+
       // 提交預約
       const res = await fetch(`${CLASSES_RESERVATION_POST}`, {
         method: 'POST',
@@ -161,51 +169,52 @@ const handleCardClick = (classData) => {
           reservation_time: selectedClass.start_time,
         }),
       })
-  
+
       // 重複預約
-      if(res.status === 400) {
+      if (res.status === 400) {
         setIsModalOpen(false)
         Toast.fire({
           icon: 'info',
-          title: '你已預約過此課程'
+          title: '你已預約過此課程',
         })
         return
       }
-  
+
       if (!res.ok) {
         setIsModalOpen(false)
         Toast.fire({
           icon: 'error',
-          title: '預約失敗'
+          title: '預約失敗',
         })
         return
       }
-  
+
       setIsModalOpen(false)
       Toast.fire({
         icon: 'success',
-        title: '預約成功'
+        title: '預約成功',
       })
-      
-      if(onReservationSuccess){
+
+      if (onReservationSuccess) {
         onReservationSuccess()
       }
-  
     } catch (error) {
       console.error('Reservation failed:', error)
       setIsModalOpen(false)
       Toast.fire({
         icon: 'error',
-        title: error.message
+        title: error.message,
       })
     }
   }
-  
 
   return (
     <>
       <div className={styles.container}>
-        <h2 className={styles.containerH2}>{location && branch ? `${location}${branch}課程表` : '課程表'}</h2>
+        <h2 className={styles.containerH2}>
+          {location && branch ? `${location}${branch}課程表` : '課程表'}
+        </h2>
+        
         <div className={styles.header}>
           <button
             onClick={handlePrevWeek}
@@ -221,6 +230,12 @@ const handleCardClick = (classData) => {
           <button onClick={handleNextWeek} className={styles.nextWeek}>
             ＞
           </button>
+        </div>
+        <div className={styles.filter}>
+          <div className={styles.filterItem}>入門課程</div>
+          <div className={styles.filterItem}>進階課程</div>
+          <div className={styles.filterItem}>團體課程</div>
+          <div className={styles.filterItem}>其他課程</div>
         </div>
 
         <div className={styles.calendar}>
@@ -272,23 +287,37 @@ const handleCardClick = (classData) => {
                       <div
                         key={course.id}
                         className={`${styles.event} ${
-                          course.current_capacity >= course.max_capacity
+                          moment(course.date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+
+                            ? styles.expired
+                            : course.current_capacity >= course.max_capacity
                             ? styles.full
                             : ''
                         }`}
+                        data-category={course.category_name}
                         role="button"
                         tabIndex={
+                          moment(course.date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+ ||
                           course.current_capacity >= course.max_capacity
                             ? -1
                             : 0
                         }
                         onClick={() =>
+                          moment(course.date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+ ||
                           course.current_capacity >= course.max_capacity
                             ? null
                             : handleCardClick(course)
                         }
                         onKeyPress={(e) => {
-                          if (course.current_capacity >= course.max_capacity)
+                          if (
+                            moment(course.date).isBefore(
+                              moment(),
+                              'day'
+                            ) ||
+                            course.current_capacity >= course.max_capacity
+                          )
                             return
                           if (e.key === 'Enter' || e.key === ' ') {
                             handleCardClick(course)
@@ -299,7 +328,12 @@ const handleCardClick = (classData) => {
                         <div className={styles.time}>{course.time}</div>
                         <div className={styles.name}>{course.coach_name}</div>
                         <div className={styles.capacity}>
-                          {course.current_capacity >= course.max_capacity ? (
+                          {moment(course.date).isBefore(
+                            moment(),
+                            'day'
+                          ) ? (
+                            <span className={styles.expired}>已過期</span>
+                          ) : course.current_capacity >= course.max_capacity ? (
                             <span className={styles.full}>已額滿</span>
                           ) : (
                             <span className={styles.available}>

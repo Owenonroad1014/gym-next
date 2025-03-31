@@ -9,15 +9,12 @@
   }
   
   .select {
-    /* padding: 3px; */
     width: 250px;
     border-radius: 3px;
     font-size: 18px;
     border: 2px rgb(221, 215, 215) solid;
   }
-  .select:hover {
-    border: 2px #f87808 solid;
-  }
+  
 
 
   .searchForm button {
@@ -31,11 +28,8 @@
     font-size: 15px;
  
   }
-  
-  /* 可以添加懸停效果 */
-  .searchForm button:hover {
-    background-color: #e56c00;
-  }
+
+
 
   .clearSearch {
     position: absolute;

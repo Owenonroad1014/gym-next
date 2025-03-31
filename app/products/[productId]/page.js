@@ -12,6 +12,8 @@ import { useAuth } from "@/context/auth-context";
 import { useCart } from "@/context/cart-context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
+import ReviewList from "./_components/reviews";
 
 
 const ProductDetail = () => {
@@ -28,7 +30,6 @@ const ProductDetail = () => {
   const [rentalEndDate, setRentalEndDate] = useState("");
   const MySwal = withReactContent(Swal);
   const { addToCart } = useCart()
-
 
   useEffect(() => {
     console.log(params);
@@ -142,10 +143,46 @@ const ProductDetail = () => {
 
 };
 
+  const renderStars = (rating) => {
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} color="#f87808" size={20} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} color="#f87808" size={20} />);
+      } else {
+        stars.push(<FaRegStar key={i} color="#f87808" size={20} />);
+      }
+    }
+
+    return stars;
+  };
+
+
+  const renderStar = (rating) => {
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} color="#f87808" size={40} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} color="#f87808" size={40} />);
+      } else {
+        stars.push(<FaRegStar key={i} color="#f87808" size={40} />);
+      }
+    }
+
+    return stars;
+  };
+
   return (
+    <>
+
+    <Breadcrumb breadcrumbs={breadcrumbs}/>
     <main className={styles.container}>
-      <Breadcrumb breadcrumbs={breadcrumbs}/>
-      <section className={styles.productSection}>
+          <section className={styles.productSection}>
+              <FavoriteBbutton product_id={product.id} likeId={likeId}/>
         <img
           src={`${IMG_PATH}/${product.image_url}`}
           alt={product.product_name}
@@ -156,10 +193,19 @@ const ProductDetail = () => {
         <h1 className={styles.productTitle}>{product.product_name}</h1>
         <p className={styles.productPrice}>{product.price}元/天</p>
         </div>
-          <hr className={styles.divider} />
+          <hr className={styles.dividerOne} />
           <p className={styles.productDescription}>
           {product.description}
           </p>
+          <div className={styles.rating}>
+            {product.average_rating !== null ? (
+              <>
+                {renderStars(product.average_rating)}
+                {product.average_rating > 0 && <span className ={styles.reviewCount}>({product.average_rating})</span>}
+              </>
+            ) : ""
+            }
+          </div>
           <div className={styles.selectionContainer}>
           <RentalDate 
             price={product.price} 
@@ -191,20 +237,31 @@ const ProductDetail = () => {
           <QuantitySelector onQuantityChange={handleQuantityChange}/>
           </div>
           <div className={styles.cartActions}>
-          <FavoriteBbutton product_id={product.id} likeId={likeId}/>
           <button className={styles.addToCartButton} onClick={handleAddToCart}>加入購物車</button>
-
           </div>
 
-          
         </article>
       </section>
-
-      <div className={styles.relatedTitle}>相關商品
-      <hr className={styles.divider} />
+      {product.average_rating !== null && (
+  <div className={styles.review}>
+    <div className={styles.reviewTitle}>
+      <p>商品評價&評論</p>
+      <div className={styles.point}>{product.average_rating}</div>
+      <div className={styles.ratings}>
+        {renderStar(product.average_rating)}
+        {product.average_rating > 0 && <span className={styles.reviewCounts}></span>}
       </div>
+    </div>
+    <ReviewList productId={product.id} />
+  </div>
+)}
+      
+      <div className={styles.relatedTitle}>相關商品
+      </div>
+      <hr className={styles.divider} />
       <RelatedProducts products={relatedProducts}/>
     </main>
+    </>
   );
 };
 

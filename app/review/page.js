@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { REVIEWS_LIST, EDIT_REVIEW_API, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import styles from "./_component/_styles/review.module.css";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
@@ -82,6 +84,12 @@ const Review = () => {
     }
   };
 
+  const renderStars = (rating) => {
+    return Array.from({ length: 5 }, (_, i) =>
+      i < rating ? <AiFillStar key={i} color="gold" size={24} /> : <AiOutlineStar key={i} color="gold" size={24} />
+    );
+  };
+
   return (
     <>
       <article className={styles.review}>
@@ -93,18 +101,27 @@ const Review = () => {
                 <img src={`${IMG_PATH}/${product.image_url}`} alt={product.name} className={styles.img} />
               </div>
             <div className={styles.content}>
-            <div className={styles.contentItem}>
-            <div>訂單編號:{product.order_id}</div>
-              <p>商品名稱: {product.name}</p>
-              {product.weight !== null && <div>商品重量: {product.weight}</div>}
-              {/* <div>訂單時間: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div> */}
+            
 
+            {/* <div>訂單資訊</div> */}
+            <div className={styles.contentItem}>
+            <div>訂單資料</div>
+            <div>訂單編號: #{product.order_id}</div>
+              <div>商品名稱: {product.name}</div>
+              {product.weight !== null && <div>商品重量: {product.weight}</div>}
+              <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
             </div>
               
               <div className={styles.latest_review}>
-                <p>評價: {product.latest_review.rating} 星</p>
-                <p>評論: {product.latest_review.comment}</p>
-                <button onClick={() => handleOpenReview(product)}>編輯評價</button>
+              <div>評論:<button onClick={() => handleOpenReview(product)}
+                className={styles.button}
+                ><CiEdit /></button></div>
+                <p>
+                {renderStars(product.latest_review.rating)}</p>
+
+                
+                <div className={styles.comment}> {product.latest_review.comment}</div>
+                
               </div>
             </div>
             </div>
@@ -116,14 +133,13 @@ const Review = () => {
           <div className={styles.modalContent}>
             <button className={styles.closeButton} onClick={() => setIsDialogOpen(false)}>×</button>
             <h3 className={styles.title}>編輯評價 - {selectedProduct?.name}</h3>
-            <div >
-              <span className="mr-2">星等：</span>
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button key={star} className={styles.star} onClick={() => setRating(star)}>
-                  {rating >= star ? "★" : "☆"}
-                </button>
-              ))}
-            </div>
+            <div className={styles.starContainer}>
+  {Array.from({ length: 5 }, (_, i) => (
+    <span key={i} onClick={() => setRating(i + 1)} style={{ cursor: "pointer" }}>
+      {i < rating ? <AiFillStar color="gold" size={28} /> : <AiOutlineStar color="gold" size={28} />}
+    </span>
+  ))}
+</div>
 
             <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="輸入您的評價" className={styles.textarea} />
 

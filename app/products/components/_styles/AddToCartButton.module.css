@@ -1,5 +1,5 @@
 .button {
-    /* width: 150px; */
+
     max-width: 100%;
     margin-top: 11px;
     padding: 8px 30px;
@@ -8,11 +8,13 @@
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
+    border-radius: 5px;
   }
   
   .buttonDark {
     background-color: #e76317;
     color: #fff;
+
   }
   
   .buttonLight {

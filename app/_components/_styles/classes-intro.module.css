@@ -13,13 +13,13 @@
 
 /* 基本樣式 (type1) */
 .type1 {
-  background: #5e7388;
+  background: #f8c08e;
   flex-direction: row-reverse;
 }
 
 /* 第二種樣式 (type2) */
 .type2 {
-  background: #0b3760;
+  background: #d46300;
 }
 
 .classes-info {
@@ -73,12 +73,12 @@
 }
 
 .type2 .description {
-  color: #c9c6c6;
+  color: #eee;
 }
 
 .classes-button {
   padding: 7px 15px;
-  background-color: #142020;
+  background-color: #333;
   color: white;
   border: none;
   border-radius: 3px;
@@ -99,6 +99,6 @@
 }
 
 .classes-button:hover {
-  background-color: #203e3e;
+  background-color: #1d1d1d;
   padding: 10px 20px;
 }

@@ -2,13 +2,22 @@
 import { useEffect, useState } from 'react'
 import styles from './_styles/sort.module.css'
 import ClassesIntro from '@/app/_components/classes-intro'
+import { motion, AnimatePresence } from "framer-motion"
 
-function Sort({ category, classTypes }) {
+
+
+
+function Sort({ category, classTypes,  }) {
   const [showClasses, setShowClasses] = useState(false)
   const [sortType, setSortType] = useState('')
-  
-  
 
+  useEffect(() => {
+    // 當 category 改變時重置 sortType
+    setSortType('查看課程')
+    setShowClasses(false)
+  }, [category]) 
+
+  // 點擊頁面其他地方時關閉下拉選單
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(`.${styles.dropdown}`)) {
@@ -69,15 +78,35 @@ function Sort({ category, classTypes }) {
         </div>
       </form>
     </div>
-    <div>
-        {sortedClasses?.map((classType, index) => (
-          <ClassesIntro 
-            key={index}
-            classType={classType}
-            variant={index % 2 === 0 ? 'type1' : 'type2'}
-          />
-        ))}
-      </div>
+    <AnimatePresence mode="wait">
+        <motion.div
+          key={sortType || category} // 當這些值改變時觸發動畫
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>
+            {sortedClasses?.map((classType, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.2,
+                  ease: "easeOut"
+                }}
+              >
+                <ClassesIntro
+                  classType={classType}
+                  variant={index % 2 === 0 ? 'type1' : 'type2'}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 }

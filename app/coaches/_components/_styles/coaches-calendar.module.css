@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-.containerH2{
+.containerH2 {
   color: #142020;
   margin-bottom: 10px;
   font-size: 28px;
@@ -27,7 +27,7 @@
   height: 30px;
   padding: 4px 4px;
   background-color: white;
-  color:  #142020;
+  color: #142020;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -35,13 +35,11 @@
   font-size: 25px;
   text-align: center;
   line-height: 15px;
-
 }
 
 .nextWeek:hover {
   background-color: #142020;
   color: white;
-
 }
 
 .nextWeek[disabled] {
@@ -92,10 +90,16 @@
   font-weight: bold;
 }
 
+.currentDay {
+  color: #f87808;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .event {
   margin-top: 2px;
   padding: 5px 8px;
-  background: linear-gradient(120deg, #e1edf8 0%, #f5f9fc 100%);
+  background: linear-gradient(120deg, #faba83 0%, #fadcc1 100%);
   border-radius: 8px;
   font-size: 0.9rem;
   box-shadow: 0 2px 4px rgba(1, 20, 97, 0.05);
@@ -105,8 +109,8 @@
 
 .event:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(1, 20, 97, 0.15);
-  background: linear-gradient(120deg, #e8f1f9 0%, #ffffff 100%);
+  box-shadow: 0 4px 12px rgba(97, 36, 1, 0.15);
+  background: linear-gradient(120deg, #fae9e0 0%, #ffffff 100%);
 }
 
 .full {
@@ -119,7 +123,7 @@
 
 
 .time {
-  color: #0b3760;
+  color: #ff7700;
   font-weight: 600;
 }
 
@@ -127,28 +131,14 @@
   font-weight: 600;
   font-size: 16px;
   margin: 3px 0;
-  color: #0b3760;
+  color: #ff7700;
 }
-.capacity{
+.capacity {
   font-size: 14px;
   letter-spacing: -1px;
+  color: #333;
 }
 
-.bookButton {
-  width: 100%;
-  padding: 6px;
-  margin-top: 6px;
-  background: #db6318;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.bookButton:hover {
-  background: #c0392b;
-}
 
 .empty {
   background-color: #f5f5f5;
@@ -160,16 +150,33 @@
   border-radius: 10px;
 }
 
+/* Expired course styles */
+.event.expired {
+  background: #f0f0f0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.event.expired .title,
+.event.expired .time {
+  color: #999;
+}
+
+.event.expired .capacity {
+  color: #999;
+}
+
+
 @media (max-width: 768px) {
   .container {
     width: 95%;
     padding: 10px;
   }
-  
+
   .weekdays {
     font-size: 14px; /* 調整星期文字大小 */
   }
-  
+
   .day {
     min-height: 80px;
     font-size: 0.8rem;
@@ -192,7 +199,8 @@
     margin: 2px 0;
   }
 
-  .time, .capacity {
+  .time,
+  .capacity {
     font-size: 11px;
   }
 }
@@ -202,7 +210,7 @@
     width: 100%;
     padding: 5px;
   }
-  
+
   .weekdays {
     font-size: 12px;
     padding: 8px 0;
@@ -229,6 +237,3 @@
     box-shadow: none;
   }
 }
-
-
-
