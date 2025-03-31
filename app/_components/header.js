@@ -128,7 +128,9 @@ export default function Header() {
               <FaCartPlus />
             </Link>
           </div>
+
         </div>
+      </div>
       </div>
     </>
   )
