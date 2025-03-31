@@ -1,28 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { PRODUCTS_FAV, IMG_PATH } from "@/config/api-path";
+import { VIDEOS_FAV, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
 import cardStyle from "./_compenents/_styles/videos.module.css";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 const Videos = () => {
   const { auth, getAuthHeader } = useAuth();
-  const [Products, setProducts] = useState([]);
+  const [Videos, setVideos] = useState([]);
   const [isloading, setIsloading] = useState(true)
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchVideos = async () => {
       try {
         const headers = auth ? { ...getAuthHeader() } : {};
-        const res = await fetch(PRODUCTS_FAV, { headers });
+        const res = await fetch( VIDEOS_FAV, { headers });
         const obj = await res.json();
         console.log("後端回傳的商品列表:", obj);
 
         if (obj.success) {
-          setProducts(obj.favorites || []);
+          setVideos(obj.favorites || []);
           setIsloading(false)
         }
       } catch (error) {
@@ -31,15 +32,15 @@ const Videos = () => {
       }
     };
 
-    fetchProducts();
+    fetchVideos();
   }, [auth, getAuthHeader]);
 
   // **處理取消收藏**
-  const handleRemoveFavorite = async (product,event) => {
+  const handleRemoveFavorite = async (video,event) => {
     document.body.style.overflow = 'hidden'
     event.stopPropagation(); // 阻止事件冒泡
     const result = await Swal.fire({
-      title: `確定要取消收藏 ${product.name} 嗎?`,
+      title: `確定要取消收藏嗎?`,
       text: "取消後需要重新收藏才能恢復",
       icon: "warning",
       showCancelButton: true,
@@ -55,17 +56,17 @@ const Videos = () => {
     if (result.isConfirmed) {
       try {
         const headers = auth ? { ...getAuthHeader(), "Content-Type": "application/json" } : {};
-        const res = await fetch(`${PRODUCTS_FAV}/${product.product_id}`, {
+        const res = await fetch(`${VIDEOS_FAV}/${video.video_id}`, {
           method: "DELETE",
           headers,
         });
 
         const response = await res.json();
         if (response.success) {
-          Swal.fire("已取消收藏!", `${product.name} 已從你的收藏列表中移除`, "success");
+          Swal.fire("已取消收藏!", `${video.name} 已從你的收藏列表中移除`, "success");
 
           // **前端同步更新狀態**
-          setProducts((prev) => prev.filter((p) => p.product_id !== product.product_id));
+          setVideos((prev) => prev.filter((p) => p.video_id !== video.video_id));
         } else {
           Swal.fire("操作失敗", "請稍後再試", "error");
         }
@@ -85,27 +86,29 @@ const Videos = () => {
           </div>
         </>
       ) : (<>
-      {Products.length === 0 ? (
+      {Videos.length === 0 ? (
         <p>目前沒有收藏的商品</p>
       ) : (
-        Products.map((product) => (
-          <div key={product.product_id} >
-            <Link href={`/products/${product.product_id}`} className={cardStyle.favCard}>
+        Videos.map((video) => (
+          <div key={video.video_id} >
+            <Link href={``} className={cardStyle.favCard}>
               <div className={cardStyle.images}>
-                <Image
-                  src={`${IMG_PATH}/${product.image_url}`}
-                  width={300}
-                  height={200}
-                  alt={product.name}
-                  className={cardStyle.cardImage}
-                />
+              <iframe 
+            width="100%" 
+            height="200" 
+            src={video.url} 
+            style={{ border: 'none' }}
+            title="YouTube video player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerPolicy="strict-origin-when-cross-origin" 
+            allowFullScreen
+          ></iframe>
               </div>
               <div className={cardStyle.content}>
                 <div className={cardStyle.cardBody}>
-                  <h3 className={cardStyle.name}>{product.name}</h3>
-                  <div className={cardStyle.price}>{product.price}元/天</div>
+                  <h3 className={cardStyle.name}>{video.title}</h3>
                   <div className={cardStyle.cardDesc}>
-                    <p>{product.description}</p>
+                    <p>{video.description}</p>
                   </div>
                 </div>
                 <button
@@ -113,11 +116,11 @@ const Videos = () => {
                   onClick={(event) => {
                     event.preventDefault(); // 阻止默認行為
                     event.stopPropagation(); // 阻止事件冒泡
-                    handleRemoveFavorite(product, event);
+                    handleRemoveFavorite(video, event);
                   }}
                   style={{ zIndex: 1 }} // 確保按鈕在 Link 之上
                 >
-                  取消收藏
+                  <FaHeart className={cardStyle.heart}/>
                 </button>
               </div>
             </Link>
