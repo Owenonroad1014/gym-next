@@ -101,7 +101,7 @@ export default function Header() {
           <div className={headerstyles.rightSection}>
             {auth.id ? (
               <>
-                <Link href="/member" className={headerstyles.navLink}>
+                <Link href="/member-center" className={headerstyles.navLink}>
                   <div className={headerstyles.navAvatar}>
                     <img
                       src={
