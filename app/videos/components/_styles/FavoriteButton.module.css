@@ -2,8 +2,13 @@
     color: coral;
     border:0;
     background-color:white ;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0.1px;
+    top: 0.1px;
+    z-index: 2;
+    border-radius: 0 0 0 80%;
   }
   .heart{
     font-size: 22px;

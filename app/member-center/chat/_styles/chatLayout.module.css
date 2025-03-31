@@ -1,0 +1,49 @@
+.chatLayout {
+  background-color: #f4f4f4;
+  display: flex;
+  height: 100%;
+  max-height: 80vh;
+  position: relative;
+  margin-bottom: 30px;
+}
+.friendSidebar {
+  width: 30%;
+  height: 100%;
+}
+.messageArea {
+  width: 70%;
+  height: 100%;
+}
+.selectBtn {
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: white;
+  background-color: #333;
+  margin: auto;
+  border: none;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 30;
+}
+
+@media (max-width: 1590px) {
+  .selectBtn {
+    display: block;
+  }
+  .friendSidebar {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    width: 50%;
+  }
+  .messageArea {
+    width: 100%;
+    margin: auto;
+    padding: 0 40px;
+  }
+}

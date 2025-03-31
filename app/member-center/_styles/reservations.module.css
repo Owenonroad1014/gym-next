@@ -1,0 +1,162 @@
+/* 預設畫面 */
+.noReservations {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+  }
+  .noReservations p {
+    font-size: 30px;
+  }
+  .noReservations a {
+    font-size: 20px;
+    color: #f87808;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .noReservations a:hover {
+    transform: scale(1.1);
+    transition: all 0.2s;
+  }
+
+  .loaderContainer{
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+  }
+
+  .favCard {
+    display: flex;
+    width: 60%;
+    margin: 15px 15px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 1px 1px 4px #f87808;
+    position: relative;
+  }
+  
+  .favCard:hover {
+    box-shadow: 1px 1px 15px #f87808;
+    transform: translateY(-2px);
+    transition: all 0.2s;
+  }
+  
+  .cardBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .cardBody h3 {
+    font-size: 22px;
+    min-width: 120px;
+  }
+  
+  .cardDesc {
+    flex-grow: 1;
+    padding: 0 20px;
+  }
+  
+  .cardDesc p {
+    letter-spacing: 2px;
+    font-size: 17px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .cancelBtn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    align-self: center;
+    margin-right: 20px;
+  }
+  
+  .cancelBtn:hover {
+    background-color: #df1903;
+  }
+
+  .cancelBtn:disabled {
+    background-color: #ccc;
+    pointer-events: none;
+  }
+
+  .cancelled {
+    opacity: 0.6;
+    background-color: #a1a1a1;
+    box-shadow: none;
+  }
+  .cancelled:hover{
+    box-shadow: none;
+  }
+  .cancelled .cancelBtn {
+    color: #000;
+  }
+
+  .filterButtons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .filterButtons button {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 12px;
+  }
+  
+  .filterButtons button.active {
+    background-color: #f87808;
+    color: white;
+    border-color: #f87808;
+  }
+  
+  
+  
+  @media (max-width: 1024px) {
+    .favCard {
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .favCard {
+      width: 90%;
+    }
+    
+    .cardBody {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+    
+    .cardDesc {
+      padding: 10px 0;
+    }
+    
+    .cancelBtn {
+      margin: 10px 0;
+    }
+  }
+  

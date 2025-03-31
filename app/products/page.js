@@ -15,9 +15,9 @@ const EquipmentRental = () => {
   return (
     <main className={styles.equipmentRental}>
       <HeroSection />
+      <Breadcrumb />
       <section className={styles.contentSection}>
         <div className={styles.contentTitle}>
-          <Breadcrumb />
           <div className="btnAndSearch">
             <Search searchParams={searchParams}/>
           </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import registerCss from '../_styles/register.module.css'
+import memberCss from '../_styles/member.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
@@ -11,8 +11,7 @@ import { useRouter } from 'next/navigation'
 
 export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [show, setShow] = useState(false)
   const [errors, setErrors] = useState({})
   const { login } = useAuth()
 
@@ -87,105 +86,89 @@ export default function RegisterPage() {
     }
   }
   return (
-    <div className={registerCss.container}>
-      <div className={registerCss.left}>
-        <h2>初次見面，您好!</h2>
-        <div>
-          <span>已有會員嗎?</span>
-          <Link className={registerCss.switchBtn} href="/member/login">
-            登入帳號
-          </Link>
+    <div className={memberCss.registerContainer}>
+      <div className={memberCss.form}>
+        <div className={memberCss.titleGroup}>
+          <h2>初次見面，您好!</h2>
+          <h1>GYM步空間 &nbsp; 陪您GYM步</h1>
         </div>
-      </div>
-      <div className={registerCss.right}>
-        <h1>登入GYM步空間</h1>
         <form method="post" onSubmit={onSubmit}>
-          <div className={registerCss.formGroup}>
+          <div className={memberCss.formGroup}>
             <label htmlFor="email">帳號</label>
-            <div className={registerCss.inputGroup}>
-              <input
-                type="text"
-                value={registerForm.email}
-                onChange={RegisterChangeForm}
-                placeholder="請輸入郵件"
-                name="email"
-                id="email"
-              />
-              <div>
-                {errors.email && (
-                  <span className={registerCss.textDanger}>{errors.email}</span>
-                )}
-              </div>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={registerForm.email}
+              onChange={RegisterChangeForm}
+              placeholder="請輸入郵件"
+            />
+            <div>
+              {errors.email && (
+                <span className={memberCss.textDanger}>{errors.email}</span>
+              )}
+              <button
+                className={memberCss.visibility}
+                type="button"
+               >
+               <FaRegEye/> 
+              </button>
             </div>
-            <button
-              className={registerCss.iconBtn}
-              type="button"
-              onClick={() => setPasswordVisible((prev) => !prev)}
-            >
-              {passwordVisible? <FaRegEyeSlash /> : <FaRegEye />}
-            </button>
           </div>
-
-          <div className={registerCss.formGroup}>
-            <label htmlFor="password">密碼</label>
-            <div className={registerCss.inputGroup}>
-              <input
-                type={passwordVisible ? 'text' : 'password'}
-                value={registerForm.password}
-                onChange={RegisterChangeForm}
-                placeholder="請輸入密碼"
-                name="password"
-                id="password"
-              />
-              <div>
-                {errors.password && (
-                  <span className={registerCss.textDanger}>
-                    {errors.password}
-                  </span>
-                )}
-              </div>
+          <div className={memberCss.formGroup}>
+            <label htmlFor="password"> 密碼</label>
+            <input
+              type={show ? 'text' : 'password'}
+              name="password"
+              id="password"
+              value={registerForm.password}
+              onChange={RegisterChangeForm}
+              placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
+            />
+            <div>
+              {errors.password && (
+                <span className={memberCss.textDanger}>{errors.password}</span>
+              )}
+              <button
+                className={memberCss.iconBtn}
+                type="button"
+                onClick={() => {
+                  setShow(!show)
+                }}
+              >
+                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              </button>
             </div>
-            <button
-              className={registerCss.iconBtn}
-              type="button"
-              onClick={() => {
-                setPasswordVisible((prev) => !prev)
-              }}
-            >
-              {passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-            </button>
           </div>
-          <div className={registerCss.formGroup}>
+          <div className={memberCss.formGroup}>
             <label htmlFor="confirmPassword">確認密碼</label>
-            <div className={registerCss.inputGroup}>
-              <input
-                type={confirmPasswordVisible ? 'text' : 'password'}
-                value={registerForm.confirmPassword}
-                onChange={RegisterChangeForm}
-                placeholder="請再次輸入密碼"
-                name="confirmPassword"
-                id="confirmPassword"
-              />
-              <div>
-                {errors.confirmPassword && (
-                  <span className={registerCss.textDanger}>
-                    {errors.confirmPassword}
-                  </span>
-                )}
-              </div>
+            <input
+              type={show ? 'text' : 'password'}
+              name="confirmPassword"
+              id="confirmPassword"
+              value={registerForm.confirmPassword}
+              onChange={RegisterChangeForm}
+              placeholder="請再次輸入密碼"
+            />
+            <div>
+              {errors.confirmPassword && (
+                <span className={memberCss.textDanger}>
+                  {errors.confirmPassword}
+                </span>
+              )}
+              <button
+                className={memberCss.iconBtn}
+                type="button"
+                onClick={() => {
+                  setShow(!show)
+                }}
+              >
+                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              </button>
             </div>
-            <button
-              className={registerCss.iconBtn}
-              type="button"
-              onClick={() => {
-                setConfirmPasswordVisible((prev) => !prev)
-              }}
-            >
-              {confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
-            </button>
           </div>
-          <div className={registerCss.btns}>
-            <button type="submit" className={registerCss.registerBtn}>
+          <div className={memberCss.registerBtns}>
+            <button type="submit" className={memberCss.registerBtn}>
               註冊帳號
             </button>
           </div>

@@ -1,12 +1,18 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import headerstyles from './_styles/header.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
+
 import { useCart } from '@/context/cart-context'
 import { usePathname } from 'next/navigation'
+
+import { AVATAR_PATH } from '@/config/api-path'
+import Drawer from './drawer'
+
 
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
@@ -66,8 +72,12 @@ export default function Header() {
         </div>
 
         {/* 導航選單 */}
-        <div className={headerstyles.navMenu}>
-          <Link href="/coaches" className={headerstyles.navLink}>
+
+        {/* 右側圖示與搜尋欄 */}
+        <div className={headerstyles.rightSection}>
+          <Drawer />
+          {/* <div className={headerstyles.navMenu}>
+       <Link href="/coaches" className={headerstyles.navLink}>
             找GYM身教練
           </Link>
           <Link href="/articles" className={headerstyles.navLink}>
@@ -82,6 +92,7 @@ export default function Header() {
         </div>
 
         {/* 右側圖示與搜尋欄 */}
+
         <div className={headerstyles.rightSection}>
           {auth.id ? (
             <>
@@ -119,8 +130,54 @@ export default function Header() {
           )}
           </div>
           </Link>
+
+          <div className={headerstyles.rightSection}>
+            {auth.id ? (
+              <>
+                <Link href="/member-center" className={headerstyles.navLink}>
+                  <div className={headerstyles.navAvatar}>
+                    <img
+                      src={
+                        auth.avatar
+                          ? `${AVATAR_PATH}/${auth.avatar}`
+                          : '/imgs/avatar/default-avatar.png'
+                      }
+                      alt=""
+                    />
+                  </div>
+                </Link>
+                <a
+                  href="/qs"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    logout()
+                  }}
+                  className={headerstyles.navLink}
+                >
+                  登出
+                </a>
+              </>
+            ) : (
+              <>
+                {/* 登入按鈕 */}
+                <Link href="/member/login" className={headerstyles.navLink}>
+                  登入
+                </Link>
+                {/* 註冊按鈕 */}
+                <Link href="member/register" className={headerstyles.navLink}>
+                  註冊
+                </Link>
+              </>
+            )}
+            <Link href="/carts" className={headerstyles.navLink}>
+              <FaCartPlus />
+            </Link>
+          </div>
+
+
         </div>
       </div>
+
     </>
   )
 }

@@ -48,7 +48,7 @@ function CoachDetailPage() {
     fetchCoachData();
   }, [id]);
 
-  if (loading) return  <div className={loaderStyle.loader}></div>;
+  if (loading) return  <div className={loaderStyle.container}><div className={loaderStyle.loader}></div></div>;
   if (error) return <div>{error}</div>;
   if (!coachData) return <div>找不到教練資料</div>;
 

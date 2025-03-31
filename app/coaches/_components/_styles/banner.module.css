@@ -3,9 +3,7 @@
     position: relative;
     width: 100%;
     height: 500px; /* 根據設計指南 */
-    margin-bottom: 10px;
     overflow: hidden;
-    
   }
   
   .bannerImageContainer::before {
@@ -15,8 +13,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/images/banner.jpg') center repeat;
-    background-size: contain;
+    background: url('/images/coach/banner.jpg') top no-repeat;
+    background-size: cover;
     opacity: 0.9;
     z-index: -3;
   }
@@ -35,7 +33,7 @@
   
   .title {
     color: white;
-    font-size: clamp(3rem, 3.5vw, 4.5rem);
+    font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: bold;
     margin-bottom: 20px;
     position: absolute;
@@ -45,10 +43,11 @@
   }
   .p {
     color: #dddddd;
-    font-size: clamp(1rem, 3.5vw, 2rem);
+    font-size: clamp(1rem, 2vw, 1.5rem);
     position: absolute;
     left: 50px;
-    bottom: 50px;    z-index: -1;
+    bottom: 50px;    
+    z-index: -1;
   }
   
  
