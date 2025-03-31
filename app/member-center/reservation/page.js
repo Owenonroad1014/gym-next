@@ -63,6 +63,7 @@ const filterReservations = reservationsData.filter(reservation => {
     const selectedClass = reservationsData.find((v) => v.id === class_id)
     
     // 確認 Modal
+    document.body.style.overflow = 'hidden' //畫面不要偏移使用
   const result = await Swal.fire({
     title: '確認取消預約？',
     text: '取消後將無法恢復',
@@ -71,8 +72,13 @@ const filterReservations = reservationsData.filter(reservation => {
     confirmButtonColor: '#f87808',
     cancelButtonColor: '#ccc',
     confirmButtonText: '確認取消',
-    cancelButtonText: '返回'
+    cancelButtonText: '返回',
+    didClose: () => {
+      //畫面不要偏移使用
+      document.body.style.overflow = '' // 恢復頁面滾動
+    },
   })
+  
 
   if (result.isConfirmed) {
     try {
