@@ -222,53 +222,75 @@
       gap: 16px;
     }
   }
-  /* 待改 */
-  @media (max-width: 375px) {
-    .productItem {
-      flex-direction: column;
-      align-items: center;
-      padding: 16px 0;
-      text-align: center;
-    }
-  
-    .productImage {
-      width: 60px; /* 縮小圖片 */
-    }
-  
-    .productDetails {
-      width: auto;
-      text-align: center;
-      align-items: center;
-    }
-  
-    .productPricing {
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      gap: 12px;
-    }
-  
-    .quantityControl {
-      width: 60px;
-      font-size: 10px;
-    }
-  
-    .productName {
-      font-size: 12px; /* 縮小字體 */
-    }
-  
-    .productWeight {
-      font-size: 10px;
-    }
-  
-    .unitPrice,
-    .subtotalPrice {
-      font-size: 14px;
-    }
-  
-    .removeButton {
-      align-self: center;
-      margin-top: 12px;
-    }
+@media (width<=376px) {
+  .productItem {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
+    gap: 8px;
+    border: 1px solid #e8ecef;
+    border-radius: 4px;
+    margin-bottom: 8px;
   }
-  
+
+  .productInfo {
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .productImage {
+    width: 40px;
+    height: 40px;
+  }
+
+  .productDetails {
+    flex: 1;
+    gap: 4px;
+  }
+
+  .productName {
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .productWeight {
+    font-size: 10px;
+    text-align: left;
+  }
+
+  .productPricing {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .quantityControl {
+    width: 40px;
+    min-height: 24px;
+    font-size: 10px;
+  }
+
+  .quantityButtons button {
+    font-size: 14px;
+  }
+
+  .unitPrice,
+  .subtotalPrice {
+    font-size: 12px;
+  }
+
+  .removeButton {
+    margin-top: 4px;
+    font-size: 12px;
+    align-self: flex-end;
+  }
+
+  .dateInput {
+    width: 100px;
+    font-size: 12px;
+  }
+}

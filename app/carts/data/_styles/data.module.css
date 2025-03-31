@@ -629,3 +629,96 @@
   border: 2px solid red;
   background-color: #ffe6e6;
 }
+
+
+@media (max-width: 376px) {
+  /* 訂單資訊調整 - 讓 form 在上、orderSummary 在下 */
+  .data {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px 8px;
+  }
+
+  /* 表單區塊 (會員/聯絡資訊) */
+  .form {
+    width: 100%;
+    min-width: unset;
+    padding: 12px;
+  }
+
+  /* 訂單摘要 */
+  .orderSummary {
+    width: 100%;
+    min-width: unset;
+    padding: 12px;
+  }
+
+  /* 表單標籤縮小 */
+  .formLabel {
+    font-size: 11px;
+  }
+
+  /* 輸入欄位縮小 */
+  .input,
+  .input2 {
+    min-height: 32px;
+  }
+
+  /* 下拉選單縮小 */
+  .dropdown {
+    height: 32px;
+  }
+
+  /* 表單標題縮小 */
+  .formHeader {
+    font-size: 18px;
+    height: 30px;
+  }
+
+  /* 訂單商品區塊縮小 */
+  .cartItem,
+  .cartItem2 {
+    min-height: 80px;
+  }
+
+  /* 商品圖片縮小 */
+  .img {
+    width: 60px;
+  }
+
+  /* 文字大小微調 */
+  .div3, .div4, .div5, .div6, .div7, .div8, .div9 {
+    font-size: 14px;
+  }
+
+  /* 按鈕區塊縮小 */
+  .pickupstore {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  /* 新增：讓內容區塊垂直排列 */
+  .content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 新增：調整資訊區塊排列 */
+  .info {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 新增：調整價格區塊排列 */
+  .dayprice {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* 新增：調整按鈕大小 */
+  .pickupstore button {
+    width: 100%;
+    padding: 8px;
+  }
+}

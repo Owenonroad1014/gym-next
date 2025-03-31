@@ -46,3 +46,16 @@
     display: inline-block;
     transform: skew(35deg); /* 讓文字回正 */
 }
+
+@media (max-width: 376px) {
+  .container {
+    gap: 30px;
+    margin: 10px;
+  }
+
+  .pseudo,
+  .pseudo2 {
+    font-size: 16px;
+    padding: 0.4em 1.2em;
+  }
+}
