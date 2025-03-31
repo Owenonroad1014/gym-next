@@ -10,17 +10,12 @@ import { useCart } from '@/context/cart-context'
 import { AVATAR_PATH } from '@/config/api-path'
 import Drawer from './drawer'
 
-
 export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
   const { cartQuantity } = useCart()
 
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
-
-
-
-  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +34,7 @@ export default function Header() {
     }
   }, [])
   // 判斷是否要隱藏 Header
-  if (pathname.startsWith('/member'||'/member/register')) {
+  if (pathname.startsWith('/member' || '/member/register')) {
     return null // `/member` 底下的頁面不顯示 Header
   }
   // const hideHeaderPages = [
@@ -61,7 +56,6 @@ export default function Header() {
     }
     return headerstyles.defaultHeader
   }
-
 
   return (
     <>
@@ -104,48 +98,10 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
-        <div className={headerstyles.rightSection}>
-          {auth.id ? (
-            <>
-              <Link href="/member" className={headerstyles.navLink}>
-                {/* {auth.avatar} */}
-              </Link>
-              <a
-                href="/qs"
-                onClick={(e) => {
-                  e.preventDefault()
-                  logout()
-                }}
-                className={headerstyles.navLink}
-              >
-                登出
-              </a>
-            </>
-          ) : (
-            <>
-              {/* 登入按鈕 */}
-              <Link href="/member/login" className={headerstyles.navLink}>
-                登入
-              </Link>
-              {/* 註冊按鈕 */}
-              <Link href="member/register" className={headerstyles.navLink}>
-                註冊
-              </Link>
-            </>
-          )}
-          <Link href="/carts" className={headerstyles.navLink}>
-          <div className={headerstyles.cartIcon}>
-            <FaCartPlus />
-            {cartQuantity > 0 && (
-            <span className={headerstyles.cartCount}>{cartQuantity}</span>
-          )}
-          </div>
-          </Link>
-
           <div className={headerstyles.rightSection}>
             {auth.id ? (
               <>
-                <Link href="/member-center" className={headerstyles.navLink}>
+                <Link href="/member" className={headerstyles.navLink}>
                   <div className={headerstyles.navAvatar}>
                     <img
                       src={
@@ -181,12 +137,15 @@ export default function Header() {
               </>
             )}
             <Link href="/carts" className={headerstyles.navLink}>
-              <FaCartPlus />
+              <div className={headerstyles.cartIcon}>
+                <FaCartPlus />
+                {cartQuantity > 0 && (
+                  <span className={headerstyles.cartCount}>{cartQuantity}</span>
+                )}
+              </div>
             </Link>
           </div>
-
         </div>
-      </div>
       </div>
     </>
   )
