@@ -15,6 +15,10 @@ export default function Header() {
 
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
 
+
+
+  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 36) {
@@ -45,13 +49,23 @@ export default function Header() {
   // if (hideHeaderPages.includes(pathname)) {
   //   return null // 這些頁面不顯示 Header
   // }
+  const getHeaderStyle = () => {
+    if (/^\/coaches\/list\/\d+/.test(pathname)) {
+      return headerstyles.secondHeader
+    }
+    if (/^\/products\/\d+/.test(pathname)) {
+      return headerstyles.secondHeader
+    }
+    return headerstyles.defaultHeader
+  }
+
 
   return (
     <>
       <div
         className={`${headerstyles.header} ${
           isScrolling ? headerstyles.hscrolling : ''
-        }`}
+        } ${getHeaderStyle()}`}
       >
         {/* LOGO */}
         <div>
@@ -130,7 +144,6 @@ export default function Header() {
           </div>
 
         </div>
-      </div>
       </div>
     </>
   )

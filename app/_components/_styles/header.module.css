@@ -1,5 +1,5 @@
 .header {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: auto;
   padding: 13px 64px;
@@ -13,10 +13,23 @@
   align-items: center;
   z-index: 100;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: fixed;
   top: 0;
   left: 0;
 }
+
+/* 教練頁面特定樣式 */
+.secondHeader {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 8px 60px;
+}
+
+/* 預設頁面樣式 */
+.defaultHeader {
+  background-color: transparent;
+  padding: 13px 64px;
+}
+
+
 .hscrolling {
   background-color: #2a2929;
   padding: 10px 60px;
