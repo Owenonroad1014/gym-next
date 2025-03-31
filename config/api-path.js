@@ -17,9 +17,9 @@ export const RESET_PASS_TOKEN_PUT = `${API_SERVER}/forget-password/reset-passwor
 export const CONFIRM_PASS_POST = `${API_SERVER}/change-password/confirm`
 export const RESET_PASS_PUT = `${API_SERVER}/change-password/reset`
 // 取得個人檔案路由
-export const PROFILE_GET = `${API_SERVER}/api/member/get-profile`
+export const PROFILE_GET = `${API_SERVER}/profile/get-profile`
 // 更新個人檔案的路由
-export const PROFILE_PUT = `${API_SERVER}/api/member/edit-profile`
+export const PROFILE_PUT = `${API_SERVER}/profile/edit-profile`
 
 // 教練 地圖 照片路由
 export const IMGS_PATH = `${API_SERVER}/imgs`
