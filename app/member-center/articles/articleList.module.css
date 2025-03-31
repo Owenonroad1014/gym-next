@@ -1,0 +1,38 @@
+
+
+/* #region ================= Search Start ====================== */
+.searchContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+}
+
+.searchForm input {
+  width: 250px;
+  border-radius: 3px;
+  font-size: 18px;
+  border: 2px rgb(221, 215, 215) solid;
+}
+
+.searchForm button {
+  width: 60px;
+  padding: 12px 10px;
+  background-color: #f87808;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 15px;
+}
+.clearSearch{
+    text-align: end;
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+/* #endregion ================= Search  End====================== */

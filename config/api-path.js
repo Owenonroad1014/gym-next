@@ -104,6 +104,9 @@ export const ARTICLE_ITEM_FAVTOGGLE = `${API_SERVER}/articles/api/favToggle`
 
 // 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
 export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+// 會員中心會員最愛文張
+export const ARTICLE_MEMBER_FAV = `${API_SERVER}/articles/api/allFav`
+
 
 //**************** GYMFRIEND  *****************
 // 獲取GYM友列表

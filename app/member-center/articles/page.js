@@ -9,12 +9,15 @@ import { useAuth } from '@/context/auth-context'
 import { ARTICLE_MEMBER_FAV } from '@/config/api-path'
 import styles from '../_styles/article-default.module.css'
 import loaderStyle from "@/app/_components/_styles/loading.module.css"
+import Search from './_components/search'
+import { useSearchParams } from 'next/navigation'
+
 export default function ArticleList() {
   const { auth, getAuthHeader } = useAuth()
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(true)
   const [articlesData, setArticlesData] = useState({})
-
+  const searchParams = useSearchParams()
   useEffect(() => {
     // 獲取文章列表
     const fetchArticles = async () => {
@@ -35,7 +38,7 @@ export default function ArticleList() {
       }
     }
     fetchArticles()
-  }, [auth, getAuthHeader])
+  }, [auth, getAuthHeader,searchParams])
   return (
     <>
       {isloading ? (
@@ -49,13 +52,16 @@ export default function ArticleList() {
           {articlesData?.total == 0 ? (
             <div className={styles.noFavArticle}>
               <p>目前沒有收藏文章</p>
-              <Link href="/friends">
+              <Link href="/articles">
                 <MdOutlineArticle style={{ fontSize: '30px' }} />{' '}
                 &nbsp;&nbsp;前往找GYM享知識，找知識!
               </Link>
             </div>
           ) : (
-            articlesData?.data?.map((v, i) => {
+            <div className={styles.articleList}>
+            <Search/>
+            <br />
+            {articlesData?.data?.map((v, i) => {
               return (
                 <Link href={`/articles/${v.article_id}`} key={v.like_id}>
                   <div className={cardStyle.favCard}>
@@ -71,9 +77,7 @@ export default function ArticleList() {
                     <div className={cardStyle.content}>
                       <div className={cardStyle.cardBody}>
                         <h3>{v.title}</h3>
-
                         <div className={cardStyle.cardDesc}>
-                          {/* <p>{`${price}元/天`}</p> */}
                           <p>{v.intro}</p>
                         </div>
                       </div>
@@ -81,7 +85,9 @@ export default function ArticleList() {
                   </div>
                 </Link>
               )
-            })
+            })}
+            </div>
+            
           )}
         </>
       )}
