@@ -55,7 +55,10 @@ export const IMG_PATH = `${API_SERVER}/img`;
 
 //影片路由
 export const VIDEOS_LIST = `${API_SERVER}/videos/api`;
+
 export const VIDEOS_LIST_TOGGLE_LIKE = `${API_SERVER}/videos/api/toggle-like`;
+
+export const VIDEOS_FAV = `${API_SERVER}/videos/api/favorites`;
 
 //商品評價路由
 export const REVIEWS_LIST = `${API_SERVER}/products/api/review`;
