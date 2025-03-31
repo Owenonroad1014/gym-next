@@ -12,6 +12,8 @@ import { useAuth } from "@/context/auth-context";
 import { useCart } from "@/context/cart-context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const ProductDetail = () => {
@@ -130,15 +132,15 @@ const ProductDetail = () => {
     };
 
     addToCart(cartItem);
-
-    MySwal.fire({
-      title: "成功加入購物車!",
-      text: `${product.product_name} 已加入購物車!`,
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: '#f87808',
-      cancelButtonColor: '#0b3760',
-    });
+    toast.success(`${product.product_name} 已成功加入購物車!`);
+    // MySwal.fire({
+    //   title: "成功加入購物車!",
+    //   text: `${product.product_name} 已加入購物車!`,
+    //   icon: "success",
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#f87808',
+    //   cancelButtonColor: '#0b3760',
+    // });
 
 };
 
@@ -204,6 +206,31 @@ const ProductDetail = () => {
       <hr className={styles.divider} />
       </div>
       <RelatedProducts products={relatedProducts}/>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        style={{
+          fontSize: '14px',
+          maxWidth: '90%',
+          width: '300px',
+          marginBottom: '20px',
+        }}
+        toastStyle={{
+          backgroundColor: '#f87808',
+          color: '#fff',
+        }}
+        progressStyle={{
+          background: '#fff',
+        }}
+      />
     </main>
   );
 };
