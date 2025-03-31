@@ -108,6 +108,8 @@ export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
 //**************** GYMFRIEND  *****************
 // 獲取GYM友列表
 export const GYMFRIEND_LIST = `${API_SERVER}/gymfriends/api`
+// 獲取大頭貼
+export const GYMFRIEND_AVATAR = `${API_SERVER}/img/avatar`
 
 //**************** MYFRIEND  *****************
 // 獲取好友列表
