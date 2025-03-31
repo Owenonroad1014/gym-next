@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { FaHeart } from 'react-icons/fa'
 import cardStyle from '../_styles/member.module.css'
 
+
 export default function Card(props) {
   const {
     articles = {

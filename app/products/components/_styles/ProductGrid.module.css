@@ -1,7 +1,7 @@
 .productGrid {
   justify-content: center;
   margin: auto;
-  width: 1440PX;
+  width: 1440px;
   padding: 20px;
   display: flex;
   flex-direction: row;

@@ -49,7 +49,6 @@ export default function Header() {
 
   return (
     <>
-
       <div
         className={`${headerstyles.header} ${
           isScrolling ? headerstyles.hscrolling : ''
@@ -68,32 +67,10 @@ export default function Header() {
         </div>
 
         {/* 導航選單 */}
-       
-       
-         
-        
-          
-        
-
         {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
        <Drawer/> 
-        {/* <div className={headerstyles.navMenu}>
-       <Link href="/coaches" className={headerstyles.navLink}>
-            找GYM身教練
-          </Link>
-          <Link href="/articles" className={headerstyles.navLink}>
-            GYM享知識
-          </Link>
-          <Link href="/locations" className={headerstyles.navLink}>
-            找GYM點
-          </Link>
-          <Link href="/friends" className={headerstyles.navLink}>
-            找GYM友
-          </Link>
-        </div>
 
-        {/* 右側圖示與搜尋欄 */}
         <div className={headerstyles.rightSection}>
           {auth.id ? (
             <>
@@ -136,6 +113,7 @@ export default function Header() {
             <FaCartPlus />
           </Link>
         </div>
+      </div>
       </div>
     </>
   )

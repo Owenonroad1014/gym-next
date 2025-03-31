@@ -28,6 +28,9 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
         tabIndex={0}
         aria-label={`播放影片: ${video_title}`}
       >
+            <div className={styles.btn}>
+            <FavoriteButton video_id={id} like_id={like_id} setIsLiked={setIsLiked}/>
+          </div>
         <div className={styles.imageContainer}>
           <iframe 
             width="100%" 
@@ -48,9 +51,6 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
           <p className={styles.description}>{description}</p>
           <div className={styles.btns}>
           <AddToCartButton />
-          <div className={styles.btn}>
-            <FavoriteButton video_id={id} like_id={like_id} setIsLiked={setIsLiked}/>
-          </div>
           </div>
         </div>
       </div>
