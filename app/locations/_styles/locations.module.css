@@ -16,9 +16,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: center;
   margin: 10px 30px;
   gap: 30px;
-  margin-top: 50px
+  
 }
 .searchSection {
   background: #ffffff;

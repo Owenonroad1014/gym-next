@@ -1,9 +1,9 @@
 .breadcrumbContainer {
   max-width: 300px;
   /* margin: 50px auto; */
-  position: relative;
-  font-family: 'Noto Serif TC', serif;
+
   box-sizing: border-box;
+  
 }
 
 .breadcrumb {
@@ -16,7 +16,7 @@
 
 .breadcrumbItem {
   position: relative;
-  padding: 0 20px;
+  padding: 10px 20px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -25,18 +25,17 @@
 .breadcrumbItem:not(:last-child)::after {
   content: '›';
   position: absolute;
-  top: 13px;
+  top: 15px;
   right: -5px;
   color: #666;
   font-size: 20px;
   z-index: 2;
 }
 
-.breadcrumbItem a {
+.breadcrumbItem a{
   text-decoration: none;
   color: #666;
   font-size: 18px;
-  font-family: 'Noto Serif TC', serif;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -45,10 +44,16 @@
   display: block;
 }
 
+.breadcrumbItem:hover a {
+  transform: translateY(-2px);
+  color: #666;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
 .breadcrumbItem span {
   text-decoration: none;
   font-size: 18px;
-  font-family: 'Noto Serif TC', serif;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -58,7 +63,7 @@
 }
 
 .active{
-  color: #db6318;
+  color: #f87808;
   font-weight: bold;
 }
 

@@ -298,7 +298,7 @@ export default function AddProfileJsPage() {
               </div>
             </div>
             <div className={addProfileCss.formGroup}>
-              <label htmlFor="intro">自我簡介</label>
+              <label htmlFor="intro">個人簡介</label>
               <textarea
                 className={addProfileCss.intro}
                 name="intro"
