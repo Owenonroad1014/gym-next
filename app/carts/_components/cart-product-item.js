@@ -63,8 +63,8 @@ function CartProductItem({ product }) {
       text: '這個動作將無法復原!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#0b3760',
       cancelButtonText: '取消',
       confirmButtonText: '是的，我要刪除!',
     }).then((result) => {

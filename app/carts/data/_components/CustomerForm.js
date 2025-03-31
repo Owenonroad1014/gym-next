@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../_styles/data.module.css";
 
-function CustomerForm({ onValidationResult, isSubmitted,}) {
+function CustomerForm({ onValidationResult, isSubmitted, onCustomerInfoChange }) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -47,6 +47,7 @@ function CustomerForm({ onValidationResult, isSubmitted,}) {
     const updatedData = { ...formData, [e.target.name]: e.target.value };
     setFormData(updatedData);
     validateForm(updatedData, false);
+    onCustomerInfoChange(updatedData);
   };
   
 

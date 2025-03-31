@@ -11,9 +11,9 @@ function CheckoutProgress() {
 
     {/* 訂單確認 */}
     <div className={styles.progressItem}>
-        <span style={{color: "orange"}}>step1</span>
-        <GrCart size={50} color="orange"/>
-        <span style={{color: "orange"}}>訂單確認</span>
+        <span>step1</span>
+        <GrCart size={50}/>
+        <span>訂單確認</span>
       </div>
 
       {/* <div className={styles.progressLine} /> */}
@@ -21,9 +21,9 @@ function CheckoutProgress() {
 
       {/* 填寫資料 */}
       <div className={styles.progressItem}>
-        <span>step2</span>
-        <AiOutlineForm size={50}/>
-        <span>填寫資料</span>
+        <span style={{color: "orange"}}>step2</span>
+        <AiOutlineForm size={50} color="orange"/>
+        <span style={{color: "orange"}}>填寫資料</span>
       </div>
 
       {/* <div className={styles.progressLine} /> */}
