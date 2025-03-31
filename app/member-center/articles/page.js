@@ -3,20 +3,27 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { MdOutlineArticle } from 'react-icons/md'
 import cardStyle from '../_styles/member.module.css'
+import styles from './articleList.module.css'
 import { useAuth } from '@/context/auth-context'
-import { ARTICLE_MEMBER_FAV } from '@/config/api-path'
-import styles from '../_styles/article-default.module.css'
-import loaderStyle from "@/app/_components/_styles/loading.module.css"
+import { ARTICLE_MEMBER_FAV, ARTICLE_FAV } from '@/config/api-path'
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import Search from './_components/search'
 import { useSearchParams } from 'next/navigation'
+import {
+  MdOutlineArticle,
+  MdArrowBackIos,
+  MdArrowForwardIos,
+} from 'react-icons/md'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
 
 export default function ArticleList() {
   const { auth, getAuthHeader } = useAuth()
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(true)
   const [articlesData, setArticlesData] = useState({})
+  const [islike, setIsLike] = useState(false) // 刷新
+
   const searchParams = useSearchParams()
   useEffect(() => {
     // 獲取文章列表
@@ -38,7 +45,23 @@ export default function ArticleList() {
       }
     }
     fetchArticles()
-  }, [auth, getAuthHeader,searchParams])
+  }, [auth, getAuthHeader, searchParams, islike])
+  // ==== TODO 加入或移除收藏自動渲染
+  const toggleLike = (e, article_id) => {
+    e.preventDefault()
+    fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
+      .then((r) => r.json())
+      .then((result) => {
+        console.log(result)
+        if (result.success) {
+          setIsLike(!islike)
+        }
+      })
+      .catch((error) => {
+        console.error('Error while updating favorite status:', error)
+      })
+  }
+
   return (
     <>
       {isloading ? (
@@ -59,35 +82,99 @@ export default function ArticleList() {
             </div>
           ) : (
             <div className={styles.articleList}>
-            <Search/>
-            <br />
-            {articlesData?.data?.map((v, i) => {
-              return (
-                <Link href={`/articles/${v.article_id}`} key={v.like_id}>
-                  <div className={cardStyle.favCard}>
-                    <div className={cardStyle.images}>
-                      <Image
-                        src={v.imageURL}
-                        width={300}
-                        height={200}
-                        alt={v.title}
-                        className={cardStyle.cardImage}
-                      />
-                    </div>
-                    <div className={cardStyle.content}>
-                      <div className={cardStyle.cardBody}>
-                        <h3>{v.title}</h3>
-                        <div className={cardStyle.cardDesc}>
-                          <p>{v.intro}</p>
+              <Search />
+              <br />
+              {articlesData?.data?.map((v, i) => {
+                return (
+                  <Link href={`/articles/${v.article_id}`} key={v.like_id}>
+                    <div className={cardStyle.favCard}>
+                      <div className={cardStyle.images}>
+                        <Image
+                          src={v.imageURL}
+                          width={300}
+                          height={200}
+                          alt={v.title}
+                          className={cardStyle.cardImage}
+                        />
+                      </div>
+                      <div className={cardStyle.content}>
+                        <div className={cardStyle.cardBody}>
+                          <h3>{v.title}</h3>
+                          <div className={cardStyle.cardDesc}>
+                            <p>{v.intro}</p>
+                          </div>
                         </div>
                       </div>
+                      <div className={styles.heartArea}>
+                        {v.like_id > 0 ? (
+                          <FaHeart
+                            className={styles.heartActive}
+                            onClick={(e) => toggleLike(e, v.article_id)}
+                          />
+                        ) : (
+                          <FaRegHeart
+                            className={styles.heart}
+                            onClick={(e) => toggleLike(e, v.article_id)}
+                          />
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </Link>
+                )
+              })}
+
+              <div className={styles.pagination}>
+                <Link
+                  href={`?page=${articlesData.page - 1}`}
+                  className={articlesData.page == 1 ? styles.disabled : ''}
+                  onClick={(e) => {
+                    if (articlesData.page == 1) {
+                      e.preventDefault()
+                    }
+                  }}
+                >
+                  <MdArrowBackIos />
                 </Link>
-              )
-            })}
+                {Array(articlesData.totalPages)
+                  .fill(1)
+                  .map((v, i) => {
+                    if (
+                      articlesData.page < 1 ||
+                      articlesData.page > articlesData.totalPages
+                    )
+                      return null
+                    const usp = new URLSearchParams(searchParams.toString())
+                    usp.set('page', i + 1)
+                    return (
+                      <Link
+                        href={`?${usp}`}
+                        className={
+                          i + 1 === articlesData.page ? styles.active : ''
+                        }
+                        key={i}
+                      >
+                        {v}
+                      </Link>
+                    )
+                  })}
+
+                <Link
+                  href={`?page=${articlesData.page + 1}`}
+                  className={
+                    articlesData.page == articlesData.totalPages
+                      ? styles.disabled
+                      : ''
+                  }
+                  onClick={(e) => {
+                    if (articlesData.page == articlesData.totalPages) {
+                      e.preventDefault()
+                    }
+                  }}
+                >
+                  <MdArrowForwardIos />
+                </Link>
+              </div>
             </div>
-            
           )}
         </>
       )}
