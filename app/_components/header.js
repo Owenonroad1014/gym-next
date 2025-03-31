@@ -6,10 +6,7 @@ import { usePathname } from 'next/navigation'
 import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
 import { useAuth } from '@/context/auth-context'
-
 import { useCart } from '@/context/cart-context'
-import { usePathname } from 'next/navigation'
-
 import { AVATAR_PATH } from '@/config/api-path'
 import Drawer from './drawer'
 
@@ -190,7 +187,7 @@ export default function Header() {
 
         </div>
       </div>
-      
+      </div>
     </>
   )
 }
