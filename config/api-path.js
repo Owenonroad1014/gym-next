@@ -116,10 +116,15 @@ export const ARTICLE_ITEM_FAVTOGGLE = `${API_SERVER}/articles/api/favToggle`
 
 // 我的最愛 ${API_SERVER}/articles/api/toggle-likes/:article_id
 export const ARTICLE_FAV = `${API_SERVER}/articles/api/toggle-likes`
+// 會員中心會員最愛文張
+export const ARTICLE_MEMBER_FAV = `${API_SERVER}/articles/api/allFav`
+
 
 //**************** GYMFRIEND  *****************
 // 獲取GYM友列表
 export const GYMFRIEND_LIST = `${API_SERVER}/gymfriends/api`
+// 獲取大頭貼
+export const GYMFRIEND_AVATAR = `${API_SERVER}/img/avatar`
 
 //**************** MYFRIEND  *****************
 // 獲取好友列表

@@ -4,6 +4,7 @@ import friendStyle from '../_styles/friends.module.css'
 import GymdetailModal from './gymdetail-modal'
 import Image from 'next/image'
 import { SiOpenaigym } from 'react-icons/si'
+import { GYMFRIEND_AVATAR } from '@/config/api-path'
 export default function List({
   listData = [
     {
@@ -37,8 +38,8 @@ export default function List({
           <div className={friendStyle.card}>
             <div className={friendStyle.cardPhoto}>
               <Image
-                src="https://xsgames.co/randomusers/avatar.php?g=male"
-                alt="avatae"
+                src={`${GYMFRIEND_AVATAR}/${v.avatar}`}
+                alt="avatar"
                 width={250}
                 height={250}
               ></Image>
