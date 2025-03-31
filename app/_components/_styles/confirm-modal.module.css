@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1001;
     backdrop-filter: blur(4px);
     
   }
@@ -55,13 +55,14 @@
   }
   
   .confirmButton {
-    background: #DB6318;
+    background: #f87808;
     color: white;
     border: none;
   }
   
   .confirmButton:hover {
-    background: #c0552b;
+    background:#ff7700d6;
+    ;
     transform: translateY(-2px);
   }
   

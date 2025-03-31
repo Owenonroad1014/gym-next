@@ -9,7 +9,7 @@
 
 .pageButton {
   color: white;
-  background-color: #013056;
+  background-color: #333;
   padding: 10px 15px;
   border: 1px solid;
   text-decoration: none;
@@ -20,12 +20,12 @@
 }
 
 .pageButton:hover {
-  background-color: #db6318;
+  background-color: #f87808;
   transform: scale(1.1);
 }
 
 .active {
-  background-color: #db6318;
+  background-color: #f87808;
   font-weight: bold;
   cursor: default;
 }

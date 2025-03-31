@@ -1,339 +1,217 @@
-/* #region ================= Breadcrumb  Start ====================== */
-.breadcrumbContainer {
-  position: relative;
-}
-.breadcrumb {
-  width: 100%;
-  background-color: transparent;
+/* #region ================= Login Form====================== */
+.loginContainer {
+  background-color: #000000;
   display: flex;
-  justify-content: flex-start;
-}
-
-.breadcrumbItem {
-  position: relative;
-  padding: 0 20px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.breadcrumbItem:not(:last-child)::after {
-  content: '›';
-  position: absolute;
-  top: 13px;
-  right: -5px;
-  color: #666;
-  font-size: 20px;
-  z-index: 2;
-}
-
-.breadcrumbItem a {
-  cursor: pointer;
-  color: #666;
-  font-size: 18px;
-  line-height: 60px;
-  text-decoration: none;
-  height: 60px;
-  position: relative;
-  display: block;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.breadcrumbItem:hover a {
-  transform: translateY(-2px);
-  color: #666;
-  text-decoration: underline;
-  text-underline-offset: 10px;
-}
-
-.breadcrumbItem:hover a::after,
-.breadcrumbItem.active a::after {
-  width: 100%;
-}
-
-.breadcrumbItem.active a {
-  color: #f87808;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 10px;
-}
-/* #endregion ================= Breadcrumb ====================== */
-
-/* #region ================= Select  Start ====================== */
-
-.selectArea {
-  width: 20%;
-  align-items: center;
-  margin: 0 15px;
-  display: block;
   flex-direction: column;
-  transition: width 0.3s ease, height 0.3s ease;
+  align-items: center;
+  z-index: -1;
+  padding: 100px;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  color: #fff;
+}
+.loginContainer .form {
+  position: relative;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  border-radius: 3px;
+  border: 1px solid salmon;
+  backdrop-filter: blur(5px);
+  /* background: rgba(255, 255, 255, 0.636); */
+}
+.loginContainer .titleGroup {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  margin-bottom: 30px;
 }
 
-.selectBtn {
-  cursor: pointer;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  color: white;
-  background-color: #f87808;
+.loginContainer .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.loginContainer .formGroup label {
+  width: 90%;
+  display: flex;
   margin: auto;
-  border: none;
-  border-radius: 3px;
-  display: none;
-  position: absolute;
-  left: 15px;
-  top: -65px;
-  z-index: 20;
+  margin-bottom: 4px;
 }
-.selectPart {
-  width: 100%;
-  list-style: none;
-  margin-top: 15px;
-  border: 1px solid transparent;
-}
-.categoryTitle {
-  width: 100%;
-  font-size: 20px;
-  font-weight: 700;
-  align-items: center;
-  color: rgb(16, 19, 21);
-  background-color: #dee5e7;
+.loginContainer .formGroup input {
+  width: 90%;
   padding: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.selectPart li {
-  cursor: pointer;
-  width: 85%;
-  height: 60px;
-  font-size: 18px;
-  text-align: center;
-  line-height: 60px;
-  color: #666;
-  padding: 0 20px;
-  /* border-bottom: #cdc9c9 1px solid; */
-  margin: auto;
-  position: relative;
-  transition: all 0.2s;
-}
-
-.selectPart li:hover {
-  border-bottom: #48767b 2px solid;
-  transform: translateY(-2px);
-  transition: all 0.2s;
-}
-.selectPart:has(li:hover) {
- border: 1px solid #ccdce7;
- border-radius: 3px;
-}
-.selectPart li.active {
-  color: #f87808;
-  font-weight: 400;
-  border-bottom: #f87808 1px solid;
-}
-.selectPart:has(li.active) {
-  background-color: #dbedf9;
-  border-radius: 3px;
-}
-/* #endregion ================= Select  End ====================== */
-
-/* #region ================= Member no admin  Start ====================== */
-/* memberContainer、memberContent in layout.js */
-.memberContainer {
-  display: flex;
-  margin: 0px 80px;
-}
-.memberContent {
-  display: flex;
-  flex-direction: column;
-  margin: 18px;
-  width: 100%;
-}
-
-.memberNoAdmin {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 180px;
-  margin: auto;
-}
-.memberSpan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.memberBtns {
-  display: flex;
-  justify-content: center;
-  width: 350px;
-}
-.memberBtn {
-  width: 300px;
-  margin: 0px 10px;
-  padding: 8px 18px;
-  text-align: center;
-  border-radius: 3px;
-  background: #0b3760;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
   color: #fff;
-  font-size: 18px;
-}
-.memberBtnRegister {
-  background-color: #f87808;
-}
-/* #endregion ================= Member no admin ====================== */
-
-/* #region ================= FavCard====================== */
-.favCard {
-  display: flex;
-  width: 100%;
-  margin: auto;
-  margin-bottom: 20px;
+  border: 1px solid #ffffff;
   border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 1px 1px 8px #04477d81;
 }
-.favCard:hover {
-  box-shadow: 1px 1px 15px #04477d81;
-  transform: translateZ(-2px);
-  transition: all 0.2s;
-}
-
-.images {
-  object-position: cover;
-}
-.images img {
-  height: 100%;
-}
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 80%;
-  height: 100%;
-  padding: 0px 30px;
-}
-.cardDesc {
-  width: 80%;
-}
-.favCard button {
-  margin: auto;
-  width: 10%;
-  height: 30%;
-  border-radius: 3px;
-  border: transparent;
+.loginContainer .formGroup input::placeholder {
   color: #fff;
-  background-color: #db6318;
-  box-shadow: 1px 1px 3px #5f534bd4;
 }
-/* #endregion ================= FavCard ====================== */
-
-.container {
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-  width: 100%;
-  margin: 66px;
+.loginContainer .formGroup input:focus {
+  outline: none;
+  border: 1px solid #f87808;
 }
-.left {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 180px 30px;
-  height: 80vh;
-  width: 15%;
-  background-image: linear-gradient(
-    to bottom,
-    #013056,
-    #003560,
-    #003a69,
-    #004073,
-    #00457d,
-    #0e4f8a,
-    #1a5a97,
-    #2465a5,
-    #3779b9,
-    #488dcd,
-    #5aa2e2,
-    #6bb7f6
-  );
-  color: #fff;
-  border-radius: 3px 0px 0px 3px;
-}
-.left div {
-  display: flex;
-  flex-direction: column;
-}
-.left span {
-  font-size: 12px;
-  margin-bottom: 3px;
-}
-.switchBtn {
-  background-color: #db6318;
-  padding: 8px;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 3px;
-}
-.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  padding: 30px;
-  padding-left: 60px;
-  border: 1px solid #88a9c8;
-  border-radius: 0px 3px 3px 0px;
-  color: #0b3760;
-}
-.right h1 {
-  margin-bottom: 60px;
-}
-.formGroup {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.right input {
-  width: 80%;
-  padding: 10px;
-  margin: 0px 0px 0px 15px;
-  border: none;
-  border-bottom: 1px solid #88a9c8;
-}
-
 .iconBtn {
   border: none;
-  color: #9c9c9c;
+  color: #ffffff;
+  font-size: 16px;
   background-color: transparent;
 }
-
-.loginBtn {
-  padding: 8px 18px;
-  text-align: center;
+.loginBtns {
+  width: 90%;
+  margin: auto;
   border-radius: 3px;
-  background: #0b3760;
-  color: #fff;
-  font-size: 18px;
-}
-
-.btns {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding-right: 30px;
+  color: #fff;
+  /* border: 1px solid salmon; */
 }
-.btns a {
+.loginContainer .loginBtn {
+  width: 100%;
+  background: #f87808;
+  padding: 10px 0px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 18px;
+  color: #fff;
+}
+.loginBtns a {
+  font-size: 14px;
+}
+.formGroup div {
+  display: flex;
+  width: 90%;
+  position: relative;
+  margin: auto;
+  margin-top: 4px;
+  justify-content: flex-end;
+}
+.textDanger {
+  /* margin-left: 15px; */
+  position: absolute;
+  left: 0;
+  color: #f87808;
   font-size: 12px;
-  margin-right: 4px;
 }
+/* #endregion ================= Login Form ====================== */
+
+/* #region ================= Register Form====================== */
+.registerContainer {
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1;
+  padding: 100px;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  color: #fff;
+}
+.registerContainer .form {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  border-radius: 3px;
+  border: 1px solid salmon;
+  backdrop-filter: blur(5px);
+  /* background: rgba(255, 255, 255, 0.636); */
+}
+.registerContainer .titleGroup {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.registerContainer .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.registerContainer .formGroup label {
+  width: 90%;
+  display: flex;
+  margin: auto;
+  margin-bottom: 4px;
+}
+.registerContainer .formGroup input {
+  width: 90%;
+  padding: 10px;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  
+}
+.registerContainer .formGroup input::placeholder {
+  color: #fff;
+}
+.registerContainer .formGroup input:focus {
+  outline: none;
+  border: 1px solid #f87808;
+}
+.visibility{
+visibility: hidden;
+}
+.registerBtns {
+  width: 90%;
+  margin: auto;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #fff;
+  /* border: 1px solid salmon; */
+}
+.registerContainer .registerBtn {
+  width: 100%;
+  background: #f87808;
+  padding: 10px 0px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 18px;
+  color: #fff;
+}
+.registerBtns a {
+  font-size: 14px;
+}
+.formGroup div {
+  display: flex;
+  width: 90%;
+  position: relative;
+  margin: auto;
+  margin-top: 4px;
+  justify-content: flex-end;
+}
+.textDanger {
+  position: absolute;
+  left: 0;
+  color: #f87808;
+  font-size: 12px;
+}
+/* #endregion ================= FavCard ====================== */

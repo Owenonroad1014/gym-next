@@ -56,7 +56,8 @@ export default function CenterList() {
         {auth ? (
           <>
             <div className={selectStyle.welcome}>
-              <SiOpenaigym className={selectStyle.welcomeicon} /> WELOCOME !{' '}
+            <img src="/gymdot.svg" alt="gym-icon" className={selectStyle.welcomeicon}/>
+            WELOCOME !{' '}
               {name}{' '}
             </div>
           </>
@@ -117,12 +118,12 @@ export default function CenterList() {
           </li>
           <li
             className={
-              pathname === '/member-center/edit-password'
+              pathname === '/member-center/change-password'
                 ? selectStyle.active
                 : ''
             }
           >
-            <Link href="/member-center/edit-password">修改密碼</Link>
+            <Link href="/member-center/change-password">修改密碼</Link>
           </li>
         </ul>
 

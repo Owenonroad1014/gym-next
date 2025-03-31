@@ -151,7 +151,7 @@ const Map = ({ center = [23.0252956, 120.226376], zoom = 18 }) => {
           // 簡單的popup內容
           marker.bindPopup(
             `
-             <img src="${IMGS_PATH}/${location.avatar}" alt="${location.location}" width=200px/>
+             <img src="${IMGS_PATH}/${location.avatar}" alt="${location.location}" style="width: 200px; height: 120px; object-fit: cover;" />
               <h3>${location.location}${location.branch}</h3>
               <div style="display: flex; align-items: center; margin: 0.5rem 0">
                 <svg style="width: 1.2rem; height: 1.2rem; margin-right: 0.3rem ; color: black" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9A2.5 2.5 0 0 1 12 11.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z"/></svg>

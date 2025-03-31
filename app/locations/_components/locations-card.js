@@ -75,7 +75,6 @@ const LocationCard = ({ location }) => {
         </div>
       </div>
       <ConfirmationModal
-        id="testModal"
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         location={location}

@@ -12,6 +12,7 @@ import Breadcrumb from './bread'
 import CoachCalendar from './coaches-calendar'
 import { IMGS_PATH } from '../../../config/api-path'
 import { MdEmail, MdPhone } from 'react-icons/md'
+import Swal from 'sweetalert2'
 
 const CoachDetail = ({
   avatar = '',
@@ -46,6 +47,41 @@ const CoachDetail = ({
   const handleClose = () => {
     setIsOpen(!isOpen) 
   }
+  const handleEmailClick = (e) => {
+    
+    e.preventDefault();
+    let timerInterval;
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'info',
+      title: '即將開啟 google mail',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: '立即開啟',
+      cancelButtonText: '取消',
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#6F6F6F',
+      
+      html: '將在 <b>3</b> 秒後跳轉...',
+      didOpen: () => {
+        const timer = Swal.getPopup().querySelector('b');
+        const timerInterval = setInterval(() => {
+          timer.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+        }, 100);  
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  }
+  
 
   return (
     <>
@@ -111,7 +147,8 @@ const CoachDetail = ({
           <div className={styles['contact-info']}>
             <div className={styles['info-item']}>
               <MdEmail style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
-              <a href={`mailto:${email}`} className={styles['contact-link']}>{email}</a>
+              <a href={`mailto:${email}`} className={styles['contact-link']} 
+              onClick={handleEmailClick}>{email}</a>
             </div>
             <div className={styles['info-item']}>
               <MdPhone style={{ width: '1.2rem', height: '1.2rem', marginRight: '0.5rem'}} />
@@ -144,7 +181,9 @@ const CoachDetail = ({
 
           <div className={styles['cta-container']}>
             {/* <button className={styles['contact-button']}>聯絡教練</button> */}
-            <button className={styles['schedule-button']} onClick={handleClose}> {isOpen ? '關閉課程表' : '預約課程'}</button>
+            <button className={styles['schedule-button']} onClick={handleClose}>
+    <span>{isOpen ? '關閉課程表' : '預約課程'}</span>
+  </button>
           </div>
         </div>
       </div>

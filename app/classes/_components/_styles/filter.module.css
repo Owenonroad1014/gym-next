@@ -37,11 +37,11 @@
 .filter ul li button:hover {
   text-decoration: none;
   text-underline-offset: 5px;
-  color: #ea6715;
+  color: #f87808;
 }
 
 .filter ul li button.active {
   text-decoration: none;
-  color: #ea5c03;
+  color: #f87808;
   font-weight: bold;
 }

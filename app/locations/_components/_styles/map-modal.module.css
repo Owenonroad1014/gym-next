@@ -92,7 +92,7 @@
 }
 
 .address p:hover, .addressButton:hover {
-  color: #DB6318;
+  color: #f87808;
   background: #f8f9fa;
   transform: translateX(5px);
 }
@@ -101,7 +101,7 @@
   margin-top: 0px;
   font-size: 22px;
   font-weight: 600;
-  color: #00101f;
+  color: #000;
   border-bottom: 2px solid #eee;
   padding-bottom: 15px;
   cursor: default;
@@ -132,7 +132,7 @@
 }
 
 .closeButton:hover {
-  background: #DB6318;
+  background: #f87808;
   color: white;
   transform: rotate(90deg);
 }
