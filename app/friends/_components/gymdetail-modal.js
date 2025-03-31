@@ -1,10 +1,12 @@
 'use client'
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import styles from '../_styles/modal.module.css'
 import { SiOpenaigym } from 'react-icons/si'
 import { useAuth } from '@/context/auth-context'
 import { FRIEND_REQUEST } from '@/config/api-path'
-import { useRouter } from 'next/navigation'
+import { GYMFRIEND_AVATAR } from '@/config/api-path'
 export default function GymdetailModal({
   isOpen,
   onClose,
@@ -84,6 +86,7 @@ export default function GymdetailModal({
             </p>
           </div>
           {/* <div className={styles.dash}></div> */}
+          {/* <hr style={{ width: '85%', marginLeft: '20px' }} /> */}
           <div className={styles.userInfo}>
             <p>
               <span>性別</span>：{sex == 'male' ? '男' : '女'}

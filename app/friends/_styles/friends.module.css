@@ -1,7 +1,6 @@
-/* Bannner */
+/* #region ================= Banner  Start ====================== */
 .banner {
   background-image: url('/imgs/friend/banner/friendBanner2000.jpg');
-  /* max-width: 1440px; */
   width: 100%;
   height: 500px;
   display: flex;
@@ -19,6 +18,8 @@
   color: #ddd;
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
+/* #endregion ================= Banner  end ====================== */
+
 .friendContainer {
   max-width: 1440px;
   height: 100%;
@@ -143,7 +144,7 @@
   margin-top: 20px;
 }
 
-/* 麵包屑 */
+/* #region ================= breadcrumb  Start ======================  */
 .breadcrumbContainer {
   max-width: 1200px;
   /* margin: 50px auto; */
@@ -206,7 +207,10 @@
   color: #f87808;
   font-weight: 600;
 }
-/* pagination */
+
+/* #endregion ================= breadcrumb  end ======================  */
+
+/* #region ================= pagination  Start ======================  */
 
 .pagination {
   display: flex;
@@ -243,6 +247,8 @@
   background-color: #8b8b8b;
   cursor: not-allowed;
 }
+/* #endregion ================= pagination  end ======================  */
+
 .rightsection {
   width: 80%;
   min-height: 80vh;
@@ -272,7 +278,7 @@
   --bg-color: #fff;
   --main-color: #555;
   width: 228px;
-  height: 260px;
+  height: 300px;
   background: var(--bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.295), 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
@@ -283,11 +289,12 @@
 }
 
 .cardPhoto img {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 3px;
+  transition: all 0.3s;
 }
 
 .cardTitle {
@@ -359,7 +366,10 @@
   height: 40px;
   margin-bottom: 10px;
 }
-
+.cardPhoto img:hover {
+  transform: scale(1.1);
+  transition: all 0.3s;
+}
 /* #endregion =================  Card end ====================== */
 
 @media (max-width: 1440) {
