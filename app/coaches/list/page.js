@@ -18,7 +18,7 @@ export default function CoachesListPage(props) {
   const searchParams = useSearchParams()
   const breadcrumb = ['home', '教練列表']
   const [currentPage, setCurrentPage] = useState(1)
-  const perPage = 1
+  const perPage = 6
   const totalPages = Math.ceil(coaches.length / perPage)
   const currentCoaches = coaches.slice(
     (currentPage - 1) * perPage,

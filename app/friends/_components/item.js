@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import friendStyle from '../_styles/friends.module.css'
 import GymdetailModal from './gymdetail-modal'
-
+import Image from 'next/image'
+import { SiOpenaigym } from 'react-icons/si'
 export default function List({
   listData = [
     {
@@ -32,26 +33,30 @@ export default function List({
   return (
     <>
       {listData.map((v, i) => (
-        
-          <div key={v.member_id} className={friendStyle.profileCard}>
-            <div className={friendStyle.profileCard_container}>
-              <div className={friendStyle.circle}>
-                <div className={friendStyle.profileImage}></div>
-              </div>
-              <p className={friendStyle.profileName}>{v.name}</p>
-              <hr className={friendStyle.profile_divider} />
-              <section className={friendStyle.profile_description_wrapper}>
-                <p className={friendStyle.profile_description}>{v.intro}</p>
-                <button
-                  className={friendStyle.favorite_button}
-                  onClick={() => handleOpenModal(v)}
-                >
-                  查看更多
-                </button>
-              </section>
+        <>
+          <div className={friendStyle.card}>
+            <div className={friendStyle.cardPhoto}>
+              <Image
+                src="https://xsgames.co/randomusers/avatar.php?g=male"
+                alt="avatae"
+                width={250}
+                height={250}
+              ></Image>
+            </div>
+            <div className={friendStyle.cardTitle}>
+              <SiOpenaigym style={{ fontSize: '16px' }} /> {v.name} <br />
+              <span>{v.intro}</span>
+            </div>
+            <div className={friendStyle.cardSocials}>
+              <button
+                className={friendStyle.cardSocialsBtn}
+                onClick={() => handleOpenModal(v)}
+              >
+                <span>查看更多</span>
+              </button>
             </div>
           </div>
-        
+        </>
       ))}
       {selectedUser && (
         <GymdetailModal

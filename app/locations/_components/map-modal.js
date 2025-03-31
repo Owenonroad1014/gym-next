@@ -5,6 +5,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { IMGS_PATH } from '@/config/api-path'
 import { MdLocationOn, MdPhone, MdAccessTime } from 'react-icons/md'
+import Swal from'sweetalert2'
 
 export default function MapModal({ isOpen, onClose, selectedAddress }) {
   const mapRef = useRef(null)
@@ -65,10 +66,42 @@ export default function MapModal({ isOpen, onClose, selectedAddress }) {
     }
   }, [isOpen, selectedAddress])
 
-  const handleAddressClick = () => {
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedAddress.address)}`
-    window.open(googleMapsUrl, '_blank')
+  const handleAddressClick = (e) => {
+    e.preventDefault();
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedAddress.address)}`;
+    
+    
+    let timerInterval;
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'info',
+      title: '即將開啟 Google Maps',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: '立即開啟',
+      cancelButtonText: '取消',
+      confirmButtonColor: '#f87808',
+      cancelButtonColor: '#6F6F6F',
+      html: '將在 <b>3</b> 秒後跳轉...',
+      didOpen: () => {
+        const timer = Swal.getPopup().querySelector('b');
+        timerInterval = setInterval(() => {
+          timer.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      }
+    }).then((result) => {
+      if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+        window.open(googleMapsUrl, '_blank');
+      }
+    });
   }
+  
 
   if (!isOpen) return null
 

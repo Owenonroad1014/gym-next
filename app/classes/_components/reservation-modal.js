@@ -42,12 +42,13 @@ export default function ReservationModal({
                 確認要預約此課程嗎？
               </div>
               <div className={styles.buttonGroup}>
+              <button type="submit" className={styles.submitButton}>
+                  確認預約
+                </button>
                 <button type="button" onClick={onClose} className={styles.cancelButton}>
                   取消
                 </button>
-                <button type="submit" className={styles.submitButton}>
-                  確認預約
-                </button>
+                
               </div>
             </form>
           </div>

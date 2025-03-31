@@ -1,6 +1,8 @@
 .searchContainer {
   display: inline-block;
   width: 500px;
+  height: 50px;
+  margin-top: 20px;
 }
 
 .searchForm {
@@ -33,6 +35,7 @@
 .dropdown button:hover {
   background-color: #142020;
   color: white;
+  
   padding: 12px 8px;
   border-radius: 3px;
 }
@@ -83,4 +86,10 @@
   border: 1px solid #142020;
   cursor: pointer;
   border-radius: 3px;
+}
+
+@media (max-width: 440px){
+  .searchContainer {
+    width: 350px;
+  }
 }

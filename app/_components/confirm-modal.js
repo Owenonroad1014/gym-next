@@ -2,8 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './_styles/confirm-modal.module.css'
-import { eslint } from '@/next.config'
-import { ignore } from 'antd/es/theme/useToken'
+
 
 const ConfirmationModal = ({ isOpen, onClose, location }) => {
   const router = useRouter()

@@ -306,22 +306,25 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                             <div
                             key={course.id}
                             className={`${styles.event} ${
-                              course.current_capacity >= course.max_capacity
-                                ? styles.full
-                                : moment(course.class_date).isBefore(moment(), 'day')
+                                moment(course.class_date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+
                                 ? styles.expired
+                                : course.current_capacity >= course.max_capacity
+                                ? styles.full
                                 : ''
                             }`}
                             role="button"
                             tabIndex={
                               course.current_capacity >= course.max_capacity ||
-                              moment(course.class_date).isBefore(moment(), 'day')
+                              moment(course.class_date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+
                                 ? -1
                                 : 0
                             }
                             onClick={() =>
                               course.current_capacity >= course.max_capacity ||
-                              moment(course.class_date).isBefore(moment(), 'day')
+                              moment(course.class_date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+
                                 ? null
                                 : handleCardClick(course)
                             }
@@ -341,7 +344,8 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                               {course.end_time.slice(0, 5)}
                             </div>
                             <div className={styles.capacity}>
-                              {moment(course.class_date).isBefore(moment(), 'day') ? (
+                              {moment(course.class_date).tz('Asia/Taipei').isBefore(moment().tz('Asia/Taipei'), 'day')
+ ? (
                                 <span className={styles.expired}>已過期</span>
                               ) : course.current_capacity >=
                               course.max_capacity ? (

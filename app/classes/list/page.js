@@ -33,6 +33,8 @@ const fetchClasses = async () => {
             setClasses(data.rows)
             
           }
+          console.log(data.rows);
+          
           setLoading(false)
         } catch (error) {
           console.error('Error:', error)
@@ -106,6 +108,7 @@ const fetchClasses = async () => {
         end_time: classes.end_time,
         location: classes.location,
         branch: classes.branch,
+        category_name: classes.category_name,
       }))} 
       location={location}
       branch={branch} 

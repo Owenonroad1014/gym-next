@@ -91,15 +91,15 @@
 }
 
 .currentDay {
-  color: orange;
-  font-size: 1.1rem;
+  color: #f87808;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
 .event {
   margin-top: 2px;
   padding: 5px 8px;
-  background: linear-gradient(120deg, #e1edf8 0%, #f5f9fc 100%);
+  background: linear-gradient(120deg, #faba83 0%, #fadcc1 100%);
   border-radius: 8px;
   font-size: 0.9rem;
   box-shadow: 0 2px 4px rgba(1, 20, 97, 0.05);
@@ -109,8 +109,8 @@
 
 .event:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(1, 20, 97, 0.15);
-  background: linear-gradient(120deg, #e8f1f9 0%, #ffffff 100%);
+  box-shadow: 0 4px 12px rgba(97, 36, 1, 0.15);
+  background: linear-gradient(120deg, #fae9e0 0%, #ffffff 100%);
 }
 
 .full {
@@ -123,7 +123,7 @@
 
 
 .time {
-  color: #0b3760;
+  color: #ff7700;
   font-weight: 600;
 }
 
@@ -131,28 +131,14 @@
   font-weight: 600;
   font-size: 16px;
   margin: 3px 0;
-  color: #0b3760;
+  color: #ff7700;
 }
 .capacity {
   font-size: 14px;
   letter-spacing: -1px;
+  color: #333;
 }
 
-.bookButton {
-  width: 100%;
-  padding: 6px;
-  margin-top: 6px;
-  background: #db6318;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.bookButton:hover {
-  background: #c0392b;
-}
 
 .empty {
   background-color: #f5f5f5;

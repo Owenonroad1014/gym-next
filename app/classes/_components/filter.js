@@ -75,7 +75,7 @@ export default function Filter() {
         </ul>
       </div>
       <h2>{selectedCategory || '所有課程'}</h2>
-      <Sort category={selectedCategory} classTypes={classTypes} />
+      <Sort category={selectedCategory} classTypes={classTypes} onCategoryChange={handleCategorySelect}/>
     </>
   )
 }

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import styles from './_styles/search.module.css'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { LOCATIONS_LIST } from '../../../config/api-path'
+import { FaSearch } from 'react-icons/fa'
+
 
 function Search({ onSearch }) {
   const router = useRouter()
@@ -124,7 +126,7 @@ function Search({ onSearch }) {
           className={styles.button}
           disabled={!location} // 只需選擇地區即可送出
         >
-          搜尋
+          <FaSearch />
         </button>
       </form>
     </div>
