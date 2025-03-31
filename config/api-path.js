@@ -72,16 +72,20 @@ export const EDIT_REVIEW_API = `${API_SERVER}/products/api/edit-review`
 export const PENDING_REVIEWS_LIST = `${API_SERVER}/products/api/review/pending`
 
 // 取得商品列表的資料 GET
-// export const PRODUCTS_LIST = `${API_SERVER}/products/api`
+export const PRODUCTS_LIST = `${API_SERVER}/products/api`
 
-// export const PRODUCTS_LIST_FAV = `${API_SERVER}/products`;
+export const PRODUCTS_LIST_FAV = `${API_SERVER}/products`;
 
-// export const PRODUCTS_LIST_REVIEW = `${API_SERVER}/products`;
+export const PRODUCTS_LIST_REVIEW = `${API_SERVER}/products`;
+
+export const PRODUCTS_FAV = `${API_SERVER}/products/api/favorites`;
+
+
 
 // 獲取用戶收藏商品列表
 export const FAVORITES_LIST = `${API_SERVER}/favorites/api`
 
-// export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
+export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like`;
 
 // 取得訂單列表的資料
 export const ORDERS_LIST = `${API_SERVER}/carts/api`

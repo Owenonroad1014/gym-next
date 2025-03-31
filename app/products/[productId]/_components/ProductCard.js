@@ -14,10 +14,11 @@ const renderStars = (rating) => {
       if (rating >= i) {
         stars.push(<FaStar key={i} color="#f87808" size={20} />);
       } else if (rating >= i - 0.5) {
-        stars.push(<FaRegStar key={i} color="#f87808" size={20} />);
-      } else {
         stars.push(<FaStarHalfAlt key={i} color="#f87808" size={20} />);
+      } else {
+        stars.push(<FaRegStar key={i} color="#f87808" size={20} />);
       }
+      
     }
 
     return stars;
