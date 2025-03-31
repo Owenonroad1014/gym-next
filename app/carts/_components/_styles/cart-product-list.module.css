@@ -14,7 +14,7 @@
     align-items: start;
     gap: 40px 100px;
     width: 100%;
-    padding-bottom: 24px;
+    padding-bottom: 12px;
     font-family:
       Inter,
       -apple-system,
@@ -59,8 +59,36 @@
     }
   }
   
-  @media (width<=375px) {
-    .productSection {
-      max-width: 100%;
-    }
+@media (width<=376px) {
+  .productSection {
+    width: 100%;
+    padding: 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
+
+  .tableHeader {
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 8px;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .productHeading {
+    font-size: 14px;
+  }
+
+  .columnTitles {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .columnTitle {
+    font-size: 12px;
+    text-align: left;
+  }
+}

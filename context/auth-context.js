@@ -8,7 +8,7 @@ const emptyAuth = {
   id: 0,
   account: '',
   avatar: '',
-  name:'',
+  name: '',
   token: '',
 }
 const storageKey = 'gymboo-auth'
@@ -34,14 +34,16 @@ export function AuthContextProvider({ children }) {
     if (result.success) {
       localStorage.setItem(storageKey, JSON.stringify(result.data))
       setAuth(result.data)
-      return { success: true };
-    }else{
-      return { success: false, error: result.error, code: result.code  };
+      return { success: true }
+    } else {
+      return { success: false, error: result.error, code: result.code }
     }
   }
 
+ 
+
   const getAuthHeader = () => {
-    if(!auth.token) return{}
+    if (!auth.token) return {}
     return { Authorization: 'Bearer ' + auth.token }
   }
 
@@ -56,7 +58,9 @@ export function AuthContextProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ auth, logout, login, getAuthHeader }}>
+    <AuthContext.Provider
+      value={{ auth, logout, login, getAuthHeader,setAuth }}
+    >
       {children}
     </AuthContext.Provider>
   )

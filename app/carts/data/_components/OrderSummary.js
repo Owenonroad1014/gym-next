@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 function OrderSummary() {
   const [cartItems, setCartItems] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [pickupStore, setPickupStore] = useState("");
+  const [pickupMethod, setPickupMethod] = useState("");
   const [subtotal, setSubtotal] = useState(0);
   const shipping = 0;
   const total = subtotal + shipping;
@@ -14,11 +14,11 @@ function OrderSummary() {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const storedPaymentMethod = localStorage.getItem("paymentMethod") || "未選擇";
-    const storedPickupStore = localStorage.getItem("pickupStore") || "未選擇";
+    const storedPickupMethod = localStorage.getItem("pickupMethod") || "未選擇";
 
     setCartItems(storedCart);
     setPaymentMethod(storedPaymentMethod);
-    setPickupStore(storedPickupStore);
+    setPickupMethod(storedPickupMethod);
 
     // 計算總金額
     const calculatedSubtotal = storedCart.reduce((acc, item) => {
@@ -45,7 +45,7 @@ function OrderSummary() {
       <div className={styles.pickupstore}>
         <div className={styles.info2}>
           <h3 className={styles.gym}>自取gym點</h3>
-          <p className={styles.div6}>{pickupStore}</p>
+          <p className={styles.div6}>{pickupMethod}</p>
         </div>
         <p className={styles.info3}>{paymentMethod}</p>
       </div>

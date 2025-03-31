@@ -6,6 +6,7 @@
     border-radius: 3px;
     overflow: hidden;
     box-shadow: 1px 1px 8px #04477d81;
+    position: relative;
   }
   .favCard:hover {
     box-shadow: 1px 1px 15px #04477d81;
@@ -15,6 +16,8 @@
   
   .images {
     object-position: cover;
+    width: 400px;
+    margin: auto;
   }
   .images img {
     height: 100%;
@@ -40,13 +43,13 @@
   }
   .favCard button {
     margin: auto;
-    width: 15%;
-    height: 22%;
     border-radius: 3px;
     border: transparent;
-    color: #fff;
-    background-color: #db6318;
-    box-shadow: 1px 1px 3px #5f534bd4;
+    color: #f87808;
+    font-size: 25px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
   }
   /* #endregion ================= FavCard ====================== */
   

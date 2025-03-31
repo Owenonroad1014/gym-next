@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react'
-import friendStyle from '../_styles/friends.module.css'
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
-import Item from './item'
-import { GYMFRIEND_LIST } from '@/config/api-path'
-import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
+import Link from 'next/link'
+import friendStyle from '../_styles/friends.module.css'
+import Item from './item'
+import { GYMFRIEND_LIST } from '@/config/api-path'
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 export default function List() {

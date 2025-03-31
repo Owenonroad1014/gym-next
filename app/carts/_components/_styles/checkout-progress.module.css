@@ -36,10 +36,15 @@
     /* padding: 30px; */
     /* border-bottom:3px solid #eb854a; */
   }
-  
-  
-  
 
-  
-  
-  
+@media (max-width: 376px) {
+  .progress {
+    height: 150px;
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .progressItem {
+    gap: 6px;
+  }
+}

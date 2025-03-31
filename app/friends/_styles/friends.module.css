@@ -1,7 +1,6 @@
-/* Bannner */
+/* #region ================= Banner  Start ====================== */
 .banner {
   background-image: url('/imgs/friend/banner/friendBanner2000.jpg');
-  /* max-width: 1440px; */
   width: 100%;
   height: 500px;
   display: flex;
@@ -11,14 +10,16 @@
   align-items: flex-start;
   padding: 50px 60px;
 }
-.banner h3 {
+.title {
   color: white;
   font-size: clamp(2rem, 3.5vw, 3rem);
 }
-.banner p {
-  color: white;
+.subtitle {
+  color: #ddd;
   font-size: clamp(1rem, 2vw, 1.5rem);
 }
+/* #endregion ================= Banner  end ====================== */
+
 .friendContainer {
   max-width: 1440px;
   height: 100%;
@@ -99,7 +100,7 @@
 
 .selectPart li.active {
   color: #f87808;
-  font-weight: 400;
+  font-weight: 600;
   border-bottom: #f87808 1px solid;
 }
 /* #endregion ================= Select  End ====================== */
@@ -143,7 +144,7 @@
   margin-top: 20px;
 }
 
-/* 麵包屑 */
+/* #region ================= breadcrumb  Start ======================  */
 .breadcrumbContainer {
   max-width: 1200px;
   /* margin: 50px auto; */
@@ -169,7 +170,7 @@
 .breadcrumbItem:not(:last-child)::after {
   content: '›';
   position: absolute;
-  top: 13px;
+  top: 15px;
   right: -5px;
   color: #666;
   font-size: 20px;
@@ -180,7 +181,6 @@
   text-decoration: none;
   color: #666;
   font-size: 18px;
-  font-family: 'Noto Serif TC', serif;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -206,10 +206,11 @@
 .breadcrumbItem.active a {
   color: #f87808;
   font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 10px;
 }
-/* pagination */
+
+/* #endregion ================= breadcrumb  end ======================  */
+
+/* #region ================= pagination  Start ======================  */
 
 .pagination {
   display: flex;
@@ -222,7 +223,7 @@
 
 .pagination a {
   color: white;
-  background-color: #0b3760;
+  background-color: #333;
   padding: 10px 15px;
   margin: 0 5px;
   border-radius: 3px;
@@ -246,6 +247,8 @@
   background-color: #8b8b8b;
   cursor: not-allowed;
 }
+/* #endregion ================= pagination  end ======================  */
+
 .rightsection {
   width: 80%;
   min-height: 80vh;
@@ -263,7 +266,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1vw;
 }
 
@@ -275,12 +278,10 @@
   --bg-color: #fff;
   --main-color: #555;
   width: 228px;
-  height: 250px;
+  height: 300px;
   background: var(--bg-color);
-  /* border: 2px solid var(--main-color); */
-  /* box-shadow: 4px 4px var(--main-color); */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.295), 0 6px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -288,12 +289,12 @@
 }
 
 .cardPhoto img {
-  transform: scale(0.3) translate(220px, 230px);
-  width: 250px;
-  height: 270px;
-  margin-left: -125px;
-  margin-top: -125px;
-  border-radius: 20%;
+  width: 130px;
+  height: 130px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  transition: all 0.3s;
 }
 
 .cardTitle {
@@ -365,12 +366,10 @@
   height: 40px;
   margin-bottom: 10px;
 }
-
 .cardPhoto img:hover {
-  transition: 0.3s;
-  transform: scale(0.4) translate(160px, 150px);
+  transform: scale(1.1);
+  transition: all 0.3s;
 }
-
 /* #endregion =================  Card end ====================== */
 
 @media (max-width: 1440) {

@@ -1,0 +1,154 @@
+/* #region ================= Search Start ====================== */
+.searchContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchForm {
+  display: flex;
+  gap: 10px;
+}
+
+.searchForm input {
+  width: 250px;
+  border-radius: 3px;
+  font-size: 18px;
+  border: 2px rgb(221, 215, 215) solid;
+}
+
+.searchForm button {
+  width: 60px;
+  padding: 12px 10px;
+  background-color: #f87808;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 15px;
+}
+.clearSearch {
+  text-align: end;
+  margin-right: 10px;
+  transition: all 0.3s;
+}
+
+/* #endregion ================= Search  End====================== */
+
+/* #region ================= Pagination  Start ====================== */
+.pagination {
+  padding: 20px;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  background-color: #333;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 3px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination a:hover {
+  background-color: #f87808;
+  transform: scale(1.1);
+}
+
+.pagination .active {
+  cursor: default;
+  font-weight: bold;
+  background-color: #f87808;
+}
+
+.pagination .disabled {
+  cursor: not-allowed;
+  background-color: #8b8b8b;
+}
+/* #endregion ================= Pagination  End ====================== */
+
+/* #region ================= FavCard====================== */
+.favCard {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 1px 1px 8px #04477d81;
+}
+.favCard:hover {
+  box-shadow: 1px 1px 15px #04477d81;
+  transform: translateZ(-2px);
+  transition: all 0.2s;
+}
+
+.images {
+  object-position: cover;
+}
+.images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.5;
+  width: 75%;
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 100%;
+  padding: 0px 30px;
+}
+.cardDesc {
+  width: 80%;
+}
+.favCard button {
+  margin: auto;
+  width: 10%;
+  height: 30%;
+  border-radius: 3px;
+  border: transparent;
+  color: #fff;
+  background-color: #db6318;
+  box-shadow: 1px 1px 3px #5f534bd4;
+}
+/* #endregion ================= FavCard ====================== */
+
+/* #region ================= HeartArea Start ====================== */
+
+.heartArea {
+  margin-top: 5px;
+  margin-right: 5px;
+  width: 5%;
+}
+.heart {
+  cursor: pointer;
+  box-sizing: content-box;
+  color: #f87808;
+  font-size: 22px;
+  transition: all 0.3s;
+}
+.heart:hover {
+  color: #f87808;
+  transition: all 0.3s;
+}
+.heartActive {
+  box-sizing: content-box;
+  cursor: pointer;
+  font-size: 22px;
+  color: #f87808;
+  transition: all 0.3s;
+}
+/* #endregion ================= HeartArea end ====================== */
