@@ -105,9 +105,11 @@ export default function Header() {
                   <div className={headerstyles.navAvatar}>
                     <img
                       src={
-                        auth.avatar
-                          ? `${AVATAR_PATH}/${auth.avatar}`
-                          : '/imgs/avatar/default-avatar.png'
+                        auth.google_uid
+                          ? auth.avatar // 使用 Google 大頭貼
+                          : `${AVATAR_PATH}/${
+                              auth.avatar || 'default-avatar.png'
+                            }`
                       }
                       alt=""
                     />
