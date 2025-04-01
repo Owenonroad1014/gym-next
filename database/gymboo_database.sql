@@ -251,6 +251,7 @@ CREATE TABLE messages (
   sender_id INT NOT NULL,  -- 發送訊息的用戶 ID
   message TEXT NOT NULL,  -- 訊息內容
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 訊息發送時間
+  is_read 	tinyint(1) default 0,
   FOREIGN KEY (chat_id) REFERENCES chats(id),
   FOREIGN KEY (sender_id) REFERENCES member(member_id)
 );
