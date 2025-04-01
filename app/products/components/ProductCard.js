@@ -44,7 +44,7 @@ const ProductCard = ({ id, product_name, price, description, image_url, variant,
             {average_rating !== null ? (
               <>
                 {renderStars(average_rating)}
-                {average_rating > 0 && <span className={styles.reviewCount}>({average_rating})</span>}
+                {<span className={styles.reviewCount}>({average_rating})</span>}
               </>
             ) : (
               <span className={styles.noReviews}>尚無評價</span>

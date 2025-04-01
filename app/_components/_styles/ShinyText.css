@@ -1,0 +1,34 @@
+.shiny-text {
+  font-size: 96px;
+  font-weight: 700;
+  margin: 20px 0;
+  background: linear-gradient(
+    120deg,
+    #333 20%,        /* 深色區塊 */
+    #53280b 35%,        /* 過渡區域 */
+    #eb9358 50%,        /* 提高光亮 */
+    #fff 55%,        /* 最亮的白色掃過 */
+    #471d0a 60%,        /* 再次過渡回深色 */
+    #333 80%         /* 深色區塊 */
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: shine 10s ease-in-out infinite;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200%;
+  }
+  100% {
+    background-position: -200%;
+  }
+}
+
+/* 停止動畫時 */
+.shiny-text.disabled {
+  animation: none;
+}
