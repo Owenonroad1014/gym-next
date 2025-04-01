@@ -1,13 +1,17 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
 import { edSchema } from '@/utils/schema/schema.js'
 import editCss from './_style/person.module.css'
+import memberCss from '../_styles/member.module.css'
 import { PROFILE_GET, PROFILE_PUT, AVATAR_PATH } from '@/config/api-path'
 
 export default function ProfileTable() {
+  const pathname = usePathname()
   const { auth, getAuthHeader } = useAuth()
   const [previewAvatar, setPreviewAvatar] = useState() // 預設頭貼
   const [status, setStatus] = useState()
@@ -308,194 +312,249 @@ export default function ProfileTable() {
     }
   }
   return (
-    <div>
-      <h2>個人資料</h2>
-      {/* 將<form>移到<table>外面 */}
-      <form action="post" onSubmit={(e) => onSubmit(e)}>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div className={`${editCss.formGroup} ${editCss.avatarGroup}`}>
-                  <input
-                    type="file"
-                    name="avatar"
-                    id="avatar"
-                    onChange={avatarChangeForm}
-                    hidden
-                  />
-                  <label htmlFor="avatar" className={editCss.avatar}>
-                    <img
-                      src={
-                        previewAvatar // 如果有預覽頭貼（使用者剛上傳）
-                          ? previewAvatar
-                          : auth.google_uid
-                          ? profileData?.avatar ||
-                            '/imgs/avatar/default-avatar.png' // 確保 profileData.avatar 存在
-                          : profileData?.avatar
-                          ? `${AVATAR_PATH}/${profileData.avatar}`
-                          : '/imgs/avatar/default-avatar.png' // 預設圖片
-                      }
-                      alt="頭貼預覽"
-                    />
-                  </label>
-                  <label htmlFor="avatar">上傳大頭貼</label>
-                  <div>
-                    {errors.avatar && (
-                      <span className={editCss.textDanger}>
-                        {errors.avatar}
-                      </span>
-                    )}
+    <>
+      {auth.id ? (
+        <div className={editCss.personContainer}>
+          <h2>個人資料</h2>
+          <div className={editCss.form}>
+            <form action="post" onSubmit={(e) => onSubmit(e)}>
+              <table>
+                <tbody>
+                  <div className={editCss.left}>
+                    <tr>
+                      <td>
+                        <div
+                          className={`${editCss.formGroup} ${editCss.avatarGroup}`}
+                        >
+                          <input
+                            type="file"
+                            name="avatar"
+                            id="avatar"
+                            onChange={avatarChangeForm}
+                            hidden
+                          />
+                          <label htmlFor="avatar" className={editCss.avatar}>
+                            <img
+                              src={
+                                previewAvatar // 如果有預覽頭貼（使用者剛上傳）
+                                  ? previewAvatar
+                                  : auth.google_uid
+                                  ? profileData?.avatar ||
+                                    '/imgs/avatar/default-avatar.png' // 確保 profileData.avatar 存在
+                                  : profileData?.avatar
+                                  ? `${AVATAR_PATH}/${profileData.avatar}`
+                                  : '/imgs/avatar/default-avatar.png' // 預設圖片
+                              }
+                              alt="頭貼預覽"
+                            />
+                          </label>
+                          <label htmlFor="avatar">上傳大頭貼</label>
+                          <div>
+                            {errors.avatar && (
+                              <span className={editCss.textDanger}>
+                                {errors.avatar}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
                   </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>名稱</td>
-              <td>{profileData?.name}</td>
-            </tr>
-
-            <tr>
-              <td>性別</td>
-              <td>{profileData.sex == 'male' ? '男性' : '女性' || '未設定'}</td>
-            </tr>
-            <tr>
-              <td>手機號碼</td>
-              <td>{profileData.mobile}</td>
-            </tr>
-            <tr>
-              {isEditable.intro ? (
-                <td>
-                  <div className={editCss.formGroup}>
-                    <label htmlFor="intro">個人簡介</label>
-                    <textarea
-                      className={editCss.intro}
-                      name="intro"
-                      id="intro"
-                      rows="5"
-                      maxLength={300}
-                      placeholder="我是一名瑜珈老師，最近正在增미訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。(至少30個字元，最多300個字元)"
-                      value={profileData.intro}
-                      onChange={editChangeForm}
-                    />
-                    <div>
-                      {errors.intro && (
-                        <span className={editCss.textDanger}>
-                          {errors.intro}
-                        </span>
-                      )}
+                  <div className={editCss.right}>
+                    <div className={editCss.disable}>
+                      <tr>
+                        <th>名稱</th>
+                        <td>{profileData?.name}</td>
+                      </tr>
+                      <tr>
+                        <th>性別</th>
+                        <td>
+                          {profileData.sex == 'male'
+                            ? '男性'
+                            : '女性' || '未設定'}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>手機號碼</th>
+                        <td>{profileData.mobile}</td>
+                      </tr>
                     </div>
-                  </div>
-                </td>
-              ) : (
-                <td>{profileData.intro || '未設定'}</td>
-              )}
-            </tr>
-            <tr>
-              {isEditable.item ? (
-                <td>
-                  <div className={editCss.formGroup}>
-                    <label htmlFor="item">喜愛運動項目</label>
-                    <input
-                      className={editCss.item}
-                      type="text"
-                      name="item"
-                      id="item"
-                      placeholder="跑步、抱石...，最多填寫五個項目"
-                      value={profileData.item}
-                      onChange={editChangeForm}
-                    />
-                    <div>
-                      {errors.item && (
-                        <span className={editCss.textDanger}>
-                          {errors.item}
-                        </span>
+                    <tr>
+                      {isEditable.intro ? (
+                        <td>
+                          <div className={editCss.formGroup}>
+                            <label className={editCss.titleLabel} htmlFor="intro">個人簡介</label>
+                            <textarea
+                              className={editCss.intro}
+                              name="intro"
+                              id="intro"
+                              rows="5"
+                              maxLength={300}
+                              placeholder="我是一名瑜珈老師，最近正在增미訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。(至少30個字元，最多300個字元)"
+                              value={profileData.intro}
+                              onChange={editChangeForm}
+                            />
+                            <div>
+                              {errors.intro && (
+                                <span className={editCss.textDanger}>
+                                  {errors.intro}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      ) : (
+                        <>
+                          <th>個人簡介</th>
+                          <td>{profileData.intro || '未設定'}</td>
+                        </>
                       )}
-                    </div>
-                  </div>
-                </td>
-              ) : (
-                <td>{profileData.item || '未設定'}</td>
-              )}
-            </tr>
-            <tr>
-              {isEditable.goal ? (
-                <td>
-                  <div className={editCss.formGroup}>
-                    <label>健身目標</label>
-                    <div className={editCss.checkboxes}>
-                      {[
-                        '增肌',
-                        '減脂',
-                        '提高耐力',
-                        '增強體能',
-                        '健康維持',
-                        '提高核心能量',
-                      ].map((goal, index) => {
-                        const goalId = `goal${index + 1}` // 產生 id: goal1, goal2, ...
-                        return (
-                          <div key={index} className={editCss.current}>
+                    </tr>
+                    <tr>
+                      {isEditable.item ? (
+                        <td>
+                          <div className={editCss.formGroup}>
+                            <label className={editCss.titleLabel}  htmlFor="item">喜愛運動項目</label>
+                            <input
+                              className={editCss.item}
+                              type="text"
+                              name="item"
+                              id="item"
+                              placeholder="跑步、抱石...，最多填寫五個項目"
+                              value={profileData.item}
+                              onChange={editChangeForm}
+                            />
+                            <div>
+                              {errors.item && (
+                                <span className={editCss.textDanger}>
+                                  {errors.item}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      ) : (
+                        <>
+                          <th>喜愛運動項目</th>
+                          <td>{profileData.item || '未設定'}</td>
+                        </>
+                      )}
+                    </tr>
+                    <tr>
+                      {isEditable.goal ? (
+                        <td>
+                          <div className={editCss.formGroup}>
+                            <label className={editCss.titleLabel} >健身目標</label>
+                            <div className={editCss.checkboxes}>
+                              {[
+                                '增肌',
+                                '減脂',
+                                '提高耐力',
+                                '增強體能',
+                                '健康維持',
+                                '提高核心能量',
+                              ].map((goal, index) => {
+                                const goalId = `goal${index + 1}` // 產生 id: goal1, goal2, ...
+                                return (
+                                  <div key={index} className={editCss.current}>
+                                    <input
+                                      type="checkbox"
+                                      name="goal"
+                                      value={goal}
+                                      id={goalId}
+                                      checked={profileData.goal.includes(goal)}
+                                      onChange={(e) => {
+                                        const newGoals = e.target.checked
+                                          ? [...profileData.goal, goal]
+                                          : profileData.goal.filter(
+                                              (item) => item !== goal
+                                            )
+                                        setProfileData({
+                                          ...profileData,
+                                          goal: newGoals,
+                                        })
+                                      }}
+                                    />
+                                    <label htmlFor={goalId}>{goal}</label>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        </td>
+                      ) : (
+                        <>
+                          <th>健身目標</th>
+                          <td>{profileData.goal || '暫無目標'}</td>
+                        </>
+                      )}
+                    </tr>
+                    <tr>
+                      {isEditable.status ? (
+                        <td>
+                          <div className={editCss.status}>
+                            <label className={editCss.titleLabel} >是否公開檔案</label>
                             <input
                               type="checkbox"
-                              name="goal"
-                              value={goal}
-                              id={goalId}
-                              checked={profileData.goal.includes(goal)}
-                              onChange={(e) => {
-                                const newGoals = e.target.checked
-                                  ? [...profileData.goal, goal]
-                                  : profileData.goal.filter(
-                                      (item) => item !== goal
-                                    )
-                                setProfileData({
-                                  ...profileData,
-                                  goal: newGoals,
-                                })
-                              }}
+                              name="status"
+                              id="public"
+                              checked={profileData.status}
+                              onChange={statusChangeForm}
                             />
-                            <label htmlFor={goalId}>{goal}</label>
+                            <label htmlFor="public" className={editCss.switch}>
+                              <span className={editCss.switchBtn}></span>
+                            </label>
+                            <span>{status ? '公開' : '不公開'}</span>
                           </div>
-                        )
-                      })}
-                    </div>
+                        </td>
+                      ) : (
+                        <>
+                          <th>是否公開檔案</th>
+                          <td>
+                            {profileData.status === true
+                              ? '公開檔案'
+                              : '不公開檔案'}
+                          </td>
+                        </>
+                      )}
+                    </tr>
                   </div>
-                </td>
-              ) : (
-                <td>{profileData.goal || '暫無目標'}</td>
-              )}
-            </tr>
-            <tr>
-              {isEditable.status ? (
-                <td>
-                  <div className={editCss.status}>
-                    <label>是否公開檔案</label>
-                    <input
-                      type="checkbox"
-                      name="status"
-                      id="public"
-                      checked={profileData.status}
-                      onChange={statusChangeForm}
-                    />
-                    <label htmlFor="public" className={editCss.switch}>
-                      <span className={editCss.switchBtn}></span>
-                    </label>
-                    <span>{status ? '公開' : '不公開'}</span>
-                  </div>
-                </td>
-              ) : (
-                <td>
-                  {profileData.status === true ? '公開檔案' : '不公開檔案'}
-                </td>
-              )}
-            </tr>
-          </tbody>
-        </table>
-        <div>
-          <button className={editCss.btn} type="submit">
-            送出
-          </button>
+                </tbody>
+              </table>
+              <div>
+                <button className={editCss.btn} type="submit">
+                 編輯檔案
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
-    </div>
+      ) : (
+        <>
+          <div className={memberCss.memberNoAdmin}>
+            <div className={memberCss.memberSpan}>
+              <h1>您好，請先登入</h1>
+              <span>若您尚未成為會員，請先註冊</span>
+            </div>
+            <div className={memberCss.memberBtns}>
+              <Link
+                className={memberCss.memberBtn}
+                href={`/member/login?callbackUrl=${encodeURIComponent(
+                  pathname
+                )}`}
+              >
+                會員登入
+              </Link>
+              <Link
+                className={`${memberCss.memberBtn} ${memberCss.memberBtnRegister}`}
+                href="/member/register"
+              >
+                註冊會員
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   )
 }
