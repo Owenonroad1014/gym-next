@@ -5,6 +5,7 @@
 import React from 'react'
 import styles from './_styles/footer.module.css'
 import { usePathname } from 'next/navigation'
+import { FaYoutube,FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
@@ -18,7 +19,8 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.top}>
           <section className={styles.part}>
-            <div className={styles.title}>CONTACT US</div>
+            <div className={styles.title}>
+            CONTACT  &  FOLLOW  US!</div>
             <div className={styles.group}>
               <div className={styles.contactItem}>
                 <svg
@@ -51,19 +53,10 @@ export default function Footer() {
                 {/* <div className={styles.contactText}>0998981798</div> */}
               </div>
               <div className={styles.contactItem}>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 30 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M2.8125 3.75C1.25977 3.75 0 5.00977 0 6.5625C0 7.44727 0.416016 8.2793 1.125 8.8125L13.875 18.375C14.543 18.873 15.457 18.873 16.125 18.375L28.875 8.8125C29.584 8.2793 30 7.44727 30 6.5625C30 5.00977 28.7402 3.75 27.1875 3.75H2.8125ZM0 10.3125V22.5C0 24.5684 1.68164 26.25 3.75 26.25H26.25C28.3184 26.25 30 24.5684 30 22.5V10.3125L17.25 19.875C15.9141 20.877 14.0859 20.877 12.75 19.875L0 10.3125Z"
-                    fill="#F5FFF6"
-                  />
-                </svg>
-                {/* <div className={styles.contactText}>0998981798</div> */}
+                <FaYoutube style={{width:"18px",height:"18px",color:"#fff"}}/>
+              </div>
+              <div className={styles.contactItem}>
+                <FaFacebookF style={{width:"18px",height:"18px",color:"#fff"}}/>
               </div>
             </div>
           </section>
