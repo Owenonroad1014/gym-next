@@ -96,43 +96,43 @@ export default function ProfileTable() {
   console.log('data.data:', profileData)
 
   if (!profileData) {
-    return <p>Loading...</p>; // 或者顯示 loading 畫面
+    return <p>Loading...</p> // 或者顯示 loading 畫面
   }
 
-    const MySwal = withReactContent(Swal)
-     const showError = (message) => {
-       return new Promise((res) => {
-         document.body.style.overflow = 'hidden' //畫面不要偏移使用
-         MySwal.fire({
-           text: message,
-           icon: 'error',
-           confirmButtonColor: '#0b3760',
-           confirmButtonText: '確定',
-           didClose: () => {
-             //畫面不要偏移使用
-             document.body.style.overflow = '' // 恢復頁面滾動
-           },
-         }).then((result) => {
-           if (result.isConfirmed) {
-             res()
-           }
-         })
-       })
-     }
-     const successModal = (message) => {
-         document.body.style.overflow = 'hidden' //畫面不要偏移使用
-         MySwal.fire({
-           text: message,
-           icon: 'success',
-           showConfirmButton: false,
-           timer:1500,
-           didClose: () => {
-             //畫面不要偏移使用
-             document.body.style.overflow = '' // 恢復頁面滾動
-           },
-         })
-       }
-     
+  const MySwal = withReactContent(Swal)
+  const showError = (message) => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          res()
+        }
+      })
+    })
+  }
+  const successModal = (message) => {
+    document.body.style.overflow = 'hidden' //畫面不要偏移使用
+    MySwal.fire({
+      text: message,
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 1500,
+      didClose: () => {
+        //畫面不要偏移使用
+        document.body.style.overflow = '' // 恢復頁面滾動
+      },
+    })
+  }
+
   const confirmIntro = () => {
     return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
@@ -152,7 +152,7 @@ export default function ProfileTable() {
       }).then((result) => {
         if (result.isConfirmed) {
           resolve()
-        } 
+        }
       })
     })
   }
@@ -183,8 +183,11 @@ export default function ProfileTable() {
     const formData = new FormData()
 
     // 只傳送必要的欄位
-    const { intro, item, goal, status } = profileData
+    const { avatar, intro, item, goal, status } = profileData
 
+    if (profileData.avatar && profileData.avatar instanceof File) {
+      formData.append('avatar', profileData.avatar)
+    }
     // 處理資料格式
     formData.append('intro', intro || '')
     formData.append('status', Boolean(status))
