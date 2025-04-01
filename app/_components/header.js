@@ -102,18 +102,7 @@ export default function Header() {
             {auth.id ? (
               <>
                 <Link href="/member-center" className={headerstyles.navLink}>
-                  <div className={headerstyles.navAvatar}>
-                    <img
-                      src={
-                        auth.google_uid
-                          ? auth.avatar // 使用 Google 大頭貼
-                          : `${AVATAR_PATH}/${
-                              auth.avatar || 'default-avatar.png'
-                            }`
-                      }
-                      alt=""
-                    />
-                  </div>
+                  <div className={headerstyles.navAvatar}>{auth.name}</div>
                 </Link>
                 <a
                   href="/qs"
