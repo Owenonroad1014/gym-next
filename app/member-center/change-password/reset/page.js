@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
@@ -10,6 +11,7 @@ import { useAuth } from '@/context/auth-context'
 import memberCss from '@/app/member/_styles/member.module.css'
 
 export default function ResetPasswordPage() {
+  const router = useRouter()
   const { auth, getAuthHeader } = useAuth()
   const storageKey = 'gymboo-reset'
 
@@ -32,11 +34,11 @@ export default function ResetPasswordPage() {
     MySwal.fire({
       text: message,
       icon: 'success',
-      confirmButtonColor: '#0b3760',
-      confirmButtonText: '確定',
+      timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
         document.body.style.overflow = '' // 恢復頁面滾動
+        router.replace('/member-center/change-password')
       },
     })
   }
@@ -112,9 +114,9 @@ export default function ResetPasswordPage() {
       if (result.success) {
         successModal('密碼修改成功')
         setResetPassForm({
-            newPassword: '',
-            confirmPassword: '',
-          })
+          newPassword: '',
+          confirmPassword: '',
+        })
         localStorage.removeItem(storageKey)
       } else {
         showError('密碼修改失敗，請稍後再試')
@@ -180,14 +182,8 @@ export default function ResetPasswordPage() {
                   {errors.confirmPassword}
                 </span>
               )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>

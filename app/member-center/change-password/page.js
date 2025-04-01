@@ -24,6 +24,7 @@ export default function ResetPasswordPage() {
       didClose: () => {
         //畫面不要偏移使用
         document.body.style.overflow = '' // 恢復頁面滾動
+        setResetPassForm({ password: '' })
       },
     })
   }
@@ -58,7 +59,7 @@ export default function ResetPasswordPage() {
       router.push('/member-center/change-password/reset')
     } else {
       showError('密碼錯誤，請重新輸入')
-      setResetPassForm({ password: '' })
+     
       console.warn(result)
     }
   }
