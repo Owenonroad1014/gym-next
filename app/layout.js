@@ -2,8 +2,10 @@
 import '@/styles/globals.css'
 import Header from './_components/header'
 import Footer from './_components/footer'
+import TopBtn from './_components/topBtn';
 import { AuthContextProvider } from '@/context/auth-context'
 import { CartProvider } from "@/context/cart-context";
+
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -29,8 +31,10 @@ export default function RootLayout({ children }) {
         <CartProvider>
           <Header />
           {children}
+          <TopBtn/>
           <Footer />
         </CartProvider>
+        
         </body>
       </html>
     </AuthContextProvider>
