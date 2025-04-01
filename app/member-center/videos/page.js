@@ -4,7 +4,6 @@ import { VIDEOS_FAV, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
 import cardStyle from "./_compenents/_styles/videos.module.css";
-import Image from "next/image";
 import Swal from "sweetalert2";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import { FaRegHeart, FaHeart } from "react-icons/fa";
