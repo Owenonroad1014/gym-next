@@ -376,7 +376,7 @@ export default function ProfileTable() {
                       </tr>
                       <tr>
                         <th>手機號碼</th>
-                        <td>{profileData.mobile}</td>
+                        <td>{profileData.mobile||'未填寫'}</td>
                       </tr>
                     </div>
                     <tr>
@@ -513,7 +513,7 @@ export default function ProfileTable() {
                           <td>
                             {profileData.status === true
                               ? '公開檔案'
-                              : '不公開檔案'}
+                              : '不公開檔案'||'不公開'}
                           </td>
                         </>
                       )}
