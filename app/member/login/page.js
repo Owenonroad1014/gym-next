@@ -181,11 +181,11 @@ export default function LoginPage() {
             <Link href="/member/forget-password">忘記密碼</Link>
           </div>
         </form>
-        <div>
+        <hr />
+        <div className={memberCss.loginBtns}>
           <GoogleLoginPopup />
         </div>
       </div>
-      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
     </div>
   )
 }
