@@ -228,6 +228,8 @@ CREATE TABLE friend_requests (
 CREATE TABLE friendships (
   user1_id INT NOT NULL,
   user2_id INT NOT NULL,
+  user1_delete INT NOT NULL DEFAULT 0,
+  user2_delete INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user1_id, user2_id),
   FOREIGN KEY (user1_id) REFERENCES  member(member_id),
