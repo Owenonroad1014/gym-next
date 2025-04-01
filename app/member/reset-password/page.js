@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { z } from 'zod'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import { RESET_PASS_TOKEN_PUT } from '@/config/api-path'
 import memberCss from '../_styles/member.module.css'
 
@@ -53,7 +54,7 @@ export default function ResetPasswordPage() {
         if (result.isConfirmed) {
           res()
           router.push('/member/login')
-        } 
+        }
       })
     })
   }
@@ -98,7 +99,7 @@ export default function ResetPasswordPage() {
         return
       }
 
-      // 🔥 設定定時器，讓 localStorage 自動清除
+      // 設定定時器，讓 localStorage 自動清除
       const timeoutId = setTimeout(() => {
         localStorage.removeItem(storageKey)
         showError('重設密碼連結已過期，請重新請求重設密碼')
@@ -183,6 +184,10 @@ export default function ResetPasswordPage() {
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <div className={memberCss.titleGroup}>
           <h2>歡迎回來!</h2>
           <h1>請重新設置密碼</h1>
@@ -231,11 +236,8 @@ export default function ResetPasswordPage() {
                   {errors.confirmPassword}
                 </span>
               )}
-              <button
-                className={memberCss.visibility}
-                type="button"
-               >
-               <FaRegEye/> 
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>

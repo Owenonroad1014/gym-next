@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import GoogleLoginPopup from '@/app/member/_component/g-login-btn'
@@ -64,12 +64,15 @@ export default function LoginPage() {
       await Swal.close() // 登入成功後關閉 Modal
 
       setTimeout(() => {
-        if (callbackUrl === '/member/register' || callbackUrl === '/member/login') {
+        if (
+          callbackUrl === '/member/register' ||
+          callbackUrl === '/member/login'
+        ) {
           router.replace('/')
         } else {
           router.push(callbackUrl)
         }
-      }, 1600)  // 已登入就直接跳轉
+      }, 1600) // 已登入就直接跳轉
     } else {
       // modal.show()
       if (code === 404) {
@@ -125,6 +128,10 @@ export default function LoginPage() {
   return (
     <div className={memberCss.loginContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.titleGroup}>
             <h2>歡迎回來!</h2>
@@ -185,7 +192,21 @@ export default function LoginPage() {
         <div className={memberCss.loginBtns}>
           <GoogleLoginPopup />
         </div>
+        <div className={memberCss.rgBtn}>
+          <span>還沒成為會員嗎?</span>
+          <Link className={memberCss.switchBtn} href="/member/register">
+            <span> 註冊帳號</span>
+          </Link>
+        </div>
       </div>
+      {/* <div className={memberCss.rgSelect}>
+        <div className={memberCss.rgBtn}>
+          <span>還沒成為會員嗎?</span>
+          <Link className={memberCss.switchBtn} href="/member/register">
+            <span> 註冊帳號</span>
+          </Link>
+        </div>
+      </div> */}
     </div>
   )
 }
