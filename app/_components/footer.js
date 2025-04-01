@@ -20,7 +20,7 @@ export default function Footer() {
         <div className={styles.top}>
           <section className={styles.part}>
             <div className={styles.title}>
-            CONTACT  &  FOLLOW  US!</div>
+            CONTACT & FOLLOW US!</div>
             <div className={styles.group}>
               <div className={styles.contactItem}>
                 <svg
