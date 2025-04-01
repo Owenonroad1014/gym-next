@@ -1,52 +1,42 @@
 'use client'
 
+import { useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useAuth } from '@/context/auth-context'
-import { GOOGLE_LOGIN_POST } from '@/config/api-path'
 import useFirebase from '../user/_hooks/use-firebase'
+import { useAuth } from '@/context/auth-context'
 
 export default function GoogleLoginPopup() {
-  const { loginGoogle, logoutFirebase } = useFirebase()
-  const { setAuth } = useAuth()
+  const { loginGoogle } = useFirebase()
+  const [isLoading, setIsLoading] = useState(false)
+  const { GoogleLogin} = useAuth()
+
+  // 使用 useSearchParams 和 useRouter 這些 hooks 在組件中
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackGoogleLoginPopup = async (providerData) => {
-    try {
-      const res = await fetch(GOOGLE_LOGIN_POST, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          google_uid: providerData.uid,
-          email: providerData.email,
-          name: providerData.displayName,
-          avatar: providerData.photoURL,
-        }),
-      })
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
 
-      const result = await res.json()
-      console.log(result)
-      if (result.success) {
-        setAuth(result.data)
-        localStorage.setItem(storageKey, JSON.stringify(result.data))
-        return { success: true }
-      } else {
-        return { success: false, error: result.error, code: result.code }
-      }
-    } catch (error) {
-      console.error('登入錯誤:', error.message)
-      alert('登入失敗，請稍後再試！')
-    }
+  const callbackGoogleLoginPopup = async (providerData) => {
+    setIsLoading(true)
+    const res = await GoogleLogin(providerData)
+    setIsLoading(false) // 在這裡確保 loading 狀態重置
+
+   
+  if (res.success) {
+    router.push(callbackUrl)
   }
+  }
+
   return (
     <>
       <button
-        onClick={() => {
-          callbackGoogleLoginPopup
+        onClick={async () => {
+          setIsLoading(true)
+          await loginGoogle(callbackGoogleLoginPopup)
+          setIsLoading(false)
         }}
+        disabled={isLoading}
       >
-        Google 登入
+        {isLoading ? '登入中...' : 'Google 登入'}
       </button>
     </>
   )

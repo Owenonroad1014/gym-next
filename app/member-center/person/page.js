@@ -8,7 +8,7 @@ import editCss from './_style/person.module.css'
 import { PROFILE_GET, PROFILE_PUT, AVATAR_PATH } from '@/config/api-path'
 
 export default function ProfileTable() {
-  const { getAuthHeader } = useAuth()
+  const { auth, getAuthHeader } = useAuth()
   const [previewAvatar, setPreviewAvatar] = useState() // 預設頭貼
   const [status, setStatus] = useState()
   const [profileData, setProfileData] = useState({
@@ -95,7 +95,9 @@ export default function ProfileTable() {
   }, [getAuthHeader])
   console.log('data.data:', profileData)
 
-  if (!profileData) return <div>Loading...</div>
+  if (!profileData) {
+    return <p>Loading...</p>; // 或者顯示 loading 畫面
+  }
 
   const confirmIntro = () => {
     return new Promise((resolve, reject) => {
@@ -149,26 +151,32 @@ export default function ProfileTable() {
   }
   const sendFormData = async () => {
     const formData = new FormData()
-    
+
     // 只傳送必要的欄位
     const { intro, item, goal, status } = profileData
-    
+
     // 處理資料格式
     formData.append('intro', intro || '')
     formData.append('status', Boolean(status))
-    
+
     // 確保item是陣列
     if (Array.isArray(item)) {
-      item.forEach(val => formData.append('item[]', val))
+      item.forEach((val) => formData.append('item[]', val))
     } else if (typeof item === 'string') {
-      item.split(/[\s、,]+/).filter(s => s.length > 0).forEach(val => formData.append('item[]', val))
+      item
+        .split(/[\s、,]+/)
+        .filter((s) => s.length > 0)
+        .forEach((val) => formData.append('item[]', val))
     }
 
     // 確保goal是陣列
     if (Array.isArray(goal)) {
-      goal.forEach(val => formData.append('goal[]', val))
+      goal.forEach((val) => formData.append('goal[]', val))
     } else if (typeof goal === 'string') {
-      goal.split(/[\s、,]+/).filter(s => s.length > 0).forEach(val => formData.append('goal[]', val))
+      goal
+        .split(/[\s、,]+/)
+        .filter((s) => s.length > 0)
+        .forEach((val) => formData.append('goal[]', val))
     }
 
     // 檢查FormData內容
@@ -176,7 +184,7 @@ export default function ProfileTable() {
       console.log(`${key}:`, value)
     }
     console.log('appendFormData:', ...formData)
-    
+
     try {
       const r = await fetch(`${PROFILE_PUT}?folder=avatar`, {
         method: 'PUT',
@@ -288,9 +296,12 @@ export default function ProfileTable() {
                       src={
                         previewAvatar // 如果有預覽頭貼（使用者剛上傳）
                           ? previewAvatar
-                          : profileData.avatar // 否則顯示資料庫的頭貼
+                          : auth.google_uid
+                          ? profileData?.avatar ||
+                            '/imgs/avatar/default-avatar.png' // 確保 profileData.avatar 存在
+                          : profileData?.avatar
                           ? `${AVATAR_PATH}/${profileData.avatar}`
-                          : '/imgs/avatar/default-avatar.png'
+                          : '/imgs/avatar/default-avatar.png' // 預設圖片
                       }
                       alt="頭貼預覽"
                     />
@@ -429,7 +440,7 @@ export default function ProfileTable() {
                       type="checkbox"
                       name="status"
                       id="public"
-                      checked={status}
+                      checked={profileData.status}
                       onChange={statusChangeForm}
                     />
                     <label htmlFor="public" className={editCss.switch}>
@@ -440,7 +451,7 @@ export default function ProfileTable() {
                 </td>
               ) : (
                 <td>
-                  {profileData.status == true ? '公開檔案' : '不公開檔案'}
+                  {profileData.status === true ? '公開檔案' : '不公開檔案'}
                 </td>
               )}
             </tr>
