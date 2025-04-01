@@ -16,7 +16,7 @@ INSERT INTO `class_categories` (`id`, `category_name`) VALUES
 -- 課程類型資料表 (class_types)
 CREATE TABLE class_types (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    category_id INT NOT NULL.
+    category_id INT NOT NULL,
     type_name VARCHAR(50) NOT NULL,
     description TEXT,
     avatar_url VARCHAR(255),
@@ -87,7 +87,7 @@ VALUES
 -- 王雅婷教練 (舞蹈, 信義店)
 (5, 1, '2025-03-30', '09:00:00', '10:00:00', 3, 3, 20, 0),
 (5, 2, '2025-03-30', '14:00:00', '15:00:00', 3, 3, 20, 0),
-(5, 3, '2025-03-30', '19:00:00', '20:00:00', 3, 3, 20, 0);
+(5, 3, '2025-03-30', '19:00:00', '20:00:00', 3, 3, 20, 0),
 
 -- 陳思穎教練 (皮拉提斯)
 (7, 1, '2025-03-31', '10:30:00', '11:30:00', 1, 5, 15, 0),
