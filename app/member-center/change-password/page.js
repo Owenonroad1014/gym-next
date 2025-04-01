@@ -44,7 +44,13 @@ export default function ResetPasswordPage() {
   const onSubmit = async (e) => {
     e.preventDefault()
     setErrors({}) // 清空舊錯誤
-
+   
+    if (!resetPassForm.password) {
+      const newErrors ={}
+       newErrors.password = '請輸入舊密碼'
+      setErrors(newErrors)
+      return 
+    }
     const r = await fetch(CONFIRM_PASS_POST, {
       method: 'POST',
       body: JSON.stringify({ password: resetPassForm.password }),
@@ -55,12 +61,11 @@ export default function ResetPasswordPage() {
     })
     const result = await r.json()
 
-    if (result.success) {
-      router.push('/member-center/change-password/reset')
-    } else {
+    if (!result.success) {
       showError('密碼錯誤，請重新輸入')
-     
       console.warn(result)
+    } else {
+      router.push('/member-center/change-password/reset')
     }
   }
   return (
