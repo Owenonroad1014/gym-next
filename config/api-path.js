@@ -20,6 +20,8 @@ export const RESET_PASS_PUT = `${API_SERVER}/change-password/reset`
 export const PROFILE_GET = `${API_SERVER}/profile/get-profile`
 // 更新個人檔案的路由
 export const PROFILE_PUT = `${API_SERVER}/profile/edit-profile`
+// 會員中心取得name
+export const MEMBER_CENTER_NAME = `${API_SERVER}/profile/edit-profile`
 
 // 教練 地圖 照片路由
 export const IMGS_PATH = `${API_SERVER}/imgs`

@@ -57,8 +57,8 @@ export default function CenterList() {
           <>
             <div className={selectStyle.welcome}>
             <img src="/gymdot.svg" alt="gym-icon" className={selectStyle.welcomeicon}/>
-            WELOCOME !{' '}
-              {name}{' '}
+            WELOCOME !
+              {auth.name}
             </div>
           </>
         ) : (
