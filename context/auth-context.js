@@ -1,12 +1,13 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { JWT_LOGIN_POST } from '@/config/api-path'
+import { JWT_LOGIN_POST, GOOGLE_LOGIN_POST } from '@/config/api-path'
 
 const AuthContext = createContext()
 
 const emptyAuth = {
   id: 0,
   account: '',
+  google_uid: '',
   avatar: '',
   name: '',
   token: '',
@@ -29,7 +30,6 @@ export function AuthContextProvider({ children }) {
         'Content-Type': 'application/json',
       },
     })
-
     const result = await r.json()
     if (result.success) {
       localStorage.setItem(storageKey, JSON.stringify(result.data))
@@ -40,7 +40,34 @@ export function AuthContextProvider({ children }) {
     }
   }
 
- 
+  const GoogleLogin = async (providerData) => {
+    try {
+      const res = await fetch(GOOGLE_LOGIN_POST, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          google_uid: providerData.uid,
+          email: providerData.email,
+          name: providerData.displayName,
+          avatar: providerData.photoURL,
+        }),
+      })
+
+      const result = await res.json()
+      console.log(result)
+      if (!res.ok) {
+        throw new Error(result.message || '登入失敗')
+      }
+      const data = result.data
+      localStorage.setItem(storageKey, JSON.stringify(data))
+      setAuth(data)
+      return { success: true }
+    } catch (error) {
+      return { success: false, error: error.message }
+    }
+  }
 
   const getAuthHeader = () => {
     if (!auth.token) return {}
@@ -52,14 +79,16 @@ export function AuthContextProvider({ children }) {
     if (data) {
       try {
         const authData = JSON.parse(data)
-        setAuth(authData)
-      } catch (ex) {}
+        setAuth(authData || emptyAuth)
+      } catch (ex) {
+        setAuth(emptyAuth)
+      }
     }
   }, [])
 
   return (
     <AuthContext.Provider
-      value={{ auth, logout, login, getAuthHeader,setAuth }}
+      value={{ auth, logout, login, getAuthHeader, GoogleLogin }}
     >
       {children}
     </AuthContext.Provider>
