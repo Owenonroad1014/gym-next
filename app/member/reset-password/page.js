@@ -18,7 +18,7 @@ export default function ResetPasswordPage() {
 
   const MySwal = withReactContent(Swal)
   const showError = (message) => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -33,14 +33,12 @@ export default function ResetPasswordPage() {
         if (result.isConfirmed) {
           res()
           router.push('/member/forget-password')
-        } else {
-          rej()
         }
       })
     })
   }
   const successModal = (message) => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -54,10 +52,8 @@ export default function ResetPasswordPage() {
       }).then((result) => {
         if (result.isConfirmed) {
           res()
-          router.push('/member/forget-password')
-        } else {
-          rej()
-        }
+          router.push('/member/login')
+        } 
       })
     })
   }
@@ -98,14 +94,14 @@ export default function ResetPasswordPage() {
       const timeRemaining = Number(expiresAt) - now
       if (timeRemaining <= 0) {
         localStorage.removeItem(storageKey)
-        showError('重設密碼連結已過期，請重新請求')
+        showError('重設密碼連結已過期，請重新請求重設密碼')
         return
       }
 
       // 🔥 設定定時器，讓 localStorage 自動清除
       const timeoutId = setTimeout(() => {
         localStorage.removeItem(storageKey)
-        showError('重設密碼連結已過期，請重新請求')
+        showError('重設密碼連結已過期，請重新請求重設密碼')
       }, timeRemaining)
 
       return () => clearTimeout(timeoutId)
@@ -119,7 +115,7 @@ export default function ResetPasswordPage() {
     .object({
       newPassword: z
         .string()
-        .min(1, { message: '密碼為必填' })
+        .min(1, { message: '請輸入新密碼' })
         .min(8, {
           message:
             '密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#',
@@ -236,13 +232,10 @@ export default function ResetPasswordPage() {
                 </span>
               )}
               <button
-                className={memberCss.iconBtn}
+                className={memberCss.visibility}
                 type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+               >
+               <FaRegEye/> 
               </button>
             </div>
           </div>

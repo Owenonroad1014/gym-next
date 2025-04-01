@@ -10,15 +10,18 @@
     align-items: center;
     padding: 40px 20px;
     margin-top: 50px;
+    border-bottom: 1px solid #eee;
 }
 
 .heroImage {
     width: 100%;
-    max-width: 1396px;
-    height: 415px;
+
+    max-width: 1440px;
+    height: 500px;
+
     position: relative;
     overflow: hidden;
-    border-radius: 80px;
+    border-radius: 70px;
     background-image: url('/homepagebanner.jpg');
     background-size: cover;
     background-position: center;
@@ -48,16 +51,19 @@
 }
 
 .mainHeading {
-    width: 100%;
+    width: 40%;
     max-width: 1071px;
     opacity: 1; /* 改為 1，避免與遮罩層疊加透明度 */
     text-align: center;
     color: rgb(255, 255, 255);
     font-size: clamp(40px, 5vw, 84px);
-    font-weight: 600;
-    animation: slideIn 1s ease-out forwards;
+    font-weight: 400;
+    animation: slideIn 1.2s ease-out forwards;
     line-height: 1.2;
-    position: relative; /* 加入定位 */
+    position: absolute; 
+    font-size: 26px;
+    bottom:30px;
+    left: 10px;/* 加入定位 */
     z-index: 2; /* 確保文字在最上層 */
    
 }
