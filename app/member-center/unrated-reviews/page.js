@@ -6,17 +6,20 @@ import styles from "./_compenents/_styles/review.module.css";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 const MySwal = withReactContent(Swal);
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const headers = auth ? { ...getAuthHeader(), "Content-Type": "application/json" } : {};
 
   useEffect(() => {
     const fetchPendingReviews = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch(PENDING_REVIEWS_LIST, { headers });
         const data = await response.json();
         if (data.success) {
@@ -24,6 +27,8 @@ const Review = () => {
         }
       } catch (error) {
         console.error("獲取未評價商品錯誤:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPendingReviews();
@@ -41,6 +46,7 @@ const Review = () => {
           <textarea style="width: 80%;" id="review-text" class="swal2-textarea" placeholder="輸入您的評價"></textarea>
         </div>
       `,
+      confirmButtonColor: '#f87808',
       didOpen: () => {
         const starContainer = document.getElementById("star-container");
         for (let i = 1; i <= 5; i++) {
@@ -82,7 +88,7 @@ const Review = () => {
       const response = await fetch(SUBMIT_REVIEW_API, {
         method: "POST",
         headers,
-        body: JSON.stringify({ product_id: product.product_id, rating, review_text: comment }),
+        body: JSON.stringify({ product_id: product.product_id, rating, review_text: comment,order_item_id:product.order_item_id }),
       });
       const data = await response.json();
       if (data.success) {
@@ -97,31 +103,47 @@ const Review = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className={loaderStyle.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
+
   return (
     <article className={styles.review}>
       {products.length === 0 ? (
         <p>目前沒有未評價的商品</p>
       ) : (
-        products.map(product => (
-          <div className={styles.productReview} key={product.product_id}>
-            <div className={styles.imgContainer}>
-              <img src={`${IMG_PATH}/${product.image_url}`} alt={product.name} className={styles.img} />
-            </div>
-            <div className={styles.content}>
-              <div className={styles.contentItems}>
-                <div className={styles.productContent}><CiEdit /> 商品資訊</div>
-                <hr className={styles.divider} />
-                <div className={styles.contentItem}>
-                  <div>訂單編號: # {product.order_id}</div>
-                  <div>商品名稱: {product.name}</div>
-                  {product.weight !== null && <div>商品規格: {product.weight}公斤</div>}
-                  <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
+        <div className={styles.cardContainer}>
+          {products.map(product => (
+            <div className={styles.productReview} key={product.product_id}>
+              <div className={styles.imgContainer}>
+                <img src={`${IMG_PATH}/${product.image_url}`} alt={product.name} className={styles.img} />
+              </div>
+              <div className={styles.content}>
+                <div className={styles.contentItems}>
+                  <div>
+                  </div>
+                  <div>
+                    <div className={styles.productContent}><CiEdit /> 訂單資訊</div>
+                    <hr className={styles.divider} />
+                    <div className={styles.contentAll}>
+                      <div className={styles.contentItem}>
+                        <div>訂單編號: # {product.order_id}</div>
+                        <div>商品名稱: {product.name}</div>
+                        {product.weight !== null && <div>商品規格: {product.weight}公斤</div>}
+                        <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
+                      </div>
+                      <button onClick={() => handleOpenReview(product)} className={styles.button}>新增評價</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button onClick={() => handleOpenReview(product)} className={styles.button}>新增評價</button>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </article>
   );
