@@ -107,11 +107,12 @@ export default function AddProfileJsPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
+          router.push(callbackUrl)
         },
       })
     })
   }
-  
+
   const showError = (message) => {
     return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用

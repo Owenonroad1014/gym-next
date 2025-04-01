@@ -61,13 +61,15 @@ export default function LoginPage() {
 
     if (success) {
       await loginSuccess()
-      if (
-        router.push(callbackUrl) === '/member/register' ||
-        router.push(callbackUrl) === '/member/login'
-      ) {
-        router.replace('/')
-      }
-      router.push(callbackUrl) // 已登入就直接跳轉
+      await Swal.close() // 登入成功後關閉 Modal
+
+      setTimeout(() => {
+        if (callbackUrl === '/member/register' || callbackUrl === '/member/login') {
+          router.replace('/')
+        } else {
+          router.push(callbackUrl)
+        }
+      }, 1600)  // 已登入就直接跳轉
     } else {
       // modal.show()
       if (code === 404) {
@@ -104,7 +106,7 @@ export default function LoginPage() {
   }
 
   const loginSuccess = () => {
-    return new Promise((resolve) => {
+    return new Promise(() => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         imageUrl: '/gymdot.svg',
@@ -116,14 +118,6 @@ export default function LoginPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
-
-          if (
-            router.pathname === '/member/register' ||
-            router.pathname === '/member/login'
-          ) {
-            router.replace('/')
-          }
-          router.push(callbackUrl) // 已登入就直接跳轉},
         },
       })
     })
