@@ -99,8 +99,42 @@ export default function ProfileTable() {
     return <p>Loading...</p>; // 或者顯示 loading 畫面
   }
 
+    const MySwal = withReactContent(Swal)
+     const showError = (message) => {
+       return new Promise((res) => {
+         document.body.style.overflow = 'hidden' //畫面不要偏移使用
+         MySwal.fire({
+           text: message,
+           icon: 'error',
+           confirmButtonColor: '#0b3760',
+           confirmButtonText: '確定',
+           didClose: () => {
+             //畫面不要偏移使用
+             document.body.style.overflow = '' // 恢復頁面滾動
+           },
+         }).then((result) => {
+           if (result.isConfirmed) {
+             res()
+           }
+         })
+       })
+     }
+     const successModal = (message) => {
+         document.body.style.overflow = 'hidden' //畫面不要偏移使用
+         MySwal.fire({
+           text: message,
+           icon: 'success',
+           showConfirmButton: false,
+           timer:1500,
+           didClose: () => {
+             //畫面不要偏移使用
+             document.body.style.overflow = '' // 恢復頁面滾動
+           },
+         })
+       }
+     
   const confirmIntro = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       const MySwal = withReactContent(Swal)
       MySwal.fire({
@@ -118,14 +152,12 @@ export default function ProfileTable() {
       }).then((result) => {
         if (result.isConfirmed) {
           resolve()
-        } else {
-          reject()
-        }
+        } 
       })
     })
   }
   const confirmStatus = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       const MySwal = withReactContent(Swal)
       MySwal.fire({
@@ -143,8 +175,6 @@ export default function ProfileTable() {
       }).then((result) => {
         if (result.isConfirmed) {
           resolve()
-        } else {
-          reject()
         }
       })
     })
@@ -198,15 +228,15 @@ export default function ProfileTable() {
 
       // 確保伺服器回應成功
       if (result.success) {
-        alert('個人檔案已建立')
+        successModal('個人檔案已建立')
       } else {
         // 顯示伺服器返回的錯誤訊息
-        alert(`個人檔案建立失敗: ${result.message || '未知錯誤'}`)
+        showError(`個人檔案建立失敗: ${result.message || '未知錯誤'}`)
         console.warn('Error details:', result) // 在控制台顯示更多錯誤細節
       }
     } catch (error) {
       // 捕捉網路或請求錯誤
-      alert(`請求發生錯誤: ${error.message || '未知錯誤'}`)
+      showError(`請求發生錯誤: ${error.message || '未知錯誤'}`)
       console.error('Network or request error:', error)
     }
   }
