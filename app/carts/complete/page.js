@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./_styles/order-confirmation.module.css";
+import Link from 'next/link'
+import CheckoutProgress from "./_components/checkout-progress";
 
 function OrderConfirmationHeader({ imageUrl }) {
   return (
@@ -83,17 +85,22 @@ function OrderDetails() {
 
 function OrderConfirmation() {
   return (
+    
     <main className={styles.pageContainer}>
+    <CheckoutProgress/>
       <article className={styles.contentWrapper}>
         <OrderConfirmationHeader imageUrl="/cart-img/check.png" />
         <OrderDetails />
       </article>
-
-      <div className={styles.buttonContainer}>
-        <a href="/" className={styles.homeButton}>回首頁</a>
-      </div>
-    </main>
     
+    <div className={styles.container}>
+      <Link href="/">
+        <button className={styles.pseudo}>
+          <span>回首頁</span>
+        </button>
+      </Link>
+      </div>
+      </main>
   );
 }
 

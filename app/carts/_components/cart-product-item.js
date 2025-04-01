@@ -74,6 +74,7 @@ function CartProductItem({ product }) {
           title: '已成功刪除!',
           text: `${product.name} 已從購物車中刪除!`,
           icon: 'success',
+          confirmButtonColor: '#f87808',
         });
       }
     });
