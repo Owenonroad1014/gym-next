@@ -4,12 +4,19 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
 import chatStyle from './chatroom.module.css'
-import { CHATS_MSG, CHATS_ITEM, CHATS_LIST, READ_CHAT } from '@/config/api-path'
+import {
+  CHATS_MSG,
+  CHATS_ITEM,
+  CHATS_LIST,
+  READ_CHAT,
+  GYMFRIEND_AVATAR,
+} from '@/config/api-path'
 import { IoPerson } from 'react-icons/io5'
 import moment from 'moment'
 import EmojiPicker from 'emoji-picker-react'
 import io from 'socket.io-client'
 import { FaRegSmile, FaRegSmileWink } from 'react-icons/fa'
+import Image from 'next/image'
 // 创建单例 socket 连接
 let socket
 
@@ -43,6 +50,7 @@ export default function ChatRoomPage() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [isRead, setIsRead] = useState(false) //刷新用
   const [someoneInto, setSomeoneInto] = useState(false) //刷新用
+  const [typing, setTyping] = useState(false)
   const chatBoxRef = useRef(null)
   // 自動滾動到訊息底部
   const scrollToBottom = () => {
@@ -51,7 +59,12 @@ export default function ChatRoomPage() {
       chatBox.scrollTop = chatBox.scrollHeight
     }
   }
-
+  if (inputMsg.length > 0) {
+    socket.emit('typing', { chatroomId: chatroomId, typer: user })
+  }
+  if (inputMsg.length <= 0) {
+    socket.emit('stoptyping', { chatroomId: chatroomId, typer: user })
+  }
   // 訊息變化時滾動
   useEffect(() => {
     scrollToBottom()
@@ -283,6 +296,15 @@ export default function ChatRoomPage() {
       setSomeoneInto(!someoneInto)
     }
 
+    // 輸入中
+    const handleTyping = (data) => {
+      console.log(data)
+      setTyping(true)
+    }
+    const handleStopTyping = (data) => {
+      console.log(data)
+      setTyping(false)
+    }
     // 註冊事件監聽器
     socket.on('connect', handleConnect)
     socket.on('disconnect', handleDisconnect)
@@ -293,6 +315,8 @@ export default function ChatRoomPage() {
     socket.on('error_message', handleErrorMessage)
     socket.on('messageRead', handleReadMessage)
     socket.on('someoneIntoRoom', handlesomeoneIntoRoom)
+    socket.on('typing', handleTyping)
+    socket.on('stoptyping', handleStopTyping)
 
     // 如果已連接則手動執行處理函數
     if (socket.connected) {
@@ -310,6 +334,7 @@ export default function ChatRoomPage() {
       socket.off('error_message', handleErrorMessage)
       socket.off('messageRead', handleReadMessage)
       socket.off('someoneIntoRoom', handlesomeoneIntoRoom)
+      socket.off('typing', handleTyping)
 
       // 離開聊天室但不斷開連接
       socket.emit('leave_room', chatroomId)
@@ -428,10 +453,19 @@ export default function ChatRoomPage() {
       <div className={chatStyle.tempbody}>
         <div className={chatStyle.chatContainer}>
           <div className={chatStyle.friendName}>
-            <IoPerson /> &nbsp;
-            {chatroomId == 'official'
-              ? 'GYM部空間官方'
-              : chatItem.user1_id == user
+            <div className={chatStyle.avatar}>
+              <Image
+                src={`${GYMFRIEND_AVATAR}/${
+                  auth.id == chatItem.user1_id
+                    ? chatItem.user2_avatar
+                    : chatItem.user1_avatar
+                }`}
+                alt="avatar"
+                width={30}
+                height={30}
+              />
+            </div>
+            {chatItem.user1_id == user
               ? chatItem.user2_name
               : chatItem.user1_name}
           </div>
@@ -479,8 +513,7 @@ export default function ChatRoomPage() {
               ) : (
                 <li className={chatStyle.noMessages}>暫無消息</li>
               )}
-              {/* 滾動錨點
-              <div ref={messagesEndRef} /> */}
+              {typing ? <li>對方正在輸入中...</li> : ''}
             </ul>
           </div>
           {/* 訊息輸入區域 */}

@@ -35,90 +35,73 @@ export default function FriendListPage() {
   const [error, setError] = useState('')
   const [isdelete, setisdelete] = useState('') //刷新用
   const [isRead, setisRead] = useState('')//刷新用
-  // const notifydeleteChat = () => {
-  //   const Toast = Swal.mixin({
-  //     toast: true,
-  //     position: 'top-end',
-  //     showConfirmButton: false,
-  //     timer: 3000,
-  //     timerProgressBar: false,
-  //     didOpen: (toast) => {
-  //       toast.onmouseenter = Swal.stopTimer
-  //       toast.onmouseleave = Swal.resumeTimer
-  //     },
-  //   })
-  //   Toast.fire({
-  //     icon: 'success',
-  //     title: `已成功刪除聊天室`,
-  //   })
+
+  // const fetchRead = async (id) => {
+  //   try {
+  //     const res = await fetch(READ_CHAT, {
+  //       method: 'POST',
+  //       headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ chat_id: id }),
+  //     })
+  //     if (!res.ok) {
+  //       setError('Failed to read chat room')
+  //     }
+  //     const data = await res.json()
+  //     setisRead(!isRead)
+  //   } catch (err) {
+  //     setError(err.message || 'Something went wrong')
+  //   }
   // }
 
-  const fetchRead = async (id) => {
-    try {
-      const res = await fetch(READ_CHAT, {
-        method: 'POST',
-        headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: id }),
-      })
-      if (!res.ok) {
-        setError('Failed to read chat room')
-      }
-      const data = await res.json()
-      setisRead(!isRead)
-    } catch (err) {
-      setError(err.message || 'Something went wrong')
-    }
-  }
-
   // 處理 Socket 連接
-  useEffect(() => {
-    if (!socket || !user) return
+  // useEffect(() => {
+  //   if (!socket || !user) return
 
     // 連接事件處理
-    const handleConnect = () => {
-      console.log('聊天列表已連接到 Socket.io 服務器')
-      // 發送用户 ID
-      socket.emit('userId', user)
-    }
+    // const handleConnect = () => {
+    //   console.log('聊天列表已連接到 Socket.io 服務器')
+    //   // 發送用户 ID
+    //   socket.emit('userId', user)
+    // }
 
     // 斷開連接處理
-    const handleDisconnect = (reason) => {
-      console.log('聊天列表與 Socket.io 服務器斷開連接:', reason)
-    }
+    // const handleDisconnect = (reason) => {
+    //   console.log('聊天列表與 Socket.io 服務器斷開連接:', reason)
+    // }
 
     // 處理未讀數量更新
-    const handleUnreadUpdate = ({ chat_id, unread_count }) => {
-      console.log('收到未讀數量更新:', { chat_id, unread_count })
-      setChatListData(prevData => {
-        if (!prevData.rows) return prevData
-        return {
-          ...prevData,
-          rows: prevData.rows.map(chat => 
-            chat.id === chat_id 
-              ? { ...chat, unread_count } 
-              : chat
-          )
-        }
-      })
-    }
+    // const handleUnreadUpdate = ({ chat_id, unread_count }) => {
+    //   console.log('收到未讀數量更新:', { chat_id, unread_count })
+    //   setChatListData(prevData => {
+    //     if (!prevData.rows) return prevData
+    //     return {
+    //       ...prevData,
+    //       rows: prevData.rows.map(chat => 
+    //         chat.id === chat_id 
+    //           ? { ...chat, unread_count } 
+    //           : chat
+    //       )
+    //     }
+    //   })
+    // }
 
     // 註冊事件監聽器
-    socket.on('connect', handleConnect)
-    socket.on('disconnect', handleDisconnect)
-    socket.on('unread_update', handleUnreadUpdate)
+    // socket.on('connect', handleConnect)
+    // socket.on('disconnect', handleDisconnect)
+    // socket.on('unread_update', handleUnreadUpdate)
 
     // 如果已連接則手動執行處理函數
-    if (socket.connected) {
-      handleConnect()
-    }
+    // if (socket.connected) {
+    //   handleConnect()
+    // }
 
     // 清理函數
-    return () => {
-      socket.off('connect', handleConnect)
-      socket.off('disconnect', handleDisconnect)
-      socket.off('unread_update', handleUnreadUpdate)
-    }
-  }, [user])
+  //   return () => {
+  //     socket.off('connect', handleConnect)
+  //     socket.off('disconnect', handleDisconnect)
+  //     socket.off('unread_update', handleUnreadUpdate)
+  //   }
+  // }, [user])
 
   useEffect(() => {
     setUser(auth.id)

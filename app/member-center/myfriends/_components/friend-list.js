@@ -2,26 +2,30 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import friendListStyle from './friendList.module.css'
+import friendListStyle from '../_styles/friendList.module.css'
 import { useAuth } from '@/context/auth-context'
+import { IoChatbubbleEllipsesSharp } from 'react-icons/io5'
+import { FaTrashAlt, FaUserFriends } from 'react-icons/fa'
 import {
-  FRIEND_LIST,
   FRIEND_REQ_LIST,
   FRIEND_ACCEPT,
   FRIEND_REJECT,
   FRIEND_DELETE,
+  CHATS_LIST,
+  GYMFRIEND_AVATAR,
 } from '@/config/api-path'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import Image from 'next/image'
 export default function FriendListPage() {
   const { auth, getAuthHeader } = useAuth()
-  const [friendListData, setfriendListData] = useState({})
   const [friendRequestListData, setFriendRequestListData] = useState({})
+  const [chatListData, setChatListData] = useState({})
   const [friendAccept, setFriendAccept] = useState({})
   const [isAccept, setIsAccept] = useState(false) //控制更新狀態刷新
   const [isDelete, setIsDelete] = useState(false) //控制更新狀態刷新
   const [error, setError] = useState('')
+
   // 通知接受好友邀請
   const notifyacceptRequest = (username) => {
     setIsAccept(!isAccept)
@@ -61,28 +65,35 @@ export default function FriendListPage() {
     })
   }
   // 通知刪除好友
-  const notifydeleteFriend = (user,username) => {
+  const notifydeleteFriend = (user, username) => {
     setIsAccept(!isAccept)
-    Swal.fire({
+    document.body.style.overflow = 'hidden'
+    const MySwal = withReactContent(Swal)
+    MySwal.fire({
       title: `確定要刪除好友${username}?`,
-      text: "刪除後無法復原",
-      icon: "warning",
+      text: '刪除後無法復原',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "rgba(0, 0, 0, 0.5)",
-      cancelButtonColor: "#f87808",
-      confirmButtonText: "是",
-      cancelButtonText: "否",
+      confirmButtonColor: 'rgba(0, 0, 0, 0.5)',
+      cancelButtonColor: '#f87808',
+      confirmButtonText: '是',
+      cancelButtonText: '否',
+      didClose: () => {
+        document.body.style.overflow = ''
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteFriend(user,username)
-        Swal.fire({
+        deleteFriend(user, username)
+        MySwal.fire({
           title: `已成功刪除好友${username}`,
-          icon: "success",
-          confirmButtonColor: "#f87808",
-        });
+          icon: 'success',
+          confirmButtonColor: '#f87808',
+          didClose: () => {
+            document.body.style.overflow = ''
+          },
+        })
       }
-    });
-    
+    })
   }
   // 無法刪除好友
   const notifydeleteFriendError = (username) => {
@@ -143,21 +154,23 @@ export default function FriendListPage() {
   }
 
   useEffect(() => {
-    // 獲取好友列表
-    const fetchFriendList = async () => {
+    // 獲取聊天室列表
+    const fetchChatsList = async () => {
       try {
-        const res = await fetch(FRIEND_LIST, {
+        const res = await fetch(CHATS_LIST, {
           headers: { ...getAuthHeader() },
         })
         if (!res.ok) {
-          setError('Failed to fetch friends')
+          setError('Failed to fetch chats')
         }
         const data = await res.json()
-        setfriendListData(data || {})
+        setChatListData(data || {})
       } catch (err) {
         setError(err.message || 'Something went wrong')
       }
     }
+
+    fetchChatsList()
     // 獲取邀請好友列表
     const fetchFriendRequestList = async () => {
       try {
@@ -174,7 +187,6 @@ export default function FriendListPage() {
       }
     }
 
-    fetchFriendList()
     fetchFriendRequestList()
   }, [auth, getAuthHeader, isAccept, isDelete])
 
@@ -241,20 +253,27 @@ export default function FriendListPage() {
   return (
     <>
       <div className={friendListStyle.friendsPage}>
-        <h1>好友列表</h1>
-        <div className={friendListStyle.search}>
-          <input type="text" placeholder="搜尋好友" />
-        </div>
-
-        {/* 顯示訊息 */}
-        {/* {message && <p>{message}</p>} */}
-        <h2>好友請求</h2>
+        <p className={friendListStyle.title}>
+          <FaUserFriends /> &nbsp; 好友列表
+        </p>
+        <div className={friendListStyle.subtitle}>好友請求</div>
+        <div className={friendListStyle.dash}></div>
         <ul>
           {friendRequestListData.totalRows > 0 ? (
             friendRequestListData?.data?.map((v, i) => {
               return (
                 <li key={i}>
-                  <div className={friendListStyle.name}>{v.sender_name}</div>
+                  <div className={friendListStyle.leftsection}>
+                    <div className={friendListStyle.avatar}>
+                      <Image
+                        src={`${GYMFRIEND_AVATAR}/${v.sender_avatar}`}
+                        alt="avatar"
+                        width={35}
+                        height={35}
+                      />
+                    </div>
+                    <div className={friendListStyle.name}>{v.sender_name}</div>{' '}
+                  </div>
                   <div className={friendListStyle.btngroup}>
                     <button
                       onClick={() =>
@@ -277,15 +296,15 @@ export default function FriendListPage() {
               )
             })
           ) : (
-            <p>尚未有好友邀請...</p>
+            <p className={friendListStyle.nofriReq}>尚未有好友邀請...</p>
           )}
         </ul>
         <br />
-        <hr />
-        <h2>我的好友</h2>
+        <div className={friendListStyle.subtitle}>我的好友</div>
+        <div className={friendListStyle.dash}></div>
         <ul>
-          {friendListData.totalRows > 0 ? (
-            friendListData?.rows?.map((v, i) => {
+          {chatListData.totalRows > 0 ? (
+            chatListData?.rows?.map((v, i) => {
               if (
                 (auth.id == v.user1_id && v.user1_delete == 1) ||
                 (auth.id == v.user2_id && v.user2_delete == 1)
@@ -293,32 +312,48 @@ export default function FriendListPage() {
                 return null
               }
               return (
-                <li key={i}>
-                  <div className={friendListStyle.name}>
-                    {v.member_id == v.user1_id ? v.user2_name : v.user1_name}{' '}
+                <li key={v.id}>
+                  <div className={friendListStyle.leftsection}>
+                    <div className={friendListStyle.avatar}>
+                      <Image
+                        src={`${GYMFRIEND_AVATAR}/${
+                          auth.id == v.user1_id
+                            ? v.user2_avatar
+                            : v.user1_avatar
+                        }`}
+                        alt="avatar"
+                        width={35}
+                        height={35}
+                      />
+                    </div>
+                    <div className={friendListStyle.name}>
+                      {auth.id == v.user1_id ? v.user2_name : v.user1_name}
+                    </div>
                   </div>
                   <div className={friendListStyle.btngroup}>
                     <button>
                       {' '}
-                      <Link href="/chat">發送訊息...</Link>
+                      <Link href={`/member-center/myfriends/chat-list/${v.id}`}>
+                        <IoChatbubbleEllipsesSharp />
+                      </Link>
                     </button>
                     <button
-                      style={{ backgroundColor: '#c97d7d' }}
+                      className={friendListStyle.trash}
                       onClick={() => {
-                        notifydeleteFriend( v.member_id === v.user1_id ? v.user2_id : v.user1_id,
-                          v.member_id === v.user1_id
-                            ? v.user2_name
-                            : v.user1_name)
+                        notifydeleteFriend(
+                          auth.id === v.user1_id ? v.user2_id : v.user1_id,
+                          auth.id === v.user1_id ? v.user2_name : v.user1_name
+                        )
                       }}
                     >
-                      刪除好友
+                      <FaTrashAlt />
                     </button>
                   </div>
                 </li>
               )
             })
           ) : (
-            <p>目前沒有好友</p>
+            <p className={friendListStyle.nofriReq}>目前沒有好友...</p>
           )}
         </ul>
       </div>

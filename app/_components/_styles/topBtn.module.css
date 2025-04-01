@@ -1,0 +1,40 @@
+.container{
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container img {
+    animation: rotateAnimation 5s  linear infinite;
+  }
+  @keyframes rotateAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+.text {
+    font-size: 0.5em;
+    width: 100px;
+    color: rgba(255, 255, 255, 0.658);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition-duration: .7s;
+    margin-top: 10px;
+  }
+  
+
+  .container:hover .text {
+    opacity: 1;
+    transition-duration: .7s;
+  }
+
+  

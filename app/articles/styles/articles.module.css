@@ -263,6 +263,8 @@
   text-decoration: none;
 }
 .images {
+  border: none;
+  border-radius: 3px;
   position: relative;
   position: absolute;
   width: 100%;
@@ -274,7 +276,6 @@
   width: 60px;
   height: 60px;
   background-color: white;
-  /* border: 3px solid #333; */
   border-radius: 50%;
   position: absolute;
   right: -24px;
@@ -307,6 +308,8 @@
 .content {
   height: 50%;
   width: 94%;
+  border: none;
+  border-radius: 3px;
   background-color: #cdc9c9da;
   padding: 10px 20px;
   margin: 10px 0;

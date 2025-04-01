@@ -46,13 +46,14 @@ export default function ForgetPasswordPage() {
       timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
-        document.body.style.overflow = ''
-        router.push('/member/login') // 恢復頁面滾動
+        document.body.style.overflow = '' // 恢復頁面滾動
+        setResetForm({
+          email: '',
+        })
       },
     })
   }
 
-  
   const [errors, setErrors] = useState({})
   const [resetForm, setResetForm] = useState({
     email: '',

@@ -1,202 +1,195 @@
-.container {
-    display: flex;
-    justify-content: center;
-    max-width: 1440px;
-    margin: 0px auto;
-  }
-  
-  /* profile form */
-  /* 表單樣式 */
-  .form {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    border-radius: 3px;
-  }
-  .form form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    padding: 50px 0px;
-    border-radius: 3px;
-  }
-  
-  .form h1 {
-    margin-bottom: 15px 0px;
-  }
-  
-  .formGroup {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    margin: 10px 40px;
-  }
-  .formGroup label {
-    margin-bottom: 10px;
-  }
-  .formGroup input {
-    width: 95%;
-    padding: 10px;
-    margin: 0px auto;
-    background: transparent;
-    border: 1px solid #0b3760;
-    border-radius: 3px;
-  }
-  .formGroup input:focus {
-    outline: none;
-    border: 1px solid #db6318;
-  }
-  
-  /* avatar */
-  .formGroup.avatarGroup {
-    align-items: center;
-    width: 100%;
-    margin: 40px;
-    margin-bottom: 20px;
-  }
-  .formGroup.avatarGroup label {
-    padding: 0;
-    margin: 0;
-    width: 30%;
-    text-align: center;
-  }
-  .formGroup.avatarGroup .avatar {
-    width: 15vw;
-    background-color: #e5e3e3a4;
-    border-radius: 3px;
-    aspect-ratio: 1/1;
-    overflow: hidden;
-  }
-  .formGroup.avatarGroup .avatar img {
-    width: 100%;
-    border-radius: 3px;
-  }
-  
-  /* sex radio */
-  .radios {
-    display: flex;
-    width: 100%;
-  }
-  .radioItem {
-    width: 16%;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 20px;
-  }
-  .radios .radioItem input {
-    position: relative;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    margin: 0px 20x;
-    border: 1px solid #0b3760;
-    border-radius: 3px;
-  }
-  .radioItem input:checked::before {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background-color: #db6318; /* 內圈變橘色 */
-    border-radius: 3px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* goal checkbox */
-  .checkboxes {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    margin-left: 1.125rem;
-  }
-  .current input {
-    display: none;
-  }
-  .current label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 15px;
-    border: 1px solid #0b3760;
-    border-radius: 3px;
-    margin-right: 10px;
-  }
-  .current input:checked + label {
-    background-color: #db6318;
-    color: #fff;
-    border: 1px solid #db6318;
-  }
-  
-  /* public switch */
-  .status {
-    display: flex;
-  }
-  .status input {
-    display: none;
-  }
-  .switch + span {
-    margin-top: 2px;
-  }
-  .switch {
-    width: 40px;
-    height: 20px;
-    margin: 4px 10px 0px 20px;
-    background: #db6318;
-    display: inline-block;
-    border-radius: 100px;
-    position: relative;
-  }
-  .switchBtn {
-    position: absolute;
-    left: calc(100% - 18px);
-    top: 2px;
-    width: 16px;
-    height: 16px;
-    background: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s, left 0.3s; /* 確保兩個屬性都能順利過渡 */
-  }
-  .status input:not(:checked) + label {
-    background: #0b3760;
-  }
-  .status input:not(:checked) + label .switchBtn {
-    left: 2px;
-  }
-  
-  .btn {
-    padding: 8px 18px;
-    text-align: center;
-    border-radius: 3px;
-    background: #0b3760;
-    color: #fff;
-    font-size: 18px;
-  }
-  /* 同loginBtn樣式 */
-  
-  .intro {
-    width: 95%;
-    height: 150px;
-    font-size: 14px;
-    resize: none;
-    padding: 10px;
-    margin: 0px auto;
-    background: transparent;
-    border: 1px solid #0b3760;
-    border-radius: 3px;
-  }
-  .intro:focus {
-    outline: none;
-    border: 1px solid #db6318;
-  }
-  .textDanger {
-    margin-left: 15px;
-    display: flex;
-    justify-content: flex-start;
-    color: red;
-    font-size: 12px;
-  }
-  
+.personContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* 表單樣式 */
+.personContainer .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form h1 {
+  margin-bottom: 15px 0px;
+}
+.personContainer table {
+  width: 100%;
+padding: 20px;
+}
+.personContainer tbody {
+  display: flex;
+}
+.personContainer .left {
+  display: flex;
+  width: 30%;
+  margin-right: 20px;
+}
+
+
+.personContainer .right .disable tr{
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+font-size: 18px;
+}
+.personContainer .right .disable th{
+  width:12%;
+  display: flex;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.personContainer .right .titleLabel {
+  width:18%;
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 8px;
+  margin-right: 20px;
+}
+.formGroup input {
+  width: 95%;
+  padding: 10px;
+  margin: 0px auto;
+  font-size: 16px;
+  background: transparent;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+}
+.formGroup input:focus {
+  outline: none;
+  border: 1px solid #f87808;
+}
+
+.formGroup textarea{
+  font-size: 16px;
+}
+/* avatar */
+.formGroup.avatarGroup {
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+.formGroup.avatarGroup label {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.formGroup.avatarGroup .avatar {
+  background-color: #e5e3e3a4;
+  border-radius: 3px;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.formGroup.avatarGroup .avatar img {
+  width: 100%;
+  border-radius: 3px;
+}
+
+/* goal checkbox */
+.checkboxes {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-left: 1.125rem;
+}
+.current input {
+  display: none;
+}
+.current label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 15px;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+.current input:checked + label {
+  background-color: #f87808;
+  color: #fff;
+  border: 1px solid #f87808;
+}
+
+/* public switch */
+.status {
+  display: flex;
+}
+.status input {
+  display: none;
+}
+.switch + span {
+  margin-top: 2px;
+}
+.switch {
+  width: 40px;
+  height: 20px;
+  margin: 4px 10px 0px 20px;
+  background: #f87808;
+  display: inline-block;
+  border-radius: 100px;
+  position: relative;
+}
+.switchBtn {
+  position: absolute;
+  left: calc(100% - 18px);
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s, left 0.3s; /* 確保兩個屬性都能順利過渡 */
+}
+.status input:not(:checked) + label {
+  background: #0b3760;
+}
+.status input:not(:checked) + label .switchBtn {
+  left: 2px;
+}
+
+.btn {
+  padding: 8px 18px;
+  text-align: center;
+  border-radius: 3px;
+  background: #f87808;
+  border: 1px solid transparent;
+  color: #fff;
+  font-size: 18px;
+}
+/* 同loginBtn樣式 */
+
+.intro {
+  width: 95%;
+  height: 150px;
+  font-size: 14px;
+  resize: none;
+  padding: 10px;
+  margin: 0px auto;
+  background: transparent;
+  border: 1px solid #0b3760;
+  border-radius: 3px;
+}
+.intro:focus {
+  outline: none;
+  border: 1px solid #f87808;
+}
+.textDanger {
+  margin-left: 15px;
+  display: flex;
+  justify-content: flex-start;
+  color: red;
+  font-size: 12px;
+}
