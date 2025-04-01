@@ -42,14 +42,16 @@ const renderStars = (rating) => {
         <hr className={styles.divider} />
         <p className={styles.description}>{description}</p>
         <div className={styles.rating}>
-            {average_rating !== null ? (
-              <>
-                {renderStars(average_rating)}
-                {average_rating > 0 && <span className={styles.reviewCount}>({average_rating})</span>}
-              </>
-            ) : (
-              <span className={styles.noReviews}>尚無評價</span>
-            )}
+        {average_rating !== null ? (
+  <>
+    {renderStars(Number(average_rating))} {/* 確保是數字 */}
+    <span className={styles.reviewCount}>
+      ({Number(average_rating).toFixed(1)})  {/* 轉數字後再格式化 */}
+    </span>
+  </>
+) : (
+  <span className={styles.noReviews}>尚無評價</span>
+)}
           </div>
       </div>
     </article>

@@ -1,10 +1,9 @@
-// components/HeroSection.js
 "use client"
 
 import React, { useEffect } from 'react';
 import styles from './_styles/hero-section.module.css';
 import gsap from 'gsap';
-
+import ShinyText from './title'
 
 const HeroSection = () => {
 
@@ -18,25 +17,20 @@ const HeroSection = () => {
   }, []);
 
   return (
-  
-      <div className={styles.container}>
-        <div className={styles.title}>GYMBOO SPACE</div>
-        <div className={styles.heroImage}>
-          <div className={styles.content}>
-
-            <div className={styles.mainHeading}>
+    <div className={styles.container}>
+              <ShinyText text="GYMBOO SPACE" speed={12} />  
+      <div className={styles.heroImage}>
+        <div className={styles.content}>
+        <div className={styles.mainHeading}>
+       
             make progress and grow up together
             </div>
+
           </div>
         </div>
       </div>
-    
-  
+    </div>
   );
 };
 
 export default HeroSection;
-
-
-
-
