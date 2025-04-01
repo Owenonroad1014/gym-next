@@ -3,8 +3,8 @@ import Hyperspeed from './_components/hy';
 import styles from '../styles/home.module.css'
 import HeroSection from './_components/hero-section';
 import Features from './_components/features-section';
-import ClassSection from './_components/class-section';
-import CoachSection from './_components/coach-section';
+import ClassSection from './_components/friends-section';
+import LocationSection from './_components/location-section';
 import ProductSection from './_components/product-section';
 
 
@@ -19,9 +19,11 @@ export default function Home() {
       
       <HeroSection/>
       <Features/>
-      <ClassSection/>
-      <CoachSection/>
+
       <ProductSection/>
+      <ClassSection/>
+      <LocationSection/>
+      
       </>
   )
 }

@@ -14,8 +14,12 @@ export default function Header() {
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
   const { cartQuantity } = useCart()
+  const [mounted, setMounted] = useState(false)
 
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +58,12 @@ export default function Header() {
     if (/^\/products\/\d+/.test(pathname)) {
       return headerstyles.secondHeader
     }
+    if(pathname.startsWith('/carts')){
+      return headerstyles.secondHeader
+    }
+    if (pathname === '/') {
+      return headerstyles.homeHeader
+    }
     return headerstyles.defaultHeader
   }
 
@@ -68,7 +78,13 @@ export default function Header() {
         <div>
           <Link href="/" className={headerstyles.logo}>
             <Image
-              src="/gym-logo-white.svg"
+              src={
+                mounted && pathname === '/'
+                  ? isScrolling
+                    ? '/gym-logo-white.svg'
+                    : '/gym-logo.svg'
+                  : '/gym-logo-white.svg'
+              }
               alt="Logo"
               width={130}
               height={40}
@@ -79,74 +95,59 @@ export default function Header() {
         {/* 導航選單 */}
 
         {/* 右側圖示與搜尋欄 */}
-        <div className={headerstyles.rightSection}>
-          <Drawer />
-          {/* <div className={headerstyles.navMenu}>
-       <Link href="/coaches" className={headerstyles.navLink}>
-            找GYM身教練
-          </Link>
-          <Link href="/articles" className={headerstyles.navLink}>
-            GYM享知識
-          </Link>
-          <Link href="/locations" className={headerstyles.navLink}>
-            找GYM點
-          </Link>
-          <Link href="/friends" className={headerstyles.navLink}>
-            找GYM友
-          </Link>
-        </div>
 
         {/* 右側圖示與搜尋欄 */}
 
-          <div className={headerstyles.rightSection}>
-            {auth.id ? (
-              <>
-                <Link href="/member-center" className={headerstyles.navLink}>
-                  <div className={headerstyles.navAvatar}>
-                    <img
-                      src={
-                        auth.google_uid
-                          ? auth.avatar // 使用 Google 大頭貼
-                          : `${AVATAR_PATH}/${
-                              auth.avatar || 'default-avatar.png'
-                            }`
-                      }
-                      alt=""
-                    />
-                  </div>
-                </Link>
-                <a
-                  href="/qs"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    logout()
-                  }}
-                  className={headerstyles.navLink}
-                >
-                  登出
-                </a>
-              </>
-            ) : (
-              <>
-                {/* 登入按鈕 */}
-                <Link href="/member/login" className={headerstyles.navLink}>
-                  登入
-                </Link>
-                {/* 註冊按鈕 */}
-                <Link href="member/register" className={headerstyles.navLink}>
-                  註冊
-                </Link>
-              </>
-            )}
-            <Link href="/carts" className={headerstyles.navLink}>
-              <div className={headerstyles.cartIcon}>
-                <FaCartPlus />
-                {cartQuantity > 0 && (
-                  <span className={headerstyles.cartCount}>{cartQuantity}</span>
-                )}
-              </div>
-            </Link>
-          </div>
+        <div className={headerstyles.rightSection}>
+          {' '}
+          <Drawer />
+          {auth.id ? (
+            <>
+              <Link href="/member-center" className={headerstyles.navLink}>
+                <div className={headerstyles.navAvatar}>
+                  <img
+                    src={
+                      auth.google_uid
+                        ? auth.avatar // 使用 Google 大頭貼
+                        : `${AVATAR_PATH}/${
+                            auth.avatar || 'default-avatar.png'
+                          }`
+                    }
+                    alt=""
+                  />
+                </div>
+              </Link>
+              <a
+                href="/qs"
+                onClick={(e) => {
+                  e.preventDefault()
+                  logout()
+                }}
+                className={headerstyles.navLink}
+              >
+                登出
+              </a>
+            </>
+          ) : (
+            <>
+              {/* 登入按鈕 */}
+              <Link href="/member/login" className={headerstyles.navLink}>
+                登入
+              </Link>
+              {/* 註冊按鈕 */}
+              <Link href="member/register" className={headerstyles.navLink}>
+                註冊
+              </Link>
+            </>
+          )}
+          <Link href="/carts" className={headerstyles.navLink}>
+            <div className={headerstyles.cartIcon}>
+              <FaCartPlus />
+              {cartQuantity > 0 && (
+                <span className={headerstyles.cartCount}>{cartQuantity}</span>
+              )}
+            </div>
+          </Link>
         </div>
       </div>
     </>

@@ -25,7 +25,7 @@ const HeroSection = () => {
           <div className={styles.content}>
 
             <div className={styles.mainHeading}>
-              {/* 打造更好的自己<br/>一起GYM步吧 ! */}
+            make progress and grow up together
             </div>
           </div>
         </div>
