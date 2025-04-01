@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 24px;
+    /* padding: 40px; */
   }
   
   .contentWrapper {
@@ -22,7 +22,7 @@
   .confirmationImage {
     width: 250px;
     height: 250px;
-    margin: 20px; 
+    margin: 5px; 
   }
   
   .confirmationTitle {
@@ -35,7 +35,7 @@
   
   .orderDetailsContainer {
     gap: 30px;
-    width: 100%;
+    /* width: 100%; */
     max-width: 369px;
     display: flex;
     flex-direction: column;
@@ -64,3 +64,30 @@
     }
   }
   
+  .container {
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    gap: 90px; /* 設定按鈕間距 */
+    margin: 40px; /* 與表格的間距 */
+}
+
+.pseudo {
+    position: relative;
+    display: inline-block;
+    padding: 0.5em 1.5em;
+    font-family: helvetica;
+    color: white;
+    font-size: 20px;
+    background-color: #eb854a;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transform: skew(-35deg); /* 讓按鈕變成平行四邊形 */
+    overflow: hidden;
+}
+
+.pseudo span {
+    display: inline-block;
+    transform: skew(35deg); /* 讓文字回正 */
+}

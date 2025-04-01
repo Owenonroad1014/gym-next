@@ -24,7 +24,7 @@
     padding: 16px 24px;
     font-size: 12px;
     font-weight: 700;
-    box-shadow: 0 4px 10px #c6bfbf;
+    box-shadow: 10px 10px 10px 10px #c6bfbf;
   }
   @media (width<=991px) {
     .form {
@@ -60,14 +60,29 @@
     }
   }
   .input {
-    /* border: 1px solid var(--Black-300, #cbcbcb); */
     border: none;
+    border-bottom: 1px solid #c2b9b9;
     background-color: #fff;
-    border-radius: 3px;
     width: 100%;
     min-height: 35px;
     margin-top: 12px;
     display: flex;
+    transition: transform 0.1s ease;
+  }
+
+  .input:active {
+    transform: scale(0.98);
+  }
+
+  .input:-webkit-autofill,
+  .input:-webkit-autofill:hover, 
+  .input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+      -webkit-text-fill-color: #000;
+  }
+  
+  .input:focus {
+    outline: none;
   }
   @media (width<=991px) {
     .input {
@@ -136,14 +151,20 @@
   }
   .td {
     background-color: #fff;
-    border: 1px solid #0000004d;
+    border: none;
     border-radius: 3px;
     width: 100%;
     min-height: 56px;
     margin-top: 14px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     display: flex;
+  }
+
+  .td:active {
+    transform: scale(0.98);
+  }
+
+  .td:focus {
+    outline: none;
   }
   @media (width<=991px) {
     .td {
@@ -213,7 +234,7 @@
     flex-wrap: wrap;
     justify-content: start;
     align-items: stretch;
-    gap: 16px;
+    gap: 20px;
     width: 100%;
     display: flex;
     margin-top: 10px;
@@ -229,7 +250,8 @@
     object-fit: contain;
     object-position: center;
     flex-shrink: 0;
-    width: 80px;
+    width: 100px;
+    height: 100px;
     margin-top: auto;
     margin-bottom: auto;
   }
@@ -238,7 +260,7 @@
     flex: 1;
     justify-content: start;
     align-items: stretch;
-    gap: 40px 67px;
+    gap: 40px 45px;
     min-width: 240px;
     height: 100%;
     display: flex;
@@ -270,17 +292,16 @@
     font-feature-settings:
       "liga" off,
       "clig" off;
-    margin-top: 17px;
+    /* margin-top: 5px; */
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 2;
   }
   .x1 {
     color: #0b3760;
-    margin-top: 17px;
     font-size: 16px;
     font-weight: 700;
-    line-height: 1;
+    line-height: 2;
   }
   .dayprice {
     color: #153b5a;
@@ -304,7 +325,7 @@
     align-self: stretch;
     margin-top: auto;
     margin-bottom: auto;
-    line-height: 22px;
+    line-height: 25px;
   }
   .css500 {
     text-align: center;
@@ -389,7 +410,7 @@
     margin-bottom: auto;
   }
   .info3 {
-    text-align: center;
+    text-align: right;
     /* align-self: stretch; */
     gap: 10px;
     width: 80px;
@@ -595,7 +616,7 @@
   .formHeader {
     color: #153b5a;
     height: 35px;
-    margin-top: 12px;
+    margin: 12px 0px 5px;
     font-size: 22px;
     font-weight: 400;
     display: flex;
@@ -612,6 +633,7 @@
   }
 
   .dropdown {
+    color: #6c7275;
     background-color: #fff;
     border: 1px solid #0000004d;
     width: 100%;
