@@ -12,6 +12,8 @@ import { useAuth } from "@/context/auth-context";
 import { useCart } from "@/context/cart-context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
 
@@ -91,7 +93,8 @@ const ProductDetail = () => {
   // 加入購物車
   document.body.style.overflow = 'hidden'
   const handleAddToCart = () => {
-    if (!selectedWeight) {
+    // 如果商品有重量變體但未選擇重量，顯示警告
+    if (product.variants && product.variants.length > 0 && !selectedWeight) {
       MySwal.fire({
         title: "請選擇重量!",
         text: "請選擇商品的重量才能加入購物車。",
@@ -117,29 +120,35 @@ const ProductDetail = () => {
       return;
     }
 
-    const selectedVariant = product.variants.find((variant) => variant.variant_id == selectedWeight);
+    let weight = "N/A";
+    if (product.variants) {
+      const selectedVariant = product.variants.find((variant) => variant.variant_id == selectedWeight);
+      if (selectedVariant) {
+        weight = `${selectedVariant.weight} 公斤`;
+      }
+    }
 
     const cartItem = {
       id: product.id,
       name: product.product_name,
       image: product.image_url,
       price: product.price,
-      weight: selectedVariant ? `${selectedVariant.weight} 公斤` : "N/A",
+      weight,
       quantity,
       rentalStartDate,
       rentalEndDate,
     };
 
     addToCart(cartItem);
-
-    MySwal.fire({
-      title: "成功加入購物車!",
-      text: `${product.product_name} 已加入購物車!`,
-      icon: "success",
-      showCancelButton: true,
-      confirmButtonColor: '#f87808',
-      cancelButtonColor: '#0b3760',
-    });
+    toast.success(`${product.product_name} 已成功加入購物車!`);
+    // MySwal.fire({
+    //   title: "成功加入購物車!",
+    //   text: `${product.product_name} 已加入購物車!`,
+    //   icon: "success",
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#f87808',
+    //   cancelButtonColor: '#0b3760',
+    // });
 
 };
 
@@ -177,8 +186,8 @@ const ProductDetail = () => {
   };
 
   return (
-    <>
-
+    
+<>
     <Breadcrumb breadcrumbs={breadcrumbs}/>
     <main className={styles.container}>
           <section className={styles.productSection}>
@@ -201,11 +210,12 @@ const ProductDetail = () => {
             {product.average_rating !== null ? (
               <>
                 {renderStars(product.average_rating)}
-                {product.average_rating > 0 && <span className ={styles.reviewCount}>({product.average_rating})</span>}
+                {product.average_rating } 0 && <span className ={styles.reviewCount}>({product.average_rating})</span>
               </>
             ) : ""
             }
           </div>
+          
           <div className={styles.selectionContainer}>
           <RentalDate 
             price={product.price} 
@@ -260,9 +270,35 @@ const ProductDetail = () => {
       </div>
       <hr className={styles.divider} />
       <RelatedProducts products={relatedProducts}/>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        style={{
+          fontSize: '14px',
+          maxWidth: '90%',
+          width: '300px',
+          marginBottom: '20px',
+        }}
+        toastStyle={{
+          backgroundColor: '#f87808',
+          color: '#fff',
+        }}
+        progressStyle={{
+          background: '#fff',
+        }}
+      />
     </main>
     </>
   );
-};
+}
+
 
 export default ProductDetail;

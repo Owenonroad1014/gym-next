@@ -60,10 +60,18 @@ export default function Button({ isFormValid, setIsSubmitted, customerInfo }) {
         throw new Error('伺服器未返回 orderId')
       }
 
+      // 存儲訂單信息到localStorage
+      const orderDate = new Date().toLocaleString()
+      const orderAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+      const pickupStore = customerInfo.pickupStore || '未選擇'
+
       localStorage.setItem('lastOrderId', result.orderId)
+      localStorage.setItem('orderDate', orderDate)  //後3行新增
+      localStorage.setItem('orderAmount', orderAmount)
+      localStorage.setItem('pickupStore', pickupStore)
       localStorage.removeItem('cart')
 
-      // window.location.href = '/carts/complete'
+      // 重定向到訂單完成頁面
       window.location.href = 'http://localhost:3005/ecpay?amount=1000'
 
     } catch (error) {

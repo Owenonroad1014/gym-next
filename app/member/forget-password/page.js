@@ -13,7 +13,7 @@ export default function ForgetPasswordPage() {
   const router = useRouter()
   const storageKey = 'gymboo-reset'
   const errorModal = () => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       const MySwal = withReactContent(Swal)
       MySwal.fire({
@@ -32,8 +32,6 @@ export default function ForgetPasswordPage() {
         if (result.isConfirmed) {
           router.push('/member/register')
           res()
-        } else {
-          rej()
         }
       })
     })
@@ -44,18 +42,17 @@ export default function ForgetPasswordPage() {
     MySwal.fire({
       text: '重設密碼連結已發送到您的信箱!',
       icon: 'success',
-      confirmButtonColor: '#0b3760',
-      confirmButtonText: '返回首頁',
+      showConfirmButton: false,
+      timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
-        document.body.style.overflow = '' // 恢復頁面滾動
+        document.body.style.overflow = ''
+        router.push('/member/login') // 恢復頁面滾動
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        router.push('/')
-      }
     })
   }
+
+  
   const [errors, setErrors] = useState({})
   const [resetForm, setResetForm] = useState({
     email: '',
