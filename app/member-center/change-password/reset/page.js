@@ -34,6 +34,7 @@ export default function ResetPasswordPage() {
     MySwal.fire({
       text: message,
       icon: 'success',
+      showConfirmButton:false,
       timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
