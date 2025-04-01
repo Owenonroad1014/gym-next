@@ -7,14 +7,12 @@ import ClassSection from './_components/class-section';
 import CoachSection from './_components/coach-section';
 import ProductSection from './_components/product-section';
 
-
 export default function Home() {
   return (
     <>
      
       {/* <div className={styles.banner}>
       <Hyperspeed />
-      
       </div> */}
       
       <HeroSection/>
@@ -23,5 +21,6 @@ export default function Home() {
       <CoachSection/>
       <ProductSection/>
       </>
+
   )
 }

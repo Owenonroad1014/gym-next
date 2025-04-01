@@ -34,30 +34,28 @@ export default function List({
   return (
     <>
       {listData.map((v, i) => (
-        <>
-          <div className={friendStyle.card}>
-            <div className={friendStyle.cardPhoto}>
-              <Image
-                src={`${GYMFRIEND_AVATAR}/${v.avatar}`}
-                alt="avatar"
-                width={250}
-                height={250}
-              ></Image>
-            </div>
-            <div className={friendStyle.cardTitle}>
-              <SiOpenaigym style={{ fontSize: '16px' }} /> {v.name} <br />
-              <span>{v.intro}</span>
-            </div>
-            <div className={friendStyle.cardSocials}>
-              <button
-                className={friendStyle.cardSocialsBtn}
-                onClick={() => handleOpenModal(v)}
-              >
-                <span>查看更多</span>
-              </button>
-            </div>
+        <div className={friendStyle.card} key={v.name}>
+          <div className={friendStyle.cardPhoto}>
+            <Image
+              src={`${GYMFRIEND_AVATAR}/${v.avatar}`}
+              alt="avatar"
+              width={250}
+              height={250}
+            ></Image>
           </div>
-        </>
+          <div className={friendStyle.cardTitle}>
+            <SiOpenaigym style={{ fontSize: '16px' }} /> {v.name} <br />
+            <span>{v.intro}</span>
+          </div>
+          <div className={friendStyle.cardSocials}>
+            <button
+              className={friendStyle.cardSocialsBtn}
+              onClick={() => handleOpenModal(v)}
+            >
+              <span>查看更多</span>
+            </button>
+          </div>
+        </div>
       ))}
       {selectedUser && (
         <GymdetailModal
