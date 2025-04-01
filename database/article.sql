@@ -11,12 +11,7 @@ CREATE TABLE articles (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   views INT DEFAULT 0
 );
-CREATE TABLE members (
-    id INT AUTO_INCREMENT PRIMARY KEY,      -- 用戶 ID
-    name VARCHAR(255) DEFAULT NULL,         -- 用戶名稱
-    email VARCHAR(255) UNIQUE DEFAULT NULL,  -- 用戶郵箱
-    password_hash varchar(100) NOT NULL
-);
+
 
 CREATE TABLE article_categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,9 +26,6 @@ CREATE TABLE article_favorites (
   FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE,
   FOREIGN KEY (member_id) REFERENCES members(id) ON DELETE CASCADE
 );
-INSERT INTO members (name, email,password_hash) VALUES
-('Alice Johnson', 'test@example.com','$2b$10$nHhquYIDY9JIvJRqhh4EaO52jQ2WmUOM55ii2WlVVLj4g9qQ5U5ae'),
-('Bob Smith', 'happy@example.com','$2b$10$nHhquYIDY9JIvJRqhh4EaO52jQ2WmUOM55ii2WlVVLj4g9qQ5U5ae');
 
 INSERT INTO article_categories (id, name, parent_id) VALUES
 (1, '健身', NULL),
@@ -158,4 +150,6 @@ INSERT INTO article_favorites (member_id, article_id) VALUES
 
 
 SELECT * FROM article_favorites LEFT JOIN articles on article_favorites.article_id = articles.id WHERE 
-article_favorites.member_id = 1 AND (articles.title LIKE "專家" OR articles.intro LIKE 專家);
+article_favorites.member_id = 1 OR (articles.title LIKE "專家" OR articles.intro LIKE "專家");
+SELECT count(*) AS total FROM article_favorites LEFT JOIN articles on article_favorites.article_id = articles.id  WHERE article_favorites.member_id = 2 ;
+SELECT * FROM article_favorites LEFT JOIN articles on article_favorites.article_id = articles.id  WHERE article_favorites.member_id = 2  ;
