@@ -19,7 +19,7 @@ CREATE TABLE locations (
 -- 傾印資料表的資料 `locations`
 --
 
-IINSERT INTO locations (city, branch_name, address, phone, business_hours, avatar, lat, lng) VALUES
+INSERT INTO locations (city, branch_name, address, phone, business_hours, avatar, lat, lng) VALUES
 -- 台北市據點
 ('台北市', '中山店', '台北市中山區南京東路二段100號', '02-2521-1234', '週一至週日 07:00-22:00', 'branch1.jpg', 25.052677, 121.528632),
 ('台北市', '大安店', '台北市大安區復興南路一段200號', '02-2731-5678', '週一至週日 06:00-23:00', 'branch2.jpg', 25.043889, 121.543889),

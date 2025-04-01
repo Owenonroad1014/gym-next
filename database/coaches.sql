@@ -33,7 +33,7 @@ CREATE TABLE coach_social_media (
 );
 
 
--INSERT INTO coaches (id, name, title, skill, email, phone, description, location_id, avatar) VALUES
+INSERT INTO coaches (id, name, title, skill, email, phone, description, location_id, avatar) VALUES
 (1, '張育瑄', '專業瑜珈教練', '瑜珈', 'yuhsuan.chang@email.com', '0912-345-678', '專業瑜珈教練，擁有10年教學經驗', 1, 'coach1.jpg'),
 (2, '林明宏', '重量訓練教練', '重訓', 'minghong.lin@email.com', '0923-456-789', '資深重訓教練，專注於肌力訓練', 2, 'coach2.jpg'),
 (3, '王雅婷', '有氧舞蹈教練', '舞蹈', 'yating.wang@email.com', '0934-567-890', '專業舞蹈老師，擅長帶動課堂氣氛', 3, 'coach3.jpg'),
