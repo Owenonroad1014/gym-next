@@ -45,15 +45,15 @@ export default function AddProfileJsPage() {
       reader.readAsDataURL(file)
     }
   }
-
   const statusChangeForm = () => {
     setStatus((prevStatus) => !prevStatus)
     setProfileForm((prev) => ({ ...prev, status: !prev.status }))
   }
+  // modals
+  const MySwal = withReactContent(Swal)
   const confirmIntro = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
-      const MySwal = withReactContent(Swal)
       MySwal.fire({
         text: '未填寫自我簡介將影響您使用GYM友功能，確定暫不填寫嗎?',
         icon: 'warning',
@@ -69,16 +69,13 @@ export default function AddProfileJsPage() {
       }).then((result) => {
         if (result.isConfirmed) {
           resolve()
-        } else {
-          reject()
         }
       })
     })
   }
   const confirmStatus = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
-      const MySwal = withReactContent(Swal)
       MySwal.fire({
         text: '選擇不公開檔案將影響您使用GYM友功能，確定暫不公開嗎?',
         icon: 'warning',
@@ -94,12 +91,49 @@ export default function AddProfileJsPage() {
       }).then((result) => {
         if (result.isConfirmed) {
           resolve()
-        } else {
-          reject()
         }
       })
     })
   }
+
+  const successModal = (message) => {
+    return new Promise(() => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'success',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+          router.push(callbackUrl)
+        },
+      })
+    })
+  }
+
+  const showError = (message) => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          res()
+          router.push('/member/forget-password')
+        }
+      })
+    })
+  }
+
   const sendFormData = async () => {
     const formData = new FormData()
     if (profileForm.avatar && profileForm.avatar instanceof File) {
@@ -125,12 +159,9 @@ export default function AddProfileJsPage() {
     })
     const result = await r.json()
     if (result.success) {
-      alert('個人檔案已建立')
-      // router.push('/')
-      console.log('回傳結果', result)
-      router.replace(callbackUrl)
+      successModal('個人檔案已建立')
     } else {
-      alert('個人檔案建立失敗')
+      showError('個人檔案建立失敗')
       console.warn(result)
     }
   }

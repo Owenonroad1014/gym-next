@@ -214,4 +214,9 @@ visibility: hidden;
   color: #f87808;
   font-size: 12px;
 }
-/* #endregion ================= FavCard ====================== */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* #endregion ================= Register Form ====================== */
