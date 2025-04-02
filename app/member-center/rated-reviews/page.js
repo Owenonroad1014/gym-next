@@ -43,9 +43,9 @@ const Review = () => {
   }, [auth]);
 
   const handleOpenReview = async (product) => {
-    document.body.style.overflow = 'hidden'
-    let currentRating = product.latest_review?.rating || 0;
-
+    document.body.style.overflow = 'hidden';
+    let currentRating = product.latest_review?.rating || 0;  // 讀取原有評分
+  
     const { value: formValues } = await Swal.fire({
       title: `編輯評價 - ${product.name}`,
       html: `
@@ -54,28 +54,37 @@ const Review = () => {
           <textarea style="width: 80%;" id="review-text" class="swal2-textarea" placeholder="輸入您的評價">${product.latest_review?.comment || ""}</textarea>
         </div>
       `,
+      confirmButtonColor: '#f87808',
       didOpen: () => {
         const starContainer = document.getElementById("star-container");
-
+  
         for (let i = 1; i <= 5; i++) {
-          const star = document.createElement("span");
-          star.innerHTML = i <= currentRating ? "★" : "☆";
-          star.style.fontSize = "36px";
-          star.style.cursor = "pointer";
-          star.style.color = "#f87808";
-          star.onclick = () => {
+          const starSpan = document.createElement("span");
+          starSpan.style.cursor = "pointer";
+          starSpan.style.margin = "0 4px";
+  
+          // 設置點擊事件，變更評分
+          starSpan.onclick = () => {
             currentRating = i;
             document.querySelectorAll("#star-container span").forEach((s, index) => {
-              s.innerHTML = index < i ? "★" : "☆";
+              const starIcon = index < i
+                ? React.createElement(FaStar, { color: "#f87808", size: 36 })
+                : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+              ReactDOM.render(starIcon, s);
             });
           };
-          starContainer.appendChild(star);
+  
+          // 初始化星星圖示 (根據 `currentRating` 來決定)
+          const initialIcon = i <= currentRating
+            ? React.createElement(FaStar, { color: "#f87808", size: 36 })
+            : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+  
+          ReactDOM.render(initialIcon, starSpan);
+          starContainer.appendChild(starSpan);
         }
-
-        document.getElementById("review-text").focus();
       },
       didClose: () => {
-        document.body.style.overflow = ''
+        document.body.style.overflow = '';
       },
       showCancelButton: true,
       cancelButtonText: '取消',
@@ -89,7 +98,7 @@ const Review = () => {
         return { rating: currentRating, comment: reviewText };
       }
     });
-
+  
     if (formValues) {
       handleSubmitReview(product, formValues.rating, formValues.comment, product.order_item_id);
     }
