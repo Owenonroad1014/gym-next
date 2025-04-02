@@ -71,8 +71,9 @@ export default function ResetPasswordPage() {
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
-        <div className={memberCss.titleGroup}>
-          <p>修改密碼</p>
+      <div className={memberCss.titleGroup}>
+          <h2>修改密碼</h2>
+          <h3>請輸入舊密碼</h3>
         </div>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>

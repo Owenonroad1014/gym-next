@@ -98,6 +98,46 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
+
+          <div className={headerstyles.rightSection}>
+            {auth.id ? (
+              <>
+                <Link href="/member-center" className={headerstyles.navLink}>
+                  <div className={headerstyles.navAvatar}>{auth.name}</div>
+                </Link>
+                <a
+                  href="/qs"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    logout()
+                  }}
+                  className={headerstyles.navLink}
+                >
+                  登出
+                </a>
+              </>
+            ) : (
+              <>
+                {/* 登入按鈕 */}
+                <Link href="/member/login" className={headerstyles.navLink}>
+                  登入
+                </Link>
+                {/* 註冊按鈕 */}
+                <Link href="member/register" className={headerstyles.navLink}>
+                  註冊
+                </Link>
+              </>
+            )}
+            <Link href="/carts" className={headerstyles.navLink}>
+              <div className={headerstyles.cartIcon}>
+                <FaCartPlus />
+                {cartQuantity > 0 && (
+                  <span className={headerstyles.cartCount}>{cartQuantity}</span>
+                )}
+              </div>
+            </Link>
+          </div>
+
         <div className={headerstyles.rightSection}>
           {' '}
           <Drawer />
@@ -148,6 +188,7 @@ export default function Header() {
               )}
             </div>
           </Link>
+
         </div>
       </div>
     </>

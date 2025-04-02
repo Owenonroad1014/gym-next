@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import selectStyle from '../_styles/member.module.css'
-import { MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { FaHome } from 'react-icons/fa'
-import { MdLogout } from 'react-icons/md'
+import { MdLogout, MdLogin, MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useAuth } from '@/context/auth-context'
 import { MEMBER_CENTER_NAME } from '@/config/api-path'
 import { SiOpenaigym } from 'react-icons/si'
@@ -56,9 +55,12 @@ export default function CenterList() {
         {auth ? (
           <>
             <div className={selectStyle.welcome}>
-            <img src="/gymdot.svg" alt="gym-icon" className={selectStyle.welcomeicon}/>
-            WELOCOME !{' '}
-              {name}{' '}
+              <img
+                src="/gymdot.svg"
+                alt="gym-icon"
+                className={selectStyle.welcomeicon}
+              />
+              WELOCOME !{auth.name}
             </div>
           </>
         ) : (
@@ -132,13 +134,22 @@ export default function CenterList() {
             {' '}
             <FaHome style={{ cursor: 'pointer' }} />
           </Link>
-          <MdLogout
-            style={{ cursor: 'pointer' }}
-            onClick={(e) => {
-              e.preventDefault()
-              logout()
-            }}
-          />
+          {auth.id ? (
+            <MdLogout
+              style={{ cursor: 'pointer' }}
+              onClick={(e) => {
+                e.preventDefault()
+                logout()
+              }}
+            />
+          ) : (
+            <MdLogin
+              onClick={(e) => {
+                e.preventDefault()
+                router.push('/member/login')
+              }}
+            />
+          )}
         </div>
       </section>
     </>

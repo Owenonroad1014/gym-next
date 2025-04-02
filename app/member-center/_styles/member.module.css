@@ -293,3 +293,205 @@
   margin-top: 20px;
   font-size: 20px;
 }
+
+/* #region ================= Change Password====================== */
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 100px;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+.registerContainer .form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  border-radius: 3px;
+  border: 1px solid salmon;
+  backdrop-filter: blur(5px);
+}
+.registerContainer .titleGroup {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.registerContainer .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.registerContainer .formGroup label {
+  width: 90%;
+  display: flex;
+  margin: auto;
+  margin-bottom: 4px;
+}
+.registerContainer .formGroup input {
+  width: 90%;
+  padding: 10px;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+}
+.registerContainer .formGroup input:focus {
+  outline: none;
+  border: 1px solid #f87808;
+}
+.registerBtns {
+  width: 90%;
+  margin: auto;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #fff;
+  /* border: 1px solid salmon; */
+}
+.registerContainer .registerBtn {
+  width: 100%;
+  background: #f87808;
+  padding: 10px 0px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 18px;
+  color: #fff;
+}
+.registerBtns a {
+  font-size: 14px;
+}
+.formGroup div {
+  display: flex;
+  width: 90%;
+  position: relative;
+  margin: auto;
+  margin-top: 4px;
+  justify-content: flex-end;
+}
+.textDanger {
+  position: absolute;
+  left: 0;
+  color: #f87808;
+  font-size: 12px;
+}
+.iconBtn {
+  border: none;
+  color: #828282;
+  font-size: 16px;
+  background-color: transparent;
+}
+/* #endregion ================= Change Password====================== */
+/* #region ================= Reset Password====================== */
+.resetContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 100px;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+.resetContainer .form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px;
+  border-radius: 3px;
+  border: 1px solid salmon;
+  backdrop-filter: blur(5px);
+}
+.resetContainer .titleGroup {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.resetContainer .formGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.resetContainer .formGroup label {
+  width: 90%;
+  display: flex;
+  margin: auto;
+  margin-bottom: 4px;
+}
+.resetContainer .formGroup input {
+  width: 90%;
+  padding: 10px;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+}
+.resetContainer .formGroup input::placeholder {
+  font-size: 12px;
+}
+.resetContainer .formGroup input:focus {
+  outline: none;
+  border: 1px solid #f87808;
+}
+.visibility {
+  visibility: hidden;
+}
+.resetBtns {
+  width: 90%;
+  margin: auto;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #fff;
+  /* border: 1px solid salmon; */
+}
+.resetContainer .resetBtn {
+  width: 100%;
+  background: #f87808;
+  padding: 10px 0px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  font-size: 18px;
+  color: #fff;
+}
+.resetBtns a {
+  font-size: 14px;
+}
+.formGroup div {
+  display: flex;
+  width: 90%;
+  position: relative;
+  margin: auto;
+  margin-top: 4px;
+  justify-content: flex-end;
+}
+.textDanger {
+  position: absolute;
+  left: 0;
+  color: #f87808;
+  font-size: 12px;
+}
+/* #endregion ================= Reset Password====================== */
+
+/* #region ================= Reset Password====================== */
