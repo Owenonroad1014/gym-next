@@ -22,7 +22,7 @@ export default function LocationsPage() {
     <>
       <Banner
         title="營業GYM點"
-        subtitle="尋找有相同運動愛好的朋友，一起GYM步吧！"
+        subtitle="探索你的專屬運動空間 !"
       />
       <div className={styles.container}>
         <div className={styles.content}>

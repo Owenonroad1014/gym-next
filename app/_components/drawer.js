@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './_styles/drawer.module.css'
 import Link from 'next/link'
+import { FaHome } from 'react-icons/fa'
 
 export default function Drawer() {
   const [isOpen, setIsOpen] = useState(false)
@@ -50,7 +51,7 @@ export default function Drawer() {
   return (
     <>
       <button ref={buttonRef} className={styles.menuButton} onClick={toggleDrawer}>
-        <span>選單</span>
+        <span>查看更多</span>
       </button>
 
       <div ref={drawerRef} className={`${styles.drawer} ${isOpen ? styles.open : ''}`}>
@@ -60,7 +61,7 @@ export default function Drawer() {
               <ul className={styles.navList}>
                 <li>
                   <Link href="/" className={styles.navLink} onClick={handleLinkClick}>
-                    首頁
+                  <FaHome style={{ cursor: 'pointer' }} />
                   </Link>
                 </li>
                 <li>
@@ -79,12 +80,13 @@ export default function Drawer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/friends" className={styles.navLink} onClick={handleLinkClick}>
-                    找GYM友
+                <Link href="/videos" className={styles.navLink} onClick={handleLinkClick}>
+                    影片教學
                   </Link>
                 </li>
               </ul>
             </nav>
+
           </div>
         </div>
       </div>

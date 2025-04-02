@@ -96,11 +96,19 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
-        {/* 右側圖示與搜尋欄 */}
-
 
         <div className={headerstyles.rightSection}>
-          {' '}
+        {' '}
+        <Link href="/products" className={headerstyles.navLink}>
+                    租借器具
+                  </Link>
+                  <Link href="/friends" className={headerstyles.navLink} >
+                    找GYM友
+                  </Link>
+                  <Link href="/classes" className={headerstyles.navLink}>
+                    課程預約
+                  </Link>
+
           <Drawer />
           {auth.id ? (
             <>
