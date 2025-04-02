@@ -1,29 +1,53 @@
 'use client'
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import styles from './_styles/friends-section.module.css';
 
-import { motion } from 'framer-motion'
-import styles from './_styles/friends-section.module.css'
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkoutFriends() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
+  const containerRef = useRef(null);
+  
+  useEffect(() => {
+    gsap.from(containerRef.current, {
+      opacity: 0,
+      y: 50,
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top bottom-=100',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }, []);
+
+  const cardVariants = {
+    offscreen: {
+      y: 300,
+      rotate: -10,
+      opacity: 0
+    },
+    onscreen: {
+      y: 0,
+      rotate: 0,
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
+        type: "spring",
+        bounce: 0.4,
+        duration: 0.8
       }
     }
   }
 
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { 
-      opacity: 1, 
-      y: 0,
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
       transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10
+        staggerChildren: 1.5,
+        delayChildren: 1
       }
     }
   }
@@ -36,7 +60,7 @@ export default function WorkoutFriends() {
     },
     {
       icon: "🧘",
-      title: "高強度間歇訓練",
+      title: "高強度間歇訓練", 
       description: "一起進行HIIT訓練"
     },
     {
@@ -47,7 +71,7 @@ export default function WorkoutFriends() {
   ]
 
   return (
-    <div className={styles.list}>
+    <div className={styles.list} ref={containerRef}>
       <motion.div 
         className={styles.container}
         initial={{ opacity: 0, y: 50 }}
@@ -58,7 +82,7 @@ export default function WorkoutFriends() {
         <div className={styles.textContainer}>
           <motion.h2 
             className={styles.title}
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -67,7 +91,7 @@ export default function WorkoutFriends() {
           </motion.h2>
           <motion.p 
             className={styles.description}
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
@@ -79,7 +103,7 @@ export default function WorkoutFriends() {
 
       <motion.div 
         className={styles.grid}
-        variants={container}
+        variants={containerVariants}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
@@ -88,12 +112,15 @@ export default function WorkoutFriends() {
           <motion.div 
             key={index}
             className={styles.item}
-            variants={item}
-            whileHover={{ 
+            variants={cardVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, margin: "-100px" }}
+            whileHover={{
               scale: 1.05,
-              backgroundColor: "rgba(255,255,255,0.8)"
+              backgroundColor: "rgba(255,255,255,0.8)",
+              transition: { duration: 0.2 }
             }}
-            transition={{ type: "spring", stiffness: 200 }}
           >
             <div className={styles.iconFrame}>
               <div className={styles.icon}>{type.icon}</div>

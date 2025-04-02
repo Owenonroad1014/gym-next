@@ -5,10 +5,16 @@
     width: 250px;
     max-width: 250px;
     height: 350px;
-    /* margin: auto; */
-    /* padding: 10px; */
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border-radius: 5px;
+  }
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 5px 5px 15px rgba(73, 41, 12, 0.8);
+    z-index: 1;
   }
   
   .cardDark {
@@ -136,4 +142,3 @@
       padding-bottom: 100px;
     }
   }
-  

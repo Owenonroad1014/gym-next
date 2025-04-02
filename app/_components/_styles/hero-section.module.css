@@ -15,8 +15,10 @@
 
 .heroImage {
     width: 100%;
+
     max-width: 1440px;
-    height: 500px;
+    height: 450px;
+
     position: relative;
     overflow: hidden;
     border-radius: 70px;
@@ -72,7 +74,7 @@
     max-width: 1073px;
     text-align: center;
     font-size: clamp(48px, 6vw, 96px);
-    color: black;
+    color: #333;
     font-weight: 800;
     animation: bounce 1s ease;
     margin-bottom: 20px;

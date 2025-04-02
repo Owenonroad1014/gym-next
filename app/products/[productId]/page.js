@@ -210,7 +210,7 @@ const ProductDetail = () => {
             {product.average_rating !== null ? (
               <>
                 {renderStars(product.average_rating)}
-                {product.average_rating } 0 && <span className ={styles.reviewCount}>({product.average_rating})</span>
+                <span className ={styles.reviewCount}>({product.average_rating})</span>
               </>
             ) : ""
             }
