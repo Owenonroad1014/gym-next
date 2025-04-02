@@ -228,6 +228,8 @@ CREATE TABLE friend_requests (
 CREATE TABLE friendships (
   user1_id INT NOT NULL,
   user2_id INT NOT NULL,
+  user1_delete INT NOT NULL DEFAULT 0,
+  user2_delete INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user1_id, user2_id),
   FOREIGN KEY (user1_id) REFERENCES  member(member_id),
@@ -251,6 +253,7 @@ CREATE TABLE messages (
   sender_id INT NOT NULL,  -- 發送訊息的用戶 ID
   message TEXT NOT NULL,  -- 訊息內容
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 訊息發送時間
+  is_read 	tinyint(1) default 0,
   FOREIGN KEY (chat_id) REFERENCES chats(id),
   FOREIGN KEY (sender_id) REFERENCES member(member_id)
 );

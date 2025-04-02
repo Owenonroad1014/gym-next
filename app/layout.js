@@ -1,7 +1,6 @@
 
 import '@/styles/globals.css'
 // import Header from './_components/header'
-import Footer from './_components/footer'
 import TopBtn from './_components/topBtn';
 import { AuthContextProvider } from '@/context/auth-context'
 import { CartProvider } from "@/context/cart-context";
@@ -10,6 +9,11 @@ import dynamic from 'next/dynamic'
 const Header = dynamic(() => import('./_components/header'), {
   ssr: false // 禁用伺服器端渲染
 })
+
+const Footer = dynamic(() => import('./_components/footer'), {
+  ssr: false // 禁用伺服器端渲染
+})
+
 
 
 

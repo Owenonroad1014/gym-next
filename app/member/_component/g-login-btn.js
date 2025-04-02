@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import useFirebase from '../user/_hooks/use-firebase'
 import { useAuth } from '@/context/auth-context'
+import btnCss from '../_styles/member.module.css'
 
 export default function GoogleLoginPopup() {
   const { loginGoogle } = useFirebase()
@@ -28,7 +29,7 @@ export default function GoogleLoginPopup() {
 
   return (
     <>
-      <button
+      <button className={btnCss.googleLoginBtn}
         onClick={async () => {
           setIsLoading(true)
           await loginGoogle(callbackGoogleLoginPopup)
