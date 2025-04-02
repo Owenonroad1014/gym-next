@@ -60,7 +60,9 @@ export default function CenterList() {
                 alt="gym-icon"
                 className={selectStyle.welcomeicon}
               />
+
               WELOCOME !{auth.name}
+
             </div>
           </>
         ) : (
@@ -70,10 +72,10 @@ export default function CenterList() {
         <ul className={selectStyle.selectPart}>
           <li
             className={
-              pathname === '/member-center/chat' ? selectStyle.active : ''
+              pathname === '/member-center/myfriends' ? selectStyle.active : ''
             }
           >
-            <Link href="/member-center/chat">聊天室</Link>
+            <Link href="/member-center/myfriends">我的好友</Link>
           </li>
         </ul>
         <ul className={selectStyle.selectPart}>
