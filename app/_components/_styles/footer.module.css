@@ -73,6 +73,13 @@
   border-radius: 50%;
   border: 1px solid #ffffffb2;
 }
+.contactItem a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .contactText {
   color: #f5fff6;

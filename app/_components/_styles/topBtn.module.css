@@ -1,13 +1,19 @@
 .container{
     position: fixed;
-    right: 20px;
-    bottom: 30px;
+    right: 15px;
+    bottom:25px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.3s;
 }
+.container:hover {
+  opacity: 1; 
+}
+
 .container img {
     animation: rotateAnimation 5s  linear infinite;
   }
@@ -33,6 +39,9 @@
   
 
   .container:hover .text {
+    border-radius: 20px;
+    padding: 5px 0;
+    background-color: #3333338c;
     opacity: 1;
     transition-duration: .7s;
   }
