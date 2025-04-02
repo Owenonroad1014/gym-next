@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { AiFillStar, AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
 import styles from "./_styles/ReviewList.module.css";

@@ -7,12 +7,14 @@ import Sort from "./sort";
 import { PRODUCTS_LIST } from "@/config/api-path";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 const ProductGrid = () => {
   const { auth, getAuthHeader } = useAuth()
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLiked, setIsLiked] = useState(false);
+  const [isloading, setIsloading] = useState(true)
   const [Products, setProducts] = useState({
     success: false,
     perPage: 0,
@@ -35,14 +37,24 @@ const ProductGrid = () => {
 
         if (obj.success) {
           setProducts(obj || {});
+          setIsloading(false)
         }
       } catch (error) {
         console.error("獲取商品列表錯誤:", error);
+        setIsloading(false)
       }
     };
 
     fetchProducts();
   }, [auth, getAuthHeader, searchParams, isLiked]);
+
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
 
   return (
     <section className={styles.productGrid}>

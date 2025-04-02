@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { REVIEWS_LIST, EDIT_REVIEW_API, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import styles from "./_compenents/_styles/review.module.css";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { FaClipboardList } from "react-icons/fa";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
+import ReactDOM from 'react-dom';
 
 const MySwal = withReactContent(Swal);
 
@@ -81,8 +82,8 @@ const Review = () => {
       confirmButtonText: "更新評價",
       preConfirm: () => {
         const reviewText = document.getElementById("review-text").value.trim();
-        if (!reviewText || currentRating === 0) {
-          Swal.showValidationMessage("請輸入星等與評論內容");
+        if (currentRating === 0) {
+          Swal.showValidationMessage("請輸入星等");
           return false;
         }
         return { rating: currentRating, comment: reviewText };
@@ -128,7 +129,7 @@ const Review = () => {
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) =>
-      i < rating ? <AiFillStar key={i} color="#f87808" size={20} /> : <AiOutlineStar key={i} color="#f87808" size={20} />
+      i < rating ? <FaStar key={i} color="#f87808" size={20} /> : <FaRegStar key={i} color="#f87808" size={20} />
     );
   };
 
@@ -173,26 +174,6 @@ const Review = () => {
             </Link>
           ))}
       </article>
-
-      {isDialogOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <button className={styles.closeButton} onClick={() => setIsDialogOpen(false)}>×</button>
-            <h3 className={styles.title}>編輯評價 - {selectedProduct?.name}</h3>
-            <div className={styles.starContainer}>
-              {Array.from({ length: 5 }, (_, i) => (
-                <span key={i} onClick={() => setRating(i + 1)} style={{ cursor: "pointer" }}>
-                  {i < rating ? <AiFillStar color="#f87808" size={28} /> : <AiOutlineStar color="#f87808;" size={28} />}
-                </span>
-              ))}
-            </div>
-            <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="輸入您的評價" className={styles.textarea} />
-            <button onClick={handleSubmitReview} className="w-full mt-4 bg-blue-500 text-white py-2 rounded">
-              更新評價
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 };

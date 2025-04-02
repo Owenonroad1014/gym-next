@@ -37,6 +37,10 @@
   font-size: 20px;
   margin-left: 30px;
 }
+.loaderContainer{
+  margin: auto;
+  margin-bottom: 25%;
+}
 
 @media (width <= 1440px) {
   .productGrid {
