@@ -216,6 +216,12 @@ align-items: center;
     border-right: none;
     opacity: 0.7;
   }
+  .event.full .time{
+    color: #000;
+  }
+  .event.full .name{
+    color: #000;
+  }
 
   .event.expired {
     background-color: #e0e0e0;

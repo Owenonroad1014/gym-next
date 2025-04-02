@@ -190,10 +190,26 @@ export default function CourseCalendar({
       }
 
       setIsModalOpen(false)
-      Toast.fire({
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
         icon: 'success',
         title: '預約成功',
-      })
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText: '前往預約列表',
+        cancelButtonText: '返回',
+        confirmButtonColor: '#f87808',
+        cancelButtonColor: '#6F6F6F',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/member-center/reservation';
+        } else {
+          setIsModalOpen(false);
+        }
+      });
+      
+      
 
       if (onReservationSuccess) {
         onReservationSuccess()

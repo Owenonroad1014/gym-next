@@ -21,7 +21,7 @@
 }
 .personContainer table {
   width: 100%;
-padding: 20px;
+  padding: 20px;
 }
 .personContainer tbody {
   display: flex;
@@ -32,15 +32,14 @@ padding: 20px;
   margin-right: 20px;
 }
 
-
-.personContainer .right .disable tr{
-display: flex;
-align-items: center;
-margin-bottom: 10px;
-font-size: 18px;
+.personContainer .right .disable tr {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
-.personContainer .right .disable th{
-  width:12%;
+.personContainer .right .disable th {
+  width: 12%;
   display: flex;
   margin-right: 10px;
   font-weight: 500;
@@ -54,7 +53,7 @@ font-size: 18px;
   margin-bottom: 10px;
 }
 .personContainer .right .titleLabel {
-  width:18%;
+  width: 18%;
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 8px;
@@ -74,7 +73,7 @@ font-size: 18px;
   border: 1px solid #f87808;
 }
 
-.formGroup textarea{
+.formGroup textarea {
   font-size: 16px;
 }
 /* avatar */
@@ -117,6 +116,7 @@ font-size: 18px;
   border: 1px solid #0b3760;
   border-radius: 3px;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 .current input:checked + label {
   background-color: #f87808;
@@ -160,9 +160,15 @@ font-size: 18px;
   left: 2px;
 }
 
+.btnpos {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;  
+}
 .btn {
   padding: 8px 18px;
-  text-align: center;
+  margin-top: 20px;
   border-radius: 3px;
   background: #f87808;
   border: 1px solid transparent;

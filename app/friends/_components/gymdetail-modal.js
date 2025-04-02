@@ -80,111 +80,87 @@ export default function GymdetailModal({
 
         <div className={styles.modalBody}>
           <div className={styles.topsection}>
-            <p className={styles.uername}>
-              <SiOpenaigym className={styles.icon} />
-              {name}
-            </p>
+            <Image
+              src={`${GYMFRIEND_AVATAR}/${avatar}`}
+              alt="avatar"
+              width={200}
+              height={200}
+            />
+            <div className={styles.topRsection}>
+              <p className={styles.uername}>
+                <SiOpenaigym className={styles.icon} />
+                {name}
+              </p>
+              <p>
+                <span>性別</span>：{sex == 'male' ? '男' : '女'}
+              </p>
+              <p>
+                <span>喜愛運動項目</span>：{item}
+              </p>
+              <div className={styles.hastag}>
+                <ul>{goalItems}</ul>
+              </div>
+            </div>
           </div>
           {/* <div className={styles.dash}></div> */}
           {/* <hr style={{ width: '85%', marginLeft: '20px' }} /> */}
           <div className={styles.userInfo}>
             <p>
-              <span>性別</span>：{sex == 'male' ? '男' : '女'}
+              {intro}
             </p>
-            <p>
-              <span>喜愛運動項目</span>：{item}
-            </p>
-            <p>
-              <span>簡短介紹</span>： {intro}
-            </p>
-            <div className={styles.hastag}>
-              <ul>{goalItems}</ul>
-            </div>
-            <div className={styles.bottomSection}>
-              {isSend === '好友請求已發送' ? (
-                <div className={styles.bottomsection}>
-                  <div className={styles.sendBtn}>
-                    <button
-                      className={styles.btn}
-                      style={{ backgroundColor: '#333' }}
-                      disabled
-                    >
+          </div>
+
+            {isSend === '好友請求已發送' ? (
+              <div className={styles.bottomsection}>
+                <div className={styles.sendBtn}>
+                  <button
+                    className={styles.btn}
+                    style={{ backgroundColor: '#333' }}
+                    disabled
+                  >
+                    <div className={styles.svgWrapper}>
                       <div className={styles.svgWrapper}>
-                        <div className={styles.svgWrapper}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="24"
-                            height="24"
-                          >
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path
-                              fill="currentColor"
-                              d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                            ></path>
-                          </svg>
-                        </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                        >
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path
+                            fill="currentColor"
+                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                          ></path>
+                        </svg>
                       </div>
-                      <span>已發送邀請</span>
-                    </button>
-                  </div>
-                  {/* success */}
-                  <div className={styles.success}>
-                    <svg
-                      className={styles.checkmark}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 52 52"
-                    >
-                      <circle
-                        className={styles.checkmarkCircle}
-                        cx={26}
-                        cy={26}
-                        r={25}
-                        fill="none"
-                      />
-                      <path
-                        className={styles.checkmarkCheck}
-                        fill="none"
-                        d="M14.1 27.2l7.1 7.2 16.7-16.8"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              ) : isSend === '已發送過請求' ? (
-                <>
-                  <div className={styles.bottomsection}>
-                    <div
-                      className={styles.sendBtn}
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <button className={styles.btn} disabled>
-                        <div className={styles.svgWrapper}>
-                          <div className={styles.svgWrapper}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              width="24"
-                              height="24"
-                            >
-                              <path fill="none" d="M0 0h24v24H0z"></path>
-                              <path
-                                fill="currentColor"
-                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </div>
-                        <span>已發送過邀請</span>
-                      </button>
                     </div>
-                  </div>
-                  <pre>正在等待對方同意...</pre>
-                </>
-              ) : isSend === '已是好友' ? (
+                    <span>已發送邀請</span>
+                  </button>
+                </div>
+                {/* success */}
+                <div className={styles.success}>
+                  <svg
+                    className={styles.checkmark}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 52 52"
+                  >
+                    <circle
+                      className={styles.checkmarkCircle}
+                      cx={26}
+                      cy={26}
+                      r={25}
+                      fill="none"
+                    />
+                    <path
+                      className={styles.checkmarkCheck}
+                      fill="none"
+                      d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                    />
+                  </svg>
+                </div>
+              </div>
+            ) : isSend === '已發送過請求' ? (
+              <>
                 <div className={styles.bottomsection}>
                   <div
                     className={styles.sendBtn}
@@ -211,18 +187,23 @@ export default function GymdetailModal({
                           </svg>
                         </div>
                       </div>
-                      <span>已是好友</span>
+                      <span>已發送過邀請</span>
                     </button>
                   </div>
+                <pre>正在等待對方同意...</pre>
                 </div>
-              ) : (
-                <div className={styles.sendBtn}>
-                  <button
-                    className={styles.btn}
-                    onClick={() => {
-                      sendFriendRequest(parseInt(member_id))
-                    }}
-                  >
+              </>
+            ) : isSend === '已是好友' ? (
+              <div className={styles.bottomsection}>
+                <div
+                  className={styles.sendBtn}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <button className={styles.btn} disabled>
                     <div className={styles.svgWrapper}>
                       <div className={styles.svgWrapper}>
                         <svg
@@ -239,12 +220,38 @@ export default function GymdetailModal({
                         </svg>
                       </div>
                     </div>
-                    <span>發送邀請</span>
+                    <span>已是好友</span>
                   </button>
                 </div>
-              )}
-            </div>
-          </div>
+              </div>
+            ) : (
+              <div className={styles.sendBtn}>
+                <button
+                  className={styles.btn}
+                  onClick={() => {
+                    sendFriendRequest(parseInt(member_id))
+                  }}
+                >
+                  <div className={styles.svgWrapper}>
+                    <div className={styles.svgWrapper}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                          fill="currentColor"
+                          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span>發送邀請</span>
+                </button>
+              </div>
+            )}
         </div>
       </div>
     </div>

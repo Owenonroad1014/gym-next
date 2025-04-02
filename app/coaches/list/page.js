@@ -60,8 +60,8 @@ export default function CoachesListPage(props) {
   return (
     <>
       <Banner
-        title="健身教練"
-        subtitle="尋找有相同運動愛好的朋友，一起GYM步吧！"
+        title="GYM身教練"
+        subtitle="從入門到進階，專業教練帶你飛。"
       />
       <div className={styles.container}>
         <div className={styles.content}>

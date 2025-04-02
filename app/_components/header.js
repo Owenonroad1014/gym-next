@@ -96,25 +96,25 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
-        {/* 右側圖示與搜尋欄 */}
 
         <div className={headerstyles.rightSection}>
-          {' '}
+        {' '}
+        <Link href="/products" className={headerstyles.navLink}>
+                    租借器具
+                  </Link>
+                  <Link href="/friends" className={headerstyles.navLink} >
+                    找GYM友
+                  </Link>
+                  <Link href="/classes" className={headerstyles.navLink}>
+                    課程預約
+                  </Link>
+
           <Drawer />
           {auth.id ? (
             <>
               <Link href="/member-center" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                  <img
-                    src={
-                      auth.google_uid
-                        ? auth.avatar // 使用 Google 大頭貼
-                        : `${AVATAR_PATH}/${
-                            auth.avatar || 'default-avatar.png'
-                          }`
-                    }
-                    alt=""
-                  />
+                <div className={headerstyles.navAvatar}>{auth.name}</div>
                 </div>
               </Link>
               <a
@@ -148,6 +148,7 @@ export default function Header() {
               )}
             </div>
           </Link>
+
         </div>
       </div>
     </>

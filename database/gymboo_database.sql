@@ -228,6 +228,8 @@ CREATE TABLE friend_requests (
 CREATE TABLE friendships (
   user1_id INT NOT NULL,
   user2_id INT NOT NULL,
+  user1_delete INT NOT NULL DEFAULT 0,
+  user2_delete INT NOT NULL DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user1_id, user2_id),
   FOREIGN KEY (user1_id) REFERENCES  member(member_id),
@@ -251,6 +253,7 @@ CREATE TABLE messages (
   sender_id INT NOT NULL,  -- 發送訊息的用戶 ID
   message TEXT NOT NULL,  -- 訊息內容
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 訊息發送時間
+  is_read 	tinyint(1) default 0,
   FOREIGN KEY (chat_id) REFERENCES chats(id),
   FOREIGN KEY (sender_id) REFERENCES member(member_id)
 );
@@ -350,42 +353,53 @@ CREATE TABLE `products` (
   `average_rating` decimal(3,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ;
-CREATE TABLE product_reviews (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    member_id INT NOT NULL,
-    product_id INT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    review_text TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (member_id) REFERENCES member(member_id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
-);
+CREATE TABLE `product_reviews` (
+  `id` int NOT NULL,
+  `member_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `rating` int DEFAULT NULL,
+  `review_text` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_item_id` int DEFAULT NULL
+) ;
+
+INSERT INTO `product_reviews` (`id`, `member_id`, `product_id`, `rating`, `review_text`, `created_at`, `order_item_id`) VALUES
+(1, 4, 1, 4, '棒棒噠', '2025-03-25 07:46:22', NULL),
+(3, 4, 9, 3, '123456', '2025-03-25 13:43:07', 5),
+(5, 4, 7, 4, '1234567894', '2025-03-25 14:14:25', 4),
+(7, 4, 15, 2, '123456', '2025-03-25 14:59:10', 6),
+(8, 4, 13, 3, '123456', '2025-03-25 15:26:21', 7),
+(9, 1, 1, 4, '商品很棒棒，愛了~~~~~~', '2025-03-26 03:35:40', NULL),
+(10, 7, 1, 3, '難用死，狗才跟你們借', '2025-03-27 01:24:14', NULL),
+(11, 4, 18, 3, '123456', '2025-03-28 06:52:29', 10),
+(12, 4, 14, 5, '13516548', '2025-03-31 07:59:36', 13),
+(13, 4, 14, 4, '111111111111111111111111111111', '2025-03-31 12:09:07', 11);
 
 INSERT INTO categories (id, category_name) VALUES
 (1, '健身器材'),
 (3, '拳擊用品'),
 (2, '瑜珈輔具');
 INSERT INTO `products` (`id`, `product_code`, `name`, `description`, `category_id`, `price`, `image_url`, `average_rating`, `created_at`) VALUES
-(1, 'P001', '啞鈴', '人體工學設計，防滑握把，穩定訓練手感。', 1, 50, 'products.jpg', 3.67, '2025-03-13 07:37:00'),
-(2, 'P002', '槓鈴', '高強度鋼材，適合深蹲、硬舉等訓練。', 1, 50, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(3, 'P003', '壺鈴', '防滑設計，人體工學握把，穩定好操作。', 1, 80, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(4, 'P004', '訓練繩', '耐用材質，提升肌耐力與心肺功能。', 1, 50, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(5, 'P005', '跳繩', '專業訓練跳繩，輕巧耐用，適合燃脂。', 1, 90, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(6, 'P006', '握力器', '增強手部力量，適合恢復與日常訓練。', 1, 80, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(7, 'P007', '可調式健身椅', '多角度調整，適合不同訓練需求。', 1, 100, 'products.jpg', 5.00, '2025-03-13 07:37:00'),
-(8, 'P008', '平板健身椅', '高密度泡棉支撐，提供舒適與穩定性。', 1, 150, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(9, 'P009', '槓片', '橡膠包覆材質，減少地板損傷與噪音。', 1, 50, 'products.jpg', 3.00, '2025-03-13 07:37:00'),
-(10, 'P010', '健腹輪', '強化核心肌群，增強腹部與背部力量。', 1, 30, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(11, 'P031', '瑜珈墊', '防滑吸汗，適合初學者與進階訓練者。', 2, 20, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(12, 'P032', '瑜珈磚', '輕巧耐用，幫助伸展與平衡訓練。', 2, 20, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(13, 'P033', '瑜珈輪', '適合背部伸展，提升柔軟度與平衡感。', 2, 50, 'products.jpg', 3.00, '2025-03-13 07:37:00'),
-(14, 'P034', '瑜珈繩', '加強肌肉柔軟度，適合深層伸展訓練。', 2, 50, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(15, 'P035', '瑜珈球', '提升核心穩定性，適合平衡與核心訓練。', 2, 50, 'products.jpg', 2.00, '2025-03-13 07:37:00'),
-(16, 'P051', '拳擊手套', '減少衝擊，保護手部關節，適合長時間訓練。', 3, 80, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(17, 'P052', '拳擊頭盔', '加強頭部保護，降低擊打衝擊力。', 3, 100, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(18, 'P053', '護齒', '符合人體工學設計，減少運動損傷。', 3, 50, 'products.jpg', 3.00, '2025-03-13 07:37:00'),
-(19, 'P054', '手綁帶', '提供手腕支撐，吸汗透氣，提升保護力。', 3, 30, 'products.jpg', NULL, '2025-03-13 07:37:00'),
-(20, 'P055', '沙袋', '高強度懸掛設計，耐打耐用。', 3, 80, 'products.jpg', NULL, '2025-03-13 07:37:00');
+(1, 'P001', '啞鈴', '人體工學設計，防滑握把，穩定訓練手感。', 1, 50, 'dumbbel.jpg', 3.67, '2025-03-13 07:37:00'),
+(2, 'P002', '槓鈴', '高強度鋼材，適合深蹲、硬舉等訓練。', 1, 50, 'Barbell.jpg', NULL, '2025-03-13 07:37:00'),
+(3, 'P003', '壺鈴', '防滑設計，人體工學握把，穩定好操作。', 1, 80, 'Kettlebell.jpg', NULL, '2025-03-13 07:37:00'),
+(4, 'P004', '訓練繩', '耐用材質，提升肌耐力與心肺功能。', 1, 50, 'training-rope.jpg', NULL, '2025-03-13 07:37:00'),
+(5, 'P005', '跳繩', '專業訓練跳繩，輕巧耐用，適合燃脂。', 1, 90, 'jump-rope.jpg', NULL, '2025-03-13 07:37:00'),
+(6, 'P006', '握力器', '增強手部力量，適合恢復與日常訓練。', 1, 80, 'HandGripStrengthener.jpg', NULL, '2025-03-13 07:37:00'),
+(7, 'P007', '可調式健身椅', '多角度調整，適合不同訓練需求。', 1, 100, 'bench.jpg', 4.00, '2025-03-13 07:37:00'),
+(8, 'P008', '平板健身椅', '高密度泡棉支撐，提供舒適與穩定性。', 1, 150, 'flat-bench.jpg', NULL, '2025-03-13 07:37:00'),
+(9, 'P009', '槓片', '橡膠包覆材質，減少地板損傷與噪音。', 1, 50, 'fitness-weight.jpg', 3.00, '2025-03-13 07:37:00'),
+(10, 'P010', '健腹輪', '強化核心肌群，增強腹部與背部力量。', 1, 30, 'wheel.jpg', NULL, '2025-03-13 07:37:00'),
+(11, 'P031', '瑜珈墊', '防滑吸汗，適合初學者與進階訓練者。', 2, 20, 'yoga-mat.jpg', NULL, '2025-03-13 07:37:00'),
+(12, 'P032', '瑜珈磚', '輕巧耐用，幫助伸展與平衡訓練。', 2, 20, 'yoga-block.jpg', NULL, '2025-03-13 07:37:00'),
+(13, 'P033', '瑜珈輪', '適合背部伸展，提升柔軟度與平衡感。', 2, 50, 'yoga-wheel.jpg', 3.00, '2025-03-13 07:37:00'),
+(14, 'P034', '瑜珈繩', '加強肌肉柔軟度，適合深層伸展訓練。', 2, 50, 'yoga-strap.jpg', 4.50, '2025-03-13 07:37:00'),
+(15, 'P035', '瑜珈球', '提升核心穩定性，適合平衡與核心訓練。', 2, 50, 'yoga-ball.jpg', 2.00, '2025-03-13 07:37:00'),
+(16, 'P051', '拳擊手套', '減少衝擊，保護手部關節，適合長時間訓練。', 3, 80, 'Boxing-gloves.jpg', NULL, '2025-03-13 07:37:00'),
+(17, 'P052', '拳擊頭盔', '加強頭部保護，降低擊打衝擊力。', 3, 100, 'Boxing-Helmet.jpg', NULL, '2025-03-13 07:37:00'),
+(18, 'P053', '護齒', '符合人體工學設計，減少運動損傷。', 3, 50, 'Boxing-Mouthguard.jpg', 3.00, '2025-03-13 07:37:00'),
+(19, 'P054', '手綁帶', '提供手腕支撐，吸汗透氣，提升保護力。', 3, 30, 'Boxing-hand-straps.jpg', NULL, '2025-03-13 07:37:00'),
+(20, 'P055', '沙袋', '高強度懸掛設計，耐打耐用。', 3, 80, 'Boxing-punching-bag.jpg', NULL, '2025-03-13 07:37:00');
 
 
 ALTER TABLE `products`
@@ -417,7 +431,7 @@ INSERT INTO orders (
 (1, '張三', '0912345678', 'zhangsan@example.com', '已下單', '未付款', '台南中西店', '信用卡'),
 (2, '李四', '0922333444', 'lisi@example.com', '租賃中', '已付款', '台南中華店', '現金'),
 (3, '王五', '0933111222', 'wangwu@example.com', '已下單', '未付款', '台南永康店', '信用卡'),
-(4, '陳六', '0988777666', 'chenliu@example.com', '租賃中', '已付款', '台南中西店', '信用卡'),
+(4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中西店', '信用卡'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中華店', '現金'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '未付款', '台南永康店', '信用卡'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中西店', '現金'),
@@ -884,9 +898,9 @@ VALUES
 (1, 1, '2025-03-30', '09:00:00', '10:00:00', 1, 1, 20, 0),
 (1, 2, '2025-04-01', '14:00:00', '15:00:00', 1, 1, 20, 0),
 (1, 3, '2025-04-03', '19:00:00', '20:00:00', 1, 1, 20, 0),
-(1, 1, '2025-04-05', '10:00:00', '11:00:00', 1, 1, 20, 0),
+(1, 1, '2025-04-05', '10:00:00', '11:00:00', 1, 1, 20, 20),
 (1, 2, '2025-04-07', '16:00:00', '17:00:00', 1, 1, 20, 0),
-(1, 3, '2025-04-09', '18:00:00', '19:00:00', 1, 1, 20, 0),
+(1, 3, '2025-04-09', '18:00:00', '19:00:00', 1, 1, 20, 20),
 (1, 1, '2025-04-11', '09:00:00', '10:00:00', 1, 1, 20, 0),
 (1, 2, '2025-04-13', '15:00:00', '16:00:00', 1, 1, 20, 0),
 (1, 3, '2025-04-15', '19:00:00', '20:00:00', 1, 1, 20, 0),
