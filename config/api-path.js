@@ -22,6 +22,8 @@ export const PROFILE_GET = `${API_SERVER}/profile/get-profile`
 export const PROFILE_PUT = `${API_SERVER}/profile/edit-profile`
 // 會員中心取得name
 export const MEMBER_CENTER_NAME = `${API_SERVER}/profile/edit-profile`
+// 取得更新auth
+export const REFRESH_AUTH_GET = `${API_SERVER}/profile/auth`
 
 // 教練 地圖 照片路由
 export const IMGS_PATH = `${API_SERVER}/imgs`
