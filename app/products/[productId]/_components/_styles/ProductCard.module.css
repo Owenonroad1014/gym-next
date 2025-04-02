@@ -5,10 +5,16 @@
     align-self: stretch;
     width: 250px;
     height: 340px;
-    /* margin: auto; */
-    /* padding: 10px; */
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+  }
+
+  .card:hover {
+    transform: scale(1.01);
+    box-shadow: 5px 5px 15px rgba(73, 41, 12, 0.8);
+    z-index: 1;
   }
   
   .cardDark {

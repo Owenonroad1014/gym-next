@@ -64,7 +64,7 @@ export default function Drawer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/coaches" className={styles.navLink} onClick={handleLinkClick}>
+                  <Link href="/coaches/list" className={styles.navLink} onClick={handleLinkClick}>
                     找GYM身教練
                   </Link>
                 </li>

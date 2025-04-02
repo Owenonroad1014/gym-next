@@ -30,7 +30,7 @@ const Review = () => {
           // 確保評論資料被正確存入 `latest_review`
           const formattedProducts = data.products.map((p) => ({
             ...p,
-            latest_review: p.rating !== null ? { rating: p.rating, comment: p.review_text } : null,
+            latest_review: p.rating !== null ? { rating: p.rating, comment: p.review_text } : null,order_item_id: p.order_item_id,
           }));
           setProducts(formattedProducts);
         }
@@ -41,15 +41,8 @@ const Review = () => {
     fetchProducts();
   }, [auth]);
 
-  // **打開編輯評價彈窗**
-//   const handleOpenReview = (product) => {
-//     setSelectedProduct(product);
-//     setRating(product.latest_review?.rating || 0);
-//     setComment(product.latest_review?.comment || "");
-//     setIsDialogOpen(true);
-//   };
 
-const handleOpenReview = async (product) => {
+  const handleOpenReview = async (product) => {
     document.body.style.overflow = 'hidden'
     let currentRating = product.latest_review?.rating || 0; // **提升變數作用域**
   
@@ -71,7 +64,7 @@ const handleOpenReview = async (product) => {
           star.style.cursor = "pointer";
           star.style.color = "#f87808";
           star.onclick = () => {
-            currentRating = i; // **更新 currentRating**
+            currentRating = i;
             document.querySelectorAll("#star-container span").forEach((s, index) => {
               s.innerHTML = index < i ? "★" : "☆";
             });
@@ -96,17 +89,18 @@ const handleOpenReview = async (product) => {
         return { rating: currentRating, comment: reviewText };
       }
     });
-
   
     if (formValues) {
-      handleSubmitReview(product, formValues.rating, formValues.comment);
+      // **傳遞 order_item_id**
+      handleSubmitReview(product, formValues.rating, formValues.comment, product.order_item_id);
     }
   };
   
   
+  
 
   // **更新評價**
-  const handleSubmitReview = async (product, rating, comment) => {
+  const handleSubmitReview = async (product, rating, comment, orderItemId) => {
     try {
       const response = await fetch(EDIT_REVIEW_API, {
         method: "POST",
@@ -115,6 +109,7 @@ const handleOpenReview = async (product) => {
           product_id: product.product_id,
           rating,
           review_text: comment,
+          order_item_id: orderItemId, // **傳遞 order_item_id**
         }),
       });
   
@@ -125,7 +120,7 @@ const handleOpenReview = async (product) => {
         // **更新前端顯示的評論**
         setProducts((prevProducts) =>
           prevProducts.map((p) =>
-            p.product_id === product.product_id
+            p.order_item_id === orderItemId
               ? { ...p, latest_review: { rating, comment } }
               : p
           )
@@ -138,6 +133,7 @@ const handleOpenReview = async (product) => {
       Swal.fire("發生錯誤", "請稍後再試", "error");
     }
   };
+  
   
 
   const renderStars = (rating) => {
