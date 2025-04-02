@@ -1,24 +1,35 @@
-.hearts{
-    position: fixed;
-    color: coral;
-    border:0;
-    background-color:rgb(210, 216, 221) ;
-    height: 20px;
-    text-align: start;
-    display: flex;
-    font-size: 16px;
-    bottom: 50px;
-    right: 80px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .text{
-    margin-left: 10PX;
-  }
-  .heart{
-    font-size: 28px;
-  }
+.container {
+  position: relative;
+}
+
+.hearts {
+  position: absolute;
+  color: #f87808;
+  border: 0;
+  background-color: #f8fafb;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  bottom: 0px;
+  right: 0px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  border: #333 1px solid;
+}
+
+.hearts:hover {
+  transform: scale(1.1);
+}
+
+.text {
+  margin-left: 8px;
+  white-space: nowrap;
+  color: #333;
+  font-size: 16px;
+}
+
+.heart {
+  font-size: 28px;
+}

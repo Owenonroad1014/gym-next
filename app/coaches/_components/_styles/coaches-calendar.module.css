@@ -119,6 +119,13 @@
   font-weight: bold;
   border-right: none;
   opacity: 0.8;
+  color: #000;
+}
+.event.full .title{
+  color: #000;
+}
+.event.full .time{
+  color: #000;
 }
 
 

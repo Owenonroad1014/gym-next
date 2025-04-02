@@ -7,6 +7,8 @@ import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
+import { FaStar, FaRegStar } from "react-icons/fa";
+import ReactDOM from 'react-dom';
 
 const MySwal = withReactContent(Swal);
 
@@ -38,7 +40,7 @@ const Review = () => {
       title: `新增評價 - ${product.name}`,
       html: `
         <div style="display: flex; flex-direction:column; align-items: center;">
-          <div id="star-container" style="margin-bottom: 10px; width: 80%;"></div>
+          <div id="star-container" style="margin-bottom: 10px; width: 80%; display: flex; justify-content: center;"></div>
           <textarea style="width: 80%;" id="review-text" class="swal2-textarea" placeholder="輸入您的評價"></textarea>
         </div>
       `,
@@ -46,18 +48,21 @@ const Review = () => {
       didOpen: () => {
         const starContainer = document.getElementById("star-container");
         for (let i = 1; i <= 5; i++) {
-          const star = document.createElement("span");
-          star.innerHTML = "☆";
-          star.style.fontSize = "36px";
-          star.style.cursor = "pointer";
-          star.style.color = "#f87808";
-          star.onclick = () => {
+          const starSpan = document.createElement("span");
+          starSpan.style.cursor = "pointer";
+          starSpan.style.margin = "0 4px";
+          starSpan.onclick = () => {
             currentRating = i;
             document.querySelectorAll("#star-container span").forEach((s, index) => {
-              s.innerHTML = index < i ? "★" : "☆";
+              const starIcon = index < i ? 
+                React.createElement(FaStar, { color: "#f87808", size: 36 }) : 
+                React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+              ReactDOM.render(starIcon, s);
             });
           };
-          starContainer.appendChild(star);
+          const initialIcon = React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+          ReactDOM.render(initialIcon, starSpan);
+          starContainer.appendChild(starSpan);
         }
       },
       didClose: () => { document.body.style.overflow = ''; },
@@ -66,8 +71,8 @@ const Review = () => {
       confirmButtonText: "提交評價",
       preConfirm: () => {
         const reviewText = document.getElementById("review-text").value.trim();
-        if (!reviewText || currentRating === 0) {
-          Swal.showValidationMessage("請輸入星等與評論內容");
+        if (currentRating === 0) {
+          Swal.showValidationMessage("請輸入星等");
           return false;
         }
         return { rating: currentRating, comment: reviewText };
@@ -93,7 +98,7 @@ const Review = () => {
       } else {
         Swal.fire("操作失敗", data.error, "error");
       }
-    } catch (error) {
+    } catch ( error) {
       console.error("提交評價錯誤:", error);
       Swal.fire("發生錯誤", "請稍後再試", "error");
     }

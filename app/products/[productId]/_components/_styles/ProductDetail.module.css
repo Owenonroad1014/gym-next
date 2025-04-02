@@ -29,7 +29,6 @@
     align-items: center;
     gap: 10px;
     padding: 0 75px;
-    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
     font-weight: 400;
     overflow: hidden;
     margin: auto;
@@ -98,7 +97,6 @@
   
   .selectionContainer,.cartActions {
     justify-content: start;
-    align-items: center;
     width: 100%;
     margin: auto;
   }
@@ -198,7 +196,6 @@
   .relatedTitle {
     width: 80%;
     margin: 10px auto 5px auto;
-    font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
     font-size: 36px;
     padding-left: 15px;
   }

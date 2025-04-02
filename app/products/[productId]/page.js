@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 
 const ProductDetail = () => {
@@ -32,6 +33,7 @@ const ProductDetail = () => {
   const [rentalStartDate, setRentalStartDate] = useState("");
   const [rentalEndDate, setRentalEndDate] = useState("");
   const MySwal = withReactContent(Swal);
+  const [isloading, setIsloading] = useState(true)
 
   useEffect(() => {
     console.log(params);
@@ -62,12 +64,14 @@ const ProductDetail = () => {
             { label: product_name, link: null },
           ];
           setBreadcrumbs(newBreadcrumbs);
+          setIsloading(false)
 
           if (variants !== null) {
             setSelectedWeight(variants[0].variant_id);
           }
         } else {
           router.push("/products");
+          setIsloading(false)
         }
       });
   }, [auth, getAuthHeader, likeId]);
@@ -187,13 +191,21 @@ const ProductDetail = () => {
     return stars;
   };
 
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
+
+
   return (
     
 <>
     <Breadcrumb breadcrumbs={breadcrumbs}/>
     <main className={styles.container}>
           <section className={styles.productSection}>
-              <FavoriteBbutton product_id={product.id} likeId={likeId}/>
         <img
           src={`${IMG_PATH}/${product.image_url}`}
           alt={product.product_name}
@@ -250,6 +262,7 @@ const ProductDetail = () => {
           </div>
           <div className={styles.cartActions}>
           <button className={styles.addToCartButton} onClick={handleAddToCart}>加入購物車</button>
+          <FavoriteBbutton product_id={product.id} likeId={likeId}/>
           </div>
 
         </article>
