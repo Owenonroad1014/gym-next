@@ -29,7 +29,7 @@ ALTER TABLE `member`
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `google_uid` (`google_uid`);
 ALTER TABLE `member`
-  MODIFY `member_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `member_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 # 會員詳細資料表
 CREATE TABLE `member_profile` (
@@ -59,7 +59,7 @@ INSERT INTO `member_profile` (`profile_id`, `member_id`, `avatar`, `sex`, `mobil
 (10, 10, 'avatar-9.jpg', 'male', '0901234567', '我是健身新手，剛開始學習如何正確訓練，希望能找到夥伴一起成長進步！', '重訓', '增肌,減脂', 1, 1, '2025-03-15 17:43:45', '2025-03-18 06:29:18');
 
 ALTER TABLE `member_profile`
-  MODIFY `profile_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `profile_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
   
   
 # 文章
