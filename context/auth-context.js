@@ -1,6 +1,10 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { JWT_LOGIN_POST, GOOGLE_LOGIN_POST } from '@/config/api-path'
+import {
+  JWT_LOGIN_POST,
+  GOOGLE_LOGIN_POST,
+  REFRESH_AUTH_GET,
+} from '@/config/api-path'
 
 const AuthContext = createContext()
 
@@ -10,6 +14,7 @@ const emptyAuth = {
   google_uid: '',
   avatar: '',
   name: '',
+  add_status: '',
   token: '',
 }
 const storageKey = 'gymboo-auth'
@@ -61,6 +66,7 @@ export function AuthContextProvider({ children }) {
         throw new Error(result.message || '登入失敗')
       }
       const data = result.data
+      console.log(data)
       localStorage.setItem(storageKey, JSON.stringify(data))
       setAuth(data)
       return { success: true }
@@ -68,7 +74,24 @@ export function AuthContextProvider({ children }) {
       return { success: false, error: error.message }
     }
   }
+  const refreshAuth = async () => {
+    try {
+      const res = await fetch(REFRESH_AUTH_GET, {
+        headers: {
+          'Content-Type': 'application',
+          ...getAuthHeader(),
+        },
+      })
+      const result = await res.json()
 
+      if (result.success) {
+        localStorage.setItem(storageKey, JSON.stringify(result.data))
+        setAuth(result.data)
+      }
+    } catch (error) {
+      console.warn('無法刷新auth資料', error.message)
+    }
+  }
   const getAuthHeader = () => {
     if (!auth.token) return {}
     return { Authorization: 'Bearer ' + auth.token }
@@ -88,7 +111,7 @@ export function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ auth, logout, login, getAuthHeader, GoogleLogin }}
+      value={{ auth, logout, login, getAuthHeader, GoogleLogin, refreshAuth }}
     >
       {children}
     </AuthContext.Provider>
