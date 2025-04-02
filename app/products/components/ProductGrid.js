@@ -1,4 +1,3 @@
-
 import React from 'react'
 import ProductCard from './ProductCard'
 import styles from './_styles/ProductGrid.module.css'
@@ -8,7 +7,6 @@ import Sort from "./sort";
 import { PRODUCTS_LIST } from "@/config/api-path";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-
 
 const ProductGrid = () => {
   const { auth, getAuthHeader } = useAuth()
@@ -23,51 +21,50 @@ const ProductGrid = () => {
     page: 0,
     rows: [],
     keyword: ""
-      });
+  });
 
-      useEffect(() => {
-        
-        const fetchProducts = async () => {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const headers = auth ? { ...getAuthHeader() } : {}
+        const res = await fetch(`${PRODUCTS_LIST}${location.search}`, {
+          headers,
+        });
+        const obj = await res.json();
+        console.log("後端回傳的商品列表:", obj);
 
-          try {
-            const headers = auth ? { ...getAuthHeader() } : {}
-            const res = await fetch(`${PRODUCTS_LIST}${location.search}`, {
-              headers,
-              }
-            );
-            const obj = await res.json();
-            console.log("後端回傳的商品列表:", obj);
+        if (obj.success) {
+          setProducts(obj || {});
+        }
+      } catch (error) {
+        console.error("獲取商品列表錯誤:", error);
+      }
+    };
 
-            if (obj.success) {
-              setProducts(obj || {});
-            }
-
-          } catch (error) {
-            console.error("獲取商品列表錯誤:", error);
-          }
-        };
-    
-        fetchProducts();
-      }, [auth, getAuthHeader, searchParams, isLiked]);
-
-  
+    fetchProducts();
+  }, [auth, getAuthHeader, searchParams, isLiked]);
 
   return (
     <section className={styles.productGrid}>
-          <Sort router={router}/>
-          <div className={styles.productArea}>
-        
-          <div className={styles.productItem}>
+      <Sort router={router}/>
+      <div className={styles.productArea}>
+        {Products.rows.length > 0 ? (
+          <>
+            <div className={styles.productItem}>
               {Products.rows.map((product) => (
                 <ProductCard key={product.id} {...product} setIsLiked={setIsLiked} />
               ))}
-              </div>
-              <div>
-                    <Pagination {...Products} searchParams={searchParams}
-                    />
-              </div>
-
+            </div>
+            <div className={styles.paginationWrapper}>
+              <Pagination {...Products} searchParams={searchParams} />
+            </div>
+          </>
+        ) : (
+          <div className={styles.noProducts}>
+            查無該商品
           </div>
+        )}
+      </div>
     </section>
   )
 }

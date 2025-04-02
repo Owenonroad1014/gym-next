@@ -17,16 +17,17 @@
 
 
 .img{
-    width: 100%;
+    width: 85%;
     height: 100%;
     border-radius: 5px 0 0 5px;
+    object-fit: fill;
+
 }
 
 .imgContainer{
     width: 45%;
-    object-fit: fill;
-    
-
+    height: 200px;
+    overflow: hidden;
 }
 
 .content{
@@ -55,6 +56,10 @@
     padding: 10px;
     border-radius: 10px;
     width: 80%;
+}
+.contentArea{
+    display: flex;
+    flex-direction: row;
 }
 
 .contentAll{
