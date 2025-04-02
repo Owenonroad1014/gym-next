@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import selectStyle from '../_styles/member.module.css'
-import { MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { FaHome } from 'react-icons/fa'
-import { MdLogout } from 'react-icons/md'
+import { MdLogout, MdLogin, MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useAuth } from '@/context/auth-context'
 import { MEMBER_CENTER_NAME } from '@/config/api-path'
 import { SiOpenaigym } from 'react-icons/si'
@@ -56,9 +55,14 @@ export default function CenterList() {
         {auth ? (
           <>
             <div className={selectStyle.welcome}>
-            <img src="/gymdot.svg" alt="gym-icon" className={selectStyle.welcomeicon}/>
-            WELOCOME !{' '}
-              {name}{' '}
+              <img
+                src="/gymdot.svg"
+                alt="gym-icon"
+                className={selectStyle.welcomeicon}
+              />
+
+              WELOCOME !{auth.name}
+
             </div>
           </>
         ) : (
@@ -68,10 +72,10 @@ export default function CenterList() {
         <ul className={selectStyle.selectPart}>
           <li
             className={
-              pathname === '/member-center/chat' ? selectStyle.active : ''
+              pathname === '/member-center/myfriends' ? selectStyle.active : ''
             }
           >
-            <Link href="/member-center/chat">聊天室</Link>
+            <Link href="/member-center/myfriends">我的好友</Link>
           </li>
         </ul>
         <ul className={selectStyle.selectPart}>
@@ -111,6 +115,22 @@ export default function CenterList() {
         <ul className={selectStyle.selectPart}>
           <li
             className={
+              pathname === '/member-center/rated-reviews' ? selectStyle.active : ''
+            }
+          >
+            <Link href="/member-center/rated-reviews">我的評價</Link>
+          </li>
+          <li
+            className={
+              pathname === '/member-center/unrated-reviews' ? selectStyle.active : ''
+            }
+          >
+            <Link href="/member-center/unrated-reviews">尚未評價</Link>
+          </li>
+        </ul>
+        <ul className={selectStyle.selectPart}>
+          <li
+            className={
               pathname === '/member-center/person' ? selectStyle.active : ''
             }
           >
@@ -132,13 +152,22 @@ export default function CenterList() {
             {' '}
             <FaHome style={{ cursor: 'pointer' }} />
           </Link>
-          <MdLogout
-            style={{ cursor: 'pointer' }}
-            onClick={(e) => {
-              e.preventDefault()
-              logout()
-            }}
-          />
+          {auth.id ? (
+            <MdLogout
+              style={{ cursor: 'pointer' }}
+              onClick={(e) => {
+                e.preventDefault()
+                logout()
+              }}
+            />
+          ) : (
+            <MdLogin
+              onClick={(e) => {
+                e.preventDefault()
+                router.push('/member/login')
+              }}
+            />
+          )}
         </div>
       </section>
     </>

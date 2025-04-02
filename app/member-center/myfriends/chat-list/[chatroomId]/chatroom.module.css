@@ -1,0 +1,121 @@
+.tempbody {
+  display: flex;
+  justify-content: center;
+  /* padding: 0 20px; */
+  height: 100%;
+  max-height: 80vh;
+  box-sizing: border-box;
+  min-width: 380px;
+}
+.chatContainer {
+  width: 100%;
+  min-height: 600px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.friendName {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #ddd;
+  /* color: white; */
+  height: 8%;
+}
+.avatar {
+  margin-right: 10px;
+}
+.avatar img {
+  border-radius: 50%;
+}
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  height: 84%;
+  overflow-y: auto;
+}
+
+.messages {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #f9f9f9;
+  word-wrap: break-word;
+}
+/* 輸入區 */
+.inputArea {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  height: 8%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.textInput {
+  border: none;
+  padding: 0 1rem;
+  flex-grow: 1;
+  border-radius: 2rem;
+  margin: 0.25rem;
+  height: 2rem;
+}
+.textInput:focus {
+  outline: none;
+}
+.sendButton {
+  height: 2rem;
+  background: #333;
+  border: none;
+  padding: 0 1rem;
+  margin: 0.25rem;
+  border-radius: 3px;
+  outline: none;
+  color: #fff;
+}
+
+/* 消息樣式 */
+.message {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.sent {
+  max-width: 60%;
+  background-color: #efefef;
+  text-align: right;
+  margin-left: auto;
+  padding: 10px 20px;
+}
+
+.received {
+  margin-right: auto;
+  width: 80%;
+  background-color: #9c9a9a;
+  color: white;
+  text-align: left;
+  padding: 10px 20px;
+}
+.time {
+  padding: 0 10px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 表情 */
+.emojiArea {
+  position: relative;
+}
+.emojiArea button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+  font-size: 20px;
+  fill: #333;
+}

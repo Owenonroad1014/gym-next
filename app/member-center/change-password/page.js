@@ -24,6 +24,7 @@ export default function ResetPasswordPage() {
       didClose: () => {
         //畫面不要偏移使用
         document.body.style.overflow = '' // 恢復頁面滾動
+        setResetPassForm({ password: '' })
       },
     })
   }
@@ -43,7 +44,13 @@ export default function ResetPasswordPage() {
   const onSubmit = async (e) => {
     e.preventDefault()
     setErrors({}) // 清空舊錯誤
-
+   
+    if (!resetPassForm.password) {
+      const newErrors ={}
+       newErrors.password = '請輸入舊密碼'
+      setErrors(newErrors)
+      return 
+    }
     const r = await fetch(CONFIRM_PASS_POST, {
       method: 'POST',
       body: JSON.stringify({ password: resetPassForm.password }),
@@ -54,19 +61,19 @@ export default function ResetPasswordPage() {
     })
     const result = await r.json()
 
-    if (result.success) {
-      router.push('/member-center/change-password/reset')
-    } else {
+    if (!result.success) {
       showError('密碼錯誤，請重新輸入')
-      setResetPassForm({ password: '' })
       console.warn(result)
+    } else {
+      router.push('/member-center/change-password/reset')
     }
   }
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
-        <div className={memberCss.titleGroup}>
-          <p>修改密碼</p>
+      <div className={memberCss.titleGroup}>
+          <h2>修改密碼</h2>
+          <h3>請輸入舊密碼</h3>
         </div>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>

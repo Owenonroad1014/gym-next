@@ -23,11 +23,16 @@
   padding: 8px 60px;
 }
 
+
 /* 預設頁面樣式 */
 .defaultHeader {
   background-color: transparent;
   padding: 13px 64px;
 }
+
+
+
+
 
 
 .hscrolling {
@@ -130,13 +135,6 @@
   font-weight: bold;
 }
 
-.cartIcon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  color: white;
-}
 
 .cartCount {
   position: absolute;
@@ -162,4 +160,25 @@
   border-radius: 3px;
   margin-right: 8px;
   border: 1px solid salmon;
+}
+
+
+/*首頁樣式*/
+.homeHeader{
+  color: #000000;
+}
+.homeHeader .navLink{
+  color:#000000
+}
+.homeHeader .cartIcon{
+  color:#000000
+}
+/* 首頁滑動時的樣式 */
+.homeHeader.hscrolling {
+  background-color: #2a2929;
+}
+
+.homeHeader.hscrolling .navLink,
+.homeHeader.hscrolling .cartIcon {
+  color: #ffffff;
 }

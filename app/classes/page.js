@@ -16,7 +16,7 @@ export default function ClassesPage() {
 
   return (
     <>
-      <Banner title="課程專區" subtitle="FITNESS CLASSES" />
+      <Banner title="課程專區" subtitle="專業課程，成就更好的自己。" />
       <div className={styles.container}>
         <div className={styles.tabButtons}>
           <TabButton

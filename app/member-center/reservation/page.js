@@ -8,6 +8,8 @@ import styles from '../_styles/reservations.module.css'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import Swal from 'sweetalert2'
 
+
+
 export default function ArticleList() {
   const { auth, getAuthHeader } = useAuth()
   const [error, setError] = useState('')
@@ -168,26 +170,29 @@ const filterReservations = reservationsData.filter(reservation => {
   return (
     <>
     <div className={styles.filterButtons}>
-  <button 
-    onClick={() => setFilter('all')}
-    className={filter === 'all' ? styles.active : ''}
-  >
-    全部預約
-  </button>
-  <button 
-    onClick={() => setFilter('confirmed')}
-    className={filter === 'confirmed' ? styles.active : ''}
-  >
-   目前預約
-  </button>
-</div>
+      <button 
+        onClick={() => setFilter('all')}
+        className={filter === 'all' ? styles.active : ''}
+      >
+        全部預約
+      </button>
+      <button 
+        onClick={() => setFilter('confirmed')}
+        className={filter === 'confirmed' ? styles.active : ''}
+      >
+       目前預約
+      </button>
+    </div>
       {filterReservations.map((v) => (
         <div 
           key={v.id}
           className={`${styles.favCard} ${v.status === 'cancelled' ? styles.cancelled : ''}`}
         >
           <div className={styles.cardBody}>
-            <h3>{v.type_name}</h3>
+            <h3>
+            
+              {v.type_name}
+            </h3>
             <div className={styles.cardDesc}>
               <p><BsCalendar2Date /> {new Date(v.class_date).toLocaleDateString()}</p>
               <p><BsClockFill /> {`${v.start_time.slice(0, 5)}-${v.end_time.slice(0, 5)}`}</p>

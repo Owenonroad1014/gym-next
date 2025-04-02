@@ -6,6 +6,7 @@ import styles from "./_compenents/_styles/review.module.css";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Link from 'next/link'
 
 const MySwal = withReactContent(Swal);
 
@@ -36,11 +37,12 @@ const Review = () => {
     const { value: formValues } = await Swal.fire({
       title: `新增評價 - ${product.name}`,
       html: `
-        <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="display: flex; flex-direction:column; align-items: center;">
           <div id="star-container" style="margin-bottom: 10px; width: 80%;"></div>
           <textarea style="width: 80%;" id="review-text" class="swal2-textarea" placeholder="輸入您的評價"></textarea>
         </div>
       `,
+      confirmButtonColor: '#f87808',
       didOpen: () => {
         const starContainer = document.getElementById("star-container");
         for (let i = 1; i <= 5; i++) {
@@ -82,7 +84,7 @@ const Review = () => {
       const response = await fetch(SUBMIT_REVIEW_API, {
         method: "POST",
         headers,
-        body: JSON.stringify({ product_id: product.product_id, rating, review_text: comment }),
+        body: JSON.stringify({ product_id: product.product_id, rating, review_text: comment,order_item_id:product.order_item_id }),
       });
       const data = await response.json();
       if (data.success) {
@@ -103,24 +105,35 @@ const Review = () => {
         <p>目前沒有未評價的商品</p>
       ) : (
         products.map(product => (
-          <div className={styles.productReview} key={product.product_id}>
+          <Link href={`/products/${product.product_id}`} key={product.product_id} className={styles.productReview}>
             <div className={styles.imgContainer}>
               <img src={`${IMG_PATH}/${product.image_url}`} alt={product.name} className={styles.img} />
             </div>
             <div className={styles.content}>
               <div className={styles.contentItems}>
-                <div className={styles.productContent}><CiEdit /> 商品資訊</div>
+                <div className={styles.productContent}><CiEdit /> 訂單資訊</div>
                 <hr className={styles.divider} />
+                <div className={styles.contentArea}>
                 <div className={styles.contentItem}>
                   <div>訂單編號: # {product.order_id}</div>
                   <div>商品名稱: {product.name}</div>
                   {product.weight !== null && <div>商品規格: {product.weight}公斤</div>}
                   <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
+  
                 </div>
+                <button onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleOpenReview(product);
+              }} className={styles.button}>
+                新增評價
+              </button>
+                </div>
+
               </div>
-              <button onClick={() => handleOpenReview(product)} className={styles.button}>新增評價</button>
+ 
             </div>
-          </div>
+          </Link>
         ))
       )}
     </article>

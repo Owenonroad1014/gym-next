@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { z } from 'zod'
-import { FaRegEye } from 'react-icons/fa'
+import { FaRegEye, FaHome } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -46,13 +47,14 @@ export default function ForgetPasswordPage() {
       timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
-        document.body.style.overflow = ''
-        router.push('/member/login') // 恢復頁面滾動
+        document.body.style.overflow = '' // 恢復頁面滾動
+        setResetForm({
+          email: '',
+        })
       },
     })
   }
 
-  
   const [errors, setErrors] = useState({})
   const [resetForm, setResetForm] = useState({
     email: '',
@@ -120,6 +122,10 @@ export default function ForgetPasswordPage() {
     <>
       <div className={memberCss.registerContainer}>
         <div className={memberCss.form}>
+          <Link className={memberCss.home} href="/">
+            <FaHome style={{ cursor: 'pointer' }} />
+            <span>回首頁</span>
+          </Link>
           <div className={memberCss.titleGroup}>
             <h1>忘記密碼</h1>
           </div>

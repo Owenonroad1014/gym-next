@@ -1,10 +1,13 @@
 'use client'
 
-import memberCss from '../_styles/member.module.css'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import { REGISTER_POST } from '@/config/api-path'
+import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import { rgSchema } from '@/utils/schema/schema'
 
@@ -12,17 +15,86 @@ export default function RegisterPage() {
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
   const [errors, setErrors] = useState({})
-  const { login } = useAuth()
-
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const { auth, login } = useAuth()
+
   const [registerForm, setRegisterForm] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   })
-
+  useEffect(() => {
+    if (auth.id) {
+      router.push(callbackUrl) // 已登入就直接跳轉
+    }
+  }, [auth, callbackUrl, router])
   const RegisterChangeForm = (e) => {
     setRegisterForm({ ...registerForm, [e.target.name]: e.target.value })
+  }
+
+  const MySwal = withReactContent(Swal)
+
+  const showError = (message) => {
+    return new Promise(() => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'error',
+        showCancelButton: true,
+        cancelButtonColor: '#f87808',
+        cancelButtonText: '',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      })
+    })
+  }
+  const successModal = (message) => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+
+      MySwal.fire({
+        text: message,
+        showConfirmButton: false,
+        allowOutsideClick: false, // 禁止點擊外部關閉
+        timer: 1500,
+        imageUrl: '/gymdot.svg',
+        imageHeight: 150,
+        imageAlt: 'gym-boo-logo',
+        didOpen: () => {
+          // 取得圖片並添加旋轉動畫
+          const image = Swal.getPopup().querySelector('img')
+          if (image) {
+            image.style.animation = 'spin 1.5s linear infinite'
+          }
+        },
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then(() => res())
+    })
+  }
+  const showErrorLogin = (message) => {
+    return new Promise(() => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+          router.push('/member/login')
+        },
+      })
+    })
   }
 
   const onSubmit = async (e) => {
@@ -60,33 +132,47 @@ export default function RegisterPage() {
     const result = await r.json()
 
     if (result.success) {
-      // modal.show()
-      alert('註冊成功')
-      setRegisterForm({
-        email: '',
-        password: '',
-        confirmPassword: '',
-      })
-      const success = await login(
+      // 顯示成功彈窗，並在期間內開始登入
+      const loginPromise = login(
         result.bodyData.email,
         result.bodyData.password
       )
-      if (success) {
-        router.push('/member/register/add-profile')
-      } else {
-        alert('登入失敗')
-      }
+
+      await successModal('註冊成功，即將自動登入').then(async () => {
+        setRegisterForm({
+          email: '',
+          password: '',
+          confirmPassword: '',
+        })
+
+        try {
+          const success = await loginPromise // 等待登入結果
+          if (success) {
+            Swal.close() // 登入成功後關閉 Modal
+            router.push('/member/register/add-profile')
+          } else {
+            showErrorLogin('登入失敗')
+          }
+        } catch (error) {
+          console.error('登入錯誤', error)
+          showErrorLogin('登入過程發生錯誤')
+        }
+      })
     } else {
-      console.warn(result)
       if (result.error === '用戶已註冊') {
-        // modal.show()
-        alert(result.error)
+        showError('您已註冊，請前往登入')
       }
+      showErrorLogin('註冊失敗')
+      console.warn(result)
     }
   }
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <div className={memberCss.titleGroup}>
           <h2>初次見面，您好!</h2>
           <h1>GYM步空間 &nbsp; 陪您GYM步</h1>
@@ -106,11 +192,8 @@ export default function RegisterPage() {
               {errors.email && (
                 <span className={memberCss.textDanger}>{errors.email}</span>
               )}
-              <button
-                className={memberCss.visibility}
-                type="button"
-               >
-               <FaRegEye/> 
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>
@@ -155,14 +238,8 @@ export default function RegisterPage() {
                   {errors.confirmPassword}
                 </span>
               )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>
@@ -170,6 +247,15 @@ export default function RegisterPage() {
             <button type="submit" className={memberCss.registerBtn}>
               註冊帳號
             </button>
+          </div>
+
+          <div className={memberCss.rgBtn}>
+            <div>
+              <span>已有會員嗎?</span>
+              <Link className={memberCss.switchBtn} href="/member/login">
+                <span>登入帳號</span>
+              </Link>
+            </div>
           </div>
         </form>
       </div>

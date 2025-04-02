@@ -24,6 +24,16 @@
     border-radius: 3px;
     font-size: 15px;
   }
+
+  .clearButton{
+    background-color: gray;
+    border: none;
+    color: white;
+    width: 50px;
+    padding: 12px 5px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
   
   /* 可以添加懸停效果 */
   /* .button:hover {

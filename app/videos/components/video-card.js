@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./_styles/video-Card.module.css";
 import FavoriteButton from "./favorite-button";
-import AddToCartButton from "./AddToCartButton";
+
 
 const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsLiked }) => {
   const cardClass = variant === "light" ? styles.cardLight : styles.cardDark;
@@ -49,9 +49,9 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
           </div>
           <hr className={styles.divider} />
           <p className={styles.description}>{description}</p>
-          <div className={styles.btns}>
+          {/* <div className={styles.btns}>
           <AddToCartButton />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -64,7 +64,7 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
         >
         <iframe 
             width="100%" 
-            height="500" 
+            height="510" 
             style={{ border: 'none', borderRadius: '5px' }}
             src={url} 
             title="YouTube video player" 

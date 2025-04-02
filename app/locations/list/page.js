@@ -1,6 +1,6 @@
 'use client'
-
 import styles from '../_styles/locations.module.css'
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import React, { useState, useEffect } from 'react'
 import Search from '../_components/search'
 import Banner from '../_components/banner'
@@ -24,62 +24,53 @@ export default function LocationsPage() {
   const [locations, setLocations] = useState([])
   const [filteredLocations, setFilteredLocations] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [showMap, setShowMap] = useState(false)
+  const [showLocations, setShowLocations] = useState(true)
+  
   const breadcrumb = ['home', '營業GYM點']
   const searchParams = useSearchParams()
-  const [showMap, setShowMap] = useState(false)
+  const Router = useRouter()
   const center = [23.7577054, 120.8964954]
   const zoom = 8
-  const [showLocations, setShowLocations] = useState(true)
-  const Router = useRouter()
-  // 處理數據獲取和搜索
+
   useEffect(() => {
     const fetchData = async () => {
-      const location = searchParams.get('location') || ''
-      const branch = searchParams.get('branch') || ''
-      const searchTerm = `${location} ${branch}`.trim()
-      const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`
-
       try {
+        setLoading(true)
+        const location = searchParams.get('location') || ''
+        const branch = searchParams.get('branch') || ''
+        const searchTerm = `${location} ${branch}`.trim()
+        const url = `${LOCATIONS_LIST}?location=${location}&branch=${branch}`
+        
         const res = await fetch(url)
-        if (!res.ok) {
-          throw new Error('Network response was not ok')
-        }
+        if (!res.ok) throw new Error('Network response was not ok')
+        
         const data = await res.json()
-        console.log('Fetched data:', data)
-
-        if (data && data.success) {
+        if (data?.success) {
           setLocations(data.rows || [])
-
           if (!searchTerm) {
             setFilteredLocations(data.rows || [])
-            return
+          } else {
+            const searchParts = searchTerm.toLowerCase().split(' ').filter(Boolean)
+            const [selectedLocation, selectedBranch] = searchParts
+            
+            const filtered = data.rows.filter(location => 
+              location.location?.toLowerCase() === selectedLocation
+            )
+            
+            const sorted = filtered.sort((a, b) => {
+              const aBranch = a.branch?.toLowerCase() || ''
+              const bBranch = b.branch?.toLowerCase() || ''
+              if (selectedBranch) {
+                if (aBranch === selectedBranch) return -1
+                if (bBranch === selectedBranch) return 1
+              }
+              return aBranch.localeCompare(bBranch)
+            })
+            
+            setFilteredLocations(sorted)
           }
-
-          const searchParts = searchTerm
-            .toLowerCase()
-            .split(' ')
-            .filter((part) => part.length > 0)
-
-          const selectedLocation = searchParts[0] || ''
-          const selectedBranch = searchParts[1] || ''
-
-          const filtered = data.rows.filter((location) => {
-            const locationName = location.location?.toLowerCase() || ''
-            return locationName === selectedLocation
-          })
-
-          const sorted = filtered.sort((a, b) => {
-            const aBranch = a.branch?.toLowerCase() || ''
-            const bBranch = b.branch?.toLowerCase() || ''
-
-            if (selectedBranch) {
-              if (aBranch === selectedBranch) return -1
-              if (bBranch === selectedBranch) return 1
-            }
-            return aBranch.localeCompare(bBranch)
-          })
-
-          setFilteredLocations(sorted)
         } else {
           setLocations([])
           setFilteredLocations([])
@@ -88,9 +79,11 @@ export default function LocationsPage() {
         console.error('獲取locations數據失敗:', error)
         setLocations([])
         setFilteredLocations([])
+      } finally {
+        setLoading(false)
       }
     }
-
+    
     fetchData()
   }, [searchParams])
 
@@ -101,7 +94,6 @@ export default function LocationsPage() {
   }
 
   const handleLocationClick = (location) => {
-    console.log('Location clicked:', location)
     setSelectedAddress(location)
     setIsModalOpen(true)
   }
@@ -134,6 +126,7 @@ export default function LocationsPage() {
               <Search onSearch={handleSearch} />
             </div>
           </div>
+
           <div
             className={styles.mapContainer}
             role="button"
@@ -158,17 +151,23 @@ export default function LocationsPage() {
               <h3>點擊尋找最近的據點</h3>
             </>
           </div>
+
           <div className={styles.resultsContainer}>
             {showMap && <Map center={center} zoom={zoom} />}
           </div>
         </div>
 
-        {showLocations &&
-          (filteredLocations.length === 0 ? (
-            <>
-              <div className={styles.toolsContainer}>
-                <Breadcrumb breadcrumb={breadcrumb} />
+        {showLocations && (
+          <>
+            <div className={styles.toolsContainer}>
+              <Breadcrumb breadcrumb={breadcrumb} />
+            </div>
+            
+            {loading ? (
+              <div className={styles.loaderContainer}>
+                <div className={loaderStyle.loader}></div>
               </div>
+            ) : filteredLocations.length === 0 ? (
               <div className={styles.locationsContainer}>
                 <div className={styles.emptyResults}>
                   <p>
@@ -178,18 +177,13 @@ export default function LocationsPage() {
                   </p>
                 </div>
               </div>
-            </>
-          ) : (
-            <>
-              <div className={styles.toolsContainer}>
-                <Breadcrumb breadcrumb={breadcrumb} />
-              </div>
+            ) : (
               <div className={styles.locationsContainer}>
                 {filteredLocations.map((location) => (
                   <div key={location.id} className={styles.cardWrapper}>
-                    <div 
+                    <div
                       className={styles.cardContent}
-                      role="button" 
+                      role="button"
                       tabIndex={0}
                       onClick={() => handleLocationClick(location)}
                       onKeyPress={(e) => {
@@ -197,26 +191,23 @@ export default function LocationsPage() {
                           handleLocationClick(location)
                         }
                       }}
-                      style={{ cursor: 'pointer', 
-                      }}
+                      style={{ cursor: 'pointer' }}
                     >
                       <LocationCard location={location} />
                     </div>
                   </div>
                 ))}
-               
-              </div> 
-              
-            </>
-          ))}
+              </div>
+            )}
+          </>
+        )}
       </div>
+
       <MapModal
-                  isOpen={isModalOpen}
-                  onClose={() => {
-                    setIsModalOpen(false)
-                    }}
-                  selectedAddress={selectedAddress}
-                />
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedAddress={selectedAddress}
+      />
     </>
   )
 }

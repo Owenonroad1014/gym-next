@@ -2,14 +2,16 @@
 
 import { useState } from 'react'
 import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { RESET_PASS_PUT } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context'
-import memberCss from '@/app/member/_styles/member.module.css'
+import memberCss from '../../_styles/member.module.css'
 
 export default function ResetPasswordPage() {
+  const router = useRouter()
   const { auth, getAuthHeader } = useAuth()
   const storageKey = 'gymboo-reset'
 
@@ -32,11 +34,12 @@ export default function ResetPasswordPage() {
     MySwal.fire({
       text: message,
       icon: 'success',
-      confirmButtonColor: '#0b3760',
-      confirmButtonText: '確定',
+      showConfirmButton:false,
+      timer: 1500,
       didClose: () => {
         //畫面不要偏移使用
         document.body.style.overflow = '' // 恢復頁面滾動
+        router.replace('/member-center/change-password')
       },
     })
   }
@@ -112,9 +115,9 @@ export default function ResetPasswordPage() {
       if (result.success) {
         successModal('密碼修改成功')
         setResetPassForm({
-            newPassword: '',
-            confirmPassword: '',
-          })
+          newPassword: '',
+          confirmPassword: '',
+        })
         localStorage.removeItem(storageKey)
       } else {
         showError('密碼修改失敗，請稍後再試')
@@ -130,11 +133,11 @@ export default function ResetPasswordPage() {
     }
   }
   return (
-    <div className={memberCss.registerContainer}>
+    <div className={memberCss.resetContainer}>
       <div className={memberCss.form}>
         <div className={memberCss.titleGroup}>
           <h2>修改密碼</h2>
-          <h3>請輸入新密碼</h3>
+          <h3>請設定新密碼</h3>
         </div>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>
@@ -180,19 +183,13 @@ export default function ResetPasswordPage() {
                   {errors.confirmPassword}
                 </span>
               )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>
-          <div className={memberCss.registerBtns}>
-            <button type="submit" className={memberCss.registerBtn}>
+          <div className={memberCss.resetBtns}>
+            <button type="submit" className={memberCss.resetBtn}>
               修改密碼
             </button>
           </div>

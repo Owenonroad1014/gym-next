@@ -53,15 +53,22 @@ const VideoGrid = () => {
     <section className={styles.productGrid}>
           <Sort router={router}/>
           <div className={styles.productArea}>
-          <div className={styles.productItem}>
-              {Videos.rows.map((video) => (
-                <VideoCard key={video.id} {...video} setIsLiked={setIsLiked}/>
-              ))}
+          {Videos.rows.length > 0 ? (
+            <>
+              <div className={styles.productItem}>
+                {Videos.rows.map((video) => (
+                  <VideoCard key={video.id} {...video} setIsLiked={setIsLiked}/>
+                ))}
               </div>
-              <div>
-              <Pagination {...Videos} searchParams={searchParams}
-                    />
+              <div className={styles.paginationWrapper}>
+                <Pagination {...Videos} searchParams={searchParams} />
               </div>
+            </>
+          ) : (
+            <div className={styles.noVideos}>
+              查無該影片
+            </div>
+          )}
 
           </div>
     </section>

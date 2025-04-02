@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { z } from 'zod'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import { RESET_PASS_TOKEN_PUT } from '@/config/api-path'
 import memberCss from '../_styles/member.module.css'
 
@@ -18,7 +19,7 @@ export default function ResetPasswordPage() {
 
   const MySwal = withReactContent(Swal)
   const showError = (message) => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -33,14 +34,12 @@ export default function ResetPasswordPage() {
         if (result.isConfirmed) {
           res()
           router.push('/member/forget-password')
-        } else {
-          rej()
         }
       })
     })
   }
   const successModal = (message) => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -54,9 +53,7 @@ export default function ResetPasswordPage() {
       }).then((result) => {
         if (result.isConfirmed) {
           res()
-          router.push('/member/forget-password')
-        } else {
-          rej()
+          router.push('/member/login')
         }
       })
     })
@@ -98,14 +95,14 @@ export default function ResetPasswordPage() {
       const timeRemaining = Number(expiresAt) - now
       if (timeRemaining <= 0) {
         localStorage.removeItem(storageKey)
-        showError('重設密碼連結已過期，請重新請求')
+        showError('重設密碼連結已過期，請重新請求重設密碼')
         return
       }
 
-      // 🔥 設定定時器，讓 localStorage 自動清除
+      // 設定定時器，讓 localStorage 自動清除
       const timeoutId = setTimeout(() => {
         localStorage.removeItem(storageKey)
-        showError('重設密碼連結已過期，請重新請求')
+        showError('重設密碼連結已過期，請重新請求重設密碼')
       }, timeRemaining)
 
       return () => clearTimeout(timeoutId)
@@ -119,7 +116,7 @@ export default function ResetPasswordPage() {
     .object({
       newPassword: z
         .string()
-        .min(1, { message: '密碼為必填' })
+        .min(1, { message: '請輸入新密碼' })
         .min(8, {
           message:
             '密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#',
@@ -187,6 +184,10 @@ export default function ResetPasswordPage() {
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <div className={memberCss.titleGroup}>
           <h2>歡迎回來!</h2>
           <h1>請重新設置密碼</h1>
@@ -235,14 +236,8 @@ export default function ResetPasswordPage() {
                   {errors.confirmPassword}
                 </span>
               )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
+              <button className={memberCss.visibility} type="button">
+                <FaRegEye />
               </button>
             </div>
           </div>

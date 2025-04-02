@@ -5,19 +5,19 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import GoogleLoginPopup from '@/app/member/_component/g-login-btn'
 
 export default function LoginPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const { auth, login } = useAuth()
   // 呈現密碼核取方塊(勾選盒) 布林值
   const [show, setShow] = useState(false)
-  const { auth, login } = useAuth()
-  const searchParams = useSearchParams()
   const [errors, setError] = useState('')
-  const callbackUrl = searchParams.get('callbackUrl') || '/'
-  const router = useRouter()
   const [loginForm, setLoginChangeForm] = useState({
     account: '',
     password: '',
@@ -60,30 +60,78 @@ export default function LoginPage() {
     )
 
     if (success) {
-      // modal.show()
-      console.log('登入成功', { auth })
-      if (
-        router.push(callbackUrl) === '/member/register' ||
-        router.push(callbackUrl) === '/member/login'
-      ) {
-        router.replace('/')
-      }
-      router.push(callbackUrl) // 已登入就直接跳轉
+      await loginSuccess()
+      await Swal.close() // 登入成功後關閉 Modal
+
+      setTimeout(() => {
+        if (
+          callbackUrl === '/member/register' ||
+          callbackUrl === '/member/login'
+        ) {
+          router.replace('/')
+        } else {
+          router.push(callbackUrl)
+        }
+      }, 1600) // 已登入就直接跳轉
     } else {
       // modal.show()
       if (code === 404) {
-        alert(error || '用戶未註冊')
+        showError(error || '用戶未註冊')
       } else if (code === 410 || code === 420) {
-        alert(error || '帳號或密碼錯誤')
+        showError(error || '帳號或密碼錯誤')
       } else {
-        alert(error || '登入失敗，請稍後再試')
+        showError(error || '登入失敗，請稍後再試')
       }
     }
   }
 
+  const MySwal = withReactContent(Swal)
+  const showError = (message) => {
+    return new Promise((res, rej) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#0b3760',
+        confirmButtonText: '確定',
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          res()
+        } else {
+          rej()
+        }
+      })
+    })
+  }
+
+  const loginSuccess = () => {
+    return new Promise(() => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        imageUrl: '/gymdot.svg',
+        imageHeight: 150,
+        imageAlt: 'gym-boo-logo',
+        text: '登入成功!',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+        },
+      })
+    })
+  }
   return (
     <div className={memberCss.loginContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.titleGroup}>
             <h2>歡迎回來!</h2>
@@ -140,11 +188,25 @@ export default function LoginPage() {
             <Link href="/member/forget-password">忘記密碼</Link>
           </div>
         </form>
-        <div>
+        <hr />
+        <div className={memberCss.loginBtns}>
           <GoogleLoginPopup />
         </div>
+        <div className={memberCss.rgBtn}>
+          <span>還沒成為會員嗎?</span>
+          <Link className={memberCss.switchBtn} href="/member/register">
+            <span> 註冊帳號</span>
+          </Link>
+        </div>
       </div>
-      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
+      {/* <div className={memberCss.rgSelect}>
+        <div className={memberCss.rgBtn}>
+          <span>還沒成為會員嗎?</span>
+          <Link className={memberCss.switchBtn} href="/member/register">
+            <span> 註冊帳號</span>
+          </Link>
+        </div>
+      </div> */}
     </div>
   )
 }
