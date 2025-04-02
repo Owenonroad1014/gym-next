@@ -1,12 +1,13 @@
 'use client'
 
-import memberCss from '../_styles/member.module.css'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
 import { REGISTER_POST } from '@/config/api-path'
+import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import { rgSchema } from '@/utils/schema/schema'
 
@@ -147,7 +148,7 @@ export default function RegisterPage() {
         try {
           const success = await loginPromise // 等待登入結果
           if (success) {
-        Swal.close() // 登入成功後關閉 Modal
+            Swal.close() // 登入成功後關閉 Modal
             router.push('/member/register/add-profile')
           } else {
             showErrorLogin('登入失敗')
@@ -168,6 +169,10 @@ export default function RegisterPage() {
   return (
     <div className={memberCss.registerContainer}>
       <div className={memberCss.form}>
+        <Link className={memberCss.home} href="/">
+          <FaHome style={{ cursor: 'pointer' }} />
+          <span>回首頁</span>
+        </Link>
         <div className={memberCss.titleGroup}>
           <h2>初次見面，您好!</h2>
           <h1>GYM步空間 &nbsp; 陪您GYM步</h1>
@@ -242,6 +247,15 @@ export default function RegisterPage() {
             <button type="submit" className={memberCss.registerBtn}>
               註冊帳號
             </button>
+          </div>
+
+          <div className={memberCss.rgBtn}>
+            <div>
+              <span>已有會員嗎?</span>
+              <Link className={memberCss.switchBtn} href="/member/login">
+                <span>登入帳號</span>
+              </Link>
+            </div>
           </div>
         </form>
       </div>

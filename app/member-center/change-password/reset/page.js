@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 import { RESET_PASS_PUT } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context'
-import memberCss from '@/app/member/_styles/member.module.css'
+import memberCss from '../../_styles/member.module.css'
 
 export default function ResetPasswordPage() {
   const router = useRouter()
@@ -133,11 +133,11 @@ export default function ResetPasswordPage() {
     }
   }
   return (
-    <div className={memberCss.registerContainer}>
+    <div className={memberCss.resetContainer}>
       <div className={memberCss.form}>
         <div className={memberCss.titleGroup}>
           <h2>修改密碼</h2>
-          <h3>請輸入新密碼</h3>
+          <h3>請設定新密碼</h3>
         </div>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>
@@ -188,8 +188,8 @@ export default function ResetPasswordPage() {
               </button>
             </div>
           </div>
-          <div className={memberCss.registerBtns}>
-            <button type="submit" className={memberCss.registerBtn}>
+          <div className={memberCss.resetBtns}>
+            <button type="submit" className={memberCss.resetBtn}>
               修改密碼
             </button>
           </div>

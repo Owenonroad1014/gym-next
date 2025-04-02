@@ -376,14 +376,19 @@ export default function ProfileTable() {
                       </tr>
                       <tr>
                         <th>手機號碼</th>
-                        <td>{profileData.mobile}</td>
+                        <td>{profileData.mobile || '未填寫'}</td>
                       </tr>
                     </div>
                     <tr>
                       {isEditable.intro ? (
                         <td>
                           <div className={editCss.formGroup}>
-                            <label className={editCss.titleLabel} htmlFor="intro">個人簡介</label>
+                            <label
+                              className={editCss.titleLabel}
+                              htmlFor="intro"
+                            >
+                              個人簡介
+                            </label>
                             <textarea
                               className={editCss.intro}
                               name="intro"
@@ -414,7 +419,12 @@ export default function ProfileTable() {
                       {isEditable.item ? (
                         <td>
                           <div className={editCss.formGroup}>
-                            <label className={editCss.titleLabel}  htmlFor="item">喜愛運動項目</label>
+                            <label
+                              className={editCss.titleLabel}
+                              htmlFor="item"
+                            >
+                              喜愛運動項目
+                            </label>
                             <input
                               className={editCss.item}
                               type="text"
@@ -444,7 +454,9 @@ export default function ProfileTable() {
                       {isEditable.goal ? (
                         <td>
                           <div className={editCss.formGroup}>
-                            <label className={editCss.titleLabel} >健身目標</label>
+                            <label className={editCss.titleLabel}>
+                              健身目標
+                            </label>
                             <div className={editCss.checkboxes}>
                               {[
                                 '增肌',
@@ -493,7 +505,9 @@ export default function ProfileTable() {
                       {isEditable.status ? (
                         <td>
                           <div className={editCss.status}>
-                            <label className={editCss.titleLabel} >是否公開檔案</label>
+                            <label className={editCss.titleLabel}>
+                              是否公開檔案
+                            </label>
                             <input
                               type="checkbox"
                               name="status"
@@ -513,19 +527,19 @@ export default function ProfileTable() {
                           <td>
                             {profileData.status === true
                               ? '公開檔案'
-                              : '不公開檔案'}
+                              : '不公開檔案' || '不公開'}
                           </td>
                         </>
                       )}
                     </tr>
+                    <div className={editCss.btnpos}>
+                      <button className={editCss.btn} type="submit">
+                        編輯檔案
+                      </button>
+                    </div>
                   </div>
                 </tbody>
               </table>
-              <div>
-                <button className={editCss.btn} type="submit">
-                 編輯檔案
-                </button>
-              </div>
             </form>
           </div>
         </div>
