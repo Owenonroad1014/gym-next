@@ -7,9 +7,9 @@ import { useAuth } from '@/context/auth-context'
 import btnCss from '../_styles/member.module.css'
 
 export default function GoogleLoginPopup() {
-  const { loginGoogle } = useFirebase()
+  const { loginGoogle, auth } = useFirebase()
   const [isLoading, setIsLoading] = useState(false)
-  const { GoogleLogin} = useAuth()
+  const { GoogleLogin } = useAuth()
 
   // 使用 useSearchParams 和 useRouter 這些 hooks 在組件中
   const router = useRouter()
@@ -18,18 +18,27 @@ export default function GoogleLoginPopup() {
 
   const callbackGoogleLoginPopup = async (providerData) => {
     setIsLoading(true)
-    const res = await GoogleLogin(providerData)
+    const { success } = await GoogleLogin(providerData)
     setIsLoading(false) // 在這裡確保 loading 狀態重置
 
-   
-  if (res.success) {
-    router.push(callbackUrl)
+  // 檢查 auth 是否存在
+  if (!auth) {
+    console.error('auth 未定義，等待更新...')
+    return
   }
+
+    // 確保 auth.add_status 存在再執行跳轉
+    if (auth?.add_status === 0) {
+      router.push('/member/register/add-profile')
+    } else if (auth?.add_status === 1) {
+      router.push(callbackUrl)
+    }
   }
 
   return (
     <>
-      <button className={btnCss.googleLoginBtn}
+      <button
+        className={btnCss.googleLoginBtn}
         onClick={async () => {
           setIsLoading(true)
           await loginGoogle(callbackGoogleLoginPopup)
