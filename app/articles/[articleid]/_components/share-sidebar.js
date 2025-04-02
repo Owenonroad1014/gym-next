@@ -9,7 +9,7 @@ import { ARTICLE_ITEM_FAV, ARTICLE_ITEM_FAVTOGGLE } from '@/config/api-path'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
-
+import ShareModal from './share-modal'
 export default function ShareSidebar({
   articles = {
     category_id: 0,
@@ -29,7 +29,7 @@ export default function ShareSidebar({
   const [like, setLike] = useState(false)
   const { auth, getAuthHeader } = useAuth()
   const [error, setError] = useState('')
-
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const Toast = Swal.mixin({
     toast: true,
     position: 'top-start',
@@ -63,6 +63,9 @@ export default function ShareSidebar({
     )
   }
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
   useEffect(() => {
     const getFetchFav = async () => {
       try {
@@ -136,7 +139,7 @@ export default function ShareSidebar({
               <FaList />
             </Link>
           </li>
-          <li className={articleStyle.icon} onClick={copyUrl}>
+          <li className={articleStyle.icon} onClick={() => handleOpenModal()}>
             <span className={articleStyle.tooltip}>分享</span>
             <IoShareSocialSharp />
           </li>
@@ -154,6 +157,11 @@ export default function ShareSidebar({
           </li>
         </ul>
       </div>
+      <ShareModal
+        setIsModalOpen={setIsModalOpen}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   )
 }
