@@ -362,6 +362,17 @@ CREATE TABLE `product_reviews` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `order_item_id` int DEFAULT NULL
 ) ;
+CREATE TABLE `favorites` (
+  `like_id` int NOT NULL,
+  `member_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `favorites` (`like_id`, `member_id`, `product_id`, `created_at`) VALUES
+(37, 4, 10, '2025-03-22 11:48:51'),
+(120, 1, 1, '2025-03-28 02:59:45');
+
+
 
 INSERT INTO `product_reviews` (`id`, `member_id`, `product_id`, `rating`, `review_text`, `created_at`, `order_item_id`) VALUES
 (1, 4, 1, 4, '棒棒噠', '2025-03-25 07:46:22', NULL),
@@ -479,7 +490,9 @@ CREATE TABLE order_items (
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
   FOREIGN KEY (product_variant_id) REFERENCES productvariants(id) ON DELETE SET NULL
 );
-
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`member_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 INSERT INTO order_items (
   order_id, product_id, product_variant_id, rental_start_date, rental_end_date, quantity, price
 ) VALUES
