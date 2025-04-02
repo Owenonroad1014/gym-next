@@ -52,7 +52,7 @@
   align-items: center;
 }
 .rightection {
-  width: 5%;
+  width: 7%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -60,7 +60,7 @@
   color: #3333338a;
 }
 .middlesection {
-  width: 90%;
+  width: 85%;
 }
 .friendsPage ul li {
   background-color: #ffffffbd;
