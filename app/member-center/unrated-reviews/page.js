@@ -9,12 +9,14 @@ import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
 import { FaStar, FaRegStar } from "react-icons/fa";
 import ReactDOM from 'react-dom';
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 const MySwal = withReactContent(Swal);
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
   const [products, setProducts] = useState([]);
+  const [isloading, setIsloading] = useState(true)
   const headers = auth ? { ...getAuthHeader(), "Content-Type": "application/json" } : {};
 
   useEffect(() => {
@@ -24,9 +26,11 @@ const Review = () => {
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
+          setIsloading(false)
         }
       } catch (error) {
         console.error("獲取未評價商品錯誤:", error);
+        setIsloading(false)
       }
     };
     fetchPendingReviews();
@@ -103,6 +107,14 @@ const Review = () => {
       Swal.fire("發生錯誤", "請稍後再試", "error");
     }
   };
+
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
 
   return (
     <article className={styles.review}>

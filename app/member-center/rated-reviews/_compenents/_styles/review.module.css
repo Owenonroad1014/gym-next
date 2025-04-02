@@ -166,4 +166,10 @@
     align-items: center;
     margin-bottom: 15px;
   }
+
+  .loaderContainer{
+    width: 30%;
+    margin: auto;
+    margin-top: 50px;
+}
   

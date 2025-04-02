@@ -10,16 +10,18 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
 import ReactDOM from 'react-dom';
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 const MySwal = withReactContent(Swal);
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [rating, setRating] = useState(0);
+  // const [comment, setComment] = useState("");
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [products, setProducts] = useState([]);
+    const [isloading, setIsloading] = useState(true)
 
   const headers = auth ? { ...getAuthHeader() } : {};
 
@@ -34,9 +36,11 @@ const Review = () => {
             latest_review: p.rating !== null ? { rating: p.rating, comment: p.review_text } : null,order_item_id: p.order_item_id,
           }));
           setProducts(formattedProducts);
+          setIsloading(false)
         }
       } catch (error) {
         console.error("獲取商品列表錯誤:", error);
+        setIsloading(false)
       }
     };
     fetchProducts();
@@ -141,6 +145,14 @@ const Review = () => {
       i < rating ? <FaStar key={i} color="#f87808" size={20} /> : <FaRegStar key={i} color="#f87808" size={20} />
     );
   };
+
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
 
   return (
     <>
