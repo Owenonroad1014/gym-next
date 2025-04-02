@@ -96,6 +96,7 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
+
         <div className={headerstyles.rightSection}>
         {' '}
         <Link href="/products" className={headerstyles.navLink}>
@@ -113,16 +114,7 @@ export default function Header() {
             <>
               <Link href="/member-center" className={headerstyles.navLink}>
                 <div className={headerstyles.navAvatar}>
-                  <img
-                    src={
-                      auth.google_uid
-                        ? auth.avatar // 使用 Google 大頭貼
-                        : `${AVATAR_PATH}/${
-                            auth.avatar || 'default-avatar.png'
-                          }`
-                    }
-                    alt=""
-                  />
+                <div className={headerstyles.navAvatar}>{auth.name}</div>
                 </div>
               </Link>
               <a
