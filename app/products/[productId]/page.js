@@ -13,7 +13,7 @@ import { useCart } from "@/context/cart-context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
 
@@ -27,11 +27,11 @@ const ProductDetail = () => {
   const [selectedWeight, setSelectedWeight] = useState(null);
   const [likeId, setLikeId] = useState(false); // 新增狀態
   const { auth, getAuthHeader } = useAuth()
+  const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1);
   const [rentalStartDate, setRentalStartDate] = useState("");
   const [rentalEndDate, setRentalEndDate] = useState("");
   const MySwal = withReactContent(Swal);
-  const { addToCart } = useCart()
 
   useEffect(() => {
     console.log(params);
@@ -91,8 +91,10 @@ const ProductDetail = () => {
   };
 
   // 加入購物車
-  document.body.style.overflow = 'hidden'
   const handleAddToCart = () => {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden'
+    }
     // 如果商品有重量變體但未選擇重量，顯示警告
     if (product.variants && product.variants.length > 0 && !selectedWeight) {
       MySwal.fire({
@@ -269,7 +271,7 @@ const ProductDetail = () => {
       <div className={styles.relatedTitle}>相關商品
       </div>
       <hr className={styles.divider} />
-      <RelatedProducts products={relatedProducts}/>
+      
       <ToastContainer
         position="bottom-center"
         autoClose={3000}
@@ -295,6 +297,7 @@ const ProductDetail = () => {
           background: '#fff',
         }}
       />
+      <RelatedProducts products={relatedProducts}/>
     </main>
     </>
   );

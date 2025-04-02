@@ -63,12 +63,12 @@ export default function Button({ isFormValid, setIsSubmitted, customerInfo }) {
       // 存儲訂單信息到localStorage
       const orderDate = new Date().toLocaleString()
       const orderAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-      const pickupStore = customerInfo.pickupStore || '未選擇'
+      const pickupMethod = customerInfo.pickupMethod || '未選擇'
 
       localStorage.setItem('lastOrderId', result.orderId)
       localStorage.setItem('orderDate', orderDate)  //後3行新增
       localStorage.setItem('orderAmount', orderAmount)
-      localStorage.setItem('pickupStore', pickupStore)
+      localStorage.setItem('pickupMethod', pickupMethod)
       localStorage.removeItem('cart')
 
       // 重定向到訂單完成頁面

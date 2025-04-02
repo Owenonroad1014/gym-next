@@ -30,7 +30,7 @@ export function CartProvider({ children }) {
     //   rentalStartDate: "",
     //   rentalEndDate: "",
     // },
-  ])
+  ]);
   const [paymentMethod, setPaymentMethod] = useState(""); // 付款方式
   const [pickupMethod, setPickupMethod] = useState(""); // 取貨方式
   const [cartQuantity, setCartQuantity] = useState(0);
@@ -136,24 +136,30 @@ export function CartProvider({ children }) {
   //加入商品
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id)
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      let updatedCart;
+  
       if (existingItem) {
-        // 如果商品已經存在，增加數量
-        return prevItems.map((item) =>
+        updatedCart = prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
+        );
       } else {
-        // 如果商品不存在，加入購物車
-        return [...prevItems, { ...product, quantity: 1 }]
+        updatedCart = [...prevItems, { ...product, quantity: 1 }];
       }
-    })
+  
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+      return updatedCart;
+
+    });
+  
     setPaymentMethod(""); 
     setPickupMethod("");
-    localStorage.removeItem('paymentMethod');
-    localStorage.removeItem('pickupMethod');
-  }
+    localStorage.removeItem("paymentMethod");
+    localStorage.removeItem("pickupMethod");
+  };
+  
 
   //移除商品
   const removeFromCart = (productId) => {
@@ -193,4 +199,4 @@ export function CartProvider({ children }) {
 // 自訂 Hook，讓其他組件更方便使用
 export function useCart() {
   return useContext(CartContext)
-}
+}   

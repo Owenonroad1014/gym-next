@@ -23,16 +23,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <AuthContextProvider>
-      <html lang="en">
-        <body>
-        <CartProvider>
-          <Header />
-          {children}
-          <Footer />
-        </CartProvider>
-        </body>
-      </html>
-    </AuthContextProvider>
+    <CartProvider>
+      <AuthContextProvider>
+        <html lang="en">
+          <body>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </AuthContextProvider>
+    </CartProvider>
   )
 }
