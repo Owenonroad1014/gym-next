@@ -2,14 +2,18 @@
     color: coral;
     border:0;
     background-color:white ;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     position: absolute;
-    right: 0.1px;
-    top: 0.1px;
+    right: -1px;
+    top: -1px;
     z-index: 2;
-    border-radius: 0 0 0 80%;
+    border-radius: 0 0 0 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .heart{
-    font-size: 22px;
+    font-size: 20px;
+    margin-left: 3px;
   }

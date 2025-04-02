@@ -115,6 +115,22 @@ export default function CenterList() {
         <ul className={selectStyle.selectPart}>
           <li
             className={
+              pathname === '/member-center/rated-reviews' ? selectStyle.active : ''
+            }
+          >
+            <Link href="/member-center/rated-reviews">我的評價</Link>
+          </li>
+          <li
+            className={
+              pathname === '/member-center/unrated-reviews' ? selectStyle.active : ''
+            }
+          >
+            <Link href="/member-center/unrated-reviews">尚未評價</Link>
+          </li>
+        </ul>
+        <ul className={selectStyle.selectPart}>
+          <li
+            className={
               pathname === '/member-center/person' ? selectStyle.active : ''
             }
           >
