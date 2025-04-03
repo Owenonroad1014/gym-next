@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -97,7 +97,7 @@ export default function AddProfileJsPage() {
   }
 
   const successModal = (message) => {
-    return new Promise(() => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -107,14 +107,23 @@ export default function AddProfileJsPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
-          router.push(callbackUrl)
         },
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          resolve()
+          await refreshAuth()
+          // 延遲一小段時間再進行跳轉
+          setTimeout(() => {
+            console.log('Updated auth:', auth) // 確認 auth 已經更新
+            router.push(callbackUrl) // 跳轉到目標頁面
+          }, 100) // 延遲100ms，確保狀態更新後再跳轉
+        }
       })
     })
   }
 
   const showError = (message) => {
-    return new Promise((res) => {
+    return new Promise((resolve) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -124,16 +133,16 @@ export default function AddProfileJsPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
+          resolve() // 確保 Promise 會結束
         },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          res()
-          router.push('/member/forget-password')
-        }
       })
     })
   }
-
+  useEffect(() => {
+    if (auth.add_status === 1) {
+      router.replace(callbackUrl || '/')
+    }
+  }, [auth.add_status, callbackUrl, router])
   const sendFormData = async () => {
     const formData = new FormData()
     if (profileForm.avatar && profileForm.avatar instanceof File) {
@@ -144,12 +153,12 @@ export default function AddProfileJsPage() {
       if (key === 'goal' && Array.isArray(profileForm[key])) {
         profileForm[key].forEach((item) => formData.append(`${key}[]`, item))
       } else if (key === 'status') {
-        formData.append(key, profileForm[key] === 'true')
+        formData.append('status', Boolean(status))
       } else {
         formData.append(key, profileForm[key])
       }
     })
-    // console.log('appendFormData:', ...formData)
+    console.log('appendFormData:', ...formData)
     const r = await fetch(`${REGISTER_PROFILE_POST}?folder=avatar`, {
       method: 'PUT',
       body: formData,
@@ -159,7 +168,6 @@ export default function AddProfileJsPage() {
     })
     const result = await r.json()
     if (result.success) {
-      refreshAuth()
       successModal('個人檔案已建立')
     } else {
       showError('個人檔案建立失敗')
@@ -234,206 +242,200 @@ export default function AddProfileJsPage() {
 
   return (
     <>
-      {auth.add_status === 1 ? (
-        router.replace(callbackUrl || '/')
-      ) : (
-        <div className={addProfileCss.container}>
-          {/* {auth.id?():()} */}
-          <div className={addProfileCss.form}>
-            <form method="POST" onSubmit={onSubmit}>
-              <h2>填寫個人檔案</h2>
-              <div
-                className={`${addProfileCss.formGroup} ${addProfileCss.avatarGroup}`}
-              >
-                <input
-                  type="file"
-                  name="avatar"
-                  id="avatar"
-                  onChange={avatarChangeForm}
-                  hidden
-                />
-                <label htmlFor="avatar" className={addProfileCss.avatar}>
-                  <img src={previewAvatar} alt="頭貼預覽" />
-                </label>
-                <label htmlFor="avatar">上傳大頭貼</label>
-                <div>
-                  {errors.avatar && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.avatar}
-                    </span>
-                  )}
-                </div>
+      <div className={addProfileCss.container}>
+        {/* {auth.id?():()} */}
+        <div className={addProfileCss.form}>
+          <form method="POST" onSubmit={onSubmit}>
+            <h2>填寫個人檔案</h2>
+            <div
+              className={`${addProfileCss.formGroup} ${addProfileCss.avatarGroup}`}
+            >
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                onChange={avatarChangeForm}
+                hidden
+              />
+              <label htmlFor="avatar" className={addProfileCss.avatar}>
+                <img src={previewAvatar} alt="頭貼預覽" />
+              </label>
+              <label htmlFor="avatar">上傳大頭貼</label>
+              <div>
+                {errors.avatar && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.avatar}
+                  </span>
+                )}
               </div>
-              <div className={addProfileCss.formGroup}>
-                <label htmlFor="name">姓名</label>
-                <input
-                  type="text"
-                  name="pname"
-                  id="name"
-                  value={profileForm.pname}
-                  onChange={profileChangeForm}
-                  placeholder="此欄為必填，請輸入完整姓名"
-                />
-                <div>
-                  {errors.pname && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.pname}
-                    </span>
-                  )}
-                </div>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label htmlFor="name">姓名</label>
+              <input
+                type="text"
+                name="pname"
+                id="name"
+                value={profileForm.pname}
+                onChange={profileChangeForm}
+                placeholder="此欄為必填，請輸入完整姓名"
+              />
+              <div>
+                {errors.pname && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.pname}
+                  </span>
+                )}
               </div>
-              <div className={addProfileCss.formGroup}>
-                <label htmlFor="sex">性別</label>
-                <div className={addProfileCss.radios}>
-                  <div className={addProfileCss.radioItem}>
-                    <input
-                      type="radio"
-                      name="sex"
-                      id="male"
-                      value="male"
-                      checked={profileForm.sex === 'male'}
-                      onChange={profileChangeForm}
-                    />
-                    <label htmlFor="male">男性</label>
-                  </div>
-                  <div className={addProfileCss.radioItem}>
-                    <input
-                      type="radio"
-                      name="sex"
-                      id="female"
-                      value="female"
-                      checked={profileForm.sex === 'female'}
-                      onChange={profileChangeForm}
-                    />
-                    <label htmlFor="female">女性</label>
-                  </div>
-                </div>
-                <div>
-                  {errors.sex && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.sex}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className={addProfileCss.formGroup}>
-                <label htmlFor="mobile">手機</label>
-                <input
-                  type="tel"
-                  name="mobile"
-                  id="mobile"
-                  placeholder="此欄為必填，手機格式為09xxxxxx"
-                  value={profileForm.mobile}
-                  onChange={profileChangeForm}
-                />
-                <div>
-                  {errors.mobile && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.mobile}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className={addProfileCss.formGroup}>
-                <label htmlFor="intro">個人簡介</label>
-                <textarea
-                  className={addProfileCss.intro}
-                  name="intro"
-                  id="intro"
-                  rows="5"
-                  maxLength={300}
-                  placeholder="我是一名瑜珈老師，最近正在增肌訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。(至少30個字元，最多300個字元)"
-                  value={profileForm.intro}
-                  onChange={profileChangeForm}
-                />
-                <div>
-                  {errors.intro && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.intro}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className={addProfileCss.formGroup}>
-                <label htmlFor="item">喜愛運動項目</label>
-                <input
-                  className={addProfileCss.item}
-                  type="text"
-                  name="item"
-                  id="item"
-                  placeholder="跑步、抱石...，最多填寫五個項目"
-                  value={profileForm.item}
-                  onChange={profileChangeForm}
-                />
-                <div>
-                  {errors.item && (
-                    <span className={addProfileCss.textDanger}>
-                      {errors.item}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className={addProfileCss.formGroup}>
-                <label>健身目標</label>
-                <div className={addProfileCss.checkboxes}>
-                  {[
-                    '增肌',
-                    '減脂',
-                    '提高耐力',
-                    '增強體能',
-                    '健康維持',
-                    '提高核心能量',
-                  ].map((goal, index) => {
-                    const goalId = `goal${index + 1}` // 產生 id: goal1, goal2, ...
-                    return (
-                      <div key={index} className={addProfileCss.current}>
-                        <input
-                          type="checkbox"
-                          name="goal"
-                          value={goal}
-                          id={goalId}
-                          checked={profileForm.goal.includes(goal)}
-                          onChange={(e) => {
-                            const newGoals = e.target.checked
-                              ? [...profileForm.goal, goal]
-                              : profileForm.goal.filter((item) => item !== goal)
-                            setProfileForm({ ...profileForm, goal: newGoals })
-                          }}
-                        />
-                        <label htmlFor={goalId}>{goal}</label>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              <div
-                className={`${addProfileCss.formGroup} ${addProfileCss.status}`}
-              >
-                <div className={addProfileCss.status}>
-                  <label>是否公開檔案</label>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label htmlFor="sex">性別</label>
+              <div className={addProfileCss.radios}>
+                <div className={addProfileCss.radioItem}>
                   <input
-                    type="checkbox"
-                    name="status"
-                    id="public"
-                    checked={status}
-                    onChange={statusChangeForm}
+                    type="radio"
+                    name="sex"
+                    id="male"
+                    value="male"
+                    checked={profileForm.sex === 'male'}
+                    onChange={profileChangeForm}
                   />
-                  <label htmlFor="public" className={addProfileCss.switch}>
-                    <span className={addProfileCss.switchBtn}></span>
-                  </label>
-                  <span>{status ? '公開' : '不公開'}</span>
+                  <label htmlFor="male">男性</label>
+                </div>
+                <div className={addProfileCss.radioItem}>
+                  <input
+                    type="radio"
+                    name="sex"
+                    id="female"
+                    value="female"
+                    checked={profileForm.sex === 'female'}
+                    onChange={profileChangeForm}
+                  />
+                  <label htmlFor="female">女性</label>
                 </div>
               </div>
               <div>
-                <button className={addProfileCss.btn} type="submit">
-                  送出
-                </button>
+                {errors.sex && (
+                  <span className={addProfileCss.textDanger}>{errors.sex}</span>
+                )}
               </div>
-            </form>
-          </div>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label htmlFor="mobile">手機</label>
+              <input
+                type="tel"
+                name="mobile"
+                id="mobile"
+                placeholder="此欄為必填，手機格式為09xxxxxx"
+                value={profileForm.mobile}
+                onChange={profileChangeForm}
+              />
+              <div>
+                {errors.mobile && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.mobile}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label htmlFor="intro">個人簡介</label>
+              <textarea
+                className={addProfileCss.intro}
+                name="intro"
+                id="intro"
+                rows="5"
+                maxLength={300}
+                placeholder="我是一名瑜珈老師，最近正在增肌訓練，想找一個可以一起訓練的夥伴，並且希望能一起互相鼓勵進步。(至少30個字元，最多300個字元)"
+                value={profileForm.intro}
+                onChange={profileChangeForm}
+              />
+              <div>
+                {errors.intro && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.intro}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label htmlFor="item">喜愛運動項目</label>
+              <input
+                className={addProfileCss.item}
+                type="text"
+                name="item"
+                id="item"
+                placeholder="跑步、抱石...，最多填寫五個項目"
+                value={profileForm.item}
+                onChange={profileChangeForm}
+              />
+              <div>
+                {errors.item && (
+                  <span className={addProfileCss.textDanger}>
+                    {errors.item}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={addProfileCss.formGroup}>
+              <label>健身目標</label>
+              <div className={addProfileCss.checkboxes}>
+                {[
+                  '增肌',
+                  '減脂',
+                  '提高耐力',
+                  '增強體能',
+                  '健康維持',
+                  '提高核心能量',
+                ].map((goal, index) => {
+                  const goalId = `goal${index + 1}` // 產生 id: goal1, goal2, ...
+                  return (
+                    <div key={index} className={addProfileCss.current}>
+                      <input
+                        type="checkbox"
+                        name="goal"
+                        value={goal}
+                        id={goalId}
+                        checked={profileForm.goal.includes(goal)}
+                        onChange={(e) => {
+                          const newGoals = e.target.checked
+                            ? [...profileForm.goal, goal]
+                            : profileForm.goal.filter((item) => item !== goal)
+                          setProfileForm({ ...profileForm, goal: newGoals })
+                        }}
+                      />
+                      <label htmlFor={goalId}>{goal}</label>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            <div
+              className={`${addProfileCss.formGroup} ${addProfileCss.status}`}
+            >
+              <div className={addProfileCss.status}>
+                <label>是否公開檔案</label>
+                <input
+                  type="checkbox"
+                  name="status"
+                  id="public"
+                  checked={status}
+                  onChange={statusChangeForm}
+                />
+                <label htmlFor="public" className={addProfileCss.switch}>
+                  <span className={addProfileCss.switchBtn}></span>
+                </label>
+                <span>{status ? '公開' : '不公開'}</span>
+              </div>
+            </div>
+            <div>
+              <button className={addProfileCss.btn} type="submit">
+                送出
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </div>
     </>
   )
 }
