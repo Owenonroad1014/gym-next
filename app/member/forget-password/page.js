@@ -13,10 +13,11 @@ import { FORGET_PASS_POST } from '@/config/api-path'
 export default function ForgetPasswordPage() {
   const router = useRouter()
   const storageKey = 'gymboo-reset'
+  
+  const MySwal = withReactContent(Swal)
   const errorModal = () => {
     return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
-      const MySwal = withReactContent(Swal)
       MySwal.fire({
         text: '此電子信箱尚未註冊',
         icon: 'error',
@@ -39,7 +40,6 @@ export default function ForgetPasswordPage() {
   }
   const sendedModal = () => {
     document.body.style.overflow = 'hidden' //畫面不要偏移使用
-    const MySwal = withReactContent(Swal)
     MySwal.fire({
       text: '重設密碼連結已發送到您的信箱!',
       icon: 'success',
@@ -102,9 +102,6 @@ export default function ForgetPasswordPage() {
 
     if (!result.success) {
       await errorModal()
-      setResetForm({
-        email: '',
-      })
     } else {
       if (result.token?.token && result.token?.expiresAt) {
         localStorage.setItem(
