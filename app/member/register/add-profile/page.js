@@ -143,6 +143,7 @@ export default function AddProfileJsPage() {
       router.replace(callbackUrl || '/')
     }
   }, [auth.add_status, callbackUrl, router])
+  
   const sendFormData = async () => {
     const formData = new FormData()
     if (profileForm.avatar && profileForm.avatar instanceof File) {
