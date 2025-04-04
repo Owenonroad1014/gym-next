@@ -1,15 +1,18 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
 import { edSchema } from '@/utils/schema/schema.js'
 import editCss from './_style/person.module.css'
+import memberCss from '../_styles/member.module.css'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import { PROFILE_GET, PROFILE_PUT, AVATAR_PATH } from '@/config/api-path'
 
 export default function ProfileTable() {
+  const pathname = usePathname()
   const { auth, getAuthHeader, refreshAuth } = useAuth()
   const [loading, setLoading] = useState(true) // 加載狀態
   const [previewAvatar, setPreviewAvatar] = useState() // 預設頭貼
@@ -194,7 +197,7 @@ export default function ProfileTable() {
     const formData = new FormData()
 
     // 只傳送必要的欄位
-    const {intro, item, goal, status } = profileData
+    const { intro, item, goal, status } = profileData
 
     if (profileData.avatar && profileData.avatar instanceof File) {
       formData.append('avatar', profileData.avatar)
@@ -319,6 +322,31 @@ export default function ProfileTable() {
       console.log('取消送出，返回表單')
     }
   }
+  if (!auth.id)
+    return (
+      <>
+        <div className={memberCss.memberNoAdmin}>
+          <div className={memberCss.memberSpan}>
+            <h1>您好，請先登入</h1>
+            <span>若您尚未成為會員，請先註冊</span>
+          </div>
+          <div className={memberCss.memberBtns}>
+            <Link
+              className={memberCss.memberBtn}
+              href={`/member/login?callbackUrl=${encodeURIComponent(pathname)}`}
+            >
+              會員登入
+            </Link>
+            <Link
+              className={`${memberCss.memberBtn} ${memberCss.memberBtnRegister}`}
+              href="/member/register"
+            >
+              註冊會員
+            </Link>
+          </div>
+        </div>
+      </>
+    )
   return loading ? (
     <>
       <div className={editCss.loaderContainer}>
@@ -350,12 +378,10 @@ export default function ProfileTable() {
                           src={
                             previewAvatar // 如果有預覽頭貼（使用者剛上傳）
                               ? previewAvatar
-                              : auth.google_uid
-                              ? profileData?.avatar ||
-                                '/imgs/avatar/default-avatar.png' // 確保 profileData.avatar 存在
-                              : profileData?.avatar
-                              ? `${AVATAR_PATH}/${profileData.avatar}`
-                              : '/imgs/avatar/default-avatar.png' // 預設圖片
+                              : profileData?.avatar &&
+                                profileData?.avatar?.startsWith('https://')
+                              ? profileData?.avatar
+                              : `${AVATAR_PATH}/${profileData.avatar}`
                           }
                           alt="頭貼預覽"
                         />
