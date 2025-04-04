@@ -9,28 +9,16 @@ import { useParams } from 'next/navigation'
 import { ARTICLE_ITEM } from '@/config/api-path'
 import { BsTriangleFill } from 'react-icons/bs'
 
-export default function Content({ article = {}, date = '' }) {
+export default function Content({ article = {}, date = '', totalArticle = 0 }) {
   const { articleid } = useParams()
   const [nextArticle, setNextArticle] = useState('')
   const [backArticle, setBackArticle] = useState('')
   const [error, setError] = useState(null)
-  const [totalArticle, setTotalArticle] = useState(0)
-  const nextid = +articleid + 1 > +totalArticle ? 1 : +articleid + 1
-  const backid = +articleid - 1 < +totalArticle ? 1 : +articleid - 1
+
+  const nextid = +articleid === totalArticle ? 1 : +articleid + 1
+  const backid = +articleid === 1 ? totalArticle : +articleid - 1
+
   useEffect(() => {
-    const fetchTotalArticle = async () => {
-      try {
-        const response = await fetch(`${ARTICLE_ITEM}`)
-        const data = await response.json()
-        if (response.ok) {
-          setTotalArticle(data.totalRows)
-        } else {
-          setError('連接總筆數錯誤')
-        }
-      } catch (err) {
-        setError('連接總筆數失敗')
-      }
-    }
     if (!nextid) return
     const fetchNextArticle = async () => {
       try {
@@ -60,10 +48,9 @@ export default function Content({ article = {}, date = '' }) {
         setError('連接上一篇文章失敗')
       }
     }
-    fetchTotalArticle()
     fetchNextArticle()
     fetchBackArticle()
-  }, [nextid, backid])
+  }, [nextid, backid, totalArticle])
   return (
     <>
       <div className={articleStyle.articleContent}>
