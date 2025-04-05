@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
+import GradientText from '../_component/title-group'
 import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
 import GoogleLoginPopup from '@/app/member/_component/g-login-btn'
@@ -134,8 +135,15 @@ export default function LoginPage() {
               <FaHome style={{ cursor: 'pointer' }} />
               <span>回首頁</span>
             </Link>
-            <h2>歡迎回來!</h2>
-            <h1>登入GYM步空間</h1>
+            <GradientText
+              colors={['#f3b681', '#f87808', '#f3b681', '#f87808', '#f3b681']}
+              animationSpeed={4}
+              showBorder={false}
+              className="custom-class"
+            >
+              <h2>歡迎回來!</h2>
+              <h1>登入GYM步空間</h1>
+            </GradientText>
           </div>
           <div className={memberCss.right}>
             <div className={memberCss.form}>
