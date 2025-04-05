@@ -6,6 +6,7 @@ import { FaDumbbell, FaBook, FaMapMarkerAlt, FaUsers } from 'react-icons/fa';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './_styles/home.module.css';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,36 +48,46 @@ const FeaturesSection = () => {
     {
       icon: FaDumbbell,
       title: '找教練',
-      description: '展開你的GYM新技能，專業導師帶領！'
+      description: '展開你的GYM新技能，專業導師帶領！',
+      href: 'coaches/list'
     },
     {
       icon: FaBook,
       title: 'GYM享知識',
-      description: '學習更多免費知識，掌握正確運動觀念'
+      description: '學習更多免費知識，掌握正確運動觀念',
+      href: 'articles'
     },
     {
       icon: FaMapMarkerAlt,
-      title: '找GYM點',
-      description: '尋找離你最近的運動空間'
+      title: '影片教學',
+      description: '尋找離你最近的運動空間',
+      href: 'videos'
     },
     {
       icon: FaUsers,
-      title: '找GYM友',
-      description: '和志同道合的夥伴一起運動'
+      title: '課程預約',
+      description: '和志同道合的夥伴一起運動',
+      href: 'classes'
     }
   ];
+  
 
   return (
     <section className={styles.container}>
       <div className={styles.grid}>
         {features.map((feature, index) => (
+          <>
+          <Link href={`${feature.href}`} key={index}>
           <FeatureCard
             key={index}
             icon={feature.icon}
             title={feature.title}
             description={feature.description}
             index={index}
-          />
+          /></Link>
+          </>
+          
+          
         ))}
       </div>
     </section>
