@@ -37,7 +37,7 @@ export default function RegisterPage() {
   const MySwal = withReactContent(Swal)
 
   const showError = (message) => {
-    return new Promise(() => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -50,6 +50,7 @@ export default function RegisterPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
+          res()
         },
       })
     })
@@ -64,15 +65,8 @@ export default function RegisterPage() {
         allowOutsideClick: false, // 禁止點擊外部關閉
         timer: 1500,
         imageUrl: '/gymdot.svg',
-        imageHeight: 150,
+        imageHeight: 80,
         imageAlt: 'gym-boo-logo',
-        didOpen: () => {
-          // 取得圖片並添加旋轉動畫
-          const image = Swal.getPopup().querySelector('img')
-          if (image) {
-            image.style.animation = 'spin 1.5s linear infinite'
-          }
-        },
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
@@ -81,7 +75,7 @@ export default function RegisterPage() {
     })
   }
   const showErrorLogin = (message) => {
-    return new Promise(() => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         text: message,
@@ -91,6 +85,7 @@ export default function RegisterPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
+          res()
           router.push('/member/login')
         },
       })
@@ -160,9 +155,10 @@ export default function RegisterPage() {
       })
     } else {
       if (result.error === '用戶已註冊') {
-        showError('您已註冊，請前往登入')
+        showErrorLogin('您已註冊，請前往登入')
+      } else {
+        showError('註冊失敗')
       }
-      showErrorLogin('註冊失敗')
       console.warn(result)
     }
   }
