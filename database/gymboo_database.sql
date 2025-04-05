@@ -257,7 +257,25 @@ CREATE TABLE messages (
   FOREIGN KEY (chat_id) REFERENCES chats(id),
   FOREIGN KEY (sender_id) REFERENCES member(member_id)
 );
-
+INSERT INTO `friend_requests` (`sender_id`, `receiver_id`, `status`, `created_at`) VALUES
+(2, 4, 'accepted', '2025-04-05 14:35:32'),
+(2, 5, 'accepted', '2025-04-05 14:35:39'),
+(2, 7, 'accepted', '2025-04-05 14:35:45');
+INSERT INTO `friendships` (`user1_id`, `user2_id`, `user1_delete`, `user2_delete`, `created_at`) VALUES
+(4, 2, 0, 0, '2025-04-05 14:38:55'),
+(5, 2, 0, 0, '2025-04-05 14:40:27'),
+(7, 2, 0, 0, '2025-04-05 14:42:12');
+INSERT INTO `chats` (`user1_id`, `user2_id`, `created_at`, `user1_delete`, `user2_delete`) VALUES
+(4, 2, '2025-04-05 14:38:55', 0, 0),
+(5, 2, '2025-04-05 14:40:27', 0, 0),
+(7, 2, '2025-04-05 14:42:12', 0, 0);
+INSERT INTO `messages` (`chat_id`, `sender_id`, `message`, `created_at`, `is_read`) VALUES
+(1, 2, '邀請你一起運動吧!!', '2025-04-05 14:38:55', 0),
+(1, 4, '好啊!要約甚麼時候😀我禮拜一可以', '2025-04-05 14:39:38', 0),
+(2, 2, '邀請你一起運動吧!!', '2025-04-05 14:40:27', 0),
+(2, 5, '再說罷', '2025-04-05 14:40:51', 0),
+(3, 2, '邀請你一起運動吧!!', '2025-04-05 14:42:12', 0),
+(3, 7, '好呀好呀!!!🤩', '2025-04-05 14:42:33', 0);
 # 影片
 CREATE TABLE `videos_categories` (
   `id` int NOT NULL PRIMARY KEY ,
@@ -986,6 +1004,7 @@ CREATE TABLE reservations (
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'confirmed',
+    notification_sent TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (member_id) REFERENCES member(member_id),

@@ -354,7 +354,7 @@ export default function CourseCalendar({
                           ) : (
                             <span className={styles.available}>
                               人數 :
-                              {course.max_capacity - course.current_capacity} /{' '}
+                              {course.current_capacity} /{' '}
                               {course.max_capacity}
                             </span>
                           )}

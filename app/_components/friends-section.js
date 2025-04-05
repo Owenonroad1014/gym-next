@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './_styles/friends-section.module.css';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,19 +57,23 @@ export default function WorkoutFriends() {
     {
       icon: "💪",
       title: "重量訓練",
-      description: "尋找健身夥伴一起重訓"
+      description: "找到志同道合的重訓夥伴，一起互相鼓勵成長",
+      href: "friends?category=增肌"
     },
     {
       icon: "🧘",
-      title: "高強度間歇訓練", 
-      description: "一起進行HIIT訓練"
+      title: "增強體能",
+      description: "和新朋友一起挑戰HIIT，相互激勵突破極限",
+      href: "friends?category=增強體能"
     },
     {
       icon: "🏋️",
-      title: "交叉訓練",
-      description: "加入CrossFit團練"
+      title: "健康維持",
+      description: "結交運動夥伴，建立健康生活圈",
+      href: "friends?category=健康維持"
     }
-  ]
+  ];
+  
 
   return (
     <div className={styles.list} ref={containerRef}>
@@ -109,6 +114,8 @@ export default function WorkoutFriends() {
         viewport={{ once: true, margin: "-50px" }}
       >
         {workoutTypes.map((type, index) => (
+          <>
+          <Link href={type.href} key={index} className={styles.grid}>
           <motion.div 
             key={index}
             className={styles.item}
@@ -130,6 +137,8 @@ export default function WorkoutFriends() {
               <p className={styles.subtitle}>{type.description}</p>
             </div>
           </motion.div>
+          </Link>
+          </>
         ))}
       </motion.div>
     </div>

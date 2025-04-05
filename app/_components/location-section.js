@@ -4,6 +4,7 @@
 import React from 'react'
 import styles from './_styles/location-section.module.css'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function LocationSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -27,7 +28,7 @@ export default function LocationSection() {
   return (
     <div id="location-section" className={styles.container}>
       <div className={`${styles.button} ${isVisible ? styles.visible : ''}`}>
-        <div className={styles.buttonText}>尋找GYM點</div>
+      <Link href="/locations" className={styles.buttonText}>尋找GYM點</Link>
       </div>
       <div className={styles.arrows}>
         <img 
