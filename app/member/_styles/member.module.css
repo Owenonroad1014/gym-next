@@ -37,13 +37,13 @@
   padding: 0px 60px;
   z-index: 1; /* 確保內容在遮罩層上方 */
 }
- .right {
+.right {
   width: 50%;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
- .form {
+.form {
   background-color: #1e1e1ebe;
   width: 80%;
   display: flex;
@@ -54,7 +54,7 @@
   backdrop-filter: blur(5px);
 }
 
- .titleGroup {
+.titleGroup {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,7 @@
   margin-top: 38%;
 }
 
- .formGroup {
+.formGroup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -70,16 +70,16 @@
   margin-bottom: 15px;
   font-size: 18px;
 }
- .formGroup .point {
+.formGroup .point {
   width: 80%;
 }
- .formGroup label {
+.formGroup label {
   width: 88%;
   display: flex;
   margin: auto;
   margin-bottom: 8px;
 }
- .formGroup input {
+.formGroup input {
   width: 80%;
   padding: 10px;
   margin: 0px auto;
@@ -88,7 +88,7 @@
   border: 1px solid #f8780846;
   border-radius: 3px;
 }
- .formGroup input::placeholder {
+.formGroup input::placeholder {
   color: #fff;
 }
 .formGroup input:focus {
@@ -248,11 +248,49 @@
   border: 1px solid transparent;
   border-radius: 3px;
 }
-.registerContainer .titleGroup{
-padding-left: 30px;
+.registerContainer .titleGroup {
+  padding-left: 30px;
 }
 
 /* #endregion ================= Register Form ====================== */
+
+/* #region ================= Forget Password Form====================== */
+
+.forgetPassContainer {
+  position: relative;
+  display: flex;
+  width: 60vw;
+  height: 70vh;
+  margin: auto;
+  background-image: url('/member-bg-2.jpg');
+  background-size: cover;
+  /* background-position: center; */
+  border-radius: 3px;
+}
+
+.forgetPassContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1.2px);
+}
+.forgetPassContainer .content {
+  flex-direction: column;
+  padding:70px 0px;
+}
+.forgetPassContainer .form{
+  margin: 0;
+}
+.forgetPassContainer .titleGroup {
+  width: 80%;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* #endregion ================= Forget Password Form ====================== */
 
 /* #region ================= RWD ====================== */
 @media (max-width: 1440px) {

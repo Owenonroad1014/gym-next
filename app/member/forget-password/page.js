@@ -13,7 +13,7 @@ import { FORGET_PASS_POST } from '@/config/api-path'
 export default function ForgetPasswordPage() {
   const router = useRouter()
   const storageKey = 'gymboo-reset'
-  
+
   const MySwal = withReactContent(Swal)
   const errorModal = () => {
     return new Promise((res) => {
@@ -117,42 +117,48 @@ export default function ForgetPasswordPage() {
   }
   return (
     <>
-      <div className={memberCss.registerContainer}>
-        <div className={memberCss.form}>
-          <Link className={memberCss.home} href="/">
-            <FaHome style={{ cursor: 'pointer' }} />
-            <span>回首頁</span>
-          </Link>
-          <div className={memberCss.titleGroup}>
-            <h1>忘記密碼</h1>
-          </div>
-          <form method="post" onSubmit={onSubmit}>
-            <div className={memberCss.formGroup}>
-              <label htmlFor="email">帳號</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={resetForm.email}
-                onChange={ResetChangeForm}
-                placeholder="請輸入郵件"
-              />
-              <div>
-                {errors.email && (
-                  <span className={memberCss.textDanger}>{errors.email}</span>
-                )}
-                <button className={memberCss.visibility} type="button">
-                  <FaRegEye />
-                </button>
+      <div className={memberCss.flexContainer}>
+        <div className={memberCss.forgetPassContainer}>
+          <div className={memberCss.content}>
+              <Link className={memberCss.home} href="/">
+                <FaHome style={{ cursor: 'pointer' }} />
+                <span>回首頁</span>
+              </Link>
+              <div className={memberCss.titleGroup}>
+                <h1>忘記密碼</h1>
               </div>
-            </div>
+            <div className={memberCss.form}>
+              <form method="post" onSubmit={onSubmit}>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="email">帳號</label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    value={resetForm.email}
+                    onChange={ResetChangeForm}
+                    placeholder="請輸入郵件"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.email && (
+                      <span className={memberCss.textDanger}>
+                        {errors.email}
+                      </span>
+                    )}
+                    <button className={memberCss.visibility} type="button">
+                      <FaRegEye />
+                    </button>
+                  </div>
+                </div>
 
-            <div className={memberCss.registerBtns}>
-              <button type="submit" className={memberCss.registerBtn}>
-                查詢
-              </button>
+                <div className={memberCss.loginBtns}>
+                  <button type="submit" className={memberCss.loginBtn}>
+                    查詢
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
