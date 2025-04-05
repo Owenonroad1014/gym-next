@@ -72,7 +72,7 @@ export default function LoginPage() {
         } else {
           router.push(callbackUrl)
         }
-      }, 1600) // 已登入就直接跳轉
+      }, 1800) // 已登入就直接跳轉
     } else {
       // modal.show()
       if (code === 404) {
@@ -126,87 +126,88 @@ export default function LoginPage() {
     })
   }
   return (
-    <div className={memberCss.loginContainer}>
-      <div className={memberCss.form}>
-        <Link className={memberCss.home} href="/">
-          <FaHome style={{ cursor: 'pointer' }} />
-          <span>回首頁</span>
-        </Link>
-        <form method="post" onSubmit={onSubmit}>
+    <div className={memberCss.flexContainer}>
+      <div className={memberCss.loginContainer}>
+        <div className={memberCss.content}>
           <div className={memberCss.titleGroup}>
+            <Link className={memberCss.home} href="/">
+              <FaHome style={{ cursor: 'pointer' }} />
+              <span>回首頁</span>
+            </Link>
             <h2>歡迎回來!</h2>
             <h1>登入GYM步空間</h1>
           </div>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="account">帳號</label>
-            <input
-              type="text"
-              name="account"
-              id="account"
-              value={loginForm.account}
-              onChange={LoginChangeForm}
-              placeholder="請輸入郵件"
-            />
-            <div>
-              {errors.account && (
-                <span className={memberCss.textDanger}>{errors.account}</span>
-              )}
-              <button className={memberCss.visibility} type="button">
-                <FaRegEye />
-              </button>
+          <div className={memberCss.right}>
+            <div className={memberCss.form}>
+              <form method="post" onSubmit={onSubmit}>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="account">帳號</label>
+                  <input
+                    type="text"
+                    name="account"
+                    id="account"
+                    value={loginForm.account}
+                    onChange={LoginChangeForm}
+                    placeholder="請輸入郵件"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.account && (
+                      <span className={memberCss.textDanger}>
+                        {errors.account}
+                      </span>
+                    )}
+                    <button className={memberCss.visibility} type="button">
+                      <FaRegEye />
+                    </button>
+                  </div>
+                </div>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="password"> 密碼</label>
+                  <input
+                    type={show ? 'text' : 'password'}
+                    name="password"
+                    id="password"
+                    value={loginForm.password}
+                    onChange={LoginChangeForm}
+                    placeholder="請輸入密碼"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.password && (
+                      <span className={memberCss.textDanger}>
+                        {errors.password}
+                      </span>
+                    )}
+                    <button
+                      className={memberCss.iconBtn}
+                      type="button"
+                      onClick={() => {
+                        setShow(!show)
+                      }}
+                    >
+                      {show ? <FaRegEyeSlash /> : <FaRegEye />}
+                    </button>
+                  </div>
+                </div>
+                <div className={memberCss.loginBtns}>
+                  <button type="submit" className={memberCss.loginBtn}>
+                    登入
+                  </button>
+                  <Link href="/member/forget-password">忘記密碼</Link>
+                </div>
+              </form>
+            </div>
+            <div className={memberCss.googleBtns}>
+              <GoogleLoginPopup />
+            </div>
+            <div className={memberCss.rgBtn}>
+              <span>還沒成為會員嗎?</span>
+              <Link className={memberCss.switchBtn} href="/member/register">
+                <span> 註冊帳號</span>
+              </Link>
             </div>
           </div>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="password"> 密碼</label>
-            <input
-              type={show ? 'text' : 'password'}
-              name="password"
-              id="password"
-              value={loginForm.password}
-              onChange={LoginChangeForm}
-              placeholder="請輸入密碼"
-            />
-            <div>
-              {errors.password && (
-                <span className={memberCss.textDanger}>{errors.password}</span>
-              )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.loginBtns}>
-            <button type="submit" className={memberCss.loginBtn}>
-              登入
-            </button>
-            <Link href="/member/forget-password">忘記密碼</Link>
-          </div>
-        </form>
-        <hr />
-        <div className={memberCss.loginBtns}>
-          <GoogleLoginPopup />
-        </div>
-        <div className={memberCss.rgBtn}>
-          <span>還沒成為會員嗎?</span>
-          <Link className={memberCss.switchBtn} href="/member/register">
-            <span> 註冊帳號</span>
-          </Link>
         </div>
       </div>
-      {/* <div className={memberCss.rgSelect}>
-        <div className={memberCss.rgBtn}>
-          <span>還沒成為會員嗎?</span>
-          <Link className={memberCss.switchBtn} href="/member/register">
-            <span> 註冊帳號</span>
-          </Link>
-        </div>
-      </div> */}
     </div>
   )
 }

@@ -1,57 +1,65 @@
 /* #region ================= Login Form====================== */
-.loginContainer {
-  display: flex;
-  justify-content: center;
-  z-index: -1;
-  padding: 50px;
+.flexContainer {
   width: 100vw;
   height: 100vh;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
 }
-.home {
+.loginContainer {
+  position: relative;
+  display: flex;
+  width: 70vw;
+  height: 80vh;
+  margin: auto;
+  background-image: url('/member-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+}
+
+.loginContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1.2px);
+}
+.content {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 80px;
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  padding: 5px;
-  border-radius: 3px;
+  padding: 0px 60px;
+  z-index: 1; /* 確保內容在遮罩層上方 */
 }
-.home:hover {
-  background: #f87808;
-}
-.rgBtn {
-  width: 40%;
-  margin: auto;
-  margin-top: 20px;
-  border: 1px solid transparent;
-}
-.rgBtn:hover a {
-  border-bottom: 1px solid #f87808;
-}
-.loginContainer .form {
-  background-color: #1e1e1e;
-  position: relative;
-  width: 40%;
+.loginContainer .right {
+  width: 50%;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  padding: 50px;
+  margin: auto;
+}
+.loginContainer .form {
+  background-color: #1e1e1ebe;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 25px 15px;
   border-radius: 3px;
-  border: 1px solid salmon;
   backdrop-filter: blur(5px);
 }
 
 .loginContainer .titleGroup {
-  width: 90%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: auto;
-  margin-bottom: 30px;
+  margin-top: 30%;
 }
 
 .loginContainer .formGroup {
@@ -59,24 +67,25 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 18px;
 }
-
+.loginContainer .formGroup .point {
+  width: 80%;
+}
 .loginContainer .formGroup label {
-  width: 90%;
+  width: 88%;
   display: flex;
   margin: auto;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .loginContainer .formGroup input {
-  width: 90%;
+  width: 80%;
   padding: 10px;
   margin: 0px auto;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+  background:#f878081e;
   color: #fff;
-  border: 1px solid #ffffff;
+  border: 1px solid #f8780846;
   border-radius: 3px;
 }
 .loginContainer .formGroup input::placeholder {
@@ -84,7 +93,9 @@
 }
 .loginContainer .formGroup input:focus {
   outline: none;
-  border: 1px solid #f87808;
+  
+  box-shadow: inset 1px 2px 8px #f87808;
+  transition: all 0.3s ease-in-out;
 }
 .iconBtn {
   border: none;
@@ -93,31 +104,38 @@
   background-color: transparent;
 }
 .loginBtns {
-  width: 90%;
+  width: 80%;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 20px;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   color: #fff;
 }
+
 .loginBtns a {
   font-size: 14px;
+  border-bottom: 1px solid transparent;
+}
+.loginBtns a:hover {
+  border-bottom: 1px solid #f87808;
+  transition: all 0.3s ease-in-out;
 }
 .loginContainer .loginBtn {
   width: 100%;
-  background: #f87808;
-  padding: 10px 0px;
-  border: 1px solid transparent;
+  background: transparent;
+  padding: 5px 0px;
+  border: 1px solid #f8780886;
   border-radius: 3px;
   font-size: 18px;
   color: #fff;
 }
-.loginContainer hr {
-  margin-top: 20px;
-  border: 0.2px solid #f87808;
+.loginContainer .loginBtn:hover {
+  box-shadow: inset 1px 2px 8px #f87808;
+  transition: all 0.3s ease-in-out;
 }
+
 .formGroup div {
   display: flex;
   width: 90%;
@@ -126,22 +144,65 @@
   margin-top: 4px;
   justify-content: flex-end;
 }
+.googleBtns {
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #fff;
+}
 .googleLoginBtn {
   width: 100%;
-  background: #f87808;
-  padding: 10px 0px;
-  border: 1px solid transparent;
+  background: transparent;
+  padding: 5px 0px;
+  border: 1px solid #f8780886;
   border-radius: 3px;
   font-size: 18px;
   color: #fff;
+  backdrop-filter: blur(5px);
 }
-
+.googleLoginBtn:hover {
+  box-shadow: inset 1px 2px 8px #f87808;
+  transition: all 0.3s ease-in-out;
+}
 .textDanger {
-  /* margin-left: 15px; */
   position: absolute;
   left: 0;
   color: #f87808;
   font-size: 12px;
+}
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
+  position: absolute;
+  left: 50px;
+  top: 15px;
+  padding: 5px;
+  border-radius: 3px;
+}
+.home:hover {
+  background: #f87808cf;
+  transition: all 0.3s ease-in-out;
+}
+.rgBtn {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid transparent;
+}
+.rgBtn a {
+  border-bottom: 1px solid transparent;
+}
+.rgBtn:hover a {
+  border-bottom: 1px solid #f87808;
+  transition: all 0.3s ease-in-out;
 }
 /* #endregion ================= Login Form ====================== */
 
@@ -251,3 +312,62 @@
 }
 
 /* #endregion ================= Register Form ====================== */
+
+/* #region ================= RWD ====================== */
+@media (max-width: 1440px) {
+  .banner {
+    background-image: url('/imgs/article/banner/articlebanner1440.jpg');
+  }
+}
+@media (max-width: 1390px) {
+  .articleList {
+    gap: 4vw;
+  }
+}
+
+@media (max-width: 1140px) {
+  .selectBtn {
+    display: block;
+  }
+  .selectArea {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    background-color: #ebeff1;
+    width: 90%;
+  }
+  .articleRight {
+    width: 100%;
+  }
+  .categoryTitle {
+    background-color: #dee5e7;
+  }
+  .selectPart li {
+    font-size: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .breadcrumbItem a {
+    font-size: 12px;
+  }
+  .selectArea {
+    flex-direction: column;
+    align-items: center;
+  }
+  .selectPart {
+    width: 100%;
+    border-right: none;
+    text-align: left;
+  }
+}
+@media (max-width: 500px) {
+  .articleList {
+    justify-content: center;
+  }
+}
+@media (max-width: 420) {
+  .banner {
+    background-image: url('/imgs/article/banner/articlebanner420.jpg');
+  }
+}
+/* #endregion ================= RWD END ====================== */
