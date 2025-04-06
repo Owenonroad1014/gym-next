@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { PENDING_REVIEWS_LIST, SUBMIT_REVIEW_API, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import styles from "./_compenents/_styles/review.module.css";
-import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
 import { FaStar, FaRegStar } from "react-icons/fa";
 import ReactDOM from 'react-dom';
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
+import { FaClipboardList } from "react-icons/fa";
 
 const MySwal = withReactContent(Swal);
 
@@ -128,7 +128,7 @@ const Review = () => {
             </div>
             <div className={styles.content}>
               <div className={styles.contentItems}>
-                <div className={styles.productContent}><CiEdit /> 訂單資訊</div>
+                <div className={styles.productContent}><FaClipboardList />訂單資訊</div>
                 <hr className={styles.divider} />
                 <div className={styles.contentArea}>
                 <div className={styles.contentItem}>

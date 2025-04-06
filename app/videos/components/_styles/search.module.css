@@ -1,9 +1,15 @@
 .searchContainer {
   padding: 10px;
+  height: 80px;
 }
 
 .searchForm {
-  display: flex;
+  /* display: flex;
+  gap: 10px; */
+}
+
+.searchItem{
+    display: flex;
   gap: 10px;
 }
 
@@ -26,14 +32,19 @@
 }
 
 .clearButton{
-  background-color: gray;
+  background: none;
   border: none;
-  color: white;
-  width: 50px;
-  padding: 12px 5px;
+  color: rgb(62, 62, 62);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  width: 100%;
+  padding: 5px 5px;
   cursor: pointer;
   border-radius: 3px;
+  text-align: end;
+  font-size: 15px;
 }
+
 
 /* 可以添加懸停效果 */
 /* .button:hover {

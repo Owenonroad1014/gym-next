@@ -5,7 +5,7 @@
     padding: 10px;
     max-width: 600px;
     width: 40%;
-    margin: 30px auto;
+    margin: 50px auto;
     /* height: 300px; */
     overflow: scroll;
     /* align-items: center; */
@@ -16,7 +16,8 @@
     padding: 12px;
     border-radius: 8px;
     background: #f9f9f9;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    
+
   }
   
   .header {
@@ -56,6 +57,11 @@
     font-size: 14px;
     color: #e8e1e1;
     height: 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
   
   .date {
@@ -96,6 +102,35 @@
   }
   
   .scrollbox::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+  .scrollboxs {
+    width: 100%;  /* 設定寬度 */
+    height: 60px; /* 設定高度 */
+    overflow-y: auto; /* 允許垂直滾動 */
+    overflow-x: hidden; /* 隱藏水平滾動 */
+    /* border: 1px solid #ddd;  */
+    padding-right: 10px;
+    background: #343a3c;
+  }
+  
+  /* 滾動條樣式 */
+  .scrollboxs::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .scrollboxs::-webkit-scrollbar-track {
+    background: #343a3c;
+  }
+  
+  .scrollboxs::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+  
+  .scrollboxs::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
   

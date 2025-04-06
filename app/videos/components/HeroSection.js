@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./_styles/HeroSection.module.css";
+import BlurText from "@/app/_components/blur-text";
 
 const HeroSection = () => {
   return (
@@ -9,11 +10,10 @@ const HeroSection = () => {
         className={styles.heroBackground}
       />
       <div className={styles.headerContain}>
-      <div className={styles.heroTitle}>影片分享
+      <BlurText text="影片分享" className={styles.heroTitle}/>
+      <BlurText text="不管是哪一種類型的影片，這裡應有GYM有，快來挑選自己喜歡的影片吧!" className={styles.heroContent}/>
       </div>
-      <p className={styles.heroContent}>不管是哪一種類型的影片，這裡應有GYM有，快來挑選自己喜歡的影片吧!</p>
-
-      </div>
+     
     </header>
   );
 };

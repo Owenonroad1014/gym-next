@@ -123,7 +123,12 @@ const Review = () => {
 
       const data = await response.json();
       if (data.success) {
-        Swal.fire("評價已更新！", "", "success");
+        Swal.fire({
+          title: "評價已更新！",
+          icon: "success",
+          confirmButtonColor: '#f87808'
+        });
+        
         setProducts((prevProducts) =>
           prevProducts.map((p) =>
             p.order_item_id === orderItemId
@@ -167,7 +172,7 @@ const Review = () => {
               <div className={styles.content}>
                 <div className={styles.contentItems}>
                   <div className={styles.productContent}>
-                    <FaClipboardList />訂單資料
+                    <FaClipboardList />訂單資訊
                   </div>
                   <hr className={styles.divder}/>
                   <div className={styles.contentItem}>
@@ -179,10 +184,14 @@ const Review = () => {
                 </div>
                 <div className={styles.latest_review}>
                   <div className={styles.productComment}>
-                    <CiEdit />評論: <span className={styles.stars}>
+                    <span>
+                    <CiEdit />評論: 
+                    </span>
+                    <span className={styles.stars}>
                     {renderStars(product.latest_review.rating)}</span>
                   </div>
-                  <div className={styles.comment}>{product.latest_review.comment}</div>
+                  <div className={`${styles.comment} ${styles.scrollbox}`}>{product.latest_review.comment}</div>
+                  <div className={styles.buttonArea}>
                   <button onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -190,6 +199,7 @@ const Review = () => {
                   }} className={styles.button}>
                     編輯
                   </button>
+                  </div>
                 </div>
               </div>
             </Link>
