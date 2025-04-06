@@ -134,11 +134,11 @@ export default function ResetPasswordPage() {
   }
   return (
     <div className={memberCss.resetContainer}>
-      <div className={memberCss.form}>
         <div className={memberCss.titleGroup}>
           <h2>修改密碼</h2>
           <h3>請設定新密碼</h3>
         </div>
+      <div className={memberCss.form}>
         <form method="post" onSubmit={onSubmit}>
           <div className={memberCss.formGroup}>
             <label htmlFor="newPassword"> 密碼</label>
@@ -150,7 +150,7 @@ export default function ResetPasswordPage() {
               onChange={ResetPassChangeForm}
               placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
             />
-            <div>
+            <div  className={memberCss.point}>
               {errors.newPassword && (
                 <span className={memberCss.textDanger}>
                   {errors.newPassword}
@@ -177,7 +177,7 @@ export default function ResetPasswordPage() {
               onChange={ResetPassChangeForm}
               placeholder="請再次輸入密碼"
             />
-            <div>
+            <div  className={memberCss.point}>
               {errors.confirmPassword && (
                 <span className={memberCss.textDanger}>
                   {errors.confirmPassword}
@@ -188,8 +188,8 @@ export default function ResetPasswordPage() {
               </button>
             </div>
           </div>
-          <div className={memberCss.resetBtns}>
-            <button type="submit" className={memberCss.resetBtn}>
+          <div className={memberCss.loginBtns}>
+            <button type="submit" className={memberCss.loginBtn}>
               修改密碼
             </button>
           </div>

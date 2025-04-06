@@ -295,189 +295,101 @@
 }
 
 /* #region ================= Change Password====================== */
-.registerContainer {
+.changePassContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 100px;
-  width: 100vw;
-  height: 100vh;
   margin: auto;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
 }
-.registerContainer .form {
-  width: 60%;
+.form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  padding: 50px;
+  padding: 55px 15px;
   border-radius: 3px;
-  border: 1px solid salmon;
   backdrop-filter: blur(5px);
+  box-shadow: 1px 1px 12px #d1d1d1e4;
 }
-.registerContainer .titleGroup {
-  width: 90%;
+
+.titleGroup {
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: auto;
+  margin-bottom: 20px;
+}
+.titleGroup h2{
   margin-bottom: 30px;
 }
-
-.registerContainer .formGroup {
+.formGroup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   font-size: 18px;
 }
-
-.registerContainer .formGroup label {
-  width: 90%;
+.formGroup .point {
+  width: 80%;
+}
+.formGroup label {
+  width: 80%;
   display: flex;
   margin: auto;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
-.registerContainer .formGroup input {
-  width: 90%;
+.formGroup input {
+  width: 80%;
   padding: 10px;
   margin: 0px auto;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ffffff;
+  background: #eeeded;
+  font-size: 16px;
+  border: 1px solid #f8780846;
   border-radius: 3px;
 }
-.registerContainer .formGroup input:focus {
+.formGroup input::placeholder {
+  color: #9c9c9c;
+}
+.formGroup input:focus {
   outline: none;
-  border: 1px solid #f87808;
-}
-.registerBtns {
-  width: 90%;
-  margin: auto;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  color: #fff;
-  /* border: 1px solid salmon; */
-}
-.registerContainer .registerBtn {
-  width: 100%;
-  background: #f87808;
-  padding: 10px 0px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  font-size: 18px;
-  color: #fff;
-}
-.registerBtns a {
-  font-size: 14px;
-}
-.formGroup div {
-  display: flex;
-  width: 90%;
-  position: relative;
-  margin: auto;
-  margin-top: 4px;
-  justify-content: flex-end;
-}
-.textDanger {
-  position: absolute;
-  left: 0;
-  color: #f87808;
-  font-size: 12px;
+  background: #fbe8d7;
+  box-shadow: inset 1px 2px 8px #f87808;
+  transition: all 0.3s ease-in-out;
 }
 .iconBtn {
   border: none;
-  color: #828282;
+  color: #c3c2c2;
   font-size: 16px;
   background-color: transparent;
 }
-/* #endregion ================= Change Password====================== */
-/* #region ================= Reset Password====================== */
-.resetContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 100px;
-  width: 100vw;
-  height: 100vh;
+.loginBtns {
+  width: 80%;
   margin: auto;
-}
-.resetContainer .form {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 50px;
-  border-radius: 3px;
-  border: 1px solid salmon;
-  backdrop-filter: blur(5px);
-}
-.resetContainer .titleGroup {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: auto;
-  margin-bottom: 30px;
-}
-
-.resetContainer .formGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: 30px;
-  font-size: 18px;
-}
-
-.resetContainer .formGroup label {
-  width: 90%;
-  display: flex;
-  margin: auto;
-  margin-bottom: 4px;
-}
-.resetContainer .formGroup input {
-  width: 90%;
-  padding: 10px;
-  margin: 0px auto;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  border: 1px solid #ffffff;
-  border-radius: 3px;
-}
-.resetContainer .formGroup input::placeholder {
-  font-size: 12px;
-}
-.resetContainer .formGroup input:focus {
-  outline: none;
-  border: 1px solid #f87808;
-}
-.visibility {
-  visibility: hidden;
-}
-.resetBtns {
-  width: 90%;
-  margin: auto;
+  margin-top: 20px;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  color: #fff;
-  /* border: 1px solid salmon; */
 }
-.resetContainer .resetBtn {
+.loginBtn {
   width: 100%;
-  background: #f87808;
-  padding: 10px 0px;
-  border: 1px solid transparent;
+  background: transparent;
+  padding: 5px 0px;
+  border: 1px solid #f8780886;
   border-radius: 3px;
   font-size: 18px;
+  color: #464646;
+}
+.loginBtn:hover {
+  box-shadow: inset 1px 2px 8px #f87808;
+  background: #e7934a;
   color: #fff;
+  transition: all 0.3s ease-in-out;
 }
-.resetBtns a {
-  font-size: 14px;
-}
+
 .formGroup div {
   display: flex;
   width: 90%;
@@ -492,6 +404,22 @@
   color: #f87808;
   font-size: 12px;
 }
+
+/* #endregion ================= Change Password====================== */
+
+/* #region ================= Reset Password====================== */
+.resetContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.visibility {
+  visibility: hidden;
+}
+
 /* #endregion ================= Reset Password====================== */
 
 /* #region ================= Reset Password====================== */
+
