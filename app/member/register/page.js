@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { FaRegEye, FaRegEyeSlash, FaHome } from 'react-icons/fa'
+import GradientText from '../_component/title-group'
 import { REGISTER_POST } from '@/config/api-path'
 import memberCss from '../_styles/member.module.css'
 import { useAuth } from '@/context/auth-context'
@@ -163,97 +164,114 @@ export default function RegisterPage() {
     }
   }
   return (
-    <div className={memberCss.registerContainer}>
-      <div className={memberCss.form}>
-        <Link className={memberCss.home} href="/">
-          <FaHome style={{ cursor: 'pointer' }} />
-          <span>回首頁</span>
-        </Link>
-        <div className={memberCss.titleGroup}>
-          <h2>初次見面，您好!</h2>
-          <h1>GYM步空間 &nbsp; 陪您GYM步</h1>
-        </div>
-        <form method="post" onSubmit={onSubmit}>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="email">帳號</label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              value={registerForm.email}
-              onChange={RegisterChangeForm}
-              placeholder="請輸入郵件"
-            />
-            <div>
-              {errors.email && (
-                <span className={memberCss.textDanger}>{errors.email}</span>
-              )}
-              <button className={memberCss.visibility} type="button">
-                <FaRegEye />
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="password"> 密碼</label>
-            <input
-              type={show ? 'text' : 'password'}
-              name="password"
-              id="password"
-              value={registerForm.password}
-              onChange={RegisterChangeForm}
-              placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
-            />
-            <div>
-              {errors.password && (
-                <span className={memberCss.textDanger}>{errors.password}</span>
-              )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="confirmPassword">確認密碼</label>
-            <input
-              type={show ? 'text' : 'password'}
-              name="confirmPassword"
-              id="confirmPassword"
-              value={registerForm.confirmPassword}
-              onChange={RegisterChangeForm}
-              placeholder="請再次輸入密碼"
-            />
-            <div>
-              {errors.confirmPassword && (
-                <span className={memberCss.textDanger}>
-                  {errors.confirmPassword}
-                </span>
-              )}
-              <button className={memberCss.visibility} type="button">
-                <FaRegEye />
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.registerBtns}>
-            <button type="submit" className={memberCss.registerBtn}>
-              註冊帳號
-            </button>
-          </div>
+    <div className={memberCss.flexContainer}>
+      <div className={memberCss.registerContainer}>
+        <div className={memberCss.content}>
+          <Link className={memberCss.home} href="/">
+            <FaHome style={{ cursor: 'pointer' }} />
+            <span>回首頁</span>
+          </Link>
+          <div className={memberCss.right}>
+            <div className={memberCss.form}>
+              <form method="post" onSubmit={onSubmit}>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="email">帳號</label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    value={registerForm.email}
+                    onChange={RegisterChangeForm}
+                    placeholder="請輸入郵件"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.email && (
+                      <span className={memberCss.textDanger}>
+                        {errors.email}
+                      </span>
+                    )}
+                    <button className={memberCss.visibility} type="button">
+                      <FaRegEye />
+                    </button>
+                  </div>
+                </div>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="password"> 密碼</label>
+                  <input
+                    type={show ? 'text' : 'password'}
+                    name="password"
+                    id="password"
+                    value={registerForm.password}
+                    onChange={RegisterChangeForm}
+                    placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.password && (
+                      <span className={memberCss.textDanger}>
+                        {errors.password}
+                      </span>
+                    )}
+                    <button
+                      className={memberCss.iconBtn}
+                      type="button"
+                      onClick={() => {
+                        setShow(!show)
+                      }}
+                    >
+                      {show ? <FaRegEyeSlash /> : <FaRegEye />}
+                    </button>
+                  </div>
+                </div>
+                <div className={memberCss.formGroup}>
+                  <label htmlFor="confirmPassword">確認密碼</label>
+                  <input
+                    type={show ? 'text' : 'password'}
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    value={registerForm.confirmPassword}
+                    onChange={RegisterChangeForm}
+                    placeholder="請再次輸入密碼"
+                  />
+                  <div className={memberCss.point}>
+                    {errors.confirmPassword && (
+                      <span className={memberCss.textDanger}>
+                        {errors.confirmPassword}
+                      </span>
+                    )}
+                    <button className={memberCss.visibility} type="button">
+                      <FaRegEye />
+                    </button>
+                  </div>
+                </div>
+                <div className={memberCss.loginBtns}>
+                  <button type="submit" className={memberCss.loginBtn}>
+                    註冊帳號
+                  </button>
+                </div>
 
-          <div className={memberCss.rgBtn}>
-            <div>
-              <span>已有會員嗎?</span>
-              <Link className={memberCss.switchBtn} href="/member/login">
-                <span>登入帳號</span>
-              </Link>
+                <div className={memberCss.rgBtn}>
+                  <div>
+                    <span>已有會員嗎?</span>
+                    <Link className={memberCss.switchBtn} href="/member/login">
+                      <span>登入帳號</span>
+                    </Link>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-        </form>
+          <div className={memberCss.titleGroup}>
+            <GradientText
+              colors={['#f3b681', '#f87808', '#f3b681', '#f87808', '#f3b681']}
+              animationSpeed={4}
+              showBorder={false}
+              className="custom-class"
+            >
+              <h2>初次見面，您好!</h2>
+              <h1>GYM步空間 &nbsp; 陪您GYM步</h1>
+            </GradientText>
+          </div>
+        </div>
       </div>
     </div>
   )
