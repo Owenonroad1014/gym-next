@@ -44,7 +44,7 @@
   border-radius: 3px;
 }
 .topsection p{
-  margin: 10px 0;
+  margin: 15px 0;
 }
 .closeButton {
   background: none;
@@ -59,7 +59,6 @@
   font-size: 22px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 25px;
 }
 .icon {
   margin-right: 15px;

@@ -238,10 +238,24 @@ const CoachCalendar = ({ name = '', isOpen }) => {
       }
 
       setIsModalOpen(false)
-      Toast.fire({
-        icon: 'success',
-        title: '預約成功',
-      })
+      Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'success',
+              title: '預約成功',
+              showConfirmButton: true,
+              showCancelButton: true,
+              confirmButtonText: '前往預約列表',
+              cancelButtonText: '返回',
+              confirmButtonColor: '#f87808',
+              cancelButtonColor: '#6F6F6F',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = '/member-center/reservation';
+              } else {
+                setIsModalOpen(false);
+              }
+            });
       fetchCoachCourses() // 重新獲取課程資料以更新狀態
     } catch (error) {
       console.error('Reservation failed:', error)
@@ -353,8 +367,7 @@ const CoachCalendar = ({ name = '', isOpen }) => {
                               ) : (
                                 <span className={styles.available}>
                                   人數:{' '}
-                                  {course.max_capacity -
-                                    course.current_capacity}{' '}
+                                  {course.current_capacity}{' '}
                                   / {course.max_capacity}
                                 </span>
                               )}
