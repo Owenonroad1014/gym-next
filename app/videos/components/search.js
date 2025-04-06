@@ -27,6 +27,8 @@ const SearchForm = ({searchParams}) => {
   return (
     <div className={styles.searchContainer}>
       <form className={styles.searchForm} onSubmit={handleSubmit}>
+      
+      <div className={styles.searchItem}>
         <input
           ref={searchRef}
           type="search"
@@ -41,13 +43,14 @@ const SearchForm = ({searchParams}) => {
         >
           <FaSearch />
         </button>
+      </div>
         {searchValue && (
           <button
             type="button"
             className={styles.clearButton}
             onClick={handleClearSearch}
           >
-            <FaTimes />
+            清除搜尋
           </button>
         )}
       </form>

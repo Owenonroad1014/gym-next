@@ -104,9 +104,15 @@
   
   .description {
     color: #697278;
-    margin-top: 11px;
     font-size: 14px;
-    height: 50px;
+    padding: 0px ;
+    margin: 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 限制最多顯示2行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
   }
   
   .cardLight .description {

@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    padding: 30px 0;
     display: flex;
     position: relative;
     overflow: hidden;
@@ -18,7 +17,7 @@
 
   .contentTitle{
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
   }
 
   .selectBtn {
