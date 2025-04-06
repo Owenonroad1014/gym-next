@@ -182,71 +182,74 @@ export default function ResetPasswordPage() {
     }
   }
   return (
-    <div className={memberCss.registerContainer}>
-      <div className={memberCss.form}>
-        <Link className={memberCss.home} href="/">
-          <FaHome style={{ cursor: 'pointer' }} />
-          <span>回首頁</span>
-        </Link>
-        <div className={memberCss.titleGroup}>
-          <h2>歡迎回來!</h2>
-          <h1>請重新設置密碼</h1>
+    <div className={memberCss.flexContainer}>
+      <div className={memberCss.forgetPassContainer}>
+        <div className={memberCss.content}>
+          <Link className={memberCss.home} href="/">
+            <FaHome style={{ cursor: 'pointer' }} />
+            <span>回首頁</span>
+          </Link>
+          <div className={memberCss.titleGroup}>
+            <h1>請重新設置密碼</h1>
+          </div>
+          <div className={memberCss.form}>
+            <form method="post" onSubmit={onSubmit}>
+              <div className={memberCss.formGroup}>
+                <label htmlFor="newPassword"> 密碼</label>
+                <input
+                  type={show ? 'text' : 'password'}
+                  name="newPassword"
+                  id="newPassword"
+                  value={resetPassForm.newPassword}
+                  onChange={ResetPassChangeForm}
+                  placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
+                />
+                <div className={memberCss.point}>
+                  {errors.newPassword && (
+                    <span className={memberCss.textDanger}>
+                      {errors.newPassword}
+                    </span>
+                  )}
+                  <button
+                    className={memberCss.iconBtn}
+                    type="button"
+                    onClick={() => {
+                      setShow(!show)
+                    }}
+                  >
+                    {show ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </button>
+                </div>
+              </div>
+              <div className={memberCss.formGroup}>
+                <label htmlFor="confirmPassword">確認密碼</label>
+                <input
+                  type={show ? 'text' : 'password'}
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={resetPassForm.confirmPassword}
+                  onChange={ResetPassChangeForm}
+                  placeholder="請再次輸入密碼"
+                />
+                <div className={memberCss.point}>
+                  {errors.confirmPassword && (
+                    <span className={memberCss.textDanger}>
+                      {errors.confirmPassword}
+                    </span>
+                  )}
+                  <button className={memberCss.visibility} type="button">
+                    <FaRegEye />
+                  </button>
+                </div>
+              </div>
+              <div className={memberCss.loginBtns}>
+                <button type="submit" className={memberCss.loginBtn}>
+                  重設密碼
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <form method="post" onSubmit={onSubmit}>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="newPassword"> 密碼</label>
-            <input
-              type={show ? 'text' : 'password'}
-              name="newPassword"
-              id="newPassword"
-              value={resetPassForm.newPassword}
-              onChange={ResetPassChangeForm}
-              placeholder="請輸入密碼，密碼至少8個字元且需包含大小寫英文字母、數字、及特殊字元 @$!%*?&#"
-            />
-            <div>
-              {errors.newPassword && (
-                <span className={memberCss.textDanger}>
-                  {errors.newPassword}
-                </span>
-              )}
-              <button
-                className={memberCss.iconBtn}
-                type="button"
-                onClick={() => {
-                  setShow(!show)
-                }}
-              >
-                {show ? <FaRegEyeSlash /> : <FaRegEye />}
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.formGroup}>
-            <label htmlFor="confirmPassword">確認密碼</label>
-            <input
-              type={show ? 'text' : 'password'}
-              name="confirmPassword"
-              id="confirmPassword"
-              value={resetPassForm.confirmPassword}
-              onChange={ResetPassChangeForm}
-              placeholder="請再次輸入密碼"
-            />
-            <div>
-              {errors.confirmPassword && (
-                <span className={memberCss.textDanger}>
-                  {errors.confirmPassword}
-                </span>
-              )}
-              <button className={memberCss.visibility} type="button">
-                <FaRegEye />
-              </button>
-            </div>
-          </div>
-          <div className={memberCss.registerBtns}>
-            <button type="submit" className={memberCss.registerBtn}>
-              重設密碼
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   )
