@@ -64,7 +64,7 @@ function CartProductItem({ product }) {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#f87808',
-      cancelButtonColor: '#0b3760',
+      cancelButtonColor: '#eee',
       cancelButtonText: '取消',
       confirmButtonText: '是的，我要刪除!',
     }).then((result) => {
@@ -75,6 +75,7 @@ function CartProductItem({ product }) {
           text: `${product.name} 已從購物車中刪除!`,
           icon: 'success',
           confirmButtonColor: '#f87808',
+          confirmButtonText: '好',
         });
       }
     });

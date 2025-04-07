@@ -1,61 +1,127 @@
 .container {
-    display: flex;
-    justify-content: center; /* 水平置中 */
-    gap: 90px; /* 設定按鈕間距 */
-    margin: 20px; /* 與表格的間距 */
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  gap: 90px; /* 設定按鈕間距 */
+  margin: 20px; /* 與表格的間距 */
 }
 
-.pseudo {
-    position: relative;
-    display: inline-block;
-    padding: 0.5em 1.5em;
-    font-family: helvetica;
-    color: white;
-    font-size: 20px;
-    background-color: #eb854a;
-    text-decoration: none;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transform: skew(35deg); /* 讓按鈕變成平行四邊形 */
-    overflow: hidden;
+.pseudo,
+.pseudo2 {
+  position: relative;
+  display: inline-block;
+  padding: 12px 35px;
+  background: #eb854a;
+  font-size: 17px;
+  font-weight: 500;
+
+  border: 1px solid #ef8e49;
+  border-radius: 3px;
+  box-shadow: 0 0 0 #fec1958c;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  transform: skew(35deg); /* 讓按鈕變成平行四邊形 */
+  overflow: hidden;
 }
 
-.pseudo span {
-    display: inline-block;
-    transform: skew(-35deg); /* 讓文字回正 */
+.pseudo span,
+.pseudo2 span {
+  display: inline-block;
+  font-family: helvetica;
+  color: rgb(240, 171, 98);
+  font-size: 20px;
+  transform: skew(-35deg); /* 讓文字回正 */
 }
 
 .pseudo2 {
-    position: relative;
-    display: inline-block;
-    padding: 0.5em 1.5em;
-    font-family: helvetica;
-    color: white;
-    font-size: 20px;
-    background-color: #eb854a;
-    text-decoration: none;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transform: skew(-35deg); /* 讓按鈕變成平行四邊形 */
-    overflow: hidden;
+  transform: skew(-35deg); /* 讓按鈕變成平行四邊形 */
 }
 
 .pseudo2 span {
-    display: inline-block;
-    transform: skew(35deg); /* 讓文字回正 */
+  transform: skew(35deg); /* 讓文字回正 */
+}
+
+/* 星星效果 */
+.star-1, .star-2, .star-3, .star-4, .star-5, .star-6 {
+  position: absolute;
+  filter: drop-shadow(0 0 0 #fffdef);
+  z-index: -5;
+  transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.star-1 { top: 20%; left: 20%; width: 25px; }
+.star-2 { top: 45%; left: 45%; width: 15px; }
+.star-3 { top: 40%; left: 40%; width: 5px; }
+.star-4 { top: 20%; left: 40%; width: 8px; }
+.star-5 { top: 25%; left: 45%; width: 15px; }
+.star-6 { top: 5%; left: 50%; width: 5px; }
+
+button:hover {
+  background: transparent;
+  color: #fec195;
+  box-shadow: 0 0 25px #fec1958c;
+}
+
+button:hover .star-1 {
+  top: -80%;
+  left: -30%;
+  width: 25px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+button:hover .star-2 {
+  top: -25%;
+  left: 10%;
+  width: 15px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+button:hover .star-3 {
+  top: 55%;
+  left: 25%;
+  width: 5px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+button:hover .star-4 {
+  top: 30%;
+  left: 80%;
+  width: 8px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+button:hover .star-5 {
+  top: 25%;
+  left: 115%;
+  width: 15px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+button:hover .star-6 {
+  top: 5%;
+  left: 60%;
+  width: 5px;
+  filter: drop-shadow(0 0 10px #fffdef);
+  z-index: 2;
+}
+
+.fil0 {
+  fill: #fffdef;
 }
 
 @media (max-width: 376px) {
-  .container {
-    gap: 30px;
-    margin: 10px;
-  }
+.container {
+  gap: 30px;
+  margin: 10px;
+}
 
-  .pseudo,
-  .pseudo2 {
-    font-size: 16px;
-    padding: 0.4em 1.2em;
-  }
+.pseudo,
+.pseudo2 {
+  font-size: 16px;
+  padding: 0.4em 1.2em;
+}
 }
