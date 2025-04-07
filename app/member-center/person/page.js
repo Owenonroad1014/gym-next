@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -11,7 +11,9 @@ import memberCss from '../_styles/member.module.css'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import { PROFILE_GET, PROFILE_PUT, AVATAR_PATH } from '@/config/api-path'
 
+
 export default function ProfileTable() {
+  const router = useRouter()
   const pathname = usePathname()
   const { auth, getAuthHeader, refreshAuth } = useAuth()
   const [loading, setLoading] = useState(true) // 加載狀態
@@ -324,28 +326,7 @@ export default function ProfileTable() {
   }
   if (!auth.id)
     return (
-      <>
-        <div className={memberCss.memberNoAdmin}>
-          <div className={memberCss.memberSpan}>
-            <h1>您好，請先登入</h1>
-            <span>若您尚未成為會員，請先註冊</span>
-          </div>
-          <div className={memberCss.memberBtns}>
-            <Link
-              className={memberCss.memberBtn}
-              href={`/member/login?callbackUrl=${encodeURIComponent(pathname)}`}
-            >
-              會員登入
-            </Link>
-            <Link
-              className={`${memberCss.memberBtn} ${memberCss.memberBtnRegister}`}
-              href="/member/register"
-            >
-              註冊會員
-            </Link>
-          </div>
-        </div>
-      </>
+    router.push('/member-center') // 如果沒有登入，導向登入頁面
     )
   return loading ? (
     <>
@@ -355,7 +336,7 @@ export default function ProfileTable() {
     </>
   ) : (
     <div className={editCss.personContainer}>
-      <h2>個人資料</h2>
+      <h2>個人檔案</h2>
       <div className={editCss.form}>
         <form action="post" onSubmit={(e) => onSubmit(e)}>
           <table>
