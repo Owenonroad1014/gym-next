@@ -80,8 +80,17 @@ export default function ChatListPage(props) {
                       </div>
                       <div className={chatListStyle.content}>{v.message}</div>
                     </div>
-                    <div className={chatListStyle.rightection}>
-                      {formattedDate}
+                    <div className={chatListStyle.rightSection}>
+                      <div className={chatListStyle.rightTopSection}>
+                        {formattedDate}
+                      </div>
+                      {v.unread_count != 0 ? (
+                        <div className={chatListStyle.rightBottomSection}>
+                          {v.unread_count}
+                        </div>
+                      ) : (
+                        ''
+                      )}
                     </div>
                   </Link>
                 </li>

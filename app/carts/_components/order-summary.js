@@ -27,7 +27,7 @@ function OrderSummary() {
       localStorage.removeItem("paymentMethod");
       localStorage.removeItem("pickupMethod");
     } else {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
+      localStorage.setItem("gym_cart", JSON.stringify(cartItems));
     }
   }, [cartItems]);
 
@@ -47,7 +47,7 @@ function OrderSummary() {
 
 
     console.log("Processing checkout...");
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    localStorage.setItem("gym_cart", JSON.stringify(cartItems));
     router.push("/carts/data"); 
   };
   return (

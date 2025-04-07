@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 import styles from "./_styles/order-confirmation.module.css";
 import Link from 'next/link'
 import CheckoutProgress from "./_components/checkout-progress";
+import { BsBagCheck } from "react-icons/bs";
 
-function OrderConfirmationHeader({ imageUrl }) {
+function OrderConfirmationHeader() {
   return (
     <>
-      <img
+      {/* <img
         src={imageUrl}
         alt="Order confirmation"
         className={styles.confirmationImage}
-      />
-      <h1 className={styles.confirmationTitle}>訂單成立</h1>
+      /> */}
+      <BsBagCheck size={100} style={{color: "#5d5a5a"}}/>
+      <h1 className={styles.confirmationTitle}>感謝您的租賃</h1>
     </>
   );
 }
@@ -33,16 +35,16 @@ function OrderDetails() {
     const orderId = localStorage.getItem("lastOrderId");
     const orderDate = localStorage.getItem("orderDate");
     const orderAmount = localStorage.getItem("orderAmount");
-    const pickupStore = localStorage.getItem("pickupStore");
-    const invoiceNumber = localStorage.getItem("invoiceNumber");
+    const pickupMethod = localStorage.getItem("pickupMethod");
+    // const invoiceNumber = localStorage.getItem("invoiceNumber");
 
     if (orderId) {
       setOrderInfo({
         orderId,
         orderDate: orderDate || "未知",
         orderAmount: orderAmount || "未知",
-        pickupStore: pickupStore || "未知",
-        invoiceNumber: invoiceNumber || "N/A",
+        pickupMethod: pickupMethod || "未知",
+        // invoiceNumber: invoiceNumber || "N/A",
         status: "處理中"
       });
     }
@@ -76,7 +78,7 @@ function OrderDetails() {
       />
       <OrderDetailItem
         label="自取門市"
-        value={orderInfo.pickupStore}
+        value={orderInfo.pickupMethod}
         className={styles.orderDetailItem}
       />
     </section>
@@ -89,14 +91,21 @@ function OrderConfirmation() {
     <main className={styles.pageContainer}>
     <CheckoutProgress/>
       <article className={styles.contentWrapper}>
-        <OrderConfirmationHeader imageUrl="/cart-img/check.png" />
+        <OrderConfirmationHeader /> {/*imageUrl="/cart-img/check.png"  */}
         <OrderDetails />
       </article>
     
     <div className={styles.container}>
-      <Link href="/">
+
+    <Link href="/">
         <button className={styles.pseudo}>
-          <span>回首頁</span>
+          <span>回到首頁</span>
+        </button>
+      </Link>
+
+      <Link href="/member-center/carts">
+        <button className={styles.pseudo2}>
+          <span>查看訂單</span>
         </button>
       </Link>
       </div>

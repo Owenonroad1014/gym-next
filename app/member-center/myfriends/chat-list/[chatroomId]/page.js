@@ -8,16 +8,13 @@ import {
   CHATS_MSG,
   CHATS_ITEM,
   CHATS_LIST,
-  READ_CHAT,
   GYMFRIEND_AVATAR,
 } from '@/config/api-path'
-import { IoPerson } from 'react-icons/io5'
 import moment from 'moment'
 import EmojiPicker from 'emoji-picker-react'
 import io from 'socket.io-client'
 import { FaRegSmile, FaRegSmileWink } from 'react-icons/fa'
 import Image from 'next/image'
-// 创建单例 socket 连接
 let socket
 
 // 確保只有在客戶端才初始化 socket
@@ -48,9 +45,7 @@ export default function ChatRoomPage() {
   // const messagesEndRef = useRef(null)
   const [socketStatus, setSocketStatus] = useState('等待連接...')
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const [isRead, setIsRead] = useState(false) //刷新用
   const [someoneInto, setSomeoneInto] = useState(false) //刷新用
-  const [typing, setTyping] = useState(false)
   const chatBoxRef = useRef(null)
   // 自動滾動到訊息底部
   const scrollToBottom = () => {
@@ -58,12 +53,6 @@ export default function ChatRoomPage() {
     if (chatBox) {
       chatBox.scrollTop = chatBox.scrollHeight
     }
-  }
-  if (inputMsg.length > 0) {
-    socket.emit('typing', { chatroomId: chatroomId, typer: user })
-  }
-  if (inputMsg.length <= 0) {
-    socket.emit('stoptyping', { chatroomId: chatroomId, typer: user })
   }
   // 訊息變化時滾動
   useEffect(() => {
@@ -230,24 +219,6 @@ export default function ChatRoomPage() {
       setError(`伺服器錯誤: ${error}`)
     }
 
-    // 處理已讀更新
-    const fetchRead = async (id) => {
-      try {
-        const res = await fetch(READ_CHAT, {
-          method: 'POST',
-          headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: id }),
-        })
-        if (!res.ok) {
-          setError('Failed to read chat room')
-        }
-        const data = await res.json()
-        setIsRead(!isRead)
-      } catch (err) {
-        setError(err.message || 'Something went wrong')
-      }
-    }
-
     // 設置訊息為已讀
     const handleReadMessage = ({ messageIds, userId }) => {
       console.log('收到已讀更新:', { messageIds, userId })
@@ -271,7 +242,6 @@ export default function ChatRoomPage() {
         // 重新獲取聊天列表以更新未讀數量
         fetchChatsList()
       }
-      fetchRead(chatroomId)
       console.log(`訊息 ${messageIds} 已被用戶 ${userId} 標記為已讀`)
     }
 
@@ -296,15 +266,6 @@ export default function ChatRoomPage() {
       setSomeoneInto(!someoneInto)
     }
 
-    // 輸入中
-    const handleTyping = (data) => {
-      console.log(data)
-      setTyping(true)
-    }
-    const handleStopTyping = (data) => {
-      console.log(data)
-      setTyping(false)
-    }
     // 註冊事件監聽器
     socket.on('connect', handleConnect)
     socket.on('disconnect', handleDisconnect)
@@ -315,8 +276,6 @@ export default function ChatRoomPage() {
     socket.on('error_message', handleErrorMessage)
     socket.on('messageRead', handleReadMessage)
     socket.on('someoneIntoRoom', handlesomeoneIntoRoom)
-    socket.on('typing', handleTyping)
-    socket.on('stoptyping', handleStopTyping)
 
     // 如果已連接則手動執行處理函數
     if (socket.connected) {
@@ -334,12 +293,11 @@ export default function ChatRoomPage() {
       socket.off('error_message', handleErrorMessage)
       socket.off('messageRead', handleReadMessage)
       socket.off('someoneIntoRoom', handlesomeoneIntoRoom)
-      socket.off('typing', handleTyping)
 
       // 離開聊天室但不斷開連接
       socket.emit('leave_room', chatroomId)
     }
-  }, [chatroomId, user, isRead])
+  }, [chatroomId, user])
 
   // 獲取聊天數據
   useEffect(() => {
@@ -513,7 +471,6 @@ export default function ChatRoomPage() {
               ) : (
                 <li className={chatStyle.noMessages}>暫無消息</li>
               )}
-              {typing ? <li>對方正在輸入中...</li> : ''}
             </ul>
           </div>
           {/* 訊息輸入區域 */}

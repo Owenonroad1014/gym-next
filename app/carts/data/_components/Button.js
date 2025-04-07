@@ -4,25 +4,43 @@ import styles from './_styles/button.module.css'
 import Link from 'next/link'
 import { ORDERS_LIST } from '@/config/api-path'
 import { useAuth } from '@/context/auth-context';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export default function Button({ isFormValid, setIsSubmitted, customerInfo }) {
   const { auth } = useAuth();
+  const MySwal = withReactContent(Swal);
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitted(true) // **按下送出時，觸發 isSubmitted 變成 true**
     // alert("QQ")
     if (!isFormValid) {
-      alert('請確認表單填寫正確！')
-    } else {
-      alert('表單提交成功！')
-    }
+      MySwal.fire({
+      icon: 'error',
+      title: '表單錯誤',
+      text: '請確認表單填寫正確！',
+    });
+  } else {
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: "你的訂單已成功提交!",
+      showConfirmButton: false,
+      timer: 3000
+    });
+  }
 
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || []
+    const cartItems = JSON.parse(localStorage.getItem('gym_cart')) || []
     const pickupMethod = localStorage.getItem('pickupMethod') || '未選擇'
     const paymentMethod = localStorage.getItem('paymentMethod') || '未選擇'
 
     if (cartItems.length === 0) {
-      alert('購物車是空的，無法送出訂單！')
+      MySwal.fire({
+        icon: 'warning',
+        title: '購物車為空',
+        text: '購物車是空的，無法送出訂單！',
+      });
       return
     }
 
@@ -62,21 +80,25 @@ export default function Button({ isFormValid, setIsSubmitted, customerInfo }) {
 
       // 存儲訂單信息到localStorage
       const orderDate = new Date().toLocaleString()
-      const orderAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-      const pickupStore = customerInfo.pickupStore || '未選擇'
+      const orderAmount = result.orderAmount || 0
+      // const pickupMethod = customerInfo.pickupMethod || '未選擇' 這個註解後，訂單金額跟自取門市就跑出來了
 
       localStorage.setItem('lastOrderId', result.orderId)
       localStorage.setItem('orderDate', orderDate)  //後3行新增
       localStorage.setItem('orderAmount', orderAmount)
-      localStorage.setItem('pickupStore', pickupStore)
-      localStorage.removeItem('cart')
+      // localStorage.setItem('pickupMethod', pickupMethod) 同66行
+      localStorage.removeItem('gym_cart')
 
       // 重定向到訂單完成頁面
       window.location.href = 'http://localhost:3005/ecpay?amount=1000'
 
     } catch (error) {
       console.error('提交訂單時發生錯誤：', error)
-      alert('訂單提交失敗，請稍後再試！')
+      MySwal.fire({
+        icon: 'error',
+        title: '提交失敗',
+        text: '訂單提交失敗，請稍後再試！',
+      });
     }
   }
 
