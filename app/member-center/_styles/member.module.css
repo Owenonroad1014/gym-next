@@ -1,64 +1,3 @@
-/* #region ================= Breadcrumb  Start ====================== */
-.breadcrumbContainer {
-  position: relative;
-}
-.breadcrumb {
-  width: 100%;
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.breadcrumbItem {
-  position: relative;
-  padding: 0 20px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.breadcrumbItem:not(:last-child)::after {
-  content: '›';
-  position: absolute;
-  top: 13px;
-  right: -5px;
-  color: #666;
-  font-size: 20px;
-  z-index: 2;
-}
-
-.breadcrumbItem a {
-  cursor: pointer;
-  color: #666;
-  font-size: 18px;
-  line-height: 60px;
-  text-decoration: none;
-  height: 60px;
-  position: relative;
-  display: block;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.breadcrumbItem:hover a {
-  transform: translateY(-2px);
-  color: #666;
-  text-decoration: underline;
-  text-underline-offset: 10px;
-}
-
-.breadcrumbItem:hover a::after,
-.breadcrumbItem.active a::after {
-  width: 100%;
-}
-
-.breadcrumbItem.active a {
-  color: #f87808;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 10px;
-}
-/* #endregion ================= Breadcrumb ====================== */
-
 /* #region ================= Select  Start ====================== */
 
 .selectArea {
@@ -69,6 +8,7 @@
   flex-direction: column;
   transition: width 0.3s ease, height 0.3s ease;
 }
+
 .welcome {
   width: 100%;
   height: 60px;
@@ -77,6 +17,18 @@
   line-height: 60px;
   color: #666;
   padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: #cdc9c9 1px solid; */
+  margin: auto;
+  width: 100%;
+  height: 60px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 60px;
+  color: #666;
+  /* padding: 0 20px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,32 +59,17 @@
   font-size: 20px;
   color: white;
   background-color: #f87808;
-  margin: auto;
   border: none;
   border-radius: 3px;
   display: none;
-  position: absolute;
-  left: 15px;
-  top: -65px;
   z-index: 20;
 }
+
 .selectPart {
   width: 100%;
   list-style: none;
   /* margin-top: 15px; */
   border: 1px solid transparent;
-}
-
-.categoryTitle {
-  width: 100%;
-  font-size: 20px;
-  font-weight: 700;
-  align-items: center;
-  color: rgb(16, 19, 21);
-  background-color: #dee5e7;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
 }
 
 .selectPart li {
@@ -178,7 +115,6 @@
 /* #endregion ================= Select  End ====================== */
 
 /* #region ================= Member no admin  Start ====================== */
-/* memberContainer、memberContent in layout.js */
 .memberContainer {
   display: flex;
   margin: 0px 80px;
@@ -224,12 +160,13 @@
   padding: 8px 18px;
   text-align: center;
   border-radius: 3px;
-  background: #0b3760;
+  background-color: #f87808;
+
   color: #fff;
   font-size: 18px;
 }
 .memberBtnRegister {
-  background-color: #f87808;
+  background: #353535;
 }
 /* #endregion ================= Member no admin ====================== */
 
@@ -311,7 +248,7 @@
   padding: 55px 15px;
   border-radius: 3px;
   backdrop-filter: blur(5px);
-  box-shadow: 1px 1px 12px #d1d1d1e4;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .titleGroup {
@@ -321,7 +258,7 @@
   align-items: flex-start;
   margin-bottom: 20px;
 }
-.titleGroup h2{
+.titleGroup h2 {
   margin-bottom: 30px;
 }
 .formGroup {
@@ -356,7 +293,7 @@
 .formGroup input:focus {
   outline: none;
   background: #fbe8d7;
-  box-shadow: inset 1px 2px 8px #f87808;
+  box-shadow: inset 1px 2px 8px #f87808d1;
   transition: all 0.3s ease-in-out;
 }
 .iconBtn {
@@ -420,6 +357,137 @@
 }
 
 /* #endregion ================= Reset Password====================== */
+/* #region ================= RWD====================== */
+@media (max-width: 1440) {
+}
+@media (max-width: 1390px) {
 
-/* #region ================= Reset Password====================== */
+}
+@media (max-width: 1140px) {
+  .selectArea {
+    position: absolute;
+    z-index: 20;
+    width: 20%;
+  }
 
+  .selectPart li {
+    font-size: 20px;
+  }
+  .welcome {
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 60px;
+    color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  .welcomeText span {
+    line-height: 30px;
+  }
+  .welcomeText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .selectArea {
+    position: absolute;
+    top: 60px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 90vw;
+    transition: height 0.3s ease-in-out;
+  }
+  .selectPart {
+    width: 90vw;
+    border-right: none;
+    text-align: left;
+    background-color: #ebeff1;
+  }
+  .selectBtn {
+    display: block;
+  }
+  .home {
+    width: 90vw;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: auto;
+  }
+  .welcome {
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 60px;
+    color: #666;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: auto;
+  }
+  .welcomeText span {
+    line-height: 30px;
+  }
+  .welcomeText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5px;
+  }
+  .icons {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    gap: 20px;
+    font-size: 20px;
+    background-color: #ebeff1;
+    padding: 10px;
+  }
+}
+@media (max-width: 500px) {
+
+}
+@media (max-width: 480px) {
+ 
+}
+@media (max-width: 420) {
+  .memberNoAdmin {
+    width: 100%;
+  }
+  .memberNoAdmin .memberSpan {
+    width: 100%;
+  }
+  .memberBtns {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 350px;
+  }
+  .memberBtn {
+    width: 80%;
+    margin: 0px 10px;
+    margin-bottom: 20px;
+    padding: 8px 18px;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #f87808;
+    color: #fff;
+    font-size: 18px;
+  }
+  .memberBtnRegister {
+    background: #353535;
+  }
+}
+
+/* #region ================= RWD====================== */
