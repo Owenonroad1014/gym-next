@@ -38,7 +38,7 @@ export default function Card({
     rows: [],
     keyword: '',
   })
-  // ==== TODO 加入或移除收藏自動渲染
+
   const toggleLike = (e, article_id) => {
     e.preventDefault()
     fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
@@ -80,7 +80,8 @@ export default function Card({
       }
     })
   }
-  const date = moment(articlesStyle.created_at).format('YYYY/MM/DD')
+  const date = moment(articles.created_at).format('YYYY/MM/DD')
+  
   return (
     <>
       <Link href={`/articles/${articles.id}`}>
