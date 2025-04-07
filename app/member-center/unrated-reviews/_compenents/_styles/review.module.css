@@ -17,7 +17,7 @@
 
 
 .img{
-    width: 85%;
+    width: 100%;
     height: 100%;
     border-radius: 5px 0 0 5px;
     object-fit: fill;
@@ -25,7 +25,7 @@
 }
 
 .imgContainer{
-    width: 45%;
+    width: 30%;
     height: 200px;
     overflow: hidden;
 }
@@ -43,23 +43,26 @@
 .contentItem{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-radius: 10px;
     height: 100px;
     color: #686a6c;
+    margin-top: 10px;
 }
 .contentItems{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     margin-right: 5px;
+    margin-top: 20px;
     padding: 10px;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
 }
 .contentArea{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .contentAll{
@@ -113,16 +116,24 @@
 }
 
 .button{
-    color: rgb(243, 239, 237);
+    color: #333;
     border: none;
-    background-color: #f87808;
+    background-color: #f0edea;
     height: 35px;
     margin-top: 13%;
     margin-left: 170px;
-    width: 20%;
+    width: 15%;
     font-size: 13px;
     font-weight: 700;
     border-radius: 10px;
+    border: #333 1px solid;
+    margin-bottom: 20px;
+}
+
+.loaderContainer{
+    width: 30%;
+    margin: auto;
+    margin-top: 50px;
 }
 
 /* review.module.css */

@@ -21,7 +21,7 @@ export const PROFILE_GET = `${API_SERVER}/profile/get-profile`
 // 更新個人檔案的路由
 export const PROFILE_PUT = `${API_SERVER}/profile/edit-profile`
 // 會員中心取得name
-export const MEMBER_CENTER_NAME = `${API_SERVER}/profile/edit-profile`
+export const MEMBER_CENTER_NAME = `${API_SERVER}/memberCenter/membername`
 // 取得更新auth
 export const REFRESH_AUTH_GET = `${API_SERVER}/profile/auth`
 

@@ -17,6 +17,8 @@ export default function ArticlesPage() {
   const { articleid } = useParams()
 
   const [breadcrumb, setBreadcrumb] = useState(['首頁', 'GYM享知識'])
+  const [totalArticle, setTotalArticle] = useState(0)
+
   const [article, setArticle] = useState({
     id: 0,
     title: '',
@@ -34,6 +36,20 @@ export default function ArticlesPage() {
 
   useEffect(() => {
     if (!articleid) return
+    const fetchTotalArticle = async () => {
+      try {
+        const response = await fetch(`${ARTICLE_ITEM}`)
+        const data = await response.json()
+        if (response.ok) {
+          setTotalArticle(data.totalRows)
+        } else {
+          setError('連接總筆數錯誤')
+        }
+      } catch (err) {
+        setError('連接總筆數失敗')
+      }
+    }
+    fetchTotalArticle()
     const fetchArticle = async () => {
       try {
         const response = await fetch(`${ARTICLE_ITEM}/${articleid}`)
@@ -73,7 +89,11 @@ export default function ArticlesPage() {
           <div className={articleStyle.articleContainer}>
             <div className={articleStyle.topSection}>
               <ShareSidebar />
-              <Content article={article} date={date} />
+              <Content
+                article={article}
+                date={date}
+                totalArticle={totalArticle}
+              />
               <HotRanking />
             </div>
 

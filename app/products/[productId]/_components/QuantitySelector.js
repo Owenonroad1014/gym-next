@@ -20,7 +20,7 @@ const QuantitySelector = () => {
         className={styles.quantityButton}
         aria-label="Decrease quantity"
       >
-        -
+        –
       </button>
       <span className={styles.quantityValue}>{quantity}</span>
       <button

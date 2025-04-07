@@ -75,17 +75,30 @@ const loginGoogle = async (callback) => {
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
 
-  signInWithPopup(auth, provider)
-    .then(async (result) => {
-      const user = result.user
-      console.log(user)
+  try {
+    const result = await signInWithPopup(auth, provider)
+    const user = result.user
+    console.log('Google 使用者:', user)
 
-      // user後端寫入資料庫等等的操作
-      callback(user.providerData[0])
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    // 傳 provider 資料給 callback（你後端 login 用）
+    callback(user.providerData[0])
+  } catch (error) {
+    console.error('Google 登入失敗:', error)
+    // 可以選擇在這裡傳 null 或自定義錯誤給 callback
+    callback(null)
+  }
+  // 老師的寫法
+  // signInWithPopup(auth, provider)
+  //   .then(async (result) => {
+  //     const user = result.user
+  //     console.log(user)
+
+  //     // user後端寫入資料庫等等的操作
+  //     callback(user.providerData[0])
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
 }
 
 const loginGoogleRedirect = async () => {

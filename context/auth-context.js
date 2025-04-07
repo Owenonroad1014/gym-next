@@ -12,7 +12,6 @@ const emptyAuth = {
   id: 0,
   account: '',
   google_uid: '',
-  avatar: '',
   name: '',
   add_status: '',
   token: '',
@@ -83,10 +82,13 @@ export function AuthContextProvider({ children }) {
         },
       })
       const result = await res.json()
-
+      console.log(result)
       if (result.success) {
-        localStorage.setItem(storageKey, JSON.stringify(result.data))
         setAuth(result.data)
+        localStorage.setItem(storageKey, JSON.stringify(result.data))
+        return { success: true }
+      }else {
+        console.warn('刷新認證資料失敗', result.message);
       }
     } catch (error) {
       console.warn('無法刷新auth資料', error.message)

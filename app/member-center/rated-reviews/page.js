@@ -10,16 +10,18 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
 import ReactDOM from 'react-dom';
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
 const MySwal = withReactContent(Swal);
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [rating, setRating] = useState(0);
+  // const [comment, setComment] = useState("");
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [products, setProducts] = useState([]);
+    const [isloading, setIsloading] = useState(true)
 
   const headers = auth ? { ...getAuthHeader() } : {};
 
@@ -34,18 +36,20 @@ const Review = () => {
             latest_review: p.rating !== null ? { rating: p.rating, comment: p.review_text } : null,order_item_id: p.order_item_id,
           }));
           setProducts(formattedProducts);
+          setIsloading(false)
         }
       } catch (error) {
         console.error("獲取商品列表錯誤:", error);
+        setIsloading(false)
       }
     };
     fetchProducts();
   }, [auth]);
 
   const handleOpenReview = async (product) => {
-    document.body.style.overflow = 'hidden'
-    let currentRating = product.latest_review?.rating || 0;
-
+    document.body.style.overflow = 'hidden';
+    let currentRating = product.latest_review?.rating || 0;  // 讀取原有評分
+  
     const { value: formValues } = await Swal.fire({
       title: `編輯評價 - ${product.name}`,
       html: `
@@ -54,28 +58,37 @@ const Review = () => {
           <textarea style="width: 80%;" id="review-text" class="swal2-textarea" placeholder="輸入您的評價">${product.latest_review?.comment || ""}</textarea>
         </div>
       `,
+      confirmButtonColor: '#f87808',
       didOpen: () => {
         const starContainer = document.getElementById("star-container");
-
+  
         for (let i = 1; i <= 5; i++) {
-          const star = document.createElement("span");
-          star.innerHTML = i <= currentRating ? "★" : "☆";
-          star.style.fontSize = "36px";
-          star.style.cursor = "pointer";
-          star.style.color = "#f87808";
-          star.onclick = () => {
+          const starSpan = document.createElement("span");
+          starSpan.style.cursor = "pointer";
+          starSpan.style.margin = "0 4px";
+  
+          // 設置點擊事件，變更評分
+          starSpan.onclick = () => {
             currentRating = i;
             document.querySelectorAll("#star-container span").forEach((s, index) => {
-              s.innerHTML = index < i ? "★" : "☆";
+              const starIcon = index < i
+                ? React.createElement(FaStar, { color: "#f87808", size: 36 })
+                : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+              ReactDOM.render(starIcon, s);
             });
           };
-          starContainer.appendChild(star);
+  
+          // 初始化星星圖示 (根據 `currentRating` 來決定)
+          const initialIcon = i <= currentRating
+            ? React.createElement(FaStar, { color: "#f87808", size: 36 })
+            : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
+  
+          ReactDOM.render(initialIcon, starSpan);
+          starContainer.appendChild(starSpan);
         }
-
-        document.getElementById("review-text").focus();
       },
       didClose: () => {
-        document.body.style.overflow = ''
+        document.body.style.overflow = '';
       },
       showCancelButton: true,
       cancelButtonText: '取消',
@@ -89,7 +102,7 @@ const Review = () => {
         return { rating: currentRating, comment: reviewText };
       }
     });
-
+  
     if (formValues) {
       handleSubmitReview(product, formValues.rating, formValues.comment, product.order_item_id);
     }
@@ -110,7 +123,12 @@ const Review = () => {
 
       const data = await response.json();
       if (data.success) {
-        Swal.fire("評價已更新！", "", "success");
+        Swal.fire({
+          title: "評價已更新！",
+          icon: "success",
+          confirmButtonColor: '#f87808'
+        });
+        
         setProducts((prevProducts) =>
           prevProducts.map((p) =>
             p.order_item_id === orderItemId
@@ -133,6 +151,14 @@ const Review = () => {
     );
   };
 
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
+
   return (
     <>
       <article className={styles.review}>
@@ -146,7 +172,7 @@ const Review = () => {
               <div className={styles.content}>
                 <div className={styles.contentItems}>
                   <div className={styles.productContent}>
-                    <FaClipboardList />訂單資料
+                    <FaClipboardList />訂單資訊
                   </div>
                   <hr className={styles.divder}/>
                   <div className={styles.contentItem}>
@@ -158,10 +184,14 @@ const Review = () => {
                 </div>
                 <div className={styles.latest_review}>
                   <div className={styles.productComment}>
-                    <CiEdit />評論: <span className={styles.stars}>
+                    <span>
+                    <CiEdit />評論: 
+                    </span>
+                    <span className={styles.stars}>
                     {renderStars(product.latest_review.rating)}</span>
                   </div>
-                  <div className={styles.comment}>{product.latest_review.comment}</div>
+                  <div className={`${styles.comment} ${styles.scrollbox}`}>{product.latest_review.comment}</div>
+                  <div className={styles.buttonArea}>
                   <button onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -169,6 +199,7 @@ const Review = () => {
                   }} className={styles.button}>
                     編輯
                   </button>
+                  </div>
                 </div>
               </div>
             </Link>

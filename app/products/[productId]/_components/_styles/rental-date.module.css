@@ -1,12 +1,14 @@
 .dateSelect{
     display: flex;
-    justify-content:space-between;
+    justify-content:start;
     font-weight: 800;
     flex-direction: row;
     color: rgb(65, 63, 60);
+    width: 100%;
 }
 .label{
     font-size: 18px;
+    width: 48%;
 
 }
 .input{
@@ -14,16 +16,25 @@
     width: 98%;
     height: 30px;
     font-size: 14px;
+    border-radius: 5px;
+}
+
+.rentalDay{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .rentalDays{
     color: rgb(65, 63, 60);
     font-weight: 600;
     font-size: 18px;
-    margin: 0;
+    margin: 5px auto;
     display: flex;
     align-items: center;
-    height: 3.px;
+    width: 100%;
+    text-align: center;
 }
 
 @media (width <= 960px) {

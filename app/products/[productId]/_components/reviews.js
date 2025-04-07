@@ -76,7 +76,7 @@ const ReviewList = ({ productId }) => {
               <span className={styles.memberName}>{review.member_name}</span>
               <div className={styles.stars}>{renderStars(review.rating)}</div>
             </div>
-            <p className={styles.reviewText}>{review.review_text}</p>
+            <p className={`${styles.reviewText} ${styles.scrollboxs}`}>{review.review_text}</p>
             <span className={styles.date}>
               {new Date(review.created_at).toLocaleDateString()}
             </span>

@@ -73,7 +73,10 @@ const RentalDate = ({ rentalStartDate, rentalEndDate, onDateChange }) => {
         </label>
       </div>
       <br />
-      <p className={styles.rentalDays}>租借天數：{rentalDays} 天</p>
+      <div className={styles.rentalDay}>
+      <div className={styles.rentalDays}>租借天數：</div>
+      <div className={styles.rentalDays}>{rentalDays} 天 </div>
+      </div>
     </>
   );
 };

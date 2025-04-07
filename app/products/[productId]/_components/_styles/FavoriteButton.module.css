@@ -1,9 +1,9 @@
 .container {
   position: relative;
+  margin-top: 10px;
 }
 
 .hearts {
-  position: absolute;
   color: #f87808;
   border: 0;
   background-color: #f8fafb;
@@ -11,8 +11,6 @@
   display: flex;
   align-items: center;
   padding: 0 12px;
-  bottom: 0px;
-  right: 0px;
   border-radius: 20px;
   transition: all 0.3s ease;
   transform: scale(1);

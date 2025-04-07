@@ -3,18 +3,20 @@ import React, { useEffect, useState } from "react";
 import { PENDING_REVIEWS_LIST, SUBMIT_REVIEW_API, IMG_PATH } from "@/config/api-path";
 import { useAuth } from "@/context/auth-context";
 import styles from "./_compenents/_styles/review.module.css";
-import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
 import { FaStar, FaRegStar } from "react-icons/fa";
 import ReactDOM from 'react-dom';
+import loaderStyle from '@/app/_components/_styles/loading.module.css'
+import { FaClipboardList } from "react-icons/fa";
 
 const MySwal = withReactContent(Swal);
 
 const Review = () => {
   const { auth, getAuthHeader } = useAuth();
   const [products, setProducts] = useState([]);
+  const [isloading, setIsloading] = useState(true)
   const headers = auth ? { ...getAuthHeader(), "Content-Type": "application/json" } : {};
 
   useEffect(() => {
@@ -24,9 +26,11 @@ const Review = () => {
         const data = await response.json();
         if (data.success) {
           setProducts(data.products);
+          setIsloading(false)
         }
       } catch (error) {
         console.error("獲取未評價商品錯誤:", error);
+        setIsloading(false)
       }
     };
     fetchPendingReviews();
@@ -104,6 +108,14 @@ const Review = () => {
     }
   };
 
+  if (isloading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={loaderStyle.loader}></div>
+      </div>
+    );
+  }
+
   return (
     <article className={styles.review}>
       {products.length === 0 ? (
@@ -116,7 +128,7 @@ const Review = () => {
             </div>
             <div className={styles.content}>
               <div className={styles.contentItems}>
-                <div className={styles.productContent}><CiEdit /> 訂單資訊</div>
+                <div className={styles.productContent}><FaClipboardList />訂單資訊</div>
                 <hr className={styles.divider} />
                 <div className={styles.contentArea}>
                 <div className={styles.contentItem}>
