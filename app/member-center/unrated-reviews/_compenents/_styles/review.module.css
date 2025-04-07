@@ -1,7 +1,13 @@
 .review{
     width: 100%;
-    
+    transition: all 0.3s ease;
 }
+
+.review:hover{
+
+
+}
+
 .productReview{
     display: flex;
     flex-direction: row;
@@ -12,8 +18,13 @@
     border-radius: 5px;
     background: #ffffff;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.productReview:hover{
+    transform: scale(1.02);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 5;}
 
 
 .img{
@@ -122,12 +133,19 @@
     height: 35px;
     margin-top: 13%;
     margin-left: 170px;
-    width: 15%;
+    width: 20%;
     font-size: 13px;
     font-weight: 700;
     border-radius: 10px;
     border: #333 1px solid;
     margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    color: #f87808;
+    border-color: #f87808;
+    background-color: #f9f7f7;
 }
 
 .loaderContainer{

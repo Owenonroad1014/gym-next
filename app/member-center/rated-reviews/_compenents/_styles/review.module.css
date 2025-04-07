@@ -1,11 +1,16 @@
 .review{
     width: 100%;
-    
+
 }
+
+/* .review:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+} */
 .productReview{
     display: flex;
     flex-direction: row;
-    background-color: #f87808;
     width: 100%;
     margin-top: 20px;
     margin-left: 20px;
@@ -13,8 +18,12 @@
     border-radius: 5px;
     background: #ffffff;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    /* margin: auto; */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.productReview:hover{
+transform: scale(1.02);
+box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+z-index: 5;}
 
 
 .img{
@@ -121,14 +130,14 @@
     display: block;
     color: #333;
     border: none;
-    background-color: #d8d6d3;
+    background-color: #f0efed;
     height: 30px;
     margin-top: 10px;
     width: 100%;
     font-size: 14px;
     font-weight: 700;
     border-radius: 10px;
-    border: #817f7f 1px solid;
+    border: #979696 1px solid;
     /* position: absolute; */
     bottom: 10px;
     right: 8px;
@@ -136,9 +145,9 @@
 }
 
 .button:hover {
-    color: #f87808;
-    border-color: #f87808;
-    background-color: #f9f7f7;
+  color: #f87808;
+  border-color: #f87808;
+  background-color: #f9f7f7;
 }
 
 
@@ -207,7 +216,9 @@
     width: 100%;  /* 設定寬度 */
     overflow-y: auto; /* 允許垂直滾動 */
     overflow-x: hidden; /* 隱藏水平滾動 */
-    background: #333;
+    /* background: #333; */
+    border: #333 1px dashed;
+    color: #333;
   }
   
   /* 滾動條樣式 */
@@ -216,7 +227,7 @@
   }
   
   .scrollbox::-webkit-scrollbar-track {
-    background: #333;
+
   }
   
   .scrollbox::-webkit-scrollbar-thumb {
