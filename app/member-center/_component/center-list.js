@@ -72,7 +72,7 @@ export default function CenterList() {
           <ul className={selectStyle.selectPart}>
             <li
               className={
-                pathname === '/member-center/myfriends'
+                pathname.startsWith('/member-center/myfriends')
                   ? selectStyle.active
                   : ''
               }
