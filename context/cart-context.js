@@ -40,7 +40,7 @@ export function CartProvider({ children }) {
 
    // 首次渲染時，從 LocalStorage 取出購物車資料
    useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const savedCart = JSON.parse(localStorage.getItem('gym_cart')) || [];
     const savedPaymentMethod = localStorage.getItem('paymentMethod') || "";
     const savedPickupMethod = localStorage.getItem('pickupMethod') || "";
 
@@ -53,7 +53,7 @@ export function CartProvider({ children }) {
   // 當購物車資料變更時，同步更新 LocalStorage
   useEffect(() => {
     if (didMount) {
-      localStorage.setItem('cart', JSON.stringify(cartItems))
+      localStorage.setItem('gym_cart', JSON.stringify(cartItems))
       updateCartQuantity()}
   }, [cartItems, didMount])
 
@@ -149,7 +149,7 @@ export function CartProvider({ children }) {
         updatedCart = [...prevItems, { ...product, quantity: 1 }];
       }
   
-      localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+      localStorage.setItem("gym_cart", JSON.stringify(updatedCart)); 
       return updatedCart;
 
     });
@@ -165,7 +165,7 @@ export function CartProvider({ children }) {
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => {
       const updatedCart = prevItems.filter((item) => item.id !== productId);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // 立即更新 LocalStorage
+      localStorage.setItem('gym_cart', JSON.stringify(updatedCart)); // 立即更新 LocalStorage
       if (updatedCart.length === 0) {
         setPaymentMethod(""); 
         setPickupMethod("");

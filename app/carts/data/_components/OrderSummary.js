@@ -12,7 +12,7 @@ function OrderSummary() {
   const total = subtotal + shipping;
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const storedCart = JSON.parse(localStorage.getItem("gym_cart")) || [];
     const storedPaymentMethod = localStorage.getItem("paymentMethod") || "未選擇";
     const storedPickupMethod = localStorage.getItem("pickupMethod") || "未選擇";
 

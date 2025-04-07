@@ -1,0 +1,89 @@
+/* styles/OrderHistoryPage.module.css */
+.pageContainer {
+    background-color: #ffffff;
+    color: #ff6600; /* 健身房風的橘色 */
+    font-family: 'Arial Black', 'Segoe UI', sans-serif;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .pageTitle {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #ff6600;
+    padding-bottom: 0.5rem;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+  }
+  
+  .table th,
+  .table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ffe5d0;
+  }
+  
+  .table th {
+    background-color: #fff2e6;
+    font-weight: bold;
+    color: #ff6600;
+  }
+  
+  .table tr:hover {
+    background-color: #fff8f2;
+    transition: background-color 0.2s ease;
+  }
+  
+  .status-complete {
+    color: #28a745; /* 綠色：已完成 */
+    font-weight: bold;
+  }
+  
+  .status-processing {
+    color: #ff9900; /* 黃橘色：處理中 */
+    font-weight: bold;
+  }
+  
+  .status-cancelled {
+    color: #dc3545; /* 紅色：已取消 */
+    font-weight: bold;
+  }
+  
+  .detailBox {
+    background-color: #fff8f2;
+    border: 1px solid #ffe0cc;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    animation: fadeIn 0.3s ease-in;
+  }
+  
+  .itemList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .itemList li {
+    padding: 0.3rem 0;
+    font-weight: 500;
+  }
+  
+  /* 動畫 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

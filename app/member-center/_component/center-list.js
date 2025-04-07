@@ -113,6 +113,13 @@ export default function CenterList() {
           </li>
         </ul>
         <ul className={selectStyle.selectPart}>
+        <li
+            className={
+              pathname === '/member-center/carts' ? selectStyle.active : ''
+            }
+          >
+            <Link href="/member-center/carts">我的訂單</Link>
+          </li>
           <li
             className={
               pathname === '/member-center/rated-reviews' ? selectStyle.active : ''

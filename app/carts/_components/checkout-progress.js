@@ -17,7 +17,7 @@ function CheckoutProgress() {
       </div>
 
       {/* <div className={styles.progressLine} /> */}
-      <HiArrowSmallRight size={50}/>
+      <HiArrowSmallRight size={50} style={{color: "#878787"}}/>
 
       {/* 填寫資料 */}
       <div className={styles.progressItem}>
@@ -27,7 +27,7 @@ function CheckoutProgress() {
       </div>
 
       {/* <div className={styles.progressLine} /> */}
-      <HiArrowSmallRight size={50}/>
+      <HiArrowSmallRight size={50} style={{color: "#878787"}}/>
 
       {/* 完成訂單 */}
       <div className={styles.progressItem}>

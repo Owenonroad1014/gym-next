@@ -106,7 +106,9 @@ const ProductDetail = () => {
         text: "請選擇商品的重量才能加入購物車。",
         icon: "warning",
         confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
+        cancelButtonColor: '#eee',
+        confirmButtonText: '已選擇',
+      cancelButtonText: '取消',
         didClose: () => {
           document.body.style.overflow = ''
         },
@@ -119,9 +121,8 @@ const ProductDetail = () => {
         title: "請選擇租借日期!",
         text: "請選擇租借的開始與結束日期。",
         icon: "warning",
-        showCancelButton: true,
         confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
+        confirmButtonText: '好的',
       });
       return;
     }
@@ -286,7 +287,7 @@ const ProductDetail = () => {
       <hr className={styles.divider} />
       
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar
         newestOnTop
@@ -301,10 +302,11 @@ const ProductDetail = () => {
           maxWidth: '90%',
           width: '300px',
           marginBottom: '20px',
+          top: '80px'
         }}
         toastStyle={{
-          backgroundColor: '#f87808',
-          color: '#fff',
+          backgroundColor: '#fff',
+          color: '#e76317',
         }}
         progressStyle={{
           background: '#fff',
