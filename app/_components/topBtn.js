@@ -11,7 +11,7 @@ export default function topBtn() {
   return (
     <div className={styles.container} onClick={scrollToTop}>
       <Image src="/gymdot.svg" alt='topButton' width={50} height={50}/>
-      <p class={styles.text}>Back to Top</p>
+      <p className={styles.text}>Back to Top</p>
     </div>
   )
 }
