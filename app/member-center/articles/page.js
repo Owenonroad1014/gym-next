@@ -9,7 +9,8 @@ import { useAuth } from '@/context/auth-context'
 import { ARTICLE_MEMBER_FAV, ARTICLE_FAV } from '@/config/api-path'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import Search from './_components/search'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams,useRouter } from 'next/navigation'
+
 import {
   MdOutlineArticle,
   MdArrowBackIos,
@@ -23,7 +24,7 @@ export default function ArticleList() {
   const [isloading, setIsloading] = useState(true)
   const [articlesData, setArticlesData] = useState({})
   const [islike, setIsLike] = useState(false) // 刷新
-
+  const router = useRouter()
   const searchParams = useSearchParams()
   useEffect(() => {
     // 獲取文章列表
@@ -46,7 +47,7 @@ export default function ArticleList() {
     }
     fetchArticles()
   }, [auth, getAuthHeader, searchParams, islike])
-  // ==== TODO 加入或移除收藏自動渲染
+  
   const toggleLike = (e, article_id) => {
     e.preventDefault()
     fetch(`${ARTICLE_FAV}/${article_id}`, { headers: { ...getAuthHeader() } })
@@ -64,7 +65,9 @@ export default function ArticleList() {
 
   return (
     <>
-      {isloading ? (
+      {
+        auth.id ? (
+        isloading ? (
         <>
           <div className={styles.loaderContainer}>
             <div className={loaderStyle.loader}></div>
@@ -177,7 +180,9 @@ export default function ArticleList() {
             </div>
           )}
         </>
-      )}
+      )):(router.push('/member-center'))
+      
+      }
     </>
   )
 }

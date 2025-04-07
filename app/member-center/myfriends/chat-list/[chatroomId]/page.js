@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'next/navigation'
 import { useAuth } from '@/context/auth-context'
+import { useRouter } from 'next/navigation'
+
 import chatStyle from './chatroom.module.css'
 import {
   CHATS_MSG,
@@ -34,6 +36,7 @@ export default function ChatRoomPage() {
   const params = useParams()
   const { auth, getAuthHeader } = useAuth()
   const { chatroomId } = params
+  const router = useRouter()
 
   // 聊天狀態
   const [error, setError] = useState('')
@@ -408,112 +411,118 @@ export default function ChatRoomPage() {
 
   return (
     <>
-      <div className={chatStyle.tempbody}>
-        <div className={chatStyle.chatContainer}>
-          <div className={chatStyle.friendName}>
-            <div className={chatStyle.avatar}>
-              <Image
-                src={`${GYMFRIEND_AVATAR}/${
-                  auth.id == chatItem.user1_id
-                    ? chatItem.user2_avatar
-                    : chatItem.user1_avatar
-                }`}
-                alt="avatar"
-                width={30}
-                height={30}
-              />
-            </div>
-            {chatItem.user1_id == user
-              ? chatItem.user2_name
-              : chatItem.user1_name}
-          </div>
-          <div className={chatStyle.chatBox} ref={chatBoxRef}>
-            {/* 顯示錯誤 */}
-            {error && <div className={chatStyle.errorMessage}>{error}</div>}
-            {/* 顯示消息 */}
-            <ul className={chatStyle.messages}>
-              {messages?.length > 0 ? (
-                messages?.map((v, index) => (
-                  <li
-                    key={v.id || index}
-                    className={v.isTemp ? chatStyle.tempMessage : ''}
-                  >
-                    <div
-                      className={`${chatStyle.message} ${
-                        user == v.sender_id
-                          ? chatStyle.sent
-                          : chatStyle.received
-                      }`}
-                    >
-                      {v.message}
-                    </div>
-                    <pre
-                      className={chatStyle.time}
-                      style={{
-                        textAlign: user == v.sender_id ? 'right' : 'left',
-                      }}
-                    >
-                      {user == v.sender_id && v.is_read === 1 ? (
-                        <span style={{ color: '#f87808', marginRight: '5px' }}>
-                          Read
-                        </span>
-                      ) : (
-                        ''
-                      )}
-                      {typeof v.created_at === 'string'
-                        ? moment(v.created_at).format('HH:mm')
-                        : moment(v.created_at).isValid()
-                        ? moment(v.created_at).format('HH:mm')
-                        : ''}
-                    </pre>
-                  </li>
-                ))
-              ) : (
-                <li className={chatStyle.noMessages}>暫無消息</li>
-              )}
-            </ul>
-          </div>
-          {/* 訊息輸入區域 */}
-          <div className={chatStyle.inputArea}>
-            {/* 顯示表情符號選擇器 */}
-            <div className={chatStyle.emojiArea}>
-              <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                {showEmojiPicker ? <FaRegSmileWink /> : <FaRegSmile />}
-              </button>
-
-              {showEmojiPicker && (
-                <EmojiPicker
-                  onEmojiClick={handleEmojiClick}
-                  style={{ position: 'absolute', bottom: '50px' }}
+      {auth.id ? (
+        <div className={chatStyle.tempbody}>
+          <div className={chatStyle.chatContainer}>
+            <div className={chatStyle.friendName}>
+              <div className={chatStyle.avatar}>
+                <Image
+                  src={`${GYMFRIEND_AVATAR}/${
+                    auth.id == chatItem.user1_id
+                      ? chatItem.user2_avatar
+                      : chatItem.user1_avatar
+                  }`}
+                  alt="avatar"
+                  width={30}
+                  height={30}
                 />
-              )}
+              </div>
+              {chatItem.user1_id == user
+                ? chatItem.user2_name
+                : chatItem.user1_name}
             </div>
+            <div className={chatStyle.chatBox} ref={chatBoxRef}>
+              {/* 顯示錯誤 */}
+              {error && <div className={chatStyle.errorMessage}>{error}</div>}
+              {/* 顯示消息 */}
+              <ul className={chatStyle.messages}>
+                {messages?.length > 0 ? (
+                  messages?.map((v, index) => (
+                    <li
+                      key={v.id || index}
+                      className={v.isTemp ? chatStyle.tempMessage : ''}
+                    >
+                      <div
+                        className={`${chatStyle.message} ${
+                          user == v.sender_id
+                            ? chatStyle.sent
+                            : chatStyle.received
+                        }`}
+                      >
+                        {v.message}
+                      </div>
+                      <pre
+                        className={chatStyle.time}
+                        style={{
+                          textAlign: user == v.sender_id ? 'right' : 'left',
+                        }}
+                      >
+                        {user == v.sender_id && v.is_read === 1 ? (
+                          <span
+                            style={{ color: '#f87808', marginRight: '5px' }}
+                          >
+                            Read
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                        {typeof v.created_at === 'string'
+                          ? moment(v.created_at).format('HH:mm')
+                          : moment(v.created_at).isValid()
+                          ? moment(v.created_at).format('HH:mm')
+                          : ''}
+                      </pre>
+                    </li>
+                  ))
+                ) : (
+                  <li className={chatStyle.noMessages}>暫無消息</li>
+                )}
+              </ul>
+            </div>
+            {/* 訊息輸入區域 */}
+            <div className={chatStyle.inputArea}>
+              {/* 顯示表情符號選擇器 */}
+              <div className={chatStyle.emojiArea}>
+                <button onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                  {showEmojiPicker ? <FaRegSmileWink /> : <FaRegSmile />}
+                </button>
 
-            <input
-              className={chatStyle.textInput}
-              type="text"
-              placeholder="輸入消息..."
-              value={inputMsg}
-              onChange={(e) => setInputMsg(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault()
-                  handleOnclickSend(e)
-                }
-              }}
-              disabled={!isConnected}
-            />
-            <button
-              className={chatStyle.sendButton}
-              onClick={handleOnclickSend}
-              disabled={!isConnected}
-              type="submit"
-            >
-              發送
-            </button>
+                {showEmojiPicker && (
+                  <EmojiPicker
+                    onEmojiClick={handleEmojiClick}
+                    style={{ position: 'absolute', bottom: '50px' }}
+                  />
+                )}
+              </div>
+
+              <input
+                className={chatStyle.textInput}
+                type="text"
+                placeholder="輸入消息..."
+                value={inputMsg}
+                onChange={(e) => setInputMsg(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    handleOnclickSend(e)
+                  }
+                }}
+                disabled={!isConnected}
+              />
+              <button
+                className={chatStyle.sendButton}
+                onClick={handleOnclickSend}
+                disabled={!isConnected}
+                type="submit"
+              >
+                發送
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        router.push('/member-center')
+      )}
     </>
   )
 }
