@@ -13,7 +13,7 @@ import { useCart } from "@/context/cart-context";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
@@ -28,11 +28,11 @@ const ProductDetail = () => {
   const [selectedWeight, setSelectedWeight] = useState(null);
   const [likeId, setLikeId] = useState(false); // 新增狀態
   const { auth, getAuthHeader } = useAuth()
+  const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1);
   const [rentalStartDate, setRentalStartDate] = useState("");
   const [rentalEndDate, setRentalEndDate] = useState("");
   const MySwal = withReactContent(Swal);
-  const { addToCart } = useCart()
   const [isloading, setIsloading] = useState(true)
 
   useEffect(() => {
@@ -95,8 +95,10 @@ const ProductDetail = () => {
   };
 
   // 加入購物車
-  document.body.style.overflow = 'hidden'
   const handleAddToCart = () => {
+    if (typeof document !== 'undefined') {
+      document.body.style.overflow = 'hidden'
+    }
     // 如果商品有重量變體但未選擇重量，顯示警告
     if (product.variants && product.variants.length > 0 && !selectedWeight) {
       MySwal.fire({
@@ -104,7 +106,9 @@ const ProductDetail = () => {
         text: "請選擇商品的重量才能加入購物車。",
         icon: "warning",
         confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
+        cancelButtonColor: '#eee',
+        confirmButtonText: '已選擇',
+      cancelButtonText: '取消',
         didClose: () => {
           document.body.style.overflow = ''
         },
@@ -117,9 +121,8 @@ const ProductDetail = () => {
         title: "請選擇租借日期!",
         text: "請選擇租借的開始與結束日期。",
         icon: "warning",
-        showCancelButton: true,
         confirmButtonColor: '#f87808',
-        cancelButtonColor: '#0b3760',
+        confirmButtonText: '好的',
       });
       return;
     }
@@ -282,9 +285,9 @@ const ProductDetail = () => {
       <div className={styles.relatedTitle}>相關商品
       </div>
       <hr className={styles.divider} />
-      <RelatedProducts products={relatedProducts}/>
+      
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar
         newestOnTop
@@ -299,15 +302,17 @@ const ProductDetail = () => {
           maxWidth: '90%',
           width: '300px',
           marginBottom: '20px',
+          top: '80px'
         }}
         toastStyle={{
-          backgroundColor: '#f87808',
-          color: '#fff',
+          backgroundColor: '#fff',
+          color: '#e76317',
         }}
         progressStyle={{
           background: '#fff',
         }}
       />
+      <RelatedProducts products={relatedProducts}/>
     </main>
     </>
   );

@@ -30,7 +30,7 @@ export function CartProvider({ children }) {
     //   rentalStartDate: "",
     //   rentalEndDate: "",
     // },
-  ])
+  ]);
   const [paymentMethod, setPaymentMethod] = useState(""); // 付款方式
   const [pickupMethod, setPickupMethod] = useState(""); // 取貨方式
   const [cartQuantity, setCartQuantity] = useState(0);
@@ -40,7 +40,7 @@ export function CartProvider({ children }) {
 
    // 首次渲染時，從 LocalStorage 取出購物車資料
    useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const savedCart = JSON.parse(localStorage.getItem('gym_cart')) || [];
     const savedPaymentMethod = localStorage.getItem('paymentMethod') || "";
     const savedPickupMethod = localStorage.getItem('pickupMethod') || "";
 
@@ -53,7 +53,7 @@ export function CartProvider({ children }) {
   // 當購物車資料變更時，同步更新 LocalStorage
   useEffect(() => {
     if (didMount) {
-      localStorage.setItem('cart', JSON.stringify(cartItems))
+      localStorage.setItem('gym_cart', JSON.stringify(cartItems))
       updateCartQuantity()}
   }, [cartItems, didMount])
 
@@ -136,30 +136,36 @@ export function CartProvider({ children }) {
   //加入商品
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id)
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      let updatedCart;
+  
       if (existingItem) {
-        // 如果商品已經存在，增加數量
-        return prevItems.map((item) =>
+        updatedCart = prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
+        );
       } else {
-        // 如果商品不存在，加入購物車
-        return [...prevItems, { ...product, quantity: 1 }]
+        updatedCart = [...prevItems, { ...product, quantity: 1 }];
       }
-    })
+  
+      localStorage.setItem("gym_cart", JSON.stringify(updatedCart)); 
+      return updatedCart;
+
+    });
+  
     setPaymentMethod(""); 
     setPickupMethod("");
-    localStorage.removeItem('paymentMethod');
-    localStorage.removeItem('pickupMethod');
-  }
+    localStorage.removeItem("paymentMethod");
+    localStorage.removeItem("pickupMethod");
+  };
+  
 
   //移除商品
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => {
       const updatedCart = prevItems.filter((item) => item.id !== productId);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // 立即更新 LocalStorage
+      localStorage.setItem('gym_cart', JSON.stringify(updatedCart)); // 立即更新 LocalStorage
       if (updatedCart.length === 0) {
         setPaymentMethod(""); 
         setPickupMethod("");
@@ -193,4 +199,4 @@ export function CartProvider({ children }) {
 // 自訂 Hook，讓其他組件更方便使用
 export function useCart() {
   return useContext(CartContext)
-}
+}   

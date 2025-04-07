@@ -2,7 +2,7 @@
     background-color: #fff;
     /* flex-wrap: wrap; */
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     gap: 40px 50px;
     padding: 80px 20px;
     font-family:
@@ -15,17 +15,22 @@
   }
   
   .form {
-    color: #6c7275;
-    background-color: #f0eeee;
+    color: #fff;
+    background: linear-gradient(145deg, #f1eeec, #f3f3f3);
     border-radius: 3px;
     align-self: start;
     width: 643px;
     min-width: 375px;
-    padding: 16px 24px;
-    font-size: 12px;
+    padding: 20px 24px;
+    font-size: 14px;
     font-weight: 700;
-    box-shadow: 10px 10px 10px 10px #c6bfbf;
-  }
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.form:hover {
+    transform: scale(1.02);
+}
   @media (width<=991px) {
     .form {
       max-width: 100%;
@@ -34,7 +39,7 @@
     }
   }
   .div {
-    color: #153b5a;
+    color: #6c7275;
     font-family:
       Poppins,
       -apple-system,
@@ -53,6 +58,7 @@
     max-width: 100%;
     margin-top: 12px;
     line-height: 1;
+    color: #6c7275;
   }
   @media (width<=991px) {
     .name {
@@ -61,14 +67,13 @@
   }
   .input {
     border: none;
-    border-bottom: 1px solid #c2b9b9;
     background-color: #fff;
     width: 100%;
-    min-height: 35px;
+    min-height: 40px;
     margin-top: 12px;
     display: flex;
-    transition: transform 0.1s ease;
-  }
+    transition: all 0.2s ease;
+}
 
   .input:active {
     transform: scale(0.98);
@@ -83,13 +88,14 @@
   
   .input:focus {
     outline: none;
+    background-color: rgba(255, 255, 255, 0.9);
   }
   @media (width<=991px) {
     .input {
       max-width: 100%;
     }
   }
-  .address {
+  /* .address {
     white-space: nowrap;
     text-transform: uppercase;
     width: 595px;
@@ -101,7 +107,7 @@
     .address {
       white-space: initial;
     }
-  }
+  } */
   .input2 {
     /* background-color: #fff; */
     /* border: 1px solid #c6bfbf; */
@@ -124,6 +130,7 @@
     max-width: 100%;
     margin-top: 12px;
     line-height: 1;
+    color: #6c7275;
   }
   @media (width<=991px) {
     .phone {
@@ -137,6 +144,7 @@
     max-width: 100%;
     margin-top: 12px;
     line-height: 1;
+    color: #6c7275;
   }
   @media (width<=991px) {
     .email {
@@ -176,14 +184,13 @@
 
 
   .orderSummary {
-    white-space: nowrap;
-    background-color: #f0eeee;
+    background: linear-gradient(145deg, #f1eeec, #f3f3f3);
     border-radius: 3px;
     width: 643px;
     min-width: 375px;
-    padding: 16px 24px;
-    box-shadow: 0 4px 10px #c6bfbf;
-  }
+    padding: 20px 24px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
   @media (width<=991px) {
     .orderSummary {
       max-width: 100%;
@@ -193,7 +200,7 @@
     }
   }
   .div3 {
-    color: #153b5a;
+    color: #6c7275;
     letter-spacing: -0.6px;
     font-size: 22px;
     font-weight: 500;
@@ -260,7 +267,7 @@
     flex: 1;
     justify-content: start;
     align-items: stretch;
-    gap: 40px 45px;
+    gap: 40px 25px;
     min-width: 240px;
     height: 100%;
     display: flex;
@@ -284,34 +291,38 @@
     font-feature-settings:
       "liga" off,
       "clig" off;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
-    line-height: 2;
+    line-height: 1;
+    color: #6c7275;
+    margin: 10px;
   }
   .kg {
     font-feature-settings:
       "liga" off,
       "clig" off;
-    /* margin-top: 5px; */
-    font-size: 12px;
+    margin: 10px;
+    font-size: 15px;
     font-weight: 600;
-    line-height: 2;
+    line-height: 3;
+    color: #6c7275;
   }
   .x1 {
-    color: #0b3760;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 2;
+    color: #6c7275;
+    font-size: 18px;
+    font-weight: 600;
+    /* line-height: 1; */
+    margin: 10px;
   }
   .dayprice {
-    color: #153b5a;
+    color: #6c7275;
     flex: 1;
     justify-content: start;
     align-items: center;
-    gap: 40px 50px;
+    gap: 40px 55px;
     min-width: 240px;
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 2;
     display: flex;
@@ -325,7 +336,8 @@
     align-self: stretch;
     margin-top: auto;
     margin-bottom: auto;
-    line-height: 25px;
+    line-height: 40px;
+    /* text-align:; */
   }
   .css500 {
     text-align: center;
@@ -358,9 +370,10 @@
     font-size: 14px;
     font-weight: 600;
     line-height: 2;
+    
   }
   .pickupstore {
-    color: #153b5a;
+    color: #6c7275;
     flex-direction: column;
     justify-content: center;
     align-items: end;
@@ -394,13 +407,14 @@
     }
   }
   .gym {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-align: right;
     align-self: stretch;
     width: 82px;
     margin-top: auto;
     margin-bottom: auto;
+    color: #6c7275;
   }
   .div6 {
     text-align: center;
@@ -408,6 +422,7 @@
     width: 80px;
     margin-top: auto;
     margin-bottom: auto;
+    color: #6c7275
   }
   .info3 {
     text-align: right;
@@ -421,7 +436,7 @@
     }
   }
   .fields {
-    color: #153b5a;
+    color: #6c7275;
     width: 100%;
     min-height: 162px;
     margin-top: 12px;
@@ -449,8 +464,8 @@
     align-items: stretch;
     width: 100%;
     min-height: 54px;
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-family:
       Inter,
       -apple-system,
@@ -481,6 +496,7 @@
     align-items: center;
     gap: 40px 100px;
     display: flex;
+    color: #6c7275
   }
   @media (width<=991px) {
     .titleAmount {
@@ -494,23 +510,25 @@
     align-self: stretch;
     margin-top: auto;
     margin-bottom: auto;
+    
   }
   .css4000 {
     text-align: center;
     align-self: stretch;
     margin-top: auto;
     margin-bottom: auto;
+    
   }
   .orderSummaryInfo2 {
-    border-color: #cdd5db;
+    border-color: #6c8191;
     border-bottom-width: 1px;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
     width: 100%;
     min-height: 54px;
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     display: flex;
   }
   @media (width<=991px) {
@@ -550,8 +568,8 @@
     align-items: stretch;
     width: 100%;
     min-height: 54px;
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 20px;
     line-height: 1.4;
     display: flex;
@@ -577,6 +595,7 @@
     justify-content: space-between;
     align-items: center;
     display: flex;
+    color: #6c7275
   }
   @media (width<=991px) {
     .titleAmount2 {
@@ -614,7 +633,7 @@
   }
   
   .formHeader {
-    color: #153b5a;
+    color: #6c7275;
     height: 35px;
     margin: 12px 0px 5px;
     font-size: 22px;

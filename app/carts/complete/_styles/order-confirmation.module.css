@@ -19,33 +19,32 @@
     max-width: 720px;
   }
   
-  .confirmationImage {
+  /* .confirmationImage {
     width: 250px;
     height: 250px;
     margin: 5px; 
-  }
+  } */
   
   .confirmationTitle {
-    color: #928a8a;
+    color: #5d5a5a;
     text-align: center;
-    margin-bottom: 50px;
+    margin: 30px;
     font-family: Inter;
-    font-size: 36px;
+    font-size: 30px;
   }
   
   .orderDetailsContainer {
-    gap: 30px;
-    /* width: 100%; */
+    gap: 10px;
+    width: 100%;
     max-width: 369px;
     display: flex;
     flex-direction: column;
-    
   }
   
   .orderDetailItem {
     color: #000;
     font-family: Inter;
-    font-size: 24px;
+    font-size: 20px;
   }
   
   @media (width<=640px) {
@@ -68,10 +67,12 @@
     display: flex;
     justify-content: center; /* 水平置中 */
     gap: 90px; /* 設定按鈕間距 */
-    margin: 40px; /* 與表格的間距 */
+    margin-top: 20px;
+    padding: 30px;
 }
 
-.pseudo {
+.pseudo,
+.pseudo2 {
     position: relative;
     display: inline-block;
     padding: 0.5em 1.5em;
@@ -79,15 +80,97 @@
     color: white;
     font-size: 20px;
     background-color: #eb854a;
+    border: 1px solid #ef8e49;
     text-decoration: none;
-    border: none;
     border-radius: 3px;
     cursor: pointer;
-    transform: skew(-35deg); /* 讓按鈕變成平行四邊形 */
     overflow: hidden;
+
+    /* 星星 hover 動畫初始值 */
+    box-shadow: 0 0 0 #fec1958c;
+    transition: all 0.3s ease-in-out;
 }
 
+/* 各自的 skew */
+.pseudo {
+    transform: skew(35deg);
+}
+.pseudo2 {
+    transform: skew(-35deg);
+}
 .pseudo span {
     display: inline-block;
-    transform: skew(35deg); /* 讓文字回正 */
+    transform: skew(-35deg);
+}
+.pseudo2 span {
+    display: inline-block;
+    transform: skew(35deg);
+}
+
+/* Hover 效果 */
+.pseudo:hover,
+.pseudo2:hover {
+    background: transparent;
+    color: #fec195;
+    box-shadow: 0 0 25px #fec1958c;
+}
+
+/* 星星動畫設定 */
+.star-1, .star-2, .star-3, .star-4, .star-5, .star-6 {
+    position: absolute;
+    width: auto;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.star-1 { top: 20%; left: 20%; width: 25px; }
+.star-2 { top: 45%; left: 45%; width: 15px; transition: all 1s cubic-bezier(0, 0.4, 0, 1.01); }
+.star-3 { top: 40%; left: 40%; width: 5px; transition: all 1s cubic-bezier(0, 0.4, 0, 1.01); }
+.star-4 { top: 20%; left: 40%; width: 8px; transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01); }
+.star-5 { top: 25%; left: 45%; width: 15px; transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01); }
+.star-6 { top: 5%; left: 50%; width: 5px; transition: all 0.8s ease; }
+
+.pseudo:hover .star-1,
+.pseudo2:hover .star-1 {
+    top: -80%; left: -30%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+.pseudo:hover .star-2,
+.pseudo2:hover .star-2 {
+    top: -25%; left: 10%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+.pseudo:hover .star-3,
+.pseudo2:hover .star-3 {
+    top: 55%; left: 25%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+.pseudo:hover .star-4,
+.pseudo2:hover .star-4 {
+    top: 30%; left: 80%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+.pseudo:hover .star-5,
+.pseudo2:hover .star-5 {
+    top: 25%; left: 115%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+.pseudo:hover .star-6,
+.pseudo2:hover .star-6 {
+    top: 5%; left: 60%; filter: drop-shadow(0 0 10px #fffdef); z-index: 2;
+}
+
+.fil0 {
+    fill: #fffdef;
+}
+
+/* 響應式設定 */
+@media (max-width: 376px) {
+  .container {
+    gap: 30px;
+    margin: 10px;
+  }
+
+  .pseudo,
+  .pseudo2 {
+    font-size: 16px;
+    padding: 0.4em 1.2em;
+  }
 }
