@@ -33,6 +33,10 @@ const fetchClasses = async () => {
             setClasses(data.rows)
             
           }
+          if(data.rows.length === 0) {
+            setClasses([])
+            
+          }
           console.log(data.rows);
           
           setLoading(false)

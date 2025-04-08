@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/auth-context"; // 確認路徑是否正確
 import { PRODUCTS_LIST_TOGGLE_LIKE } from "@/config/api-path";

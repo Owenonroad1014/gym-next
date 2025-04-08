@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import VideoCard from './video-card';
 import styles from './_styles/video-Grid.module.css'

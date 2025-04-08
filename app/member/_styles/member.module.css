@@ -279,9 +279,9 @@
 }
 .forgetPassContainer .content {
   flex-direction: column;
-  padding:70px 0px;
+  padding: 70px 0px;
 }
-.forgetPassContainer .form{
+.forgetPassContainer .form {
   margin: 0;
 }
 .forgetPassContainer .titleGroup {
@@ -293,60 +293,63 @@
 /* #endregion ================= Forget Password Form ====================== */
 
 /* #region ================= RWD ====================== */
-@media (max-width: 1440px) {
-  .banner {
-    background-image: url('/imgs/article/banner/articlebanner1440.jpg');
-  }
-}
-@media (max-width: 1390px) {
-  .articleList {
-    gap: 4vw;
-  }
-}
-
 @media (max-width: 1140px) {
-  .selectBtn {
-    display: block;
+  .registerContainer {
+    width: 100vw;
+    height: 100vh;
   }
-  .selectArea {
-    display: none;
-    position: absolute;
-    z-index: 20;
-    background-color: #ebeff1;
-    width: 90%;
+  .registerContainer .content {
+    flex-direction: column-reverse;
   }
-  .articleRight {
-    width: 100%;
+  .loginContainer {
+    width: 100vw;
+    height: 100vh;
   }
-  .categoryTitle {
-    background-color: #dee5e7;
-  }
-  .selectPart li {
-    font-size: 20px;
-  }
-}
-@media (max-width: 768px) {
-  .breadcrumbItem a {
-    font-size: 12px;
-  }
-  .selectArea {
+  .content {
     flex-direction: column;
-    align-items: center;
   }
-  .selectPart {
+  .titleGroup {
+    width: 90%;
+    margin-top: 50px;
+  }
+  .right {
+    width: 80%;
+    margin: 20px;
+  }
+  .form {
     width: 100%;
-    border-right: none;
-    text-align: left;
+  }
+  .formGroup {
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 500px) {
-  .articleList {
-    justify-content: center;
+  .content {
+    padding: 10px 25px;
+  }
+  .registerContainer .titleGroup {
+    width: 100%;
+    font-size: 13px;
+    padding-left: 0px;
+  }
+  .registerContainer .right {
+    width: 100%;
+  }
+  .registerContainer .formGroup {
+    margin-bottom: 0;
+  }
+  .loginContainer .right {
+    width: 90%;
   }
 }
 @media (max-width: 420) {
-  .banner {
-    background-image: url('/imgs/article/banner/articlebanner420.jpg');
+  .titleGroup {
+    width: 100%;
+    font-size: 13px;
+  }
+  .right {
+    width: 100%;
+    margin: 20px;
   }
 }
 /* #endregion ================= RWD END ====================== */

@@ -13,7 +13,7 @@
   background: #eb854a;
   font-size: 17px;
   font-weight: 500;
-
+  
   border: 1px solid #ef8e49;
   border-radius: 3px;
   box-shadow: 0 0 0 #fec1958c;
@@ -27,7 +27,8 @@
 .pseudo2 span {
   display: inline-block;
   font-family: helvetica;
-  color: rgb(240, 171, 98);
+  /* color: rgb(240, 171, 98); */
+  color: #fff;
   font-size: 20px;
   transform: skew(-35deg); /* 讓文字回正 */
 }
@@ -57,10 +58,12 @@
 
 button:hover {
   background: transparent;
-  color: #fec195;
+  
   box-shadow: 0 0 25px #fec1958c;
 }
-
+button:hover span{
+  color: #fec195;
+}
 button:hover .star-1 {
   top: -80%;
   left: -30%;
