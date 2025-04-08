@@ -108,3 +108,13 @@
 .trash:active {
   background-color: #db6318;
 }
+@media (max-width: 420) {
+  .leftsection{
+    min-width: 30px;
+  }
+  .friendsPage button {
+    margin: 3px;
+    font-size: 10px;
+  }
+  
+}
