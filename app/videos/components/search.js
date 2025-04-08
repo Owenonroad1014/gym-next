@@ -1,3 +1,4 @@
+"use client"
 import React, { useRef, useState } from 'react';
 import styles from './_styles/search.module.css';
 import { useRouter } from "next/navigation";
