@@ -19,7 +19,7 @@ export default function CenterList() {
   const router = useRouter()
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1140) {
+      if (window.innerWidth < 769) {
         setMenuShow(false)
       } else {
         setMenuShow(true)
@@ -51,28 +51,31 @@ export default function CenterList() {
   
 
       <div className={styles.centerSidebar}>
+      <div className={selectStyle.home}>
+          <Link href="/" className={selectStyle.welcome}>
+            <img
+              src="/gymdot.svg"
+              alt="gym-icon"
+              className={selectStyle.welcomeicon}
+            />
+            <div className={selectStyle.welcomeText}>
+              <span>WELCOME !</span>
+              <span>{auth.id ? auth.name : '請先登入'}</span>
+            </div>
+          </Link>
+          <button
+            onClick={() => setMenuShow(!menuShow)}
+            className={selectStyle.selectBtn}
+          >
+            {menuShow ? <MdMenuOpen /> : <MdMenu />}
+          </button>
+        </div>
         <section
           className={selectStyle.selectArea}
           style={{
             display: menuShow ? 'block' : 'none',
           }}
         >
-          {auth ? (
-            <>
-              <Link href="/" className={selectStyle.welcome}>
-                <img
-                  src="/gymdot.svg"
-                  alt="gym-icon"
-                  className={selectStyle.welcomeicon}
-                />
-                WELCOME !{auth.name}
-              </Link>
-            </>
-
-          ) : (
-            ''
-          )}
-          <hr />
           <ul className={selectStyle.selectPart}>
             <li
               className={
