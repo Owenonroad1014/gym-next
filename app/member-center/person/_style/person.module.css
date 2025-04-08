@@ -209,13 +209,13 @@
 .intro:focus {
   outline: none;
   background: #fbe8d7;
-  box-shadow: inset 1px 2px 8px #f87808d1;
+  box-shadow: inset 1px 2px 8px #f4b075d1;
   transition: all 0.3s ease-in-out;
 }
 .textDanger {
   margin-left: 15px;
   display: flex;
   justify-content: flex-start;
-  color: red;
+  color: #f87808;
   font-size: 12px;
 }
