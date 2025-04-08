@@ -490,7 +490,8 @@ export default function ChatRoomPage() {
                 {showEmojiPicker && (
                   <EmojiPicker
                     onEmojiClick={handleEmojiClick}
-                    style={{ position: 'absolute', bottom: '50px' }}
+                    style={{ position: 'absolute', bottom: '50px'}}
+                    
                   />
                 )}
               </div>

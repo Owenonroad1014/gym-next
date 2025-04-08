@@ -121,7 +121,13 @@
 }
 @media (max-width: 420) {
   .tempbody {
-    min-width: 280px;
+    min-width: 200px;
   }
-  
+  .textInput {
+    width: 60px;
+    margin: 5px;
+  }
+  .emojiArea aside{
+    width: 250px !important;
+  }
 }

@@ -19,5 +19,10 @@
   width: 93%;
   min-height: 600px;
   height: 100%;
-  /* border: 2px solid #333333b4; */
+}
+@media (max-width: 420){
+  .messageArea {
+    width: 80%;
+    overflow: hidden;
+  }
 }
