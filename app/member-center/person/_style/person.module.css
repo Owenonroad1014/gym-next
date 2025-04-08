@@ -10,14 +10,16 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 .form form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.form h1 {
-  margin-bottom: 15px 0px;
+.personContainer h2 {
+  margin-bottom: 20px;
 }
 .personContainer table {
   width: 100%;
@@ -60,17 +62,19 @@
   margin-right: 20px;
 }
 .formGroup input {
-  width: 95%;
+  width: 100%;
   padding: 10px;
   margin: 0px auto;
   font-size: 16px;
   background: transparent;
-  border: 1px solid #0b3760;
+  border: 1px solid #f8780846;
   border-radius: 3px;
 }
 .formGroup input:focus {
   outline: none;
-  border: 1px solid #f87808;
+  background: #fbe8d7;
+  box-shadow: inset 1px 2px 8px #f87808d1;
+  transition: all 0.3s ease-in-out;
 }
 
 .formGroup textarea {
@@ -103,7 +107,6 @@
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  margin-left: 1.125rem;
 }
 .current input {
   display: none;
@@ -113,15 +116,23 @@
   align-items: center;
   justify-content: center;
   padding: 5px 15px;
-  border: 1px solid #0b3760;
+  border: 1px solid #f8780846;
   border-radius: 3px;
   margin-right: 10px;
   margin-bottom: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.current label:hover {
+  box-shadow: 1px 2px 8px #f87808;
+  background: #f87808;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
 }
 .current input:checked + label {
   background-color: #f87808;
   color: #fff;
   border: 1px solid #f87808;
+  transition: all 0.3s ease-in-out;
 }
 
 /* public switch */
@@ -151,10 +162,10 @@
   height: 16px;
   background: #fff;
   border-radius: 50%;
-  transition: transform 0.3s, left 0.3s; /* 確保兩個屬性都能順利過渡 */
+  transition: transform 0.5s, left 0.5s; /* 確保兩個屬性都能順利過渡 */
 }
 .status input:not(:checked) + label {
-  background: #0b3760;
+  background: #2f2f2f;
 }
 .status input:not(:checked) + label .switchBtn {
   left: 2px;
@@ -164,10 +175,11 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 20px;  
+  padding: 20px;
 }
 .btn {
-  padding: 8px 18px;
+  width: 50%;
+  padding: 5px 18px;
   margin-top: 20px;
   border-radius: 3px;
   background: #f87808;
@@ -175,22 +187,30 @@
   color: #fff;
   font-size: 18px;
 }
-/* 同loginBtn樣式 */
+.btn:hover {
+  box-shadow: 0px 0px 8px #f87808;
+  background: #f87808;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
 
 .intro {
-  width: 95%;
+  width: 100%;
   height: 150px;
   font-size: 14px;
   resize: none;
   padding: 10px;
   margin: 0px auto;
   background: transparent;
-  border: 1px solid #0b3760;
+  border: 1px solid #f8780846;
   border-radius: 3px;
 }
 .intro:focus {
   outline: none;
-  border: 1px solid #f87808;
+  background: #fbe8d7;
+  box-shadow: inset 1px 2px 8px #f87808d1;
+  transition: all 0.3s ease-in-out;
 }
 .textDanger {
   margin-left: 15px;
