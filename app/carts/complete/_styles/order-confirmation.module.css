@@ -1,6 +1,5 @@
 .pageContainer {
     width: 100%;
-    max-width: 1440px;
     min-height: screen;
     background-color: #fff;
     display: flex;
