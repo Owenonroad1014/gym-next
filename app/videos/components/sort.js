@@ -3,7 +3,7 @@ import styles from './_styles/sort.module.css';
 import { MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useSearchParams } from 'next/navigation';
 
-const Sort = ({ items = ['熱門影片','徒手訓練', '居家有氧', '器械訓練'] , router}) => {
+const Sort = ({ items = ['徒手訓練', '居家有氧', '器械訓練'] , router}) => {
   const searchParams = useSearchParams();
   const [menuShow, setMenuShow] = useState(true);
   const [activeIndex, setActiveIndex] = useState(null);

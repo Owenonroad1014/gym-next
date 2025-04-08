@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useAnimation, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
-import "./_styles/ImageLinkGallery.css"; 
-
-
+import "./_styles/ImageLinkGallery.css";
 
 const ImageLinkGallery = ({ autoplay = true, pauseOnHover = false }) => {
   const router = useRouter();
+  const [isHovered, setIsHovered] = useState(false);
   const images = [
     { url: "/img/Barbell.jpg", title: "槓鈴", link: "/products/2" },
     { url: "/img/yoga-wheel.jpg", title: "瑜珈輪", link: "/products/13" },
@@ -25,21 +24,18 @@ const ImageLinkGallery = ({ autoplay = true, pauseOnHover = false }) => {
     { url: "/img/fitness-weight.jpg", title: "槓片", link: "/products/9" },
     { url: "/img/flat-bench.jpg", title: "平板健身椅", link: "/products/8" },
     { url: "/img/yoga-ball.jpg", title: "瑜珈球", link: "/products/15" },
-
   ];
+
   const [isScreenSizeSm, setIsScreenSizeSm] = useState(false);
-
   const isMountedRef = useRef(false);
-
-useEffect(() => {
-  isMountedRef.current = true;
-
-  return () => {
-    isMountedRef.current = false;
-  };
-}, []);
-
   const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
@@ -47,19 +43,18 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-    if (!autoplay || !isMounted) return;
+    if (!autoplay || !isMounted || isHovered) return;
 
     let animationFrame;
     let lastTime = performance.now();
 
     const animate = (time) => {
-      if (!isMounted) return;
+      if (!isMounted || isHovered) return;
       const delta = time - lastTime;
       lastTime = time;
-      const step = 0.01;
+      const step = 0.006;
 
       rotation.set(rotation.get() - delta * step);
-
       animationFrame = requestAnimationFrame(animate);
     };
 
@@ -68,9 +63,7 @@ useEffect(() => {
     return () => {
       if (animationFrame) cancelAnimationFrame(animationFrame);
     };
-  }, [autoplay, isMounted]);
-  
-  
+  }, [autoplay, isMounted, isHovered]);
 
   useEffect(() => {
     setIsScreenSizeSm(window.innerWidth <= 640);
@@ -106,96 +99,71 @@ useEffect(() => {
     if (link) router.push(link);
   };
 
-
-  const handleMouseEnter = () => {
-    if (autoplay && pauseOnHover) {
-      clearInterval(autoplayRef.current);
-      controls.stop();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (autoplay && pauseOnHover) {
-      const step = 360 / faceCount;
-      controls.start({ rotateY: rotation.get() - step, transition: { duration: 2, ease: "linear" } });
-      rotation.set(rotation.get() - step);
-      autoplayRef.current = setInterval(() => {
-        controls.start({ rotateY: rotation.get() - step, transition: { duration: 2, ease: "linear" } });
-        rotation.set(rotation.get() - step);
-      }, 2000);
-    }
-  };
-
   if (!images || images.length === 0) return null;
 
   return (
     <>
-
-    <motion.h2 className="title"
-                initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8, delay: 0.2 }}>精選商品</motion.h2>
-    <div className="gallery-container">
-      <div className="gallery-gradient gallery-gradient-left" />
-      <div className="gallery-gradient gallery-gradient-right" />
-      <div className="gallery-content">
-        <motion.div
-          drag="x"
-          className="gallery-track"
-          style={{
-            transform,
-            rotateY: rotation,
-            width: cylinderWidth,
-            transformStyle: "preserve-3d",
-          }}
-          animate={controls}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {images.map(({ url, title, link }, i) => (
-            <div
-              key={i}
-              className="gallery-item"
-              style={{
-                width: `${faceWidth}px`,
-                transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
-                cursor: link ? "pointer" : "default",
-              }}
-              role={link ? "button" : undefined}
-              tabIndex={link ? 0 : undefined}
-              onClick={() => handleClick(link)}
-              onKeyDown={(e) => {
-                if (link && (e.key === "Enter" || e.key === " ")) {
-                  handleClick(link);
-                }
-              }}
-              aria-label={link ? `View ${title}` : undefined}
-            >
-            <div className="item">
-
-              <img src={url} alt={title || "gallery"} className="gallery-img" />
-              {title && <div className="gallery-title">{title}</div>}
-            </div>
-            </div>
-          ))}
-        </motion.div>
+      <motion.h2 
+        className="title"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        精選商品
+      </motion.h2>
+      <div className="gallery-container">
+        <div className="gallery-gradient gallery-gradient-left" />
+        <div className="gallery-gradient gallery-gradient-right" />
+        <div className="gallery-content">
+          <motion.div
+            drag="x"
+            className="gallery-track"
+            style={{
+              transform,
+              rotateY: rotation,
+              width: cylinderWidth,
+              transformStyle: "preserve-3d",
+            }}
+            animate={controls}
+            onDrag={handleDrag}
+            onDragEnd={handleDragEnd}
+          >
+            {images.map(({ url, title, link }, i) => (
+              <div
+                key={i}
+                className="gallery-item"
+                style={{
+                  width: `${faceWidth}px`,
+                  transform: `rotateY(${i * (360 / faceCount)}deg) translateZ(${radius}px)`,
+                  cursor: link ? "pointer" : "default",
+                }}
+                role={link ? "button" : undefined}
+                tabIndex={link ? 0 : undefined}
+                onClick={() => handleClick(link)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onKeyDown={(e) => {
+                  if (link && (e.key === "Enter" || e.key === " ")) {
+                    handleClick(link);
+                  }
+                }}
+                aria-label={link ? `View ${title}` : undefined}
+              >
+                <div className="item">
+                  <img src={url} alt={title || "gallery"} className="gallery-img" />
+                  {title && <div className="gallery-title">{title}</div>}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
-    </div>
     </>
   );
 };
 
 ImageLinkGallery.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      title: PropTypes.string,
-      link: PropTypes.string,
-    })
-  ).isRequired,
   autoplay: PropTypes.bool,
   pauseOnHover: PropTypes.bool,
 };

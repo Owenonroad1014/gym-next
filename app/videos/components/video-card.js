@@ -63,7 +63,7 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
           aria-label="影片播放器"
         >
         <iframe 
-            width="100%" 
+            width="80%" 
             height="510" 
             style={{ border: 'none', borderRadius: '5px' }}
             src={url} 
