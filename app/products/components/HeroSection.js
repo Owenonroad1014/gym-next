@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import styles from "./_styles/HeroSection.module.css";
 import BlurText from "@/app/_components/blur-text";

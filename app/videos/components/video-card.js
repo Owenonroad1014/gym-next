@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import styles from "./_styles/video-Card.module.css";
 import FavoriteButton from "./favorite-button";

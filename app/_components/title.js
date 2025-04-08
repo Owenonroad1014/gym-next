@@ -1,4 +1,4 @@
-
+"use client"
 import './_styles/ShinyText.css';
 import PropTypes from 'prop-types';
 

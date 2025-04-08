@@ -65,7 +65,9 @@
     will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden; 
-    /* border: #333 2px solid; */
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transform: translate3d(0,0,0);
 }
   
   

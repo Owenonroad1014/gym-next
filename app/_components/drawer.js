@@ -4,6 +4,11 @@ import { useRouter } from 'next/navigation'
 import styles from './_styles/drawer.module.css'
 import Link from 'next/link'
 import { FaHome } from 'react-icons/fa'
+import { GiMuscleUp } from "react-icons/gi";
+import { FaBook } from "react-icons/fa";
+import { MdPlace } from "react-icons/md";
+import { BiSolidVideos } from "react-icons/bi";
+import SpotlightCard from "./SpotlightCard";
 
 export default function Drawer() {
   const [isOpen, setIsOpen] = useState(false)
@@ -55,40 +60,90 @@ export default function Drawer() {
       </button>
 
       <div ref={drawerRef} className={`${styles.drawer} ${isOpen ? styles.open : ''}`}>
-        <div className={styles.drawerInner}>
+        <SpotlightCard className={styles.drawerInner}>
           <div className={styles.drawerContent}>
             <nav>
               <ul className={styles.navList}>
-                <li>
-                  <Link href="/" className={styles.navLink} onClick={handleLinkClick}>
-                  <FaHome style={{ cursor: 'pointer' }} />
-                  </Link>
+                <li 
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                    <FaHome />
+                  </div>
                 </li>
-                <li>
-                  <Link href="/coaches/list" className={styles.navLink} onClick={handleLinkClick}>
-                    找GYM身教練
-                  </Link>
+                <li 
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/coaches/list'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/coaches/list');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                    <GiMuscleUp/>  找GYM身教練
+                  </div>
                 </li>
-                <li>
-                  <Link href="/articles" className={styles.navLink} onClick={handleLinkClick}>
-                    GYM享知識
-                  </Link>
+                <li 
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/articles'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/articles');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                    <FaBook/> GYM享知識
+                  </div>
                 </li>
-                <li>
-                  <Link href="/locations" className={styles.navLink} onClick={handleLinkClick}>
-                    找GYM點
-                  </Link>
+                <li 
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/locations'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/locations');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                    <MdPlace/> 找GYM點
+                  </div>
                 </li>
-                <li>
-                <Link href="/videos" className={styles.navLink} onClick={handleLinkClick}>
-                    影片教學
-                  </Link>
+                <li 
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/videos'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/videos');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                    <BiSolidVideos/> 影片教學
+                  </div>
                 </li>
               </ul>
             </nav>
 
           </div>
-        </div>
+        </SpotlightCard>
       </div>
 
       {isOpen && (
