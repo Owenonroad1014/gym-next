@@ -33,7 +33,9 @@ export default function CenterList() {
   }, [])
 
   useEffect(() => {
-    setMenuShow(false) // 每次路由變化時關閉選單
+    if (window.innerWidth < 769) {
+      setMenuShow(false) // 每次路由變化時關閉選單
+    }
   }, [pathname])
 
   useEffect(() => {
