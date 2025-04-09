@@ -1,5 +1,5 @@
-// components/FeaturesSection.js
 "use client"
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaDumbbell, FaBook, FaVideo, FaUsers } from 'react-icons/fa';
