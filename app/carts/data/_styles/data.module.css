@@ -50,6 +50,11 @@
     font-weight: 500;
     line-height: 1;
     padding-bottom: 10px;
+    color: #6c7275;
+    font-weight: 700;
+    text-shadow:
+    1px 1px 0 #fff,   
+    2px 2px 0 #aaa;  
   }
   .name {
     white-space: nowrap;
@@ -66,13 +71,15 @@
     }
   }
   .input {
-    border: none;
+    border: 3px solid #f1eeec;
+    border-radius: 3px;
     background-color: #fff;
     width: 100%;
     min-height: 40px;
     margin-top: 12px;
     display: flex;
     transition: all 0.2s ease;
+    
 }
 
   .input:active {
@@ -95,22 +102,8 @@
       max-width: 100%;
     }
   }
-  /* .address {
-    white-space: nowrap;
-    text-transform: uppercase;
-    width: 595px;
-    max-width: 100%;
-    margin-top: 12px;
-    line-height: 1;
-  }
-  @media (width<=991px) {
-    .address {
-      white-space: initial;
-    }
-  } */
+  
   .input2 {
-    /* background-color: #fff; */
-    /* border: 1px solid #c6bfbf; */
     border: none;
     border-radius: 3px;
     width: 100%;
@@ -188,7 +181,7 @@
     border-radius: 3px;
     width: 643px;
     min-width: 375px;
-    padding: 20px 24px;
+    padding:20px 24px 0px 24px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
   @media (width<=991px) {
@@ -204,8 +197,13 @@
     letter-spacing: -0.6px;
     font-size: 22px;
     font-weight: 500;
-    line-height: 1;
+    /* line-height: 1; */
     padding-bottom: 10px;
+    color: #6c7275;
+  font-weight: 700;
+  text-shadow:
+    1px 1px 0 #fff,   /* 上層亮邊 */
+    2px 2px 0 #aaa;
   }
   @media (width<=991px) {
     .div3 {
@@ -319,7 +317,7 @@
     flex: 1;
     justify-content: start;
     align-items: center;
-    gap: 40px 55px;
+    gap: 40px 50px;
     min-width: 240px;
     height: 100%;
     font-size: 16px;

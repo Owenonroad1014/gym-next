@@ -34,6 +34,8 @@ export default function Recommend({ articleid = 0 }) {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          variableWidth: true ,//可變寬度
+          adaptiveHeight: true // 適應高度
         },
       },
     ],
@@ -61,7 +63,7 @@ export default function Recommend({ articleid = 0 }) {
         {recommand.length === 0 ? (
           <p>目前沒有更多推薦文章。</p>
         ) : (
-          <Slider {...settings}>
+          <Slider {...settings} >
             {recommand.map((article, i) => {
               return (
                 <div className={articleStyle.sliderItem} key={article.id}>

@@ -58,7 +58,7 @@ export default function ChatListPage(props) {
                 if (
                   (auth.id == v.user1_id && v.user1_delete == 1) ||
                   (auth.id == v.user2_id && v.user2_delete == 1)
-                ) {
+                ) { 
                   return null
                 }
                 return (

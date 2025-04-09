@@ -30,9 +30,18 @@ const Toast = Swal.mixin({
   },
 })
 const filterReservations = reservationsData.filter(reservation => {
+  // 基本日期篩選：只顯示當天及未來的預約
+  const reservationDate = new Date(reservation.class_date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  if (reservationDate < today) return false;
+  
+  // 狀態篩選
   if (filter === 'all') return true;
   return reservation.status === 'confirmed';
-})
+});
+
 
   useEffect(() => {
     const fetchReservations = async () => {

@@ -15,7 +15,7 @@ export default function Header() {
   const { auth, logout } = useAuth()
   const { cartQuantity } = useCart()
   const [mounted, setMounted] = useState(false)
-
+  const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname() // 使用 Next.js 的 usePathname 來取得當前路徑
   useEffect(() => {
     setMounted(true)
@@ -38,7 +38,7 @@ export default function Header() {
     }
   }, [])
   // 判斷是否要隱藏 Header
-  if (pathname.startsWith('/member' || '/member/register')) {
+  if (pathname.startsWith('/member')) {
     return null // `/member` 底下的頁面不顯示 Header
   }
   // const hideHeaderPages = [
@@ -58,7 +58,7 @@ export default function Header() {
     if (/^\/products\/\d+/.test(pathname)) {
       return headerstyles.secondHeader
     }
-    if(pathname.startsWith('/carts')){
+    if (pathname.startsWith('/carts')) {
       return headerstyles.secondHeader
     }
     if (pathname === '/') {
@@ -96,26 +96,73 @@ export default function Header() {
 
         {/* 右側圖示與搜尋欄 */}
 
-
         <div className={headerstyles.rightSection}>
-        {' '}
-        <Link href="/products" className={headerstyles.navLink}>
-                    租借器具
-                  </Link>
-                  <Link href="/friends" className={headerstyles.navLink} >
-                    找GYM友
-                  </Link>
-                  <Link href="/classes" className={headerstyles.navLink}>
-                    課程預約
-                  </Link>
-
+          {' '}
+          <Link href="/products" className={headerstyles.navLink}>
+            租借器具
+          </Link>
+          <Link href="/friends" className={headerstyles.navLink}>
+            找GYM友
+          </Link>
+          <Link href="/classes" className={headerstyles.navLink}>
+            課程預約
+          </Link>
           <Drawer />
           {auth.id ? (
             <>
-              <Link href="/member-center" className={headerstyles.navLink}>
-                <div className={headerstyles.navAvatar}>
-                <div className={headerstyles.navAvatar}>{auth.name}</div>
-                </div>
+              <Link
+                href="/member-center"
+                className={`${headerstyles.navLink} ${headerstyles.navDropdown}`}
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+              >
+                {auth.name}
+                {isOpen && (
+                  <ul>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>前往會員中心</li>
+                    </Link>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center/myfriends"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>我的好友</li>
+                    </Link>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center/reservation"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>我的預約</li>
+                    </Link>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center/articles"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>我的收藏</li>
+                    </Link>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center/carts"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>我的訂單</li>
+                    </Link>
+                    <Link
+                      rel="stylesheet"
+                      href="/member-center/person"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <li>帳號管理</li>
+                    </Link>
+                  </ul>
+                )}
               </Link>
               <a
                 href="/qs"
@@ -148,7 +195,6 @@ export default function Header() {
               )}
             </div>
           </Link>
-
         </div>
       </div>
     </>

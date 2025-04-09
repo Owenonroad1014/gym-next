@@ -2,8 +2,8 @@
   position: fixed;
   width: 100%;
   height: auto;
-  padding: 13px 64px;
   text-align: center;
+  padding: 0px 64px;
   color: #f5fff6;
   font-size: 27px;
   font-weight: 700;
@@ -23,21 +23,15 @@
   padding: 8px 60px;
 }
 
-
 /* 預設頁面樣式 */
 .defaultHeader {
   background-color: transparent;
-  padding: 13px 64px;
+  padding: 0px 64px;
 }
-
-
-
-
-
 
 .hscrolling {
   background-color: #2a2929;
-  padding: 10px 60px;
+  padding: 0px 60px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   /* border-bottom: solid 1px #ffffff; */
   opacity: 0.98;
@@ -77,6 +71,7 @@
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
+  padding: 20px 0px;
 }
 
 .rightSection {
@@ -135,7 +130,6 @@
   font-weight: bold;
 }
 
-
 .cartCount {
   position: absolute;
   top: -5px;
@@ -151,27 +145,16 @@
   justify-content: center;
   font-weight: bold;
 }
-.navAvatar{
-  display: flex;
-  align-items: center;
-}
-.navAvatar img{
-  width: 35px;
-  border-radius: 3px;
-  margin-right: 8px;
-  border: 1px solid salmon;
-}
-
 
 /*首頁樣式*/
-.homeHeader{
+.homeHeader {
   color: #000000;
 }
-.homeHeader .navLink{
-  color:#000000
+.homeHeader .navLink {
+  color: #000000;
 }
-.homeHeader .cartIcon{
-  color:#000000
+.homeHeader .cartIcon {
+  color: #000000;
 }
 /* 首頁滑動時的樣式 */
 .homeHeader.hscrolling {
@@ -181,4 +164,41 @@
 .homeHeader.hscrolling .navLink,
 .homeHeader.hscrolling .cartIcon {
   color: #ffffff;
+}
+.homeHeader.hscrolling .navDropdown ul {
+  background-color: #2a2929c6;
+  border: 1px solid transparent;
+}
+/* member-center dropdown */
+.navDropdown {
+  position: relative;
+}
+.navDropdown ul {
+  width: 10vw;
+  position: absolute;
+  top: 60px;
+  right: -20px;
+  background-color: #dddddd1f;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0px 3px 8px #bfac9c75;
+}
+.navDropdown a {
+  display: flex;
+  justify-content: center;
+}
+.navDropdown a:hover {
+  border-radius: 3px;
+  box-shadow: inset 1px 2px 10px 2px #f87808;
+}
+.navDropdown li {
+  width: 90%;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+}
+.navDropdown ul > a:last-child li {
+  border-bottom: none;
 }

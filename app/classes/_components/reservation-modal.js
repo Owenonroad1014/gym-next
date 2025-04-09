@@ -33,7 +33,7 @@ export default function ReservationModal({
             <p>上課時間：{formattedDate} {classData.time}</p>
             <p>教練：{classData.coach_name}</p>
             <p>地點：{classData.location} {classData.branch}</p>
-            <p>剩餘名額：{classData.max_capacity - classData.current_capacity} / {classData.max_capacity}</p>
+            <p>報名人數：{classData.current_capacity} / {classData.max_capacity}</p>
           </div>
 
           <div className={styles.reservationForm}>

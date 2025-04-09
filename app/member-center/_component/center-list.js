@@ -31,6 +31,11 @@ export default function CenterList() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  useEffect(() => {
+    setMenuShow(false) // 每次路由變化時關閉選單
+  }, [pathname])
+
   useEffect(() => {
     const fetchName = async () => {
       const res = await fetch(MEMBER_CENTER_NAME, {
@@ -47,11 +52,8 @@ export default function CenterList() {
   if (!auth.id) return null
   return (
     <>
-
-  
-
       <div className={styles.centerSidebar}>
-      <div className={selectStyle.home}>
+        <div className={selectStyle.home}>
           <Link href="/" className={selectStyle.welcome}>
             <img
               src="/gymdot.svg"
@@ -122,13 +124,13 @@ export default function CenterList() {
             </li>
           </ul>
           <ul className={selectStyle.selectPart}>
-          <li
-            className={
-              pathname === '/member-center/carts' ? selectStyle.active : ''
-            }
-          >
-            <Link href="/member-center/carts">我的訂單</Link>
-          </li>
+            <li
+              className={
+                pathname === '/member-center/carts' ? selectStyle.active : ''
+              }
+            >
+              <Link href="/member-center/carts">我的訂單</Link>
+            </li>
             <li
               className={
                 pathname === '/member-center/rated-reviews'
