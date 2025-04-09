@@ -70,9 +70,10 @@
     margin: auto;
     height: 80px;
     display: flex;
-    /* justify-content: center; */
-    align-items: end;
+    justify-content: flex-start;
+    line-height: 80px;
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .navList li:hover {
