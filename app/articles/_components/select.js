@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from 'react'
 import articleStyle from '../styles/articles.module.css'
 import { MdMenu, MdMenuOpen } from 'react-icons/md'

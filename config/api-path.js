@@ -106,9 +106,11 @@ export const PRODUCTS_LIST_TOGGLE_LIKE = `${API_SERVER}/products/api/toggle-like
 export const ORDERS_LIST = `${API_SERVER}/carts/api`;
 
 export const ECPAY_PAYMENT = `${API_SERVER}/ecpay-test-only/api`
+// export const ECPAY_PAYMENT = 'http://localhost:3005/ecpay';
 
 export const HISTORY_ORDERS_LIST = `${API_SERVER}/carts/:memberId/api`;
 
+export const ORDERS_CANCEL = `${API_SERVER}/carts/:orderId/cancel`;
 
 
 

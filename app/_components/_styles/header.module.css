@@ -202,3 +202,8 @@
 .navDropdown ul > a:last-child li {
   border-bottom: none;
 }
+/* 頁面滑動時的樣式 */
+.hscrolling .navDropdown ul {
+  background-color: #2a2929c6;
+  border: 1px solid transparent;
+}
