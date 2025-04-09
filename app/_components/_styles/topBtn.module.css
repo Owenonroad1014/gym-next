@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition-duration: .7s;
+    transition-duration: 0.7s;
     margin-top: 10px;
   }
   
@@ -43,7 +43,7 @@
     padding: 5px 0;
     background-color: #3333338c;
     opacity: 1;
-    transition-duration: .7s;
+    transition-duration: 0.7s;
   }
 
   

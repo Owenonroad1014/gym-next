@@ -74,7 +74,7 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
             allowFullScreen
           ></iframe>
           <div className={styles.modalContent}>
-            <h1 className={styles.video_header}>About</h1>
+            {/* <h1 className={styles.video_header}>About</h1> */}
             <div className={styles.video_title}>
               {video_title}
             </div>

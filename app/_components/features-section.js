@@ -60,13 +60,13 @@ const FeaturesSection = () => {
     {
       icon: FaMapMarkerAlt,
       title: '影片教學',
-      description: '尋找離你最近的運動空間',
+      description: '觀看教學影片學習正確的運動技巧',
       href: 'videos'
     },
     {
       icon: FaUsers,
       title: '課程預約',
-      description: '和志同道合的夥伴一起運動',
+      description: '多種專業團課，點擊預約喜歡的課程!',
       href: 'classes'
     }
   ];

@@ -42,6 +42,8 @@
   margin-bottom: 25%;
 }
 
+
+
 @media (width <= 1440px) {
   .productGrid {
     max-width: 100%;
