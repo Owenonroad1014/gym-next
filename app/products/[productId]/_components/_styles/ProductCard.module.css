@@ -9,6 +9,8 @@
     overflow: hidden;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     margin-bottom: 15px;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
   }
 
   .card:hover {

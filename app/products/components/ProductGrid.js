@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import ProductCard from './ProductCard'
 import styles from './_styles/ProductGrid.module.css'
@@ -9,12 +10,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 
+
+
 const ProductGrid = () => {
   const { auth, getAuthHeader } = useAuth()
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLiked, setIsLiked] = useState(false);
   const [isloading, setIsloading] = useState(true)
+
   const [Products, setProducts] = useState({
     success: false,
     perPage: 0,
@@ -59,6 +63,7 @@ const ProductGrid = () => {
   return (
     <section className={styles.productGrid}>
       <Sort router={router}/>
+
       <div className={styles.productArea}>
         {Products.rows.length > 0 ? (
           <>

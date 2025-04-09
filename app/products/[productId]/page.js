@@ -17,12 +17,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
+import RentalNoticeModal from '@/app/rental-notice/page';
+import { RiErrorWarningFill } from "react-icons/ri";
 
 
 const ProductDetail = () => {
   const params = useParams();
   const router = useRouter();
-  const [product, setProduct] = useState({}); // 存商品資料
+  const [product, setProduct] = useState({}); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]); // 新增狀態
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [selectedWeight, setSelectedWeight] = useState(null);
@@ -122,7 +125,7 @@ const ProductDetail = () => {
         text: "請選擇租借的開始與結束日期。",
         icon: "warning",
         confirmButtonColor: '#f87808',
-        confirmButtonText: '好的',
+        confirmButtonText: '好',
       });
       return;
     }
@@ -148,14 +151,7 @@ const ProductDetail = () => {
 
     addToCart(cartItem);
     toast.success(`${product.product_name} 已成功加入購物車!`);
-    // MySwal.fire({
-    //   title: "成功加入購物車!",
-    //   text: `${product.product_name} 已加入購物車!`,
-    //   icon: "success",
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#f87808',
-    //   cancelButtonColor: '#0b3760',
-    // });
+    
 
 };
 
@@ -205,6 +201,20 @@ const ProductDetail = () => {
     
 <>
     <Breadcrumb breadcrumbs={breadcrumbs}/>
+    <button 
+        className={styles.rentalNoticeBtn}
+        onClick={() => setIsModalOpen(true)}
+      >
+        <p className={styles.text}>租用須知</p>
+        <RiErrorWarningFill></RiErrorWarningFill>
+ 
+      </button>
+      
+      {/* 加入 Modal 組件 */}
+      <RentalNoticeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     <main className={styles.container}>
           <section className={styles.productSection}>
         <img
@@ -296,20 +306,13 @@ const ProductDetail = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="light"
         style={{
           fontSize: '14px',
           maxWidth: '90%',
           width: '300px',
           marginBottom: '20px',
           top: '80px'
-        }}
-        toastStyle={{
-          backgroundColor: '#fff',
-          color: '#e76317',
-        }}
-        progressStyle={{
-          background: '#fff',
         }}
       />
       <RelatedProducts products={relatedProducts}/>

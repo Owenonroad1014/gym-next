@@ -5,7 +5,7 @@ import styles from './_styles/sort.module.css';
 import { MdMenu, MdMenuOpen } from 'react-icons/md'
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const Sort = ({ items = ['熱門商品','健身器材', '瑜珈輔具', '拳擊用品'] }) => {
+const Sort = ({ items = ['健身器材', '瑜珈輔具', '拳擊用品'] }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [menuShow, setMenuShow] = useState(true);

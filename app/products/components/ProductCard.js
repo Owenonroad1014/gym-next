@@ -1,3 +1,4 @@
+"use client"
 import styles from "./_styles/ProductCard.module.css";
 import { IMG_PATH } from "@/config/api-path";
 import Link from "next/link";

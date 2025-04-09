@@ -314,6 +314,47 @@
     margin: 5px auto 20px auto;
   }
 
+  .rentalNoticeBtn {
+    position: fixed;
+    right: 40px;
+    bottom:90px;
+    width: 50px;
+    height: 90px;
+    background: none;
+    color: rgba(51, 51, 51,0.5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 54px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .text {
+    font-size: 0.75rem;
+    width: 100px;
+    color: rgba(255, 255, 255, 0.658);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition-duration: 0.7s;
+    margin-top: 10px;
+  }
+  
+  .rentalNoticeBtn:hover .text {
+    border-radius: 20px;
+    padding: 5px 0;
+    background-color: #3333338c;
+    opacity: 1;
+    transition-duration: 0.7s;
+  }
+
   @media (width <= 1400px) {
     .container { width: 85%; }
     .productSection{width: 100%;}
@@ -338,7 +379,7 @@
     .productImage, .productInfo {
       width: 100%;
       margin: auto;
-      height: 580px;
+      height: 700px;
       
     }
     .itemTitle{
@@ -357,7 +398,7 @@
     .productImage, .productInfo {
       width: 100%;
       margin: auto;
-      height: 600px;
+      height: 800px;
       
     }
 

@@ -1,4 +1,4 @@
-// components/ProductSection.js
+"use client"
 import styles from './_styles/home.module.css';
 import Image from 'next/image';
 

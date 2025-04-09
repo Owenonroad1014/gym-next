@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import styles from "./_styles/video-Card.module.css";
 import FavoriteButton from "./favorite-button";
@@ -63,7 +64,7 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
           aria-label="影片播放器"
         >
         <iframe 
-            width="100%" 
+            width="80%" 
             height="510" 
             style={{ border: 'none', borderRadius: '5px' }}
             src={url} 
@@ -73,7 +74,7 @@ const VideoCard = ({ id, video_title, description, url, variant, like_id, setIsL
             allowFullScreen
           ></iframe>
           <div className={styles.modalContent}>
-            <h1 className={styles.video_header}>About</h1>
+            {/* <h1 className={styles.video_header}>About</h1> */}
             <div className={styles.video_title}>
               {video_title}
             </div>

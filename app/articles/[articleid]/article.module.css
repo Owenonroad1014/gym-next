@@ -240,6 +240,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 20px;
 }
 .sliderContainer > h5 {
   margin-left: 20px;
@@ -304,4 +305,5 @@
     height: 149px;
     width: 200px;
   }
+  
 }

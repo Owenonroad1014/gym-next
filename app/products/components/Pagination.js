@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import styles from "./_styles/Pagination.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
