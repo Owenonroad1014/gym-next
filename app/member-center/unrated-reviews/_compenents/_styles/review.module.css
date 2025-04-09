@@ -3,16 +3,11 @@
     transition: all 0.3s ease;
 }
 
-.review:hover{
-
-
-}
 
 .productReview{
     display: flex;
     flex-direction: row;
-    background-color: #f87808;
-    width: 100%;
+    width: 90%;
     margin-top: 20px;
     border-radius: 5px;
     border-radius: 5px;
@@ -23,7 +18,7 @@
 
 .productReview:hover{
     transform: scale(1.02);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 5px rgba(227, 131, 34, 0.3);
     z-index: 5;}
 
 
@@ -218,4 +213,35 @@
     background-color: #333;
     border-radius: 7px;
     color: #fff3e6;
+  }
+
+  .sort{
+    width: 100%;
+    display: flex;
+    margin-left: 0;
+
+  }
+  
+  .sortItem{
+    padding: 0.5rem 1rem;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .active {
+    background-color: #ff6600;
+    color: white;
+    border-color: #ff6600;
+  }
+  
+  .sortItem:hover {
+    background-color: #f4f4f4;
+    color:gray ;
   }

@@ -138,7 +138,7 @@ export default function CenterList() {
             >
               <Link href="/member-center/rated-reviews">我的評價</Link>
             </li>
-            <li
+            {/* <li
               className={
                 pathname === '/member-center/unrated-reviews'
                   ? selectStyle.active
@@ -146,7 +146,7 @@ export default function CenterList() {
               }
             >
               <Link href="/member-center/unrated-reviews">尚未評價</Link>
-            </li>
+            </li> */}
           </ul>
           <ul className={selectStyle.selectPart}>
             <li

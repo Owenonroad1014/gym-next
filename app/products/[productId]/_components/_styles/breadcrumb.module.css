@@ -1,6 +1,5 @@
 .breadcrumbContainer {
-
-    margin-top: 55px;
+    margin-top: 60px;
     position: relative;
     box-sizing: border-box;
   }
@@ -62,7 +61,7 @@
   @media (width <= 960px) {
   .breadcrumbContainer{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 55px;
     margin-bottom: 0;
   }
 

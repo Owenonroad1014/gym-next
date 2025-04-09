@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { AiOutlineForm } from "react-icons/ai"; // 填寫資料
 import { GrCart } from "react-icons/gr"; // 訂單確認

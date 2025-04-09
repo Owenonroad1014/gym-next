@@ -62,15 +62,12 @@
   }
   
 .navList li {
-    /* margin-left: 50px; */
     margin-bottom: 20px;
-    /* padding-bottom: 20px; */
     border-bottom: 1px solid #636161;
     width: 100%;
     margin: auto;
     height: 80px;
     display: flex;
-    /* justify-content: center; */
     align-items: end;
     transition: background-color 0.3s ease;
 }

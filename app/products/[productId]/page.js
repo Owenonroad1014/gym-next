@@ -17,12 +17,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 import ReviewList from "./_components/reviews";
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
+import RentalNoticeModal from '@/app/rental-notice/page';
+import { RiErrorWarningFill } from "react-icons/ri";
 
 
 const ProductDetail = () => {
   const params = useParams();
   const router = useRouter();
-  const [product, setProduct] = useState({}); // 存商品資料
+  const [product, setProduct] = useState({}); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]); // 新增狀態
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [selectedWeight, setSelectedWeight] = useState(null);
@@ -205,6 +208,20 @@ const ProductDetail = () => {
     
 <>
     <Breadcrumb breadcrumbs={breadcrumbs}/>
+    <button 
+        className={styles.rentalNoticeBtn}
+        onClick={() => setIsModalOpen(true)}
+      >
+        <p className={styles.text}>租用須知</p>
+        <RiErrorWarningFill></RiErrorWarningFill>
+ 
+      </button>
+      
+      {/* 加入 Modal 組件 */}
+      <RentalNoticeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     <main className={styles.container}>
           <section className={styles.productSection}>
         <img

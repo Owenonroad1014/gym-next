@@ -1,9 +1,10 @@
+'use client'
 import React from "react";
 import styles from "./components/_styles/RentalPage.module.css";
-import HeroSection from "./components/HeroSection";
-// import backgroundImg from './img/noctice_background.jpg';
 
-const NoticeItem = ({ number, title, description, image }) => (
+
+
+const NoticeItem = ({ number, title, description }) => (
   <article className={styles.noticeItem}>
     <span className={styles.noticeNumber}>{number}</span>
     <div className={styles.noticeContent}>
@@ -13,12 +14,13 @@ const NoticeItem = ({ number, title, description, image }) => (
   </article>
 );
 
-const RentalNoticeSection = () => {
+const RentalNoticeModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
   const notices = [
     {
       number: "1",
       title: "預約與訂金",
-      description: "租借前需提前預約，並支付租金的30%作為訂金。",
+      description: "租借前需提前預約，並須預先支付租金。",
     },
     {
       number: "2",
@@ -36,7 +38,7 @@ const RentalNoticeSection = () => {
       number: "4",
       title: "取消與退款政策",
       description:
-        "若需取消租借，請至少提前48小時通知，可退還訂金；未提前通知者，訂金不予退還。",
+        "若需取消租借，請至少提前48小時通知，可退還租金；未提前通知者，租金不予退還。",
     },
     {
       number: "5",
@@ -48,27 +50,33 @@ const RentalNoticeSection = () => {
   return (
     <>
 
-    <HeroSection />
-    <section className={styles.noticeSection}>
-      <div className={styles.noticeContainer}>
-        <div className={styles.noticeGrid}>
-          {notices.map((notice) => (
-            <NoticeItem key={notice.number} {...notice} />
-          ))}
-        </div>
+<div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+        <button className={styles.closeButton} onClick={onClose}>
+          ×
+        </button>
+        <section className={styles.noticeSection}>
+          <div className={styles.noticeContainer}>
+            <div className={styles.noticeGrid}>
+              {notices.map((notice) => (
+                <NoticeItem key={notice.number} {...notice} />
+              ))}
+            </div>
+          </div>
+          <aside className={styles.noticeSidebar}>
+            <h2 className={styles.sidebarTitle}>
+              <span className={styles.rental}>RENTAL</span>
+              <br />
+              <span className={styles.not}>NOT</span>
+              <br />
+              <span className={styles.ice}>ICE</span>
+            </h2>
+          </aside>
+        </section>
       </div>
-      <aside className={styles.noticeSidebar}>
-        <h2 className={styles.sidebarTitle}>
-          <span className={styles.rental}>RENTAL</span>
-          <br />
-          <span className={styles.not}>NOT</span>
-          <br />
-          <span className={styles.ice}>ICE</span>
-        </h2>
-      </aside>
-    </section>
+    </div>
     </>
   );
 };
 
-export default RentalNoticeSection;
+export default RentalNoticeModal;

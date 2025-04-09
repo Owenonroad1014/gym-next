@@ -11,7 +11,7 @@
 .productReview{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     margin-top: 20px;
     margin-left: 20px;
     border-radius: 5px;
@@ -22,7 +22,7 @@
 }
 .productReview:hover{
 transform: scale(1.02);
-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+box-shadow: 5px 5px 5px rgba(227, 131, 34, 0.3);
 z-index: 5;}
 
 
@@ -116,7 +116,7 @@ z-index: 5;}
     align-items: stretch;
     flex-direction: column;
     justify-content: start;
-    border-left: 2px gray solid;
+    border-left: 2px rgb(191, 189, 187) solid;
     padding-left: 20px;
     min-width: 50%;
     max-width: 50%;
@@ -206,10 +206,50 @@ z-index: 5;}
     margin-bottom: 15px;
   }
 
+  .header{
+    width: 100%;
+    font-size: 36px;
+    color: #333;
+    font-weight: 600;
+    border-bottom: #333 3px solid;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    padding-bottom: 10px;
+  }
+
   .loaderContainer{
     width: 30%;
     margin: auto;
     margin-top: 50px;
+}
+
+.sort{
+  width: 100%;
+  display: flex;
+}
+
+.sortItem{
+  padding: 0.5rem 1rem;
+  margin-left: 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.active {
+  background-color: #ff6600;
+  color: white;
+  border-color: #ff6600;
+}
+
+.sortItem:hover {
+  background-color: #f4f4f4;
+  color:gray ;
 }
 
 .scrollbox {
