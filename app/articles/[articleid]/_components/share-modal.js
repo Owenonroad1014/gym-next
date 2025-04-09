@@ -40,7 +40,7 @@ export default function ShareModal({ isOpen, onClose }) {
             style={style}
             url={url}
             socialTypes={['facebook', 'twitter', 'line', 'email']}
-            title={'連結分享'}
+            title={'文章連結分享'}
           />
         </div>
       </div>

@@ -1,4 +1,5 @@
 .friendsPage {
+  min-height: 600px;
   height: 100%;
   width: 100%;
   padding: 20px;
@@ -46,6 +47,7 @@
   padding: 0;
 }
 .leftsection {
+  min-width: 45px;
   width: 5%;
   display: flex;
   justify-content: flex-start;
@@ -100,4 +102,20 @@
   color: #3333338a;
   padding: 5px 0px;
   border-radius: 3px;
+}
+@media (max-width: 420){
+  .middlesection{
+    width: 60%;
+  }
+  .content{
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+  }
+  .rightSection{
+    width: 8%;
+    font-size: 10px;
+    margin-right: 10px;
+  }
 }

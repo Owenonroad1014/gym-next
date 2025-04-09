@@ -40,10 +40,10 @@
 .topRsection {
   padding: 0 25px;
 }
-.topsection img{
+.topsection img {
   border-radius: 3px;
 }
-.topsection p{
+.topsection p {
   margin: 15px 0;
 }
 .closeButton {
@@ -82,7 +82,7 @@
   position: relative;
 }
 .userInfo::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 83px;
   left: 20%;
@@ -164,7 +164,7 @@
 }
 .hastag ul li {
   margin-top: 5px;
-  margin-right: 10px ;
+  margin-right: 10px;
   border-radius: 3px;
   cursor: pointer;
   color: #333;
@@ -239,4 +239,12 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
+}
+@media (max-width: 420) {
+  .topsection {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
 }

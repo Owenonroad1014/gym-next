@@ -1,4 +1,5 @@
 .friendsPage {
+  min-height: 600px;
   height: 100%;
   width: 100%;
   padding: 20px;
@@ -46,6 +47,7 @@
   padding: 0;
 }
 .leftsection {
+  min-width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,4 +107,14 @@
 
 .trash:active {
   background-color: #db6318;
+}
+@media (max-width: 420) {
+  .leftsection{
+    min-width: 30px;
+  }
+  .friendsPage button {
+    margin: 3px;
+    font-size: 10px;
+  }
+  
 }
