@@ -2,7 +2,7 @@
 "use client"
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FaDumbbell, FaBook, FaMapMarkerAlt, FaUsers } from 'react-icons/fa';
+import { FaDumbbell, FaBook, FaVideo, FaUsers } from 'react-icons/fa';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './_styles/home.module.css';
@@ -58,7 +58,7 @@ const FeaturesSection = () => {
       href: 'articles'
     },
     {
-      icon: FaMapMarkerAlt,
+      icon: FaVideo,
       title: '影片教學',
       description: '觀看教學影片學習正確的運動技巧',
       href: 'videos'

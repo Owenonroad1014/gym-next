@@ -1,6 +1,7 @@
-"use client";
+'use client'
+
 import { useRef } from "react";
-import "./_styles/spotlightCard.css";
+import "./_styles/SpotlightCard.css";
 
 const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(255, 255, 255, 0.25)" }) => {
   const divRef = useRef(null);
