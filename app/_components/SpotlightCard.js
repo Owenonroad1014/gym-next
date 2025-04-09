@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 import { useRef } from "react";
 import "./_styles/SpotlightCard.css";
 

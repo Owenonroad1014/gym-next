@@ -10,6 +10,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import ReactDOM from 'react-dom';
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import { FaClipboardList } from "react-icons/fa";
+import { usePathname } from 'next/navigation';
 
 const MySwal = withReactContent(Swal);
 
@@ -17,6 +18,7 @@ const Review = () => {
   const { auth, getAuthHeader } = useAuth();
   const [products, setProducts] = useState([]);
   const [isloading, setIsloading] = useState(true)
+    const pathname = usePathname();
   const headers = auth ? { ...getAuthHeader(), "Content-Type": "application/json" } : {};
 
   useEffect(() => {
@@ -117,6 +119,21 @@ const Review = () => {
   }
 
   return (
+  <>
+      <div className={styles.sort}>
+  <Link 
+    href="/member-center/rated-reviews" 
+    className={`${styles.sortItem} ${pathname === '/member-center/rated-reviews' ? styles.active : ''}`}
+  >
+    已評價
+  </Link>
+  <Link 
+    href="/member-center/unrated-reviews" 
+    className={`${styles.sortItem} ${pathname === '/member-center/unrated-reviews' ? styles.active : ''}`}
+  >
+    尚未評價
+  </Link>
+</div>
     <article className={styles.review}>
       {products.length === 0 ? (
         <p>目前沒有未評價的商品</p>
@@ -132,7 +149,7 @@ const Review = () => {
                 <hr className={styles.divider} />
                 <div className={styles.contentArea}>
                 <div className={styles.contentItem}>
-                  <div>訂單編號: # {product.order_id}</div>
+                  <div>訂單編號:  {product.order_id}</div>
                   <div>商品名稱: {product.name}</div>
                   {product.weight !== null && <div>商品規格: {product.weight}公斤</div>}
                   <div>訂單日期: {new Date(product.added_at).toLocaleString("zh-TW", { hour12: false })}</div>
@@ -154,6 +171,7 @@ const Review = () => {
         ))
       )}
     </article>
+    </>
   );
 };
 
