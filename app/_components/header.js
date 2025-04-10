@@ -2,15 +2,18 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import headerstyles from './_styles/header.module.css'
 import { FaCartPlus } from 'react-icons/fa'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
 import { useCart } from '@/context/cart-context'
 import { AVATAR_PATH } from '@/config/api-path'
 import Drawer from './drawer'
 
 export default function Header() {
+  const router = useRouter()
   const [isScrolling, setIsScrolling] = useState(false)
   const { auth, logout } = useAuth()
   const { cartQuantity } = useCart()
@@ -51,6 +54,26 @@ export default function Header() {
   // if (hideHeaderPages.includes(pathname)) {
   //   return null // 這些頁面不顯示 Header
   // }
+  const MySwal = withReactContent(Swal)
+  const hasLogout = () => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        imageUrl: '/gymdot.svg',
+        imageHeight: 150,
+        imageAlt: 'gym-boo-logo',
+        text: '已登出，即將跳轉至首頁',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+          res()
+          router.push('/')
+        },
+      })
+    })
+  }
   const getHeaderStyle = () => {
     if (/^\/coaches\/list\/\d+/.test(pathname)) {
       return headerstyles.secondHeader
@@ -169,6 +192,7 @@ export default function Header() {
                 onClick={(e) => {
                   e.preventDefault()
                   logout()
+                  hasLogout()
                 }}
                 className={headerstyles.navLink}
               >
@@ -178,7 +202,12 @@ export default function Header() {
           ) : (
             <>
               {/* 登入按鈕 */}
-              <Link href="/member/login" className={headerstyles.navLink}>
+              <Link
+                href={`/member/login?callbackUrl=${encodeURIComponent(
+                  pathname
+                )}`}
+                className={headerstyles.navLink}
+              >
                 登入
               </Link>
               {/* 註冊按鈕 */}
