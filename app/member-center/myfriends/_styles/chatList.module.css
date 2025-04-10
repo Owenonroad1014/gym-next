@@ -103,6 +103,11 @@
   padding: 5px 0px;
   border-radius: 3px;
 }
+@media (max-width: 1000){
+  .rightSection {
+    margin-right:10px ;
+  }
+}
 @media (max-width: 420){
   .middlesection{
     width: 60%;

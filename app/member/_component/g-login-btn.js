@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import useFirebase from '../user/_hooks/use-firebase'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
 import btnCss from '../_styles/member.module.css'
 
@@ -16,16 +18,22 @@ export default function GoogleLoginPopup() {
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
 
+  const MySwal = withReactContent(Swal)
+ 
   const callbackGoogleLoginPopup = async (providerData) => {
     setIsLoading(true)
     const { success } = await GoogleLogin(providerData)
     setIsLoading(false) // 在這裡確保 loading 狀態重置
 
-  // 檢查 auth 是否存在
-  if (!auth) {
-    console.error('auth 未定義，等待更新...')
-    return
-  }
+   
+
+    loginSuccess()
+
+    // 檢查 auth 是否存在
+    if (!auth) {
+      console.error('auth 未定義，等待更新...')
+      return
+    }
 
     // 確保 auth.add_status 存在再執行跳轉
     if (auth?.add_status === 0) {
@@ -33,6 +41,25 @@ export default function GoogleLoginPopup() {
     } else if (auth?.add_status === 1) {
       router.push(callbackUrl)
     }
+  }
+
+  const loginSuccess = () => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        imageUrl: '/gymdot.svg',
+        imageHeight: 150,
+        imageAlt: 'gym-boo-logo',
+        text: '登入成功!',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+          res()
+        },
+      })
+    })
   }
 
   return (
@@ -46,7 +73,7 @@ export default function GoogleLoginPopup() {
         }}
         disabled={isLoading}
       >
-        {isLoading ? '登入中...' : 'Google 登入'}
+        Google 登入
       </button>
     </>
   )
