@@ -436,6 +436,7 @@
     justify-content: flex-start;
     align-items: center;
     margin: auto;
+    margin-bottom: 20px;
   }
   .welcome {
     justify-content: flex-start;
