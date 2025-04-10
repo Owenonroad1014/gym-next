@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { FaHome } from 'react-icons/fa'
 import { MdLogout, MdLogin, MdMenu, MdMenuOpen } from 'react-icons/md'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { useAuth } from '@/context/auth-context'
 import { MEMBER_CENTER_NAME } from '@/config/api-path'
 import styles from '../_styles/member-layout.module.css'
@@ -17,6 +19,26 @@ export default function CenterList() {
   const [menuShow, setMenuShow] = useState(true)
   const [name, setName] = useState('')
   const router = useRouter()
+  const MySwal = withReactContent(Swal)
+  const hasLogout = () => {
+    return new Promise((res) => {
+      document.body.style.overflow = 'hidden' //畫面不要偏移使用
+      MySwal.fire({
+        imageUrl: '/gymdot.svg',
+        imageHeight: 150,
+        imageAlt: 'gym-boo-logo',
+        text: '已登出，即將跳轉至首頁',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+          //畫面不要偏移使用
+          document.body.style.overflow = '' // 恢復頁面滾動
+          res()
+          router.push('/')
+        },
+      })
+    })
+  }
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 769) {
@@ -182,13 +204,16 @@ export default function CenterList() {
                 onClick={(e) => {
                   e.preventDefault()
                   logout()
+                  hasLogout()
                 }}
               />
             ) : (
               <MdLogin
                 onClick={(e) => {
                   e.preventDefault()
-                  router.push('/member/login')
+                  router.push(`/member/login?callbackUrl=${encodeURIComponent(
+                  pathname
+                )}`)
                 }}
               />
             )}

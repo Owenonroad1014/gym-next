@@ -77,7 +77,7 @@ export function AuthContextProvider({ children }) {
     try {
       const res = await fetch(REFRESH_AUTH_GET, {
         headers: {
-          'Content-Type': 'application',
+          'Content-Type': 'application/json',
           ...getAuthHeader(),
         },
       })
