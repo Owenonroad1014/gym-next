@@ -36,6 +36,7 @@
   }
   .centerList {
     width: 100%;
+    padding: 0;
   }
 }
 
@@ -58,8 +59,8 @@
   }
   .centerList {
     min-height: 100vh;
-    padding: 20px;
   }
+
 }
 @media (max-width: 420) {
   .memberNoAdmin {
