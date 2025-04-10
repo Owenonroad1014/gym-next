@@ -291,7 +291,7 @@
     padding: 3px 5px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   .articleContent {
     margin: 0 50px ;
   }

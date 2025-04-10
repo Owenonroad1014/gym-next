@@ -453,5 +453,22 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+  .card {
+    cursor: pointer;
+    width: 280px;
+    height: 420px;
+    padding: 5px 5px;
+    margin: 20px 0;
+    border-radius: 3px;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .images img{
+    width: 100%;
+  }
+  
 }
 /* #endregion ================= RWD END ====================== */
