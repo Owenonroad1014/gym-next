@@ -60,12 +60,12 @@ const OrderHistoryPage = () => {
 
   const mapOrderStatus = (status, paymentStatus) => {
     if (status === '已歸還') return '已完成'
-    if (paymentStatus === '已退款') return '已取消'
     if (status === '已下單' || status === '租賃中') return '處理中'
-    if (paymentStatus === '退款中' || paymentStatus === '已退款')
+    if (status === '已取消' || paymentStatus === '已退款' || paymentStatus === '退款中')
       return '已取消'
-    return '處理中'
+    return '處理中'  // 預設返回處理中
   }
+  
 
   return (
     <div className={styles.pageContainer}>
