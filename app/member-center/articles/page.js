@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import cardStyle from '../_styles/member.module.css'
 import styles from './articleList.module.css'
+import noArticlceStyles from './article-default.module.css'
 import { useAuth } from '@/context/auth-context'
 import { ARTICLE_MEMBER_FAV, ARTICLE_FAV } from '@/config/api-path'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
@@ -39,10 +40,15 @@ export default function ArticleList() {
         }
         setIsloading(false)
         const data = await res.json() // 解析 JSON
+        console.log(data);
+        if(data.error=="沒有收藏的文章"){
+          setError("沒有收藏的文章")
+        }
+        
         setArticlesData(data) // 儲存文章資料
       } catch (err) {
         setError(err.message || 'Something went wrong') // 儲存錯誤信息
-        setIsloading(false)
+        // setIsloading(false)
       }
     }
     fetchArticles()
@@ -75,9 +81,9 @@ export default function ArticleList() {
         </>
       ) : (
         <>
-          {articlesData?.total == 0 ? (
-            <div className={styles.noFavArticle}>
-              <p>目前沒有收藏文章</p>
+          {articlesData?.totalRows == 0 ? (
+            <div className={noArticlceStyles.noFavArticle}>
+              <p>目前沒有收藏文章...</p>
               <Link href="/articles">
                 <MdOutlineArticle style={{ fontSize: '30px' }} />{' '}
                 &nbsp;&nbsp;前往找GYM享知識，找知識!
