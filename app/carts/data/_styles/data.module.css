@@ -345,7 +345,7 @@
     margin-bottom: auto;
   }
   .css2000 {
-    text-align: center;
+    /* text-align: center; */
     align-self: stretch;
     margin-top: auto;
     margin-bottom: auto;
