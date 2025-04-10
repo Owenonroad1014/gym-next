@@ -34,3 +34,10 @@
     align-items: flex-start;
     margin-top: 50px;
   }
+
+  @media (max-width: 420) {
+    .noFavArticle {
+      width: 100%;
+    }
+    
+  }
