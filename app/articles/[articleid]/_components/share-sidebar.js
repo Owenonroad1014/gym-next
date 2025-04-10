@@ -109,18 +109,23 @@ export default function ShareSidebar({
     }
   }
   const needlogin = () => {
+    document.body.style.overflow = 'hidden' //畫面不要偏移使用
     const MySwal = withReactContent(Swal)
     MySwal.fire({
       title: '登入會員即可收藏!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#f87808',
-      cancelButtonColor: '#0b3760',
+      cancelButtonColor: '#333',
       confirmButtonText: '登入',
       cancelButtonText: '取消',
+      didClose: () => {
+        //畫面不要偏移使用
+        document.body.style.overflow = '' // 恢復頁面滾動
+      },
     }).then((result) => {
       if (result.isConfirmed) {
-        router.push('/quick-login')
+        router.push('/member/login')
       }
     })
   }

@@ -67,7 +67,7 @@ export default function Card({
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#f87808',
-      cancelButtonColor: '#0b3760',
+      cancelButtonColor: '#333',
       confirmButtonText: '登入',
       cancelButtonText: '取消',
       didClose: () => {
@@ -76,7 +76,7 @@ export default function Card({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        router.push('/quick-login')
+        router.push('/member/login')
       }
     })
   }

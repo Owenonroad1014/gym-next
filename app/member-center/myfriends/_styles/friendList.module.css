@@ -116,5 +116,14 @@
     margin: 3px;
     font-size: 10px;
   }
+  .friendsPage ul li {
+    height: 70px;
+  }
+  .btngroup{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 50px;
+  }
   
 }
