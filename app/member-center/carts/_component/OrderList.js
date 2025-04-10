@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import styles from '../_styles/OrderHistoryPage.module.css'
-//import { ORDERS_CANCEL } from '@/config/api-path'
+import { ORDERS_CANCEL } from '@/config/api-path'
 
 const getStatusClass = (status) => {
   switch (status) {
@@ -20,7 +20,7 @@ const handleCancelOrder = async (orderId) => {
   if (!confirmed) return
 
   try {
-    const res = await fetch(`/orders/${orderId}/cancel`, {
+    const res = await fetch(`${ORDERS_CANCEL}/${orderId}/cancel`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
