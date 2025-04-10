@@ -458,7 +458,7 @@ CREATE TABLE orders (
   customer_name VARCHAR(100) NOT NULL, -- 訂購人姓名
   customer_phone VARCHAR(20) NOT NULL, -- 訂購人電話
   customer_email VARCHAR(100) NOT NULL, -- 訂購人 Email
-  status ENUM('已下單', '租賃中', '已歸還') NOT NULL DEFAULT '已下單',  -- 訂單狀態
+  status ENUM('已下單', '租賃中', '已歸還', '已取消') NOT NULL DEFAULT '已下單',  -- 訂單狀態
   payment_status ENUM('未付款', '已付款', '退款中', '已退款') NOT NULL DEFAULT '未付款',  -- 付款狀態
   pickup_method ENUM('台南中西店', '台南中華店', '台南永康店') NOT NULL DEFAULT '台南中西店',
   payment_method ENUM('現金', '信用卡') NOT NULL DEFAULT '信用卡',
@@ -473,7 +473,7 @@ INSERT INTO orders (
 (1, '張三', '0912345678', 'zhangsan@example.com', '已下單', '未付款', '台南中西店', '信用卡'),
 (2, '李四', '0922333444', 'lisi@example.com', '租賃中', '已付款', '台南中華店', '現金'),
 (3, '王五', '0933111222', 'wangwu@example.com', '已下單', '未付款', '台南永康店', '信用卡'),
-(4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中西店', '信用卡'),
+(4, '陳六', '0988777666', 'chenliu@example.com', '已下單', '已取消', '台南中西店', '信用卡'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中華店', '現金'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '未付款', '台南永康店', '信用卡'),
 (4, '陳六', '0988777666', 'chenliu@example.com', '已歸還', '已付款', '台南中西店', '現金'),
