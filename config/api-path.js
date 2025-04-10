@@ -110,7 +110,7 @@ export const ECPAY_PAYMENT = `${API_SERVER}/ecpay-test-only/api`
 
 export const HISTORY_ORDERS_LIST = `${API_SERVER}/carts/:memberId/api`;
 
-export const ORDERS_CANCEL = `${API_SERVER}/carts/:orderId/cancel`;
+export const ORDERS_CANCEL = `${API_SERVER}/carts`;
 
 
 
