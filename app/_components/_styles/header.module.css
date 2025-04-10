@@ -22,7 +22,10 @@
   background-color: rgba(0, 0, 0, 0.85);
   padding: 8px 60px;
 }
-
+.secondHeader .navDropdown ul {
+  background-color: #2a2929c6;
+  border: 1px solid transparent;
+}
 /* 預設頁面樣式 */
 .defaultHeader {
   background-color: transparent;
