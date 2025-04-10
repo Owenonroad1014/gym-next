@@ -110,7 +110,7 @@ export default function LoginPage() {
   }
 
   const loginSuccess = () => {
-    return new Promise(() => {
+    return new Promise((res) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
       MySwal.fire({
         imageUrl: '/gymdot.svg',
@@ -122,6 +122,7 @@ export default function LoginPage() {
         didClose: () => {
           //畫面不要偏移使用
           document.body.style.overflow = '' // 恢復頁面滾動
+          res()
         },
       })
     })
