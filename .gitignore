@@ -62,3 +62,4 @@ yarn.lock
 .vscode
 
 note-pao.env*
+.env*
