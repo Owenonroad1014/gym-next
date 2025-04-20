@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 
-import '@/Styles/globals.css'
+import '@/styles/globals.css'
 import Menubar from './_components/menubar'
 import styles from './_styles/chatLayout.module.css'
 

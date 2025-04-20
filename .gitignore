@@ -61,4 +61,4 @@ yarn.lock
 .vercel
 .vscode
 
-note-pao
+note-pao.env*

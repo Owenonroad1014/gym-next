@@ -149,13 +149,13 @@ export default function Button({ isFormValid, setIsSubmitted, customerInfo }) {
   return (
     <div className={styles.container}>
       <Link href="/carts">
-        <button className={styles.pseudo}>
+        <button className={`${styles.pseudo} ${styles.button}`}>
           <span>回上一頁</span>
         </button>
       </Link>
 
       <button
-        className={styles.pseudo2}
+        className={`${styles.pseudo2} ${styles.button}`}
         onClick={handleSubmit}
         disabled={!isFormValid}
       >

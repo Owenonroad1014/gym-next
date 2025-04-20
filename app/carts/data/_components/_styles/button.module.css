@@ -56,15 +56,15 @@
 .star-5 { top: 25%; left: 45%; width: 15px; }
 .star-6 { top: 5%; left: 50%; width: 5px; }
 
-button:hover {
+.button:hover {
   background: transparent;
   
   box-shadow: 0 0 25px #fec1958c;
 }
-button:hover span{
+.button:hover span{
   color: #fec195;
 }
-button:hover .star-1 {
+.button:hover .star-1 {
   top: -80%;
   left: -30%;
   width: 25px;
@@ -72,7 +72,7 @@ button:hover .star-1 {
   z-index: 2;
 }
 
-button:hover .star-2 {
+.button:hover .star-2 {
   top: -25%;
   left: 10%;
   width: 15px;
@@ -80,7 +80,7 @@ button:hover .star-2 {
   z-index: 2;
 }
 
-button:hover .star-3 {
+.button:hover .star-3 {
   top: 55%;
   left: 25%;
   width: 5px;
@@ -88,7 +88,7 @@ button:hover .star-3 {
   z-index: 2;
 }
 
-button:hover .star-4 {
+.button:hover .star-4 {
   top: 30%;
   left: 80%;
   width: 8px;
@@ -96,7 +96,7 @@ button:hover .star-4 {
   z-index: 2;
 }
 
-button:hover .star-5 {
+.button:hover .star-5 {
   top: 25%;
   left: 115%;
   width: 15px;
@@ -104,7 +104,7 @@ button:hover .star-5 {
   z-index: 2;
 }
 
-button:hover .star-6 {
+.button:hover .star-6 {
   top: 5%;
   left: 60%;
   width: 5px;
