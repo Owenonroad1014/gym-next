@@ -144,7 +144,18 @@ export default function ShareSidebar({
               <FaList />
             </Link>
           </li>
-          <li className={articleStyle.icon} onClick={() => handleOpenModal()}>
+          <li
+            className={articleStyle.icon}
+            role="button" // 指定角色為按鈕
+            tabIndex={0} // 使元素可聚焦
+            onClick={() => handleOpenModal()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                // 支援鍵盤 Enter 或 Space 鍵點擊
+                handleOpenModal()
+              }
+            }}
+          >
             <span className={articleStyle.tooltip}>分享</span>
             <IoShareSocialSharp />
           </li>
@@ -153,7 +164,14 @@ export default function ShareSidebar({
             className={`${articleStyle.icon} ${
               like ? articleStyle.heartActive : ''
             }`}
+            role="button" // 指定角色為按鈕
+            tabIndex={0}
             onClick={(e) => toggleLike(e)}
+            onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {  // 支援鍵盤 Enter 或 Space 鍵點擊
+      toggleLike(e);
+    }
+  }}
           >
             <span className={articleStyle.tooltip}>
               {like ? '取消收藏' : '收藏'}

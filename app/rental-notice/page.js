@@ -50,8 +50,24 @@ const RentalNoticeModal = ({ isOpen, onClose }) => {
   return (
     <>
 
-<div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+<div className={styles.modalOverlay} 
+role="button" // 指定角色為按鈕
+tabIndex={0}    // 使元素可聚焦
+onKeyDown={(e) => {
+  if (e.key === 'Escape') { // 監聽 Enter 鍵事件
+    onClose()
+  }
+}}
+onClick={onClose}>
+      <div className={styles.modalContent} 
+      role="button" // 指定角色為按鈕
+      tabIndex={0}    // 使元素可聚焦
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') { // 監聽 Enter 鍵事件
+          onClose()
+        } 
+      }}
+      onClick={e => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
           ×
         </button>

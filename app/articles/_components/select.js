@@ -37,6 +37,14 @@ export default function Select() {
   return (
     <>
       <button
+        role="button"
+        tabIndex={0} // 使元素可聚焦
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            // 監聽 Enter 鍵事件
+            setMenuShow(!menuShow)
+          }
+        }}
         onClick={() => setMenuShow(!menuShow)}
         className={articleStyle.selectBtn}
       >
@@ -51,10 +59,21 @@ export default function Select() {
         <ul className={articleStyle.selectPart}>
           <span className={articleStyle.categoryTitle}>全部分類</span>
           <li
+            role="button" // 告訴輔助技術這個元素是一個按鈕
+            tabIndex={0} // 使這個元素可以接受鍵盤焦點
             onClick={(e) => {
               e.preventDefault()
               if (window.innerWidth < 960) {
                 setMenuShow(false)
+              }
+            }}
+            onKeyDown={(e) => {
+              // 支援鍵盤事件
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                if (window.innerWidth < 960) {
+                  setMenuShow(false)
+                }
               }
             }}
           >
@@ -68,11 +87,23 @@ export default function Select() {
               <li
                 key={i}
                 className={v === category ? articleStyle.active : ''}
+                role="button" // 添加 role="button" 表示這是可交互的元素
+                tabIndex={0} // 使這個元素可以接受鍵盤焦點
                 onClick={(e) => {
                   e.preventDefault()
                   router.push(`?category=${v}`)
                   if (window.innerWidth < 960) {
                     setMenuShow(false)
+                  }
+                }}
+                onKeyDown={(e) => {
+                  // 支援鍵盤事件
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    router.push(`?category=${v}`)
+                    if (window.innerWidth < 960) {
+                      setMenuShow(false)
+                    }
                   }
                 }}
               >

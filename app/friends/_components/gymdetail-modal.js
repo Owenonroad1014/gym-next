@@ -18,18 +18,29 @@ export default function GymdetailModal({
   member_id = 0,
   avatar = '',
 }) {
-  const { auth, getAuthHeader } = useAuth()
-  if (!isOpen) return null
-  const newgoal = goal.split(',')
+  const { auth, getAuthHeader } = useAuth() 
   const [isSend, setIsSend] = useState('')
   const router = useRouter()
+  if (!isOpen) return null
+  const newgoal = goal.split(',')
+ 
+
   const goalItems = newgoal.map((v, i) => {
     return (
       <li
         key={i}
+        role='button'
+        tabIndex={0} // 使元素可聚焦
         onClick={() => {
           router.push(`/friends?category=${v}`)
-          onClose()
+          onClose()  
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            // 監聽 Enter 鍵事件
+            router.push(`/friends?category=${v}`)
+            onClose()
+          }
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -70,8 +81,26 @@ export default function GymdetailModal({
 
   return (
     // 添加點外部關閉modal
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.modalOverlay}
+    role='button'
+    tabIndex={0} // 使元素可聚焦
+    onKeyDown={(e) => {
+      if (e.key === 'Escape') {
+        // 監聽 Esc 鍵事件
+        onClose()
+      }  
+    }}
+    onClick={onClose}>
+      <div className={styles.modalContent} 
+      role='button'
+      tabIndex={0} // 使元素可聚焦
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          // 監聽 Esc 鍵事件
+          e.stopPropagation()
+        }
+      }}
+      onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
           <button onClick={onClose} className={styles.closeButton}>
             ✕

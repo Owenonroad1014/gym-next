@@ -26,7 +26,7 @@ const ConfirmationModal = ({ isOpen, onClose, location }) => {
     tabIndex={0}
     onClick={onClose}
     onKeyDown={(e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === 'Escape' || e.key === ' ') {
         onClose();
       }
     }}

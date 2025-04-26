@@ -65,6 +65,17 @@ export default function Select() {
         <ul className={friendStyle.selectPart}>
           <span className={friendStyle.categoryTitle}>全部分類</span>
           <li
+          role='button' // 告訴輔助技術這個元素是一個按鈕
+          tabIndex={0} // 使這個元素可以接受鍵盤焦點
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              // 監聽 Enter 鍵事件
+              router.push(`/friends`)
+              if (window.innerWidth < 960) {
+                setMenuShow(false)
+              }
+            }
+          }}
             onClick={(e) => {
               e.preventDefault()
               router.push(`/friends`)
@@ -80,6 +91,17 @@ export default function Select() {
           <span className={friendStyle.categoryTitle}>選擇性別</span>
           <li
             className={gender == 'male' ? friendStyle.active : ''}
+            role='button' // 告訴輔助技術這個元素是一個按鈕
+            tabIndex={0} // 使這個元素可以接受鍵盤焦點
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                // 監聽 Enter 鍵事件
+                handleFilterChange(category, 'male')
+                if (window.innerWidth < 960) {
+                  setMenuShow(false)
+                }
+              } 
+            }}
             onClick={(e) => {
               e.preventDefault()
               handleFilterChange(null, gender)
@@ -93,6 +115,17 @@ export default function Select() {
           </li>
           <li
             className={gender == 'female' ? friendStyle.active : ''}
+            role='button' // 告訴輔助技術這個元素是一個按鈕
+            tabIndex={0} // 使這個元素可以接受鍵盤焦點
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                // 監聽 Enter 鍵事件
+                handleFilterChange(category,'female')
+                if (window.innerWidth < 960) {
+                  setMenuShow(false)
+                }
+              } 
+            }}
             onClick={(e) => {
               e.preventDefault()
               handleFilterChange(category, 'female')
@@ -111,6 +144,17 @@ export default function Select() {
               <li
                 key={i}
                 className={v === category ? friendStyle.active : ''}
+                role='button' // 告訴輔助技術這個元素是一個按鈕
+                tabIndex={0} // 使這個元素可以接受鍵盤焦點
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    // 監聽 Enter 鍵事件
+                    handleFilterChange(v, gender)
+                    if (window.innerWidth < 960) {
+                      setMenuShow(false)
+                    }
+                  } 
+                }}
                 onClick={(e) => {
                   e.preventDefault()
                   handleFilterChange(v, gender)

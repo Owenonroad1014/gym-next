@@ -130,7 +130,7 @@ const ImageLinkGallery = ({ autoplay = true, pauseOnHover = false }) => {
             onDragEnd={handleDragEnd}
           >
             {images.map(({ url, title, link }, i) => (
-              <div
+              <button
                 key={i}
                 className="gallery-item"
                 style={{
@@ -154,7 +154,7 @@ const ImageLinkGallery = ({ autoplay = true, pauseOnHover = false }) => {
                   <img src={url} alt={title || "gallery"} className="gallery-img" />
                   {title && <div className="gallery-title">{title}</div>}
                 </div>
-              </div>
+              </button>
             ))}
           </motion.div>
         </div>

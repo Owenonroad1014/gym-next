@@ -168,10 +168,18 @@ export default function FriendListPage() {
               }
               return (
                 <li
-                  key={v.id}
-                  onClick={() => {
-                    fetchRead(v.id)
-                  }}
+                  // key={v.id}
+                  // role='button' // 告訴輔助技術這個元素是一個按鈕
+                  // tabIndex={0} // 使這個元素可以接受鍵盤焦點
+                  // onKeyDown={(e) => {
+                  //   if (e.key === 'Enter') {
+                  //     // 監聽 Enter 鍵事件
+                  //     fetchRead(v.id)
+                  //   }
+                  // }}
+                  // onClick={() => {
+                  //   fetchRead(v.id)
+                  // }}
                 >
                   <Link href={`/chat/${v.id}`}>
                     <div className={chatListStyle.name}>

@@ -1,0 +1,12 @@
+Start-Process : 無法執行這個命令，因為發生錯誤: 系統找不到指定的檔案
+。。
+位於 線路:1 字元:1
++ Start-Process -Filepath 'C:\Users\corey\OneDrive\Documents\workspa
+ce\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          : InvalidOperation: (:) [Start-Process] 
+   ，InvalidOperationException
+    + FullyQualifiedErrorId : InvalidOperationException,Microsoft.P 
+   owerShell.Commands.StartProcessCommand
+ 

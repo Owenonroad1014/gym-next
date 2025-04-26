@@ -30,7 +30,15 @@ export default function Search() {
         </form>
       </div>
       {isShow ? (
-        <pre className={articlesStyle.clearSearch} onClick={clearSearch}>
+        <pre className={articlesStyle.clearSearch} 
+        role="button" // 指定角色為按鈕
+        tabIndex={0}    // 使元素可聚焦
+        onClick={clearSearch}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') { // 監聽 Enter 鍵事件
+            clearSearch()
+          }}
+          } >
           清除搜尋
         </pre>
       ) : (

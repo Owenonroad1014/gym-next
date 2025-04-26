@@ -9,7 +9,7 @@ import { FaClipboardList } from "react-icons/fa";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Link from 'next/link'
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import { usePathname } from 'next/navigation';
 
@@ -71,12 +71,14 @@ const Review = () => {
   
           // 設置點擊事件，變更評分
           starSpan.onclick = () => {
+            
             currentRating = i;
             document.querySelectorAll("#star-container span").forEach((s, index) => {
               const starIcon = index < i
                 ? React.createElement(FaStar, { color: "#f87808", size: 36 })
                 : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
-              ReactDOM.render(starIcon, s);
+              const root = createRoot(s);
+              root.render(starIcon);
             });
           };
   
@@ -85,8 +87,9 @@ const Review = () => {
             ? React.createElement(FaStar, { color: "#f87808", size: 36 })
             : React.createElement(FaRegStar, { color: "#f87808", size: 36 });
   
-          ReactDOM.render(initialIcon, starSpan);
-          starContainer.appendChild(starSpan);
+            const root = createRoot(starSpan);
+            root.render(initialIcon);
+            starContainer.appendChild(starSpan);
         }
       },
       didClose: () => {
