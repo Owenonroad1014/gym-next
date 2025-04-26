@@ -37,14 +37,6 @@ export default function Select() {
   return (
     <>
       <button
-        role="button"
-        tabIndex={0} // 使元素可聚焦
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            // 監聽 Enter 鍵事件
-            setMenuShow(!menuShow)
-          }
-        }}
         onClick={() => setMenuShow(!menuShow)}
         className={articleStyle.selectBtn}
       >

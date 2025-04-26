@@ -26,8 +26,27 @@ export default function ShareModal({ isOpen, onClose }) {
   }
   return (
     // 添加點外部關閉modal
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.modalOverlay} 
+    role='button'
+    tabIndex={0}
+    onKeyDown={(e) => {
+      if (e.key === 'Escape') {
+        // 監聽 Esc 鍵事件
+        onClose()
+      }
+    }
+    }
+    onClick={onClose}>
+      <div className={styles.modalContent} 
+      role='button'
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          // 監聽 Esc 鍵事件
+          e.stopPropagation()
+        }
+      }}
+      onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
           <button onClick={onClose} className={styles.closeButton}>
             ✕

@@ -168,7 +168,7 @@ export default function FriendListPage() {
               }
               return (
                 <li
-                  // key={v.id}
+                  key={v.id}
                   // role='button' // 告訴輔助技術這個元素是一個按鈕
                   // tabIndex={0} // 使這個元素可以接受鍵盤焦點
                   // onKeyDown={(e) => {
