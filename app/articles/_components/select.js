@@ -111,6 +111,18 @@ export default function Select() {
               <li
                 key={i}
                 className={v === category ? articleStyle.active : ''}
+                role="button" // 告訴輔助技術這個元素是一個按鈕
+                tabIndex={0} // 使這個元素可以接受鍵盤焦點
+                onKeyDown={(e) => {
+                  // 監聽 Enter 鍵事件
+                  if (e.key === 'Enter' || e.key ==='') {
+                    e.preventDefault()
+                    router.push(`?category=${v}`)
+                    if (window.innerWidth < 960) {
+                      setMenuShow(false)
+                    }
+                  }
+                } }
                 onClick={(e) => {
                   e.preventDefault()
                   router.push(`?category=${v}`)
@@ -131,6 +143,18 @@ export default function Select() {
               <li
                 key={i}
                 className={v === category ? articleStyle.active : ''}
+                role="button" // 告訴輔助技術這個元素是一個按鈕
+                tabIndex={0} // 使這個元素可以接受鍵盤焦點
+                onKeyDown={(e) => {
+                  // 監聽 Enter 鍵事件
+                  if (e.key === 'Enter' || e.key ==='') {
+                    e.preventDefault()
+                    router.push(`?category=${v}`)
+                    if (window.innerWidth < 960) {
+                      setMenuShow(false)
+                    }
+                  }
+                } }
                 onClick={(e) => {
                   e.preventDefault()
                   router.push(`?category=${v}`)
