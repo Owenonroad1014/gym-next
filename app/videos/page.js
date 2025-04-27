@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense} from "react";
+import React from "react";
 import HeroSection from "./components/HeroSection";
 import VideoGrid from "./components/video-Grid";
 import styles from "./components/_styles/videos.module.css";
@@ -20,14 +20,14 @@ const Videos = () => {
     <section className={styles.contentSection}>
       <div className={styles.contentTitle}>
         <div className="btnAndSearch">
-        <Suspense fallback={<div>Loading...</div>}>
+    
           <Search searchParams={searchParams}/>
-        </Suspense>
+
         </div>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+  
       <VideoGrid auth={auth} />
-      </Suspense>
+
     </section>
   </main>
   );

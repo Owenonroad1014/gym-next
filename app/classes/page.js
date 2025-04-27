@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './_styles/classes.module.css'
-import React, { useState, Suspense } from 'react'
+import React, { useState } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
 import TabButton from './_components/tabButton'
@@ -55,9 +55,9 @@ export default function ClassesPage() {
               </div>
               <h2 className={styles.secTitle}>課表查詢</h2>
               <div className={styles.filterContainer}>
-                <Suspense fallback={<div>Loading...</div>}>
+          
                   <Search />
-                </Suspense>
+             
               </div>
             </div>
             <div className={styles.resultsContainer}>
