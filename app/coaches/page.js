@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './_styles/coaches.module.css'
-import React, { useState, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
 import CoachCard from './_components/coaches-card'
@@ -31,7 +31,9 @@ export default function coachesPage() {
           </div>
           <h2 className={styles.secTitle}>尋找教練</h2>
           <div className={styles.filterContainer}>
+          <Suspense fallback={<div>Loading...</div>}>
             <Search/>
+          </Suspense>
           </div>
         </div>
         

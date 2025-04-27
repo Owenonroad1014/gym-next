@@ -12,11 +12,16 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'
-import MapModal from '../_components/map-modal'
+
 
 const Map = dynamic(() => import('../_components/map'), {
   ssr: false,
 })
+// 將直接導入改為動態導入
+const MapModal = dynamic(() => import('../_components/map-modal'), {
+  ssr: false
+})
+
 
 export default function LocationsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)

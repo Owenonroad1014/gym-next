@@ -1,12 +1,11 @@
 'use client'
 import styles from './_styles/locations.module.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, Suspense } from 'react'
 import Search from './_components/search'
 import Banner from './_components/banner'
 import { MdShareLocation } from "react-icons/md"
 import dynamic from 'next/dynamic'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'
+
 
 const Map = dynamic(() => import('./_components/map'), {
   ssr: false
@@ -43,7 +42,9 @@ export default function LocationsPage() {
             </div>
             <h2 className={styles.secTitle}>尋找據點</h2>
             <div className={styles.filterContainer}>
+              <Suspense fallback={<div>Loading...</div>}>
               <Search/>
+              </Suspense>
             </div>
           </div>
           <div

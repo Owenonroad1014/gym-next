@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import CoachesCard from '../_components/coaches-card'
 import Breadcrumb from '../_components/bread'
@@ -84,12 +84,17 @@ export default function CoachesListPage(props) {
             </div>
             <h2 className={styles.secTitle}>尋找教練</h2>
             <div className={styles.filterContainer}>
+            <Suspense fallback={<div>Loading...</div>}>
               <Search />
+            </Suspense>
             </div>
           </div>
             <div className={styles.toolsContainer}>
               <Breadcrumb breadcrumb={breadcrumb} />
+              <Suspense fallback={<div>Loading...</div>}>
               <SearchForm />
+              </Suspense>
+              
             </div>
             {loading ? (
   <div className={styles.loaderContainer}>

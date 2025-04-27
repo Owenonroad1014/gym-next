@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import ArticlesBanner from './_components/articles-banner'
 import List from './_components/list'
 import Breadcrumb from './_components/breadcrumb'
@@ -20,9 +20,13 @@ export default function ArticlesPage() {
       <div className={articlecss.articlesContainer}>
         <Search />
         <div className={articlecss.articleBottom}>
+        <Suspense fallback={<div>Loading...</div>}>
           <Select />
-          <List
-          />
+        </Suspense>
+        
+        <Suspense fallback={<div>Loading...</div>}>
+          <List />
+        </Suspense>
         </div>
       </div>
       {/* // modal */}

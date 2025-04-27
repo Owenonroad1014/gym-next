@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import cardStyle from '../_styles/member.module.css'
@@ -32,7 +32,7 @@ export default function ArticleList() {
     const fetchArticles = async () => {
       try {
         const headers = auth ? { ...getAuthHeader() } : {}
-        const res = await fetch(`${ARTICLE_MEMBER_FAV}${location.search}`, {
+        const res = await fetch(`${ARTICLE_MEMBER_FAV}${searchParams.toString()}`, {
           headers,
         })
         if (!res.ok) {
@@ -91,7 +91,9 @@ export default function ArticleList() {
             ) : (
               <div className={styles.articleList}>
                 <div className={styles.topSection}>
+                <Suspense fallback={<div>loading ...</div>}>
                   <Search />
+                </Suspense>
                   <br />
                   {articlesData?.data?.map((v, i) => {
                     return (

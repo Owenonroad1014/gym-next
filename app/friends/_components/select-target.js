@@ -35,6 +35,12 @@ export default function Select() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  const isMobile = () => {
+    return typeof window !== 'undefined' && window.innerWidth < 960
+  }
+
+
   const handleFilterChange = (newCategory, newGender) => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -71,7 +77,7 @@ export default function Select() {
             if (e.key === 'Enter') {
               // 監聽 Enter 鍵事件
               router.push(`/friends`)
-              if (window.innerWidth < 960) {
+              if (isMobile()) {
                 setMenuShow(false)
               }
             }
@@ -79,7 +85,7 @@ export default function Select() {
             onClick={(e) => {
               e.preventDefault()
               router.push(`/friends`)
-              if (window.innerWidth < 960) {
+              if (isMobile()) {
                 setMenuShow(false)
               }
             }}
@@ -97,7 +103,7 @@ export default function Select() {
               if (e.key === 'Enter') {
                 // 監聽 Enter 鍵事件
                 handleFilterChange(category, 'male')
-                if (window.innerWidth < 960) {
+                if (isMobile()) {
                   setMenuShow(false)
                 }
               } 
@@ -106,7 +112,7 @@ export default function Select() {
               e.preventDefault()
               handleFilterChange(null, gender)
               handleFilterChange(category, 'male')
-              if (window.innerWidth < 960) {
+              if (isMobile()) {
                 setMenuShow(false)
               }
             }}
@@ -121,7 +127,7 @@ export default function Select() {
               if (e.key === 'Enter') {
                 // 監聽 Enter 鍵事件
                 handleFilterChange(category,'female')
-                if (window.innerWidth < 960) {
+                if (isMobile()) {
                   setMenuShow(false)
                 }
               } 
@@ -129,7 +135,7 @@ export default function Select() {
             onClick={(e) => {
               e.preventDefault()
               handleFilterChange(category, 'female')
-              if (window.innerWidth < 960) {
+              if (isMobile()) {
                 setMenuShow(false)
               }
             }}
@@ -150,7 +156,7 @@ export default function Select() {
                   if (e.key === 'Enter') {
                     // 監聽 Enter 鍵事件
                     handleFilterChange(v, gender)
-                    if (window.innerWidth < 960) {
+                    if (isMobile()) {
                       setMenuShow(false)
                     }
                   } 
@@ -159,7 +165,7 @@ export default function Select() {
                   e.preventDefault()
                   handleFilterChange(v, gender)
                   // router.push(`?category=${v}`)
-                  if (window.innerWidth < 960) {
+                  if (isMobile()) {
                     setMenuShow(false)
                   }
                 }}

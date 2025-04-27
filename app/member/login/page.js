@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Swal from 'sweetalert2'
@@ -85,8 +85,10 @@ export default function LoginPage() {
       }
     }
   }
-
+useEffect(() => {
   const MySwal = withReactContent(Swal)
+}, [])
+  
   const showError = (message) => {
     return new Promise((res, rej) => {
       document.body.style.overflow = 'hidden' //畫面不要偏移使用
@@ -206,7 +208,9 @@ export default function LoginPage() {
               </form>
             </div>
             <div className={memberCss.googleBtns}>
+            <Suspense fallback={<div>Loading...</div>}>
               <GoogleLoginPopup />
+            </Suspense>
             </div>
             <div className={memberCss.rgBtn}>
               <span>還沒成為會員嗎?</span>

@@ -1,5 +1,6 @@
 'use client'
 
+import { Suspense } from 'react'
 import friendStyle from './_styles/friends.module.css'
 import FriendBanner from './_components/friend-banner'
 import Breadcrumb from './_components/breadcrumb'
@@ -13,8 +14,12 @@ export default function FriendsPage() {
       <FriendBanner />
       <Breadcrumb breadcrumb={breadcrumb} />
       <div className={friendStyle.friendContainer}>
+      <Suspense fallback={<div>Loading...</div>}>
         <SelectTarget />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <List />
+        </Suspense>
       </div>
     </>
   )

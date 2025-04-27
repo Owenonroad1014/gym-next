@@ -1,7 +1,7 @@
 'use client'
 
 import styles from '../_styles/classes.module.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Search from '../_components/search'
 import Banner from '../_components/banner'
 import TabButton from '../_components/tabButton'
@@ -94,10 +94,12 @@ const fetchClasses = async () => {
               </div>
               <h2 className={styles.secTitle}>課表查詢</h2>
               <div className={styles.filterContainer}>
+              <Suspense fallback={<div>Loading...</div>}>
                 <Search />
+              </Suspense>
               </div>
             </div>
-
+          <Suspense fallback={<div>Loading...</div>}>
             <Calendar 
       classes={classes.map(classes => ({
         id: classes.id,
@@ -118,7 +120,9 @@ const fetchClasses = async () => {
       branch={branch} 
       onReservationSuccess={handleReservationSuccess}
       />
+          </Suspense>
           </div>
+
         ) : (
           <Filter />
 
