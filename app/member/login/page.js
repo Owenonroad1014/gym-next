@@ -85,9 +85,9 @@ export default function LoginPage() {
       }
     }
   }
-useEffect(() => {
+
   const MySwal = withReactContent(Swal)
-}, [])
+
   
   const showError = (message) => {
     return new Promise((res, rej) => {
