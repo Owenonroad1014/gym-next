@@ -1,4 +1,4 @@
-export const API_SERVER = `https://gym-backend-pi.vercel.app/`
+export const API_SERVER = `https://gym-backend-pi.vercel.app`
 
 // 頭貼的路由
 export const AVATAR_PATH = `${API_SERVER}/img/avatar`
