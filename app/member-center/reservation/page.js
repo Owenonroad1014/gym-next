@@ -7,6 +7,7 @@ import { useAuth } from '@/context/auth-context'
 import styles from '../_styles/reservations.module.css'
 import loaderStyle from '@/app/_components/_styles/loading.module.css'
 import Swal from 'sweetalert2'
+import { API_SERVER } from '@/config/api-path'
 
 
 
@@ -47,7 +48,7 @@ const filterReservations = reservationsData.filter(reservation => {
     const fetchReservations = async () => {
       try {
         const headers = auth ? { ...getAuthHeader() } : {}
-        const res = await fetch('http://localhost:3005/classes/api/reservations', {
+        const res = await fetch(`${API_SERVER}/classes/api/reservations`, {
           headers,
         })
         
@@ -93,7 +94,7 @@ const filterReservations = reservationsData.filter(reservation => {
 
   if (result.isConfirmed) {
     try {
-      const res = await fetch('http://localhost:3005/classes/api/reservations', {
+      const res = await fetch(`${API_SERVER}/classes/api/reservations`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

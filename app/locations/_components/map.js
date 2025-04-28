@@ -44,14 +44,15 @@ const Map = ({ center = [23.0252956, 120.226376], zoom = 18 }) => {
 
     // 地圖圖層
     const darkLayer = L.tileLayer(
-      'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-      { attribution: '© Stadia Maps' }
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution: '© OpenStreetMap contributors' }
     )
-
+    
     const lightLayer = L.tileLayer(
-      'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-      { attribution: '© Stadia Maps' }
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution: '© OpenStreetMap contributors' }
     )
+    
 
     // 初始圖層
     darkLayer.addTo(map)
