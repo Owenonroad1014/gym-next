@@ -20,7 +20,7 @@ export default function Home() {
 
       <HeroSection/>
       <Features/>
-      <ImageLinkGallery ></ImageLinkGallery>
+      <ImageLinkGallery/>
       <ClassSection/>
       <LocationSection/>
       

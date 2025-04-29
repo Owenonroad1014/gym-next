@@ -8,6 +8,9 @@ import { GiMuscleUp } from "react-icons/gi";
 import { FaBook } from "react-icons/fa";
 import { MdPlace } from "react-icons/md";
 import { BiSolidVideos } from "react-icons/bi";
+import { MdCircleNotifications  } from "react-icons/md";
+import { FaUserFriends } from "react-icons/fa";
+import { MdEventAvailable } from "react-icons/md";
 import SpotlightCard from "./SpotlightCard";
 
 export default function Drawer() {
@@ -78,6 +81,53 @@ export default function Drawer() {
                   <div className={styles.navLink}>
                     <FaHome />
                   </div>
+                </li> <li 
+                  data-link="products"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/products'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/products');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                  <MdCircleNotifications />  租借商品
+                  </div>
+                </li>
+                <li 
+                  data-link="friends"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/friends'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/friends');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                  <FaUserFriends/>  找GYM友
+                  </div>
+                </li>
+                <li 
+                  data-link="classes"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => { router.push('/classes'); handleLinkClick(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      router.push('/classes');
+                      handleLinkClick();
+                    }
+                  }}
+                >
+                  <div className={styles.navLink}>
+                  <MdEventAvailable/>  課程預約
+                  </div>
                 </li>
                 <li 
                   role="button"
@@ -94,6 +144,7 @@ export default function Drawer() {
                     <GiMuscleUp/>  找GYM身教練
                   </div>
                 </li>
+               
                 <li 
                   role="button"
                   tabIndex={0}

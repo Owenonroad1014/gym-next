@@ -168,7 +168,7 @@
     background: #e56d07;
   }
   
-  @media (max-width: 450px) {
+  @media (max-width: 480px) {
     .container {
       padding: 0 1rem;
     }

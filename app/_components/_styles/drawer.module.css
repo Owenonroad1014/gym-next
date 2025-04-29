@@ -15,7 +15,7 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 30%;
+    width: 35%;
     height: 100vh;
     background: transparent;
     z-index: 1001;
@@ -48,7 +48,7 @@
   }
   
   .drawerContent {
-    padding: 60px 00px;
+    padding: 40px 0px;
     transform: skewX(0deg);
   }
   
@@ -73,6 +73,11 @@
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
+.navList li[data-link="products"],
+    .navList li[data-link="friends"],
+    .navList li[data-link="classes"] {
+      display: none;
+    }
 
 .navList li:hover {
     background-color: #000;
@@ -110,8 +115,53 @@
     z-index: 1000;
   }
   
-  @media (max-width: 768px) {
+  @media screen and (max-width: 768px) {
+    .drawer {
+      width: 50%;
+    }
     .drawerInner {
-      width: 70%;
+      width: 100%;
+    }
+    .menuButton {
+      padding: 6px 8px;
+      font-size: 14px;
     }
   }
+
+  
+
+
+  @media screen and (max-width: 480px) {
+    .drawer {
+      width: 80%;  /* 在手機版加寬drawer */
+    }
+    
+    .drawerInner {
+      width: 100%;
+    }
+
+    
+  
+    /* 將原本隱藏的連結顯示在drawer中 */
+    .navList {
+      margin-top: 20px;
+    }
+  
+    .navList li {
+      height: 60px;
+      line-height: 60px;
+    }
+  
+    .navLink {
+      font-size: 18px;
+    }
+  
+    /* 特別樣式化剛才隱藏的三個連結 */
+    .navList li[data-link="products"],
+    .navList li[data-link="friends"],
+    .navList li[data-link="classes"] {
+      display: flex;
+      border-bottom: 1px solid #636161;
+    }
+  }
+  

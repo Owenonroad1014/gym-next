@@ -210,3 +210,71 @@
   background-color: #2a2929c6;
   border: 1px solid transparent;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0px 20px;
+    font-size: 20px;
+  }
+  
+  .secondHeader {
+    padding: 8px 20px;
+  }
+  
+  .defaultHeader {
+    padding: 0px 20px;
+  }
+  
+  .hscrolling {
+    padding: 0px 20px;
+  }
+
+  .rightSection {
+    gap: 5px;
+  }
+  .navLink {
+    
+    font-size: 15px;
+  }
+  .navMenu {
+    display: none;
+  }
+  
+  .searchForm {
+    display: none;
+  }
+  
+  .searchInput {
+    width: 150px;
+  }
+  
+  .navDropdown ul {
+    width: 40vw;
+    right: -10px;
+  }
+  
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 0px 10px;
+    font-size: 18px;
+  }
+  
+  .logo img {
+    width: 120px;
+    height: auto;
+  }
+  .rightSection .navLink[href="/products"],
+  .rightSection .navLink[href="/friends"],
+  .rightSection .navLink[href="/classes"] {
+    display: none;
+  }
+  .navDropdown ul {
+    width: 60vw;
+  }
+  
+  .searchInput {
+    width: 120px;
+  }
+}

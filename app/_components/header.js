@@ -124,6 +124,7 @@ export default function Header() {
           <Link href="/products" className={headerstyles.navLink}>
             租借器具
           </Link>
+          
           <Link href="/friends" className={headerstyles.navLink}>
             找GYM友
           </Link>

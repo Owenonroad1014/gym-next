@@ -72,9 +72,9 @@ const ImageLinkGallery = ({ autoplay = true, pauseOnHover = false }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const cylinderWidth = isScreenSizeSm ? 2000 : 3400;
-  const faceCount = images?.length || 0;
-  const faceWidth = 250;
+const cylinderWidth = isScreenSizeSm ? 2000 : 3400;
+const faceCount = images?.length || 0;
+const faceWidth = isScreenSizeSm ? 180 : 250; // 在小螢幕時縮小圖片寬度
   const radius = cylinderWidth / (2 * Math.PI);
   const dragFactor = 0.05;
 
