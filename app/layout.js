@@ -25,7 +25,7 @@ const Footer = dynamic(() => import('./_components/footer'), {
 // })
 
 export const metadata = {
-  title: 'GYM',
+  title: 'GYM步空間',
   description: '我在，往GYM步的路上邁進',
 }
 

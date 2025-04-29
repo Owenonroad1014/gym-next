@@ -55,7 +55,7 @@ const ProductDetail = () => {
         if (result.success) {
           // 排除不要的欄位資料
           const { id, product_name, description, price, image_url, average_rating, variants,category_name } = result.data;
-          const relatedProducts = result.relatedProducts;
+          const relatedProducts = result.relatedproducts;
           setProduct({ id, product_name, description, price, image_url, average_rating, variants, category_name});
           setRelatedProducts(relatedProducts); // 設定相關商品
           setLikeId(result.like_id); // 設定收藏狀態

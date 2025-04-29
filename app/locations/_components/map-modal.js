@@ -29,9 +29,9 @@ export default function MapModal({ isOpen, onClose, selectedAddress }) {
         mapRef.current = L.map('map').setView([selectedAddress.lat, selectedAddress.lng], 15)
         
         L.tileLayer(
-          'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           {
-            attribution: '© Stadia Maps',
+            attribution: '© OpenStreetMap contributors', 
             zoomControl: true,
           }
         ).addTo(mapRef.current)
